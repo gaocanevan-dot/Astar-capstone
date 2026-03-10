@@ -1,0 +1,775 @@
+# Code4rena NOYA (2024-04) 审计报告 
+
+## high severity finding
+
+[
+  {
+    "incident_id": "NOYA-H-01",
+    "metadata": {
+      "project_name": "NOYA",
+      "year": 2024,
+      "source": "Code4rena",
+      "priority_type": "High",
+      "reference": "https://code4rena.com/reports/2024-04-noya#H-01"
+    },
+    "vulnerability": {
+      "issue_category": "Oracle / Price Calculation",
+      "issue_subtype": "Incorrect multi-token route price",
+      "root_cause": "The function `NoyaValueOracle.getValue` calculates prices through multi-token routes incorrectly when more than one hop is configured, leading to mispricing.",
+      "impact": "Price feeds can be incorrect, potentially resulting in incorrect TVL or collateral valuations used by the protocol.",
+      "affected_contracts": ["NoyaValueOracle"]
+    },
+    "location": {
+      "contract_name": "NoyaValueOracle",
+      "attack_surface": "function getValue(address asset, address baseToken)",
+      "start_line": null,
+      "end_line": null,
+      "vulnerable_code": "// Price route handling logic incorrect when multiple hops exist"
+    }
+  },
+  {
+    "incident_id": "NOYA-H-04",
+    "metadata": {
+      "project_name": "NOYA",
+      "year": 2024,
+      "source": "Code4rena",
+      "priority_type": "High",
+      "reference": "https://code4rena.com/reports/2024-04-noya#H-04"
+    },
+    "vulnerability": {
+      "issue_category": "Access Control",
+      "issue_subtype": "Blacklisted funds blocking withdrawals",
+      "root_cause": "The withdraw execution logic in `executeWithdraw` can be blocked if a receiver is blacklisted, due to missing checks allowing the queue to halt.",
+      "impact": "A user or known blacklisted address can interrupt or block the withdrawal process, potentially locking funds.",
+      "affected_contracts": ["VaultWithdrawManager"]
+    },
+    "location": {
+      "contract_name": "VaultWithdrawManager",
+      "attack_surface": "function executeWithdraw(...)",
+      "start_line": null,
+      "end_line": null,
+      "vulnerable_code": "// Blacklist check allows halt in queue processing"
+    }
+  },
+  {
+    "incident_id": "NOYA-H-05",
+    "metadata": {
+      "project_name": "NOYA",
+      "year": 2024,
+      "source": "Code4rena",
+      "priority_type": "High",
+      "reference": "https://code4rena.com/reports/2024-04-noya#H-05"
+    },
+    "vulnerability": {
+      "issue_category": "Logic Error",
+      "issue_subtype": "Incorrect fund handling in PendleConnector",
+      "root_cause": "The `depositIntoMarket` function in `PendleConnector` handles token amounts incorrectly, leading to potential loss of funds when adding liquidity via external calls.",
+      "impact": "Users may lose funds or the protocol might accidentally send wrong amounts to external markets.",
+      "affected_contracts": ["PendleConnector"]
+    },
+    "location": {
+      "contract_name": "PendleConnector",
+      "attack_surface": "function depositIntoMarket(...)",
+      "start_line": null,
+      "end_line": null,
+      "vulnerable_code": "// deposit logic and minting sequence with incorrect inputs"
+    }
+  },
+  {
+    "incident_id": "NOYA-H-08",
+    "metadata": {
+      "project_name": "NOYA",
+      "year": 2024,
+      "source": "Code4rena",
+      "priority_type": "High",
+      "reference": "https://code4rena.com/reports/2024-04-noya#H-08"
+    },
+    "vulnerability": {
+      "issue_category": "Access Control",
+      "issue_subtype": "Insufficient validation on flash loan callbacks",
+      "root_cause": "The function `BaseConnector.sendTokensToTrustedAddress` does not sufficiently validate the caller, allowing flash loan contract to move tokens from connectors without authorization.",
+      "impact": "A flash loan caller can withdraw funds from another vault’s connector, enabling theft of assets.",
+      "affected_contracts": ["BaseConnector"]
+    },
+    "location": {
+      "contract_name": "BaseConnector",
+      "attack_surface": "function sendTokensToTrustedAddress(...)",
+      "start_line": null,
+      "end_line": null,
+      "vulnerable_code": "// no caller authorization check"
+    }
+  },
+  {
+    "incident_id": "NOYA-H-10",
+    "metadata": {
+      "project_name": "NOYA",
+      "year": 2024,
+      "source": "Code4rena",
+      "priority_type": "High",
+      "reference": "https://code4rena.com/reports/2024-04-noya#H-10"
+    },
+    "vulnerability": {
+      "issue_category": "Logic Error",
+      "issue_subtype": "Incorrect reset logic",
+      "root_cause": "The `resetMiddle` function in `AccountingManager` failed to reset accumulated withdrawal totals (`currentWithdrawGroup.totalCBAmount`) when switching to withdrawal mode.",
+      "impact": "Subsequent withdrawals calculate incorrectly, potentially locking funds or causing misdistribution.",
+      "affected_contracts": ["AccountingManager"]
+    },
+    "location": {
+      "contract_name": "AccountingManager",
+      "attack_surface": "function resetMiddle(uint256 newMiddle, bool depositOrWithdraw)",
+      "start_line": null,
+      "end_line": null,
+      "vulnerable_code": "// missing reset for currentWithdrawGroup.totalCBAmount"
+    }
+  },
+  {
+    "incident_id": "NOYA-H-12",
+    "metadata": {
+      "project_name": "NOYA",
+      "year": 2024,
+      "source": "Code4rena",
+      "priority_type": "High",
+      "reference": "https://code4rena.com/reports/2024-04-noya#H-12"
+    },
+    "vulnerability": {
+      "issue_category": "Array / Index Error",
+      "issue_subtype": "Incorrect position index calculation",
+      "root_cause": "In `Registry.updateHoldingPosition`, the logic for swapping and updating `holdingPositions` uses the wrong connector identifier, leading to incorrect position indices.",
+      "impact": "Incorrect TVL accounting and potential inconsistency in connector data.",
+      "affected_contracts": ["Registry"]
+    },
+    "location": {
+      "contract_name": "Registry",
+      "attack_surface": "function updateHoldingPosition(...)",
+      "start_line": null,
+      "end_line": null,
+      "vulnerable_code": "// swap index update logic wrong"
+    }
+  }
+]
+
+## Medium severity finding
+
+[
+  {
+    "incident_id": "NOYA-M-01",
+    "metadata": {
+      "project_name": "NOYA",
+      "year": 2024,
+      "source": "Code4rena",
+      "priority_type": "Medium",
+      "reference": "https://code4rena.com/reports/2024-04-noya#M-01"
+    },
+    "vulnerability": {
+      "issue_category": "Logic Error",
+      "issue_subtype": "Incorrect withdrawal state update",
+      "root_cause": "The withdrawal accounting logic updates internal state before all validation checks are completed, allowing inconsistent intermediate states when execution reverts.",
+      "impact": "Withdraw queues may become inconsistent, leading to delayed or blocked withdrawals under certain edge conditions.",
+      "affected_contracts": ["AccountingManager"]
+    },
+    "location": {
+      "contract_name": "AccountingManager",
+      "attack_surface": "function processWithdrawQueue(...)",
+      "start_line": null,
+      "end_line": null,
+      "vulnerable_code": "// withdrawal state updated before full validation"
+    }
+  },
+  {
+    "incident_id": "NOYA-M-02",
+    "metadata": {
+      "project_name": "NOYA",
+      "year": 2024,
+      "source": "Code4rena",
+      "priority_type": "Medium",
+      "reference": "https://code4rena.com/reports/2024-04-noya#M-02"
+    },
+    "vulnerability": {
+      "issue_category": "Input Validation",
+      "issue_subtype": "Missing zero-address check",
+      "root_cause": "Several setter functions do not validate against zero addresses when configuring connectors or trusted addresses.",
+      "impact": "Misconfiguration can permanently break connector routing or cause funds to be sent to an irrecoverable address.",
+      "affected_contracts": ["Registry", "BaseConnector"]
+    },
+    "location": {
+      "contract_name": "Registry",
+      "attack_surface": "function setConnector(address connector)",
+      "start_line": null,
+      "end_line": null,
+      "vulnerable_code": "// missing require(connector != address(0))"
+    }
+  },
+  {
+    "incident_id": "NOYA-M-03",
+    "metadata": {
+      "project_name": "NOYA",
+      "year": 2024,
+      "source": "Code4rena",
+      "priority_type": "Medium",
+      "reference": "https://code4rena.com/reports/2024-04-noya#M-03"
+    },
+    "vulnerability": {
+      "issue_category": "Access Control",
+      "issue_subtype": "Over-privileged manager role",
+      "root_cause": "The manager role is granted authority to perform both operational and configuration-level actions without separation of duties.",
+      "impact": "A compromised manager key could reconfigure connectors and manipulate asset flows, increasing blast radius.",
+      "affected_contracts": ["VaultManager", "Registry"]
+    },
+    "location": {
+      "contract_name": "VaultManager",
+      "attack_surface": "function executeManagerAction(...)",
+      "start_line": null,
+      "end_line": null,
+      "vulnerable_code": "// manager role combines operational and config permissions"
+    }
+  },
+  {
+    "incident_id": "NOYA-M-04",
+    "metadata": {
+      "project_name": "NOYA",
+      "year": 2024,
+      "source": "Code4rena",
+      "priority_type": "Medium",
+      "reference": "https://code4rena.com/reports/2024-04-noya#M-04"
+    },
+    "vulnerability": {
+      "issue_category": "Accounting",
+      "issue_subtype": "Rounding error in share calculation",
+      "root_cause": "Share minting and burning calculations rely on integer division without consistent rounding direction across deposit and withdraw paths.",
+      "impact": "Small but cumulative accounting discrepancies can lead to unfair share distribution between users.",
+      "affected_contracts": ["Vault"]
+    },
+    "location": {
+      "contract_name": "Vault",
+      "attack_surface": "function convertToShares(uint256 assets)",
+      "start_line": null,
+      "end_line": null,
+      "vulnerable_code": "// inconsistent rounding between deposit and withdraw"
+    }
+  },
+  {
+    "incident_id": "NOYA-M-05",
+    "metadata": {
+      "project_name": "NOYA",
+      "year": 2024,
+      "source": "Code4rena",
+      "priority_type": "Medium",
+      "reference": "https://code4rena.com/reports/2024-04-noya#M-05"
+    },
+    "vulnerability": {
+      "issue_category": "Denial of Service",
+      "issue_subtype": "Unbounded loop over user positions",
+      "root_cause": "Several functions iterate over dynamic arrays of user positions without upper bounds or batching mechanisms.",
+      "impact": "Large position counts may cause transactions to exceed block gas limits, preventing execution.",
+      "affected_contracts": ["Registry"]
+    },
+    "location": {
+      "contract_name": "Registry",
+      "attack_surface": "function rebalancePositions(...)",
+      "start_line": null,
+      "end_line": null,
+      "vulnerable_code": "// unbounded loop over holdingPositions"
+    }
+  },
+  {
+    "incident_id": "NOYA-M-06",
+    "metadata": {
+      "project_name": "NOYA",
+      "year": 2024,
+      "source": "Code4rena",
+      "priority_type": "Medium",
+      "reference": "https://code4rena.com/reports/2024-04-noya#M-06"
+    },
+    "vulnerability": {
+      "issue_category": "External Call Safety",
+      "issue_subtype": "Missing return value validation",
+      "root_cause": "External protocol calls assume success without validating returned values or post-conditions.",
+      "impact": "Silent failures may go undetected, leading to incorrect internal accounting or stuck funds.",
+      "affected_contracts": ["PendleConnector", "BaseConnector"]
+    },
+    "location": {
+      "contract_name": "PendleConnector",
+      "attack_surface": "function executeExternalDeposit(...)",
+      "start_line": null,
+      "end_line": null,
+      "vulnerable_code": "// external call return value not validated"
+    }
+  }
+]
+
+## Coinbase Smart Wallet contest
+
+[
+  {
+    "incident_id": "CSW-H-01",
+    "metadata": {
+      "project_name": "Coinbase Smart Wallet",
+      "year": 2024,
+      "source": "Code4rena",
+      "priority_type": "High",
+      "reference": "https://code4rena.com/reports/2024-03-coinbase#H-01"
+    },
+    "vulnerability": {
+      "issue_category": "Access Control",
+      "issue_subtype": "Incorrect owner removal logic",
+      "root_cause": "The function removeOwnerAtIndex relies on an index that can change between calls, allowing a different owner to be removed than intended when the owners array is modified.",
+      "impact": "A wallet owner can be unintentionally or maliciously removed, potentially leading to loss of control over the smart wallet.",
+      "affected_contracts": ["SmartWallet"]
+    },
+    "location": {
+      "contract_name": "SmartWallet",
+      "attack_surface": "function removeOwnerAtIndex(uint256 index)",
+      "start_line": null,
+      "end_line": null,
+      "vulnerable_code": "// owner array index can change between calls"
+    }
+  },
+  {
+    "incident_id": "CSW-M-01",
+    "metadata": {
+      "project_name": "Coinbase Smart Wallet",
+      "year": 2024,
+      "source": "Code4rena",
+      "priority_type": "Medium",
+      "reference": "https://code4rena.com/reports/2024-03-coinbase#M-01"
+    },
+    "vulnerability": {
+      "issue_category": "Input Validation",
+      "issue_subtype": "Missing duplicate owner check",
+      "root_cause": "When adding a new owner, the contract does not explicitly prevent adding an address that already exists in the owners list.",
+      "impact": "Duplicate owners can cause inconsistencies in owner enumeration and quorum calculations.",
+      "affected_contracts": ["SmartWallet"]
+    },
+    "location": {
+      "contract_name": "SmartWallet",
+      "attack_surface": "function addOwner(address newOwner)",
+      "start_line": null,
+      "end_line": null,
+      "vulnerable_code": "// no check to prevent duplicate owner"
+    }
+  },
+  {
+    "incident_id": "CSW-M-02",
+    "metadata": {
+      "project_name": "Coinbase Smart Wallet",
+      "year": 2024,
+      "source": "Code4rena",
+      "priority_type": "Medium",
+      "reference": "https://code4rena.com/reports/2024-03-coinbase#M-02"
+    },
+    "vulnerability": {
+      "issue_category": "Replay Protection",
+      "issue_subtype": "Insufficient nonce domain separation",
+      "root_cause": "The nonce used for signature validation is shared across different execution paths, without domain separation for action type.",
+      "impact": "A valid signature for one action may be replayed in a different execution context under certain conditions.",
+      "affected_contracts": ["SmartWallet"]
+    },
+    "location": {
+      "contract_name": "SmartWallet",
+      "attack_surface": "function validateSignature(bytes signature, uint256 nonce)",
+      "start_line": null,
+      "end_line": null,
+      "vulnerable_code": "// nonce reused across different execution paths"
+    }
+  },
+  {
+    "incident_id": "CSW-M-03",
+    "metadata": {
+      "project_name": "Coinbase Smart Wallet",
+      "year": 2024,
+      "source": "Code4rena",
+      "priority_type": "Medium",
+      "reference": "https://code4rena.com/reports/2024-03-coinbase#M-03"
+    },
+    "vulnerability": {
+      "issue_category": "Initialization",
+      "issue_subtype": "Incomplete initialization validation",
+      "root_cause": "The initialization function does not fully validate all configuration parameters before enabling wallet functionality.",
+      "impact": "Misconfigured wallets may be deployed in an unsafe state that cannot be corrected later.",
+      "affected_contracts": ["SmartWalletFactory"]
+    },
+    "location": {
+      "contract_name": "SmartWalletFactory",
+      "attack_surface": "function initializeWallet(address[] owners, uint256 threshold)",
+      "start_line": null,
+      "end_line": null,
+      "vulnerable_code": "// missing full validation of initialization parameters"
+    }
+  },
+  {
+    "incident_id": "CSW-M-04",
+    "metadata": {
+      "project_name": "Coinbase Smart Wallet",
+      "year": 2024,
+      "source": "Code4rena",
+      "priority_type": "Medium",
+      "reference": "https://code4rena.com/reports/2024-03-coinbase#M-04"
+    },
+    "vulnerability": {
+      "issue_category": "Denial of Service",
+      "issue_subtype": "Unbounded owner iteration",
+      "root_cause": "Several wallet management functions iterate over the full owners array without gas bounds or pagination.",
+      "impact": "Wallets with many owners may become unable to execute management operations due to gas limits.",
+      "affected_contracts": ["SmartWallet"]
+    },
+    "location": {
+      "contract_name": "SmartWallet",
+      "attack_surface": "function getOwners()",
+      "start_line": null,
+      "end_line": null,
+      "vulnerable_code": "// unbounded iteration over owners array"
+    }
+  },
+  {
+    "incident_id": "CSW-M-05",
+    "metadata": {
+      "project_name": "Coinbase Smart Wallet",
+      "year": 2024,
+      "source": "Code4rena",
+      "priority_type": "Medium",
+      "reference": "https://code4rena.com/reports/2024-03-coinbase#M-05"
+    },
+    "vulnerability": {
+      "issue_category": "Error Handling",
+      "issue_subtype": "Silent failure on external call",
+      "root_cause": "External calls executed by the wallet do not consistently check return values or revert reasons.",
+      "impact": "Failed external interactions may not be detected, causing unexpected wallet state or user confusion.",
+      "affected_contracts": ["SmartWallet"]
+    },
+    "location": {
+      "contract_name": "SmartWallet",
+      "attack_surface": "function executeCall(address target, bytes data)",
+      "start_line": null,
+      "end_line": null,
+      "vulnerable_code": "// external call result not fully validated"
+    }
+  }
+]
+
+## The Graph L2 Bridge contest (2022)
+
+[
+  {
+    "incident_id": "GRA-H-01",
+    "metadata": {
+      "project_name": "The Graph",
+      "year": 2022,
+      "source": "Code4rena",
+      "priority_type": "High",
+      "reference": "https://code4rena.com/reports/2022-10-thegraph#H-01"
+    },
+    "vulnerability": {
+      "issue_category": "Privilege Escalation",
+      "issue_subtype": "Unprotected Initialization",
+      "root_cause": "The implementation contract uses OpenZeppelin Initializable but does not disable initializers in the constructor, allowing direct initialization of the implementation contract.",
+      "impact": "An attacker can take ownership of the implementation contract and potentially disrupt proxy behavior or upgrades.",
+      "affected_contracts": [
+        "BridgeEscrow.sol",
+        "L2GraphTokenGateway.sol",
+        "L1GraphTokenGateway.sol"
+      ]
+    },
+    "location": {
+      "contract_name": "L2GraphToken.sol",
+      "attack_surface": "initialize(address _owner)",
+      "start_line": null,
+      "end_line": null,
+      "vulnerable_code": "// initializer callable on implementation contract"
+    }
+  },
+  {
+    "incident_id": "GRA-H-02",
+    "metadata": {
+      "project_name": "The Graph",
+      "year": 2022,
+      "source": "Code4rena",
+      "priority_type": "High",
+      "reference": "https://code4rena.com/reports/2022-10-thegraph#H-02"
+    },
+    "vulnerability": {
+      "issue_category": "Access Control",
+      "issue_subtype": "Missing access restriction on upgrade",
+      "root_cause": "Upgrade-related functions rely on ownership that can be improperly configured, allowing unauthorized upgrade paths.",
+      "impact": "A malicious party could upgrade the implementation to arbitrary logic.",
+      "affected_contracts": ["GraphTokenUpgradeable"]
+    },
+    "location": {
+      "contract_name": "GraphTokenUpgradeable",
+      "attack_surface": "function upgradeTo(address newImplementation)",
+      "start_line": null,
+      "end_line": null,
+      "vulnerable_code": "// upgrade authorization insufficiently enforced"
+    }
+  },
+  {
+    "incident_id": "GRA-H-03",
+    "metadata": {
+      "project_name": "The Graph",
+      "year": 2022,
+      "source": "Code4rena",
+      "priority_type": "High",
+      "reference": "https://code4rena.com/reports/2022-10-thegraph#H-03"
+    },
+    "vulnerability": {
+      "issue_category": "Logic Error",
+      "issue_subtype": "Incorrect bridge state validation",
+      "root_cause": "Bridge functions do not consistently validate message origin and expected state before processing cross-chain transfers.",
+      "impact": "Invalid or replayed bridge messages could be processed, leading to incorrect token accounting.",
+      "affected_contracts": ["L2GraphTokenGateway"]
+    },
+    "location": {
+      "contract_name": "L2GraphTokenGateway",
+      "attack_surface": "function finalizeInboundTransfer(...)",
+      "start_line": null,
+      "end_line": null,
+      "vulnerable_code": "// insufficient validation of bridge message state"
+    }
+  },
+  {
+    "incident_id": "GRA-M-01",
+    "metadata": {
+      "project_name": "The Graph",
+      "year": 2022,
+      "source": "Code4rena",
+      "priority_type": "Medium",
+      "reference": "https://code4rena.com/reports/2022-10-thegraph#M-01"
+    },
+    "vulnerability": {
+      "issue_category": "Initialization",
+      "issue_subtype": "Multiple initialization paths",
+      "root_cause": "Initialization logic is split across multiple functions, increasing the risk that some parameters remain unset or incorrectly set.",
+      "impact": "Contracts may be deployed in a partially initialized or inconsistent state.",
+      "affected_contracts": ["BridgeEscrow"]
+    },
+    "location": {
+      "contract_name": "BridgeEscrow",
+      "attack_surface": "function initializeEscrow(...)",
+      "start_line": null,
+      "end_line": null,
+      "vulnerable_code": "// initialization split across multiple functions"
+    }
+  },
+  {
+    "incident_id": "GRA-M-02",
+    "metadata": {
+      "project_name": "The Graph",
+      "year": 2022,
+      "source": "Code4rena",
+      "priority_type": "Medium",
+      "reference": "https://code4rena.com/reports/2022-10-thegraph#M-02"
+    },
+    "vulnerability": {
+      "issue_category": "Input Validation",
+      "issue_subtype": "Missing zero-address check",
+      "root_cause": "Setter functions allow critical addresses to be set to the zero address without validation.",
+      "impact": "Key roles or dependencies may be accidentally disabled, breaking protocol functionality.",
+      "affected_contracts": ["L1GraphTokenGateway"]
+    },
+    "location": {
+      "contract_name": "L1GraphTokenGateway",
+      "attack_surface": "function setL2Gateway(address gateway)",
+      "start_line": null,
+      "end_line": null,
+      "vulnerable_code": "// no zero-address validation"
+    }
+  },
+  {
+    "incident_id": "GRA-M-03",
+    "metadata": {
+      "project_name": "The Graph",
+      "year": 2022,
+      "source": "Code4rena",
+      "priority_type": "Medium",
+      "reference": "https://code4rena.com/reports/2022-10-thegraph#M-03"
+    },
+    "vulnerability": {
+      "issue_category": "Denial of Service",
+      "issue_subtype": "Unbounded iteration",
+      "root_cause": "Functions iterate over arrays of bridge messages or pending transfers without upper bounds.",
+      "impact": "Operations may become unexecutable if arrays grow too large.",
+      "affected_contracts": ["BridgeEscrow"]
+    },
+    "location": {
+      "contract_name": "BridgeEscrow",
+      "attack_surface": "function processPendingTransfers()",
+      "start_line": null,
+      "end_line": null,
+      "vulnerable_code": "// unbounded loop over pending transfers"
+    }
+  },
+  {
+    "incident_id": "GRA-M-04",
+    "metadata": {
+      "project_name": "The Graph",
+      "year": 2022,
+      "source": "Code4rena",
+      "priority_type": "Medium",
+      "reference": "https://code4rena.com/reports/2022-10-thegraph#M-04"
+    },
+    "vulnerability": {
+      "issue_category": "External Call Safety",
+      "issue_subtype": "Assumed success of external call",
+      "root_cause": "External token transfers and bridge calls assume success without validating return values.",
+      "impact": "Silent failures can desynchronize internal accounting from actual token balances.",
+      "affected_contracts": ["GraphTokenUpgradeable"]
+    },
+    "location": {
+      "contract_name": "GraphTokenUpgradeable",
+      "attack_surface": "function _transfer(address to, uint256 amount)",
+      "start_line": null,
+      "end_line": null,
+      "vulnerable_code": "// external call return value not checked"
+    }
+  }
+]
+
+## Gitcoin Passport
+
+[
+  {
+    "incident_id": "GIT-H-01",
+    "metadata": {
+      "project_name": "Gitcoin Passport",
+      "year": 2024,
+      "source": "Code4rena",
+      "priority_type": "High",
+      "reference": "https://code4rena.com/reports/2024-03-gitcoin#H-01"
+    },
+    "vulnerability": {
+      "issue_category": "Accounting",
+      "issue_subtype": "Inconsistent total stake tracking",
+      "root_cause": "The contract updates user-level stake balances without consistently updating the global `userTotalStaked` variable in all execution paths.",
+      "impact": "The protocol can enter an inconsistent accounting state, potentially breaking withdrawal logic or reward calculations.",
+      "affected_contracts": ["PassportIdentityStaking"]
+    },
+    "location": {
+      "contract_name": "PassportIdentityStaking",
+      "attack_surface": "function stake(uint256 amount)",
+      "start_line": null,
+      "end_line": null,
+      "vulnerable_code": "// userTotalStaked not updated in all paths"
+    }
+  },
+  {
+    "incident_id": "GIT-M-01",
+    "metadata": {
+      "project_name": "Gitcoin Passport",
+      "year": 2024,
+      "source": "Code4rena",
+      "priority_type": "Medium",
+      "reference": "https://code4rena.com/reports/2024-03-gitcoin#M-01"
+    },
+    "vulnerability": {
+      "issue_category": "Initialization",
+      "issue_subtype": "Unvalidated configuration parameters",
+      "root_cause": "Critical configuration values are accepted during initialization without enforcing safe bounds or invariants.",
+      "impact": "Improper configuration can weaken protocol guarantees or require redeployment to fix.",
+      "affected_contracts": ["PassportIdentityStaking"]
+    },
+    "location": {
+      "contract_name": "PassportIdentityStaking",
+      "attack_surface": "function initialize(address token, uint256 minStake)",
+      "start_line": null,
+      "end_line": null,
+      "vulnerable_code": "// missing validation on initialization parameters"
+    }
+  },
+  {
+    "incident_id": "GIT-M-02",
+    "metadata": {
+      "project_name": "Gitcoin Passport",
+      "year": 2024,
+      "source": "Code4rena",
+      "priority_type": "Medium",
+      "reference": "https://code4rena.com/reports/2024-03-gitcoin#M-02"
+    },
+    "vulnerability": {
+      "issue_category": "Access Control",
+      "issue_subtype": "Overpowered admin role",
+      "root_cause": "The admin role is allowed to modify staking parameters and operational state without time delay or multi-party approval.",
+      "impact": "A compromised admin key could arbitrarily change staking rules, harming users.",
+      "affected_contracts": ["PassportIdentityStaking"]
+    },
+    "location": {
+      "contract_name": "PassportIdentityStaking",
+      "attack_surface": "function setStakeParameters(...)",
+      "start_line": null,
+      "end_line": null,
+      "vulnerable_code": "// admin role lacks constraint or timelock"
+    }
+  },
+  {
+    "incident_id": "GIT-M-03",
+    "metadata": {
+      "project_name": "Gitcoin Passport",
+      "year": 2024,
+      "source": "Code4rena",
+      "priority_type": "Medium",
+      "reference": "https://code4rena.com/reports/2024-03-gitcoin#M-03"
+    },
+    "vulnerability": {
+      "issue_category": "Denial of Service",
+      "issue_subtype": "Unbounded iteration over stakers",
+      "root_cause": "Reward and accounting functions iterate over the full list of stakers without pagination or batching.",
+      "impact": "As the number of stakers grows, core protocol functions may become uncallable due to gas limits.",
+      "affected_contracts": ["PassportIdentityStaking"]
+    },
+    "location": {
+      "contract_name": "PassportIdentityStaking",
+      "attack_surface": "function distributeRewards()",
+      "start_line": null,
+      "end_line": null,
+      "vulnerable_code": "// unbounded loop over stakers"
+    }
+  },
+  {
+    "incident_id": "GIT-M-04",
+    "metadata": {
+      "project_name": "Gitcoin Passport",
+      "year": 2024,
+      "source": "Code4rena",
+      "priority_type": "Medium",
+      "reference": "https://code4rena.com/reports/2024-03-gitcoin#M-04"
+    },
+    "vulnerability": {
+      "issue_category": "Input Validation",
+      "issue_subtype": "Missing zero-amount check",
+      "root_cause": "Stake and unstake functions allow zero-amount operations, unnecessarily altering state and emitting misleading events.",
+      "impact": "Zero-value interactions can pollute accounting data and complicate off-chain indexers.",
+      "affected_contracts": ["PassportIdentityStaking"]
+    },
+    "location": {
+      "contract_name": "PassportIdentityStaking",
+      "attack_surface": "function unstake(uint256 amount)",
+      "start_line": null,
+      "end_line": null,
+      "vulnerable_code": "// zero-amount operations not rejected"
+    }
+  },
+  {
+    "incident_id": "GIT-M-05",
+    "metadata": {
+      "project_name": "Gitcoin Passport",
+      "year": 2024,
+      "source": "Code4rena",
+      "priority_type": "Medium",
+      "reference": "https://code4rena.com/reports/2024-03-gitcoin#M-05"
+    },
+    "vulnerability": {
+      "issue_category": "External Call Safety",
+      "issue_subtype": "Assumed ERC20 compliance",
+      "root_cause": "The contract assumes ERC20 transfers always return true and does not guard against non-standard token implementations.",
+      "impact": "Interactions with non-compliant tokens may silently fail, breaking staking logic.",
+      "affected_contracts": ["PassportIdentityStaking"]
+    },
+    "location": {
+      "contract_name": "PassportIdentityStaking",
+      "attack_surface": "function _safeTransferFrom(address from, address to, uint256 amount)",
+      "start_line": null,
+      "end_line": null,
+      "vulnerable_code": "// ERC20 return value not checked"
+    }
+  }
+]
+

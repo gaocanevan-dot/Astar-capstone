@@ -1,0 +1,22 @@
+{
+  "CSW-H-01": {
+    "path": "data/contracts/raw/CSW/CoinbaseSmartWallet.sol",
+    "contract_name": "CoinbaseSmartWallet"
+  },
+  "GRA-H-01": {
+    "path": "data/contracts/raw/GRA/L2GraphToken.sol",
+    "contract_name": "L2GraphToken"
+  },
+  "GRA-H-02": {
+    "path": "data/contracts/raw/GRA/GraphTokenUpgradeable.sol",
+    "contract_name": "GraphTokenUpgradeable"
+  },
+  "GIT-M-02": {
+    "path": "data/contracts/raw/GIT/IdentityStaking.sol",
+    "contract_name": "IdentityStaking"
+  },
+  "NOYA-H-08": {
+    "path": "data/contracts/raw/NOYA/BaseConnector.sol",
+    "contract_name": "BaseConnector"
+  }
+}
