@@ -58,6 +58,18 @@ class VulnerabilityCase(BaseModel):
     
     def to_rag_document(self) -> Dict:
         """转换为 RAG 文档格式"""
+        # 构建元数据。像 Chroma 这类向量库对部分字段（如 tags）有非空要求，
+        # 因此我们只在 tags 非空时才添加该字段，避免空列表导致 upsert 失败。
+        metadata = {
+            "id": self.id,
+            "vulnerability_type": self.vulnerability_type.value,
+            "severity": self.severity,
+            "function": self.vulnerable_function,
+            "missing_check": self.missing_check,
+        }
+        if self.tags:
+            metadata["tags"] = self.tags
+
         return {
             "id": self.id,
             "content": f"""
@@ -81,14 +93,7 @@ PoC Code:
 Fix Recommendation:
 {self.fix_recommendation}
 """,
-            "metadata": {
-                "id": self.id,
-                "vulnerability_type": self.vulnerability_type.value,
-                "severity": self.severity,
-                "function": self.vulnerable_function,
-                "missing_check": self.missing_check,
-                "tags": self.tags
-            }
+            "metadata": metadata,
         }
     
     def to_training_example(self, task_type: TaskType = TaskType.ANALYZE) -> TrainingExample:

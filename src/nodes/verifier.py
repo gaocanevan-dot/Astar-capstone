@@ -28,11 +28,16 @@ def verify_poc(state: AuditGraphState) -> AuditGraphState:
     contract_source = state.get("contract_source", "")
     contract_name = state.get("contract_name", "Contract")
     
+    # 当前重试次数
+    current_retries = state.get("retry_count", 0)
+    
     if not poc_code:
+        # 没有 PoC 代码视为一次失败重试
         return {
             **state,
             "execution_result": "fail_error",
-            "error_message": "No PoC code"
+            "error_message": "No PoC code",
+            "retry_count": current_retries + 1,
         }
     
     try:
@@ -57,19 +62,26 @@ def verify_poc(state: AuditGraphState) -> AuditGraphState:
                 }
             })
         
+        # 根据执行结果更新重试次数
+        new_retry_count = current_retries
+        if result == "fail_error":
+            new_retry_count = current_retries + 1
+        
         return {
             **state,
             "execution_result": result,
             "error_message": error,
             "finding_confirmed": result == "pass",
-            "training_examples": training_examples
+            "training_examples": training_examples,
+            "retry_count": new_retry_count,
         }
         
     except Exception as e:
         return {
             **state,
             "execution_result": "fail_error",
-            "error_message": f"Verification failed: {str(e)}"
+            "error_message": f"Verification failed: {str(e)}",
+            "retry_count": current_retries + 1,
         }
 
 

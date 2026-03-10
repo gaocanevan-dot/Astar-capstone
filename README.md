@@ -63,11 +63,17 @@ agent/
 
 ## 快速开始
 
-### 1. 安装依赖
+### 1. 创建并激活 Conda 环境（推荐）
 
 ```bash
-pip install -r requirements.txt
+conda create -n authtrace python=3.10 -y
+conda activate authtrace
+
+# 在项目根目录安装依赖（基于 pyproject.toml）
+pip install -e .
 ```
+
+> 如需使用本地嵌入（默认已开启 `USE_LOCAL_EMBEDDINGS=true`），需要自动安装 `sentence-transformers` 等依赖，上面的命令已经涵盖。
 
 ### 2. 配置环境变量
 
@@ -76,11 +82,23 @@ cp .env.example .env
 # 编辑 .env 设置 OPENAI_API_KEY
 ```
 
-### 3. 准备数据集
+### 3. 准备示例漏洞数据集（可选）
 
-创建示例数据集查看格式：
+方式一：使用内置示例（sample）
+
 ```bash
 python scripts/run_audit.py --create-sample
+python scripts/run_audit.py --load-dataset data/dataset/sample.json
+```
+
+方式二：使用你整理的审计报告摘要（data/data.txt）
+
+```bash
+# 将 data/data.txt 转换为 RAG 数据集
+python scripts/convert_data_txt.py
+
+# 加载到向量库（Chroma）
+python scripts/run_audit.py --load-dataset data/dataset/vulnerabilities.json
 ```
 
 数据集格式 (`data/dataset/vulnerabilities.json`):
@@ -117,6 +135,14 @@ python scripts/run_audit.py --contract path/to/contract.sol
 # 不使用 RAG (对比用)
 python scripts/run_audit.py --contract path/to/contract.sol --no-rag
 ```
+
+示例：
+
+```bash
+python scripts/run_audit.py --contract data/contracts/VulnerableAccessControl.sol --max-retries 2
+```
+
+> 说明：当前仓库中 `VulnerableAccessControl.sol` 是一个**故意设计有访问控制漏洞的示例合约**，用于本地验证和测试 Agent 流程。
 
 ### 6. 评估 Agent 效果
 
@@ -187,6 +213,28 @@ python scripts/evaluate.py --dataset data/dataset/vulnerabilities.json
 - **ChromaDB**: 向量数据库
 - **Foundry**: 智能合约测试
 - **Pydantic**: 数据验证
+
+## 环境依赖一览（给队友看的 TL;DR）
+
+- **Python**: 3.10+
+- **Conda 环境（推荐）**:
+  - 使用 `conda create -n authtrace python=3.10` 创建
+  - 在项目根目录执行 `pip install -e .` 安装依赖
+- **RAG / 向量库**:
+  - 已默认开启本地嵌入：`USE_LOCAL_EMBEDDINGS=true`
+  - 依赖：
+    - `sentence-transformers`
+    - `langchain-huggingface`
+    - `chromadb`
+- **可选：Foundry（真实 PoC 验证）**
+  - 用于 `verifier` 节点实际运行 Foundry 测试（PoC）
+  - 安装（PowerShell）：
+    ```bash
+    iwr https://foundry.paradigm.xyz -UseBasicParsing | Invoke-Expression
+    foundryup
+    forge --version
+    ```
+  - 未安装 Foundry 时，`verifier` 会返回 `fail_error`，可用于调试/演示，但无法进行真实链下验证。
 
 ## License
 

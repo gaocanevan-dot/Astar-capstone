@@ -157,14 +157,33 @@ def analyze_access_control(state: AuditGraphState) -> AuditGraphState:
     try:
         result = chain.invoke(invoke_params)
         
-        # 找出高风险且无访问控制的函数
+        # 找出无访问控制的敏感函数（基于 LLM 结果）
         sensitive_funcs = result.get("sensitive_functions", [])
+        # 优先：高风险且无访问控制
         vulnerable_funcs = [
-            f for f in sensitive_funcs 
+            f for f in sensitive_funcs
             if not f.get("has_access_control", True) and f.get("risk_level") == "high"
         ]
-        
+        # 退而求其次：只要无访问控制就认为值得验证
+        if not vulnerable_funcs:
+            vulnerable_funcs = [
+                f for f in sensitive_funcs
+                if not f.get("has_access_control", True)
+            ]
+
         target_function = vulnerable_funcs[0]["name"] if vulnerable_funcs else ""
+
+        # 如果 LLM 没有可靠地给出目标函数，则使用简单正则做一个后备分析：
+        # 选第一个没有访问控制修饰符（onlyOwner/onlyAdmin）的 external/public 函数。
+        if not target_function:
+            simple_funcs = extract_functions_simple(state["contract_source"])
+            fallback_candidates = [
+                f for f in simple_funcs
+                if not f.get("has_access_control", True)
+                and f.get("visibility") in ("public", "external")
+            ]
+            if fallback_candidates:
+                target_function = fallback_candidates[0]["name"]
         
         return {
             **state,
