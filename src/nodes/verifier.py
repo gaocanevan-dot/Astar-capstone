@@ -104,9 +104,9 @@ def run_foundry_test(
         src_dir.mkdir()
         test_dir.mkdir()
         
-        # 写入文件
-        (src_dir / f"{contract_name}.sol").write_text(contract_source)
-        (test_dir / f"{contract_name}.t.sol").write_text(poc_code)
+        # 写入文件 (使用 UTF-8 编码，支持中文注释和特殊字符)
+        (src_dir / f"{contract_name}.sol").write_text(contract_source, encoding='utf-8')
+        (test_dir / f"{contract_name}.t.sol").write_text(poc_code, encoding='utf-8')
         
         # foundry.toml
         (project_dir / "foundry.toml").write_text("""[profile.default]
@@ -114,7 +114,7 @@ src = "src"
 out = "out"
 libs = ["lib"]
 solc = "0.8.20"
-""")
+""", encoding='utf-8')
         
         # 安装 forge-std
         try:
