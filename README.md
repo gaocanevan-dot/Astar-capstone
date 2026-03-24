@@ -1,240 +1,306 @@
-# Smart Contract Access Control Vulnerability Agent
+﻿# Smart Contract Access Control Vulnerability Agent
 
-基于 RAG 增强的 DeFi 智能合约**访问控制漏洞**检测系统。
+一个面向智能合约访问控制 / 权限升级漏洞的轻量研究原型，当前流程为：
 
-## 项目目标
+`静态分析 -> RAG 检索 -> AI 分析 -> PoC 生成 -> Foundry 验证`
 
-### 核心目标
+当前项目重点不是做“纯检测”，而是尽量把漏洞分析和可利用性验证串成一个完整闭环。
 
-1. **加载数据集**：将你手动构建的漏洞数据集加载到向量库
-2. **RAG 增强分析**：分析前检索相似漏洞案例，提升检测效果
-3. **自动生成 PoC**：生成 Foundry 测试代码验证漏洞
-4. **评估效果**：用数据集测试 Agent 的 Recall 和 PoC 成功率
+## 当前能力
 
-### 漏洞类型范围（仅专注于）
+- 聚焦两类漏洞：
+  - `access_control`
+  - `privilege_escalation`
+- 支持轻量静态分析预处理
+- 支持 RAG 检索相似漏洞案例
+- 支持 AI analyst 生成漏洞 hypothesis
+- 支持 Builder 生成 Foundry PoC
+- 支持 Verifier 运行 Foundry 测试确认漏洞
+- 支持基础消融实验：
+  - `full`
+  - `no-static`
+  - `no-rag`
 
-- **访问控制漏洞 (Access Control)**
-  - 缺失的 `onlyOwner` 修饰符
-  - 不正确的角色检查
-  - 公开的敏感函数
-  
-- **权限升级漏洞 (Privilege Escalation)**
-  - 未保护的所有权转移
-  - 角色管理漏洞
+## 当前项目结构
 
-## 项目架构
-
-```
+```text
 agent/
 ├── src/
-│   ├── core/              # 核心模块
-│   │   ├── state.py       # 共享状态 (含 RAG 检索结果)
-│   │   ├── graph.py       # LangGraph 工作流 (RAG 增强)
-│   │   └── config.py      # 配置管理
-│   │
-│   ├── nodes/             # Agent 节点
-│   │   ├── analyst.py     # 漏洞分析 (含 RAG 检索)
-│   │   ├── builder.py     # PoC 生成
-│   │   └── verifier.py    # 验证执行
-│   │
-│   ├── dataset/           # 数据集模块 (核心!)
-│   │   ├── loader.py      # 数据集加载器
-│   │   ├── schemas.py     # 数据结构定义
-│   │   └── collector.py   # (保留) 数据收集
-│   │
-│   ├── rag/               # RAG 模块
-│   │   ├── vectorstore.py # 向量库 (ChromaDB)
-│   │   ├── retriever.py   # 检索器
-│   │   └── embeddings.py  # 嵌入模型
-│   │
-│   └── evaluation/        # 评估模块 (新增!)
-│       └── evaluator.py   # 用数据集评估 Agent
-│
+│   ├── core/
+│   │   ├── config.py
+│   │   ├── graph_light.py
+│   │   └── state_schema.py
+│   ├── nodes/
+│   │   ├── preprocess_static.py
+│   │   ├── analyst.py
+│   │   ├── builder.py
+│   │   └── verifier.py
+│   ├── rag/
+│   │   ├── embeddings.py
+│   │   ├── retriever.py
+│   │   └── vectorstore.py
+│   ├── tools/
+│   │   ├── static_adapter.py
+│   │   ├── slither.py
+│   │   ├── foundry.py
+│   │   └── aderyn.py
+│   ├── dataset/
+│   └── evaluation/
+├── scripts/
+│   ├── run_audit.py
+│   ├── demo_light.py
+│   ├── run_ablation.py
+│   ├── evaluate.py
+│   ├── debug_analyst.py
+│   └── debug_builder_verifier.py
 ├── data/
-│   ├── dataset/           # 你的漏洞数据集
-│   ├── vectorstore/       # 向量库存储
-│   ├── contracts/         # 测试合约
-│   └── evaluation/        # 评估报告
-│
-└── scripts/
-    ├── run_audit.py       # 主入口 (支持 RAG)
-    └── evaluate.py        # 评估脚本
+│   ├── contracts/
+│   ├── dataset/
+│   ├── evaluation/
+│   └── vectorstore/
+└── README.md
 ```
+
+## 环境要求
+
+- Python `3.10+`
+- Windows PowerShell 或其他常见终端
+- OpenAI API Key
+- Foundry
+- 可选：
+  - Slither
+  - Hugging Face 访问能力（本地 embedding 首次下载模型时需要）
+
+## 安装方式
+
+推荐直接使用当前项目目录下的 `venv`。
+
+如果你要新建环境：
+
+```powershell
+python -m venv venv
+venv\Scripts\python.exe -m pip install -U pip
+venv\Scripts\python.exe -m pip install -e .
+venv\Scripts\python.exe -m pip install sentence-transformers langchain-huggingface chromadb slither-analyzer
+```
+
+## 环境变量配置
+
+复制模板：
+
+```powershell
+Copy-Item .env.example .env
+```
+
+至少需要配置：
+
+- `OPENAI_API_KEY`
+- `FOUNDRY_PATH`（如果 `forge` 不在 PATH 中）
+
+`.env.example` 中当前相关字段如下：
+
+```env
+OPENAI_API_KEY=your_openai_api_key_here
+OPENAI_MODEL=gpt-4-turbo-preview
+MAX_RETRIES=3
+DATASET_PATH=data/dataset/vulnerabilities.json
+VECTORSTORE_PATH=data/vectorstore
+FOUNDRY_PATH=
+USE_LOCAL_EMBEDDINGS=true
+RAG_TOP_K=5
+```
+
+## Windows 运行说明
+
+当前项目已经处理了几个常见 Windows 问题：
+
+- `scripts/run_audit.py` 和 `scripts/evaluate.py` 会自动禁用 Pydantic 插件扫描，避免当前 `venv` 下的启动卡顿问题
+- `scripts/run_audit.py` 会自动将 stdout/stderr 配置为 UTF-8，避免 Rich 输出导致编码报错
+- Verifier 会按以下顺序寻找 `forge`：
+  - `.env` 中的 `FOUNDRY_PATH`
+  - 系统 `PATH`
+  - 默认 Foundry 安装路径 `~/.foundry/bin/forge(.exe)`
+- Slither 工具现在优先使用项目内的：
+  - `venv\Scripts\slither.exe`
+
+## 数据说明
+
+### 1. 当前 RAG 数据集
+
+默认使用：
+
+- `data/dataset/vulnerabilities.json`
+
+它用于：
+
+- 加载到 Chroma 向量库
+- 为 analyst 提供相似漏洞案例检索结果
+
+### 2. 当前演示合约
+
+默认演示合约：
+
+- `data/contracts/VulnerableAccessControl.sol`
+
+它是一个故意设计的访问控制漏洞样例，用于验证完整流程和演示效果。
 
 ## 快速开始
 
-### 1. 创建并激活 Conda 环境（推荐）
+### 1. 加载 RAG 数据集
 
-```bash
-conda create -n authtrace python=3.10 -y
-conda activate authtrace
-
-# 在项目根目录安装依赖（基于 pyproject.toml）
-pip install -e .
+```powershell
+venv\Scripts\python.exe scripts\run_audit.py --load-dataset data/dataset/vulnerabilities.json
 ```
 
-> 如需使用本地嵌入（默认已开启 `USE_LOCAL_EMBEDDINGS=true`），需要自动安装 `sentence-transformers` 等依赖，上面的命令已经涵盖。
+### 2. 运行完整主流程
 
-### 2. 配置环境变量
-
-```bash
-cp .env.example .env
-# 编辑 .env 设置 OPENAI_API_KEY
+```powershell
+venv\Scripts\python.exe scripts\run_audit.py --contract data/contracts/VulnerableAccessControl.sol --max-retries 2
 ```
 
-### 3. 准备示例漏洞数据集（可选）
+### 3. 运行轻量 demo
 
-方式一：使用内置示例（sample）
+这是当前最推荐的演示命令：
 
-```bash
-python scripts/run_audit.py --create-sample
-python scripts/run_audit.py --load-dataset data/dataset/sample.json
+```powershell
+venv\Scripts\python.exe scripts\demo_light.py
 ```
 
-方式二：使用你整理的审计报告摘要（data/data.txt）
+### 4. 在 demo 中附带消融实验结果
 
-```bash
-# 将 data/data.txt 转换为 RAG 数据集
-python scripts/convert_data_txt.py
-
-# 加载到向量库（Chroma）
-python scripts/run_audit.py --load-dataset data/dataset/vulnerabilities.json
+```powershell
+venv\Scripts\python.exe scripts\demo_light.py --with-ablation
 ```
 
-数据集格式 (`data/dataset/vulnerabilities.json`):
-```json
-{
-  "cases": [
-    {
-      "id": "case_001",
-      "contract_source": "// Solidity code...",
-      "contract_name": "VulnerableVault",
-      "vulnerable_function": "setProtocolFee",
-      "vulnerability_type": "access_control",
-      "severity": "high",
-      "description": "Missing onlyOwner modifier",
-      "poc_code": "function test_exploit() { ... }",
-      "fix_recommendation": "Add onlyOwner modifier"
-    }
-  ]
-}
+### 5. 单独运行轻量消融实验
+
+```powershell
+venv\Scripts\python.exe scripts\run_ablation.py --contract data/contracts/VulnerableAccessControl.sol --max-retries 2
 ```
 
-### 4. 加载数据集到向量库
+## 主流程入口说明
 
-```bash
-python scripts/run_audit.py --load-dataset data/dataset/vulnerabilities.json
-```
+### `scripts/run_audit.py`
 
-### 5. 运行审计
+完整审计入口，支持：
 
-```bash
-# 使用 RAG 增强 (默认)
-python scripts/run_audit.py --contract path/to/contract.sol
-
-# 不使用 RAG (对比用)
-python scripts/run_audit.py --contract path/to/contract.sol --no-rag
-```
+- 静态分析
+- RAG
+- AI 分析
+- Foundry 验证
 
 示例：
 
-```bash
-python scripts/run_audit.py --contract data/contracts/VulnerableAccessControl.sol --max-retries 2
+```powershell
+venv\Scripts\python.exe scripts\run_audit.py --contract data/contracts/VulnerableAccessControl.sol --max-retries 2
 ```
 
-> 说明：当前仓库中 `VulnerableAccessControl.sol` 是一个**故意设计有访问控制漏洞的示例合约**，用于本地验证和测试 Agent 流程。
+支持的基础消融开关：
 
-### 6. 评估 Agent 效果
-
-```bash
-python scripts/evaluate.py --dataset data/dataset/vulnerabilities.json
+```powershell
+venv\Scripts\python.exe scripts\run_audit.py --contract data/contracts/VulnerableAccessControl.sol --max-retries 2 --no-static
+venv\Scripts\python.exe scripts\run_audit.py --contract data/contracts/VulnerableAccessControl.sol --max-retries 2 --no-rag
 ```
 
-## 工作流程
+### `scripts/demo_light.py`
 
+当前用于答辩 / 汇报的轻量 demo，展示：
+
+- Step 1：静态分析结果
+- Step 2：RAG 检索结果
+- Step 3：最终漏洞结果
+- Step 4：消融实验结果（仅在 `--with-ablation` 时显示）
+
+### `scripts/run_ablation.py`
+
+当前的轻量消融实验脚本，比较：
+
+- `full`
+- `no-static`
+- `no-rag`
+
+它目前是“单合约展示版”，更适合老师汇报，不是最终的数据集级实验脚本。
+
+### `scripts/evaluate.py`
+
+当前保留为评估入口，但后续还需要继续扩展成更正式的数据集批量实验脚本。
+
+## 当前 demo 展示的含义
+
+在 `demo_light.py` 中，最终输出通常包含：
+
+- `status`
+- `findings`
+- `vulnerability_type`
+- `target`
+- `hypothesis`
+- `confirmed`
+
+其中：
+
+- `vulnerability_type`
+  - 表示当前识别出的主要漏洞类型
+- `target`
+  - 表示当前这轮验证流程优先选中的目标函数
+  - 不是“唯一存在问题的函数”，而是当前主验证目标
+
+## 当前项目做到哪一步
+
+目前已经完成：
+
+- 完整轻量闭环打通
+- 静态分析接入主流程
+- RAG 接入主流程
+- AI 分析 + Foundry 验证串联完成
+- 轻量 demo 可直接运行
+- 基础消融实验脚本已完成
+
+目前还需要继续完善：
+
+- 面向数据集的正式消融实验
+- 真实合约的大规模批量测试
+- 与 `Slither` / `Aderyn` 的正式基线对比
+- 更规范的实验输出与论文级评估指标
+
+## 当前推荐的老师演示命令
+
+如果你要快速展示当前成果，推荐直接运行：
+
+```powershell
+venv\Scripts\python.exe scripts\demo_light.py --with-ablation
 ```
-你的数据集
-    │
-    ▼
-┌─────────────────┐
-│  加载到向量库   │  ← VectorStore (ChromaDB)
-└────────┬────────┘
-         │
-         ▼
-待审计合约 ─────────────────────────────────────────┐
-         │                                          │
-         ▼                                          ▼
-┌─────────────────┐                        ┌─────────────────┐
-│  RAG 检索       │ ───── 相似案例 ─────── │  Analyst 节点   │
-│  (Few-Shot)     │                        │  (漏洞分析)     │
-└─────────────────┘                        └────────┬────────┘
-                                                    │
-                                                    ▼
-                                           ┌─────────────────┐
-                                           │  Builder 节点   │
-                                           │  (生成 PoC)     │
-                                           └────────┬────────┘
-                                                    │
-                                                    ▼
-                                           ┌─────────────────┐
-                                           │  Verifier 节点  │
-                                           │  (Foundry 验证) │
-                                           └────────┬────────┘
-                                                    │
-                            ┌───────────────────────┼───────────────────────┐
-                            │                       │                       │
-                        pass (漏洞确认)      fail_error (重试)      fail_revert (安全)
-                            │                       │                       │
-                            ▼                       │                       ▼
-                      生成报告                  回到 Builder             标记安全
-```
 
-## 评估指标
+这条命令会一起展示：
 
-运行 `evaluate.py` 后会生成以下指标：
+- 静态分析结果
+- RAG 检索结果
+- 最终漏洞确认结果
+- 消融实验对比表
 
-| 指标                 | 说明                      |
-| -------------------- | ------------------------- |
-| **Recall**           | 检出的漏洞数 / 总漏洞数   |
-| **Detection Rate**   | Analyst 节点检出的比例    |
-| **PoC Success Rate** | PoC 执行成功 / PoC 生成数 |
+## 常见问题
 
-### 错题分析
+### 1. 为什么轻量 demo 和主流程输出不完全一样？
 
-- **Analyst Missed**: Node 1 没检出
-- **Builder Failed**: Node 2 没生成 PoC
-- **PoC Syntax Error**: PoC 语法错误
-- **PoC Wrong Logic**: PoC 逻辑错误
+因为：
 
-## 技术栈
+- `run_audit.py` 更偏向完整结果展示
+- `demo_light.py` 更偏向老师汇报时的简洁展示
 
-- **LangGraph**: 工作流编排
-- **LangChain + OpenAI**: LLM 集成
-- **ChromaDB**: 向量数据库
-- **Foundry**: 智能合约测试
-- **Pydantic**: 数据验证
+### 2. 当前消融实验能证明模块贡献率吗？
 
-## 环境依赖一览（给队友看的 TL;DR）
+目前只能初步说明：
 
-- **Python**: 3.10+
-- **Conda 环境（推荐）**:
-  - 使用 `conda create -n authtrace python=3.10` 创建
-  - 在项目根目录执行 `pip install -e .` 安装依赖
-- **RAG / 向量库**:
-  - 已默认开启本地嵌入：`USE_LOCAL_EMBEDDINGS=true`
-  - 依赖：
-    - `sentence-transformers`
-    - `langchain-huggingface`
-    - `chromadb`
-- **可选：Foundry（真实 PoC 验证）**
-  - 用于 `verifier` 节点实际运行 Foundry 测试（PoC）
-  - 安装（PowerShell）：
-    ```bash
-    iwr https://foundry.paradigm.xyz -UseBasicParsing | Invoke-Expression
-    foundryup
-    forge --version
-    ```
-  - 未安装 Foundry 时，`verifier` 会返回 `fail_error`，可用于调试/演示，但无法进行真实链下验证。
+- 系统框架已跑通
+- 模块开关可独立控制
+
+如果要正式证明 static analysis / RAG 的贡献率，还需要在更多真实合约上做批量实验。
+
+### 3. 当前静态分析工具到底是什么？
+
+当前采用：
+
+- 轻量源码静态分析为主
+- `Slither` 作为优先调用的外部静态分析工具增强
 
 ## License
 

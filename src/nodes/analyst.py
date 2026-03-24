@@ -10,7 +10,7 @@ from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import JsonOutputParser
 
-from ..core.state import AuditGraphState
+from ..core.state_schema import AuditGraphState
 from ..core.config import get_settings
 
 
@@ -36,11 +36,36 @@ Missing Check: {case.get('missing_check', '')}
     return "\n".join(context_parts)
 
 
+def _build_static_context(state: AuditGraphState) -> str:
+    """Build compact static-analysis context for the analyst."""
+    summary = state.get("static_analysis_summary", "").strip()
+    candidates = state.get("sensitive_candidates", [])
+    if not summary and not candidates:
+        return "No static-analysis facts available."
+
+    lines = []
+    if summary:
+        lines.append("Static analysis summary:")
+        lines.append(summary)
+
+    if candidates:
+        lines.append("\nSensitive candidates:")
+        for item in candidates[:5]:
+            writes = ", ".join(item.get("writes", [])) or "none"
+            modifiers = ", ".join(item.get("modifiers", [])) or "none"
+            lines.append(
+                f"- {item.get('name', '')}: modifiers={modifiers}; writes={writes}; reason={item.get('reason', '')}"
+            )
+
+    return "\n".join(lines)
+
+
 # 带 RAG 增强的分析提示模板
 ANALYST_PROMPT_WITH_RAG = ChatPromptTemplate.from_messages([
     ("system", """You are a smart contract security auditor specializing in access control vulnerabilities.
 
 {few_shot_context}
+{static_context}
 
 Analyze the given Solidity contract and identify ONLY:
 1. **Access Control Vulnerabilities**: Functions missing proper access control (e.g., missing onlyOwner)
@@ -58,6 +83,7 @@ Output JSON:
     "sensitive_functions": [
         {{
             "name": "functionName",
+            "signature": "functionName(type1,type2)",
             "has_access_control": false,
             "modifiers": [],
             "risk_level": "high|medium|low",
@@ -91,11 +117,17 @@ For each sensitive function, check:
 - Does it have appropriate access control modifiers?
 - Can an unauthorized user call it?
 
+Static-analysis facts:
+{static_context}
+
+Use the static-analysis facts to prioritize the most likely vulnerable target.
+
 Output JSON:
 {{
     "sensitive_functions": [
         {{
             "name": "functionName",
+            "signature": "functionName(type1,type2)",
             "has_access_control": false,
             "modifiers": [],
             "risk_level": "high|medium|low",
@@ -136,6 +168,7 @@ def analyze_access_control(state: AuditGraphState) -> AuditGraphState:
     # 获取 RAG 检索结果
     similar_cases = state.get("similar_cases", [])
     few_shot_context = _build_few_shot_context(similar_cases)
+    static_context = _build_static_context(state)
     
     # 选择合适的提示模板
     if few_shot_context:
@@ -143,6 +176,7 @@ def analyze_access_control(state: AuditGraphState) -> AuditGraphState:
         chain = prompt | llm | JsonOutputParser()
         invoke_params = {
             "few_shot_context": few_shot_context,
+            "static_context": static_context,
             "contract_source": state["contract_source"],
             "contract_name": state.get("contract_name", "Contract")
         }
@@ -150,6 +184,7 @@ def analyze_access_control(state: AuditGraphState) -> AuditGraphState:
         prompt = ANALYST_PROMPT_BASIC
         chain = prompt | llm | JsonOutputParser()
         invoke_params = {
+            "static_context": static_context,
             "contract_source": state["contract_source"],
             "contract_name": state.get("contract_name", "Contract")
         }
@@ -175,6 +210,15 @@ def analyze_access_control(state: AuditGraphState) -> AuditGraphState:
 
         # 如果 LLM 没有可靠地给出目标函数，则使用简单正则做一个后备分析：
         # 选第一个没有访问控制修饰符（onlyOwner/onlyAdmin）的 external/public 函数。
+        if not target_function:
+            static_candidates = state.get("sensitive_candidates", [])
+            fallback_candidates = [
+                item for item in static_candidates
+                if not any(mod.lower().startswith("only") for mod in item.get("modifiers", []))
+            ]
+            if fallback_candidates:
+                target_function = fallback_candidates[0]["name"]
+
         if not target_function:
             simple_funcs = extract_functions_simple(state["contract_source"])
             fallback_candidates = [

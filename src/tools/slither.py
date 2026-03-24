@@ -7,6 +7,9 @@ prints visual information about contract details, and provides an API for custom
 
 import subprocess
 import json
+import sys
+from pathlib import Path
+from shutil import which
 from typing import Optional, List, Dict, Tuple
 from dataclasses import dataclass, field
 
@@ -26,6 +29,7 @@ class SlitherTool:
     
     def __init__(self, solc_version: str = "0.8.20"):
         self.solc_version = solc_version
+        self.slither_cmd = resolve_slither_command()
     
     def analyze(
         self,
@@ -48,7 +52,7 @@ class SlitherTool:
         Returns:
             (success, findings, raw_output)
         """
-        cmd = ["slither", target, "--json", "-"]
+        cmd = [self.slither_cmd, target, "--json", "-"]
         
         if detectors:
             cmd.extend(["--detect", ",".join(detectors)])
@@ -125,7 +129,7 @@ class SlitherTool:
     
     def get_function_summary(self, target: str) -> Tuple[bool, str]:
         """获取合约函数摘要"""
-        cmd = ["slither", target, "--print", "function-summary"]
+        cmd = [self.slither_cmd, target, "--print", "function-summary"]
         
         try:
             result = subprocess.run(
@@ -140,7 +144,7 @@ class SlitherTool:
     
     def get_modifiers(self, target: str) -> Tuple[bool, str]:
         """获取合约修饰符信息"""
-        cmd = ["slither", target, "--print", "modifiers"]
+        cmd = [self.slither_cmd, target, "--print", "modifiers"]
         
         try:
             result = subprocess.run(
@@ -158,7 +162,7 @@ def check_slither_installed() -> bool:
     """检查 Slither 是否已安装"""
     try:
         result = subprocess.run(
-            ["slither", "--version"],
+            [resolve_slither_command(), "--version"],
             capture_output=True,
             text=True,
             timeout=10
@@ -166,3 +170,23 @@ def check_slither_installed() -> bool:
         return result.returncode == 0
     except (subprocess.TimeoutExpired, FileNotFoundError):
         return False
+
+
+def resolve_slither_command() -> str:
+    """Prefer the project's slither executable over the global PATH."""
+    candidates = [
+        Path.cwd() / "venv" / "Scripts" / "slither.exe",
+        Path(sys.executable).resolve().parent / "slither.exe",
+        Path.cwd() / "venv" / "bin" / "slither",
+        Path(sys.executable).resolve().parent / "slither",
+    ]
+
+    for candidate in candidates:
+        if candidate.exists():
+            return str(candidate)
+
+    slither_on_path = which("slither")
+    if slither_on_path:
+        return slither_on_path
+
+    return "slither"

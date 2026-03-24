@@ -16,9 +16,11 @@ Usage:
 """
 
 import argparse
+import os
 import sys
 from pathlib import Path
 
+os.environ.setdefault("PYDANTIC_DISABLE_PLUGINS", "__all__")
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from rich.console import Console
@@ -138,8 +140,8 @@ def run_evaluation(dataset_path: str, max_cases: int = None, output_path: str = 
     display_dataset_summary(evaluator)
     
     # 定义 Agent 运行函数
-    from src.core.state import create_initial_state
-    from src.core.graph import compile_graph
+    from src.core.state_schema import create_initial_state
+    from src.core.graph_light import compile_graph
     
     def run_agent(contract_source: str, contract_name: str) -> dict:
         state = create_initial_state(contract_source, contract_name)

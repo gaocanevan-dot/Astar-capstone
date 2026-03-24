@@ -336,8 +336,8 @@ def run_quick_evaluation(
     
     注意: 需要配置好 API Key
     """
-    from ..core.graph import create_audit_graph
-    from ..core.state import create_initial_state
+    from ..core.graph_light import create_audit_graph
+    from ..core.state_schema import create_initial_state
     
     def run_agent(contract_source: str, contract_name: str) -> Dict:
         state = create_initial_state(contract_source, contract_name)

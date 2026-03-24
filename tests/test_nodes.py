@@ -5,7 +5,7 @@ Tests for audit workflow nodes.
 import pytest
 from unittest.mock import Mock, patch
 
-from src.core.state import create_initial_state, AuditGraphState
+from src.core.state_schema import create_initial_state, AuditGraphState
 from src.nodes.analyst import analyze_access_control, extract_roles_with_regex, extract_modifiers_with_regex
 from src.nodes.builder import build_verification_poc, clean_code_output
 from src.nodes.verifier import parse_forge_output

@@ -7,10 +7,11 @@ Node 3: Dynamic Verifier (验证节点)
 import subprocess
 import tempfile
 from pathlib import Path
+from shutil import which
 from typing import Tuple, Literal
 
-from ..core.state import AuditGraphState
-from ..core.config import get_settings
+from ..core.state_schema import AuditGraphState
+from ..core.config import get_default_forge_path, get_settings
 
 
 def verify_poc(state: AuditGraphState) -> AuditGraphState:
@@ -95,6 +96,10 @@ def run_foundry_test(
     
     Returns: (result, trace, error)
     """
+    forge_cmd = resolve_forge_command()
+    if forge_cmd is None:
+        return "fail_error", "", "Foundry not installed or forge executable not found"
+
     with tempfile.TemporaryDirectory() as tmpdir:
         project_dir = Path(tmpdir)
         
@@ -118,19 +123,23 @@ solc = "0.8.20"
         
         # 安装 forge-std
         try:
-            subprocess.run(
-                ["forge", "install", "foundry-rs/forge-std", "--no-git"],
+            install_result = subprocess.run(
+                [forge_cmd, "install", "foundry-rs/forge-std", "--no-git"],
                 cwd=project_dir,
                 capture_output=True,
+                text=True,
                 timeout=60
             )
+            if install_result.returncode != 0:
+                install_trace = install_result.stdout + "\n" + install_result.stderr
+                return "fail_error", install_trace, extract_error_message(install_trace) or "forge install failed"
         except Exception as e:
             return "fail_error", "", f"Forge init failed: {str(e)}"
         
         # 运行测试
         try:
             result = subprocess.run(
-                ["forge", "test", "-vvv"],
+                [forge_cmd, "test", "-vvv"],
                 cwd=project_dir,
                 capture_output=True,
                 text=True,
@@ -177,6 +186,30 @@ def parse_forge_output(
         return "fail_revert", trace, "Access control working"
     
     return "fail_error", trace, extract_error_message(trace) or "Unknown error"
+
+
+def resolve_forge_command() -> str | None:
+    """Resolve forge from config, PATH, or the default Foundry install path."""
+    settings = get_settings()
+    candidates: list[Path] = []
+
+    if settings.foundry_path:
+        configured = Path(settings.foundry_path).expanduser()
+        if configured.is_dir():
+            configured = configured / ("forge.exe" if configured.drive else "forge")
+        candidates.append(configured)
+
+    forge_on_path = which("forge")
+    if forge_on_path:
+        return forge_on_path
+
+    candidates.append(get_default_forge_path())
+
+    for candidate in candidates:
+        if candidate.exists():
+            return str(candidate)
+
+    return None
 
 
 def extract_error_message(output: str) -> str:

@@ -5,7 +5,7 @@ Configuration - 配置管理
 """
 
 from functools import lru_cache
-from typing import Optional
+from pathlib import Path
 from pydantic_settings import BaseSettings
 from pydantic import Field
 
@@ -26,6 +26,7 @@ class Settings(BaseSettings):
     dataset_path: str = Field(default="data/dataset/vulnerabilities.json", env="DATASET_PATH")
     vectorstore_path: str = Field(default="data/vectorstore", env="VECTORSTORE_PATH")
     evaluation_output_dir: str = Field(default="data/evaluation", env="EVALUATION_OUTPUT_DIR")
+    foundry_path: str = Field(default="", env="FOUNDRY_PATH")
     
     # RAG 设置
     use_rag: bool = Field(default=True, env="USE_RAG")
@@ -54,3 +55,8 @@ def validate_config() -> bool:
         return False
     
     return True
+
+
+def get_default_forge_path() -> Path:
+    """Return the default per-user forge path used by Foundry installers."""
+    return Path.home() / ".foundry" / "bin" / ("forge.exe" if Path.home().drive else "forge")

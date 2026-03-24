@@ -11,7 +11,7 @@ from typing import List, Dict, Optional
 from langchain_core.documents import Document
 
 from .vectorstore import VulnerabilityVectorStore
-from ..core.state import AuditGraphState
+from ..core.state_schema import AuditGraphState
 
 
 class VulnerabilityRetriever:

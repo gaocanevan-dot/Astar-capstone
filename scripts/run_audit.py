@@ -16,9 +16,11 @@ Usage:
 """
 
 import argparse
+import os
 import sys
 from pathlib import Path
 
+os.environ.setdefault("PYDANTIC_DISABLE_PLUGINS", "__all__")
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from rich.console import Console
@@ -26,11 +28,23 @@ from rich.panel import Panel
 from rich.syntax import Syntax
 from rich.table import Table
 
-from src.core.state import create_initial_state
-from src.core.graph import compile_graph, load_dataset_to_vectorstore
+from src.core.state_schema import create_initial_state
+from src.core.graph_light import compile_graph, load_dataset_to_vectorstore
 from src.core.config import validate_config, get_settings
 
 
+def configure_utf8_output() -> None:
+    """Make Rich output safe on fresh Windows PowerShell sessions."""
+    for stream_name in ("stdout", "stderr"):
+        stream = getattr(sys, stream_name, None)
+        if stream is not None and hasattr(stream, "reconfigure"):
+            try:
+                stream.reconfigure(encoding="utf-8")
+            except ValueError:
+                pass
+
+
+configure_utf8_output()
 console = Console()
 
 
@@ -68,6 +82,33 @@ def display_contract(source: str, name: str):
     console.print(Syntax(preview, "solidity", theme="monokai", line_numbers=True))
 
 
+def display_static_info(state: dict):
+    """Display a compact static-analysis summary."""
+    if not state.get("use_static_analysis", True):
+        console.print("\n[dim]Static analysis disabled[/dim]")
+        return
+
+    candidates = state.get("sensitive_candidates", [])
+    if not candidates:
+        console.print("\n[dim]No static-analysis candidates collected[/dim]")
+        return
+
+    console.print(f"\n[cyan]Static analysis identified {len(candidates)} sensitive candidates:[/cyan]")
+    table = Table(show_header=True, header_style="bold")
+    table.add_column("Function", width=24)
+    table.add_column("Modifiers", width=20)
+    table.add_column("Writes", width=20)
+
+    for item in candidates[:4]:
+        table.add_row(
+            item.get("name", "")[:24],
+            ", ".join(item.get("modifiers", []))[:20] or "-",
+            ", ".join(item.get("writes", []))[:20] or "-",
+        )
+
+    console.print(table)
+
+
 def display_rag_info(similar_cases: list):
     """显示 RAG 检索到的相似案例"""
     if not similar_cases:
@@ -99,10 +140,13 @@ def display_results(report: dict, final_state: dict = None):
     
     status = report.get("status", "unknown")
     rag_enhanced = report.get("rag_enhanced", False)
+    static_used = report.get("static_analysis_used", False)
     
     if rag_enhanced:
         console.print("[cyan]✨ RAG Enhanced Analysis[/cyan]")
-    
+    if static_used:
+        console.print("[cyan]Static Analysis Enhanced[/cyan]")
+
     if status == "vulnerabilities_found":
         console.print(f"\n[bold red]🚨 VULNERABILITIES FOUND[/bold red]")
         console.print(f"Findings: {report.get('total_findings', 0)}")
@@ -113,13 +157,15 @@ def display_results(report: dict, final_state: dict = None):
             console.print(f"  Issue: {finding.get('hypothesis', 'N/A')}")
             if finding.get('similar_cases_used', 0) > 0:
                 console.print(f"  [dim]Referenced {finding.get('similar_cases_used')} similar cases[/dim]")
+            if finding.get('static_candidates_used', 0) > 0:
+                console.print(f"  [dim]Referenced {finding.get('static_candidates_used')} static candidates[/dim]")
     else:
         console.print(f"\n[green]✅ NO VULNERABILITIES FOUND[/green]")
     
     console.print("\n" + "=" * 50)
 
 
-def run_audit(contract_path: str, max_retries: int = 3, use_rag: bool = True):
+def run_audit(contract_path: str, max_retries: int = 3, use_rag: bool = True, use_static: bool = True):
     """执行审计"""
     
     # 加载合约
@@ -142,10 +188,15 @@ def run_audit(contract_path: str, max_retries: int = 3, use_rag: bool = True):
     initial_state = create_initial_state(
         contract_source=source_code,
         contract_name=contract_name,
-        max_retries=max_retries
+        max_retries=max_retries,
+        use_static_analysis=use_static,
+        use_rag=use_rag,
     )
     
-    mode = "with RAG" if use_rag else "without RAG"
+    mode_parts = []
+    mode_parts.append("with static analysis" if use_static else "without static analysis")
+    mode_parts.append("with RAG" if use_rag else "without RAG")
+    mode = ", ".join(mode_parts)
     console.print(f"\n[cyan]🔍 Starting audit ({mode})...[/cyan]\n")
     
     try:
@@ -158,6 +209,8 @@ def run_audit(contract_path: str, max_retries: int = 3, use_rag: bool = True):
                 final_state = node_state
                 
                 # 显示 RAG 检索结果
+                if node_name == "preprocess_static":
+                    display_static_info(node_state)
                 if node_name == "rag_retrieval":
                     display_rag_info(node_state.get("similar_cases", []))
                 
@@ -220,6 +273,11 @@ def main():
         help="Disable RAG enhancement (for comparison)"
     )
     parser.add_argument(
+        "--no-static",
+        action="store_true",
+        help="Disable static-analysis preprocessing (for comparison)"
+    )
+    parser.add_argument(
         "--max-retries", "-r",
         type=int,
         default=3,
@@ -242,7 +300,8 @@ def main():
         run_audit(
             contract_path=args.contract,
             max_retries=args.max_retries,
-            use_rag=not args.no_rag
+            use_rag=not args.no_rag,
+            use_static=not args.no_static
         )
     else:
         parser.print_help()

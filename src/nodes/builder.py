@@ -8,7 +8,7 @@ from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
-from ..core.state import AuditGraphState
+from ..core.state_schema import AuditGraphState
 from ..core.config import get_settings
 
 
@@ -41,6 +41,8 @@ Contract:
 Contract Name: {contract_name}
 Target Function: {target_function}
 Vulnerability: {audit_hypothesis}
+Static Analysis Facts:
+{static_context}
 
 {error_context}
 
@@ -113,6 +115,7 @@ Fix the issues in the new PoC."""
             "contract_name": contract_name,
             "audit_hypothesis": state.get("audit_hypothesis", ""),
             "target_function": target_function,
+            "static_context": state.get("static_analysis_summary", ""),
             "error_context": error_context
         })
         
