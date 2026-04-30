@@ -85,3 +85,29 @@ reports/
 # OS
 .DS_Store
 Thumbs.db
+
+# === Capstone project additions ===
+
+# Day-3 external dataset (122 MB Repair-Access-Control-C corpus). Source-of-
+# truth lives elsewhere; we only need smoke_set.json + per-case .sol files
+# pulled lazily by scripts/build_smoke_set_v2.py. Both the unzipped folder
+# and the original zip are excluded.
+data/dataset/Repair-Access-Control-C-main/
+data/dataset/Repair-Access-Control-C-main.zip
+
+# Embedding binary caches (regenerable from rag_training_dataset.json)
+data/dataset/.rag_training_dataset.embcache.npz
+data/dataset/.dataset_hashes.lock
+
+# Local CLI / IDE state
+.claude/
+
+# OMC runtime state (session-scoped). Plans + research stay tracked under
+# .omc/plans/ via explicit `git add` of those subdirs.
+.omc/state/
+.omc/notepad.md
+.omc/project-memory.json
+.omc/logs/
+
+# Local forge-std install cache (created by adapters/foundry.py at runtime)
+.cache/forge-std/

@@ -1,0 +1,33 @@
+nan denom=0
+
+# HONEST CAVEAT — pre-Day-2 baseline
+# Measured from data/evaluation/full_pipeline_predictions.json,
+# which records REPLICA-PATH passes (GPT-fabricated self-contained
+# PoCs), not validation against the original contract.
+# The Day-2 cascade router will re-run with verifier_mode-driven
+# source-write seam, at which point real fail_revert_ac and
+# fail_error_runtime cases will appear and deflate the baseline to
+# a meaningful number. AC11's `≥ baseline + 0.10` target MUST be
+# re-measured at that point.
+#
+# Smoke 10 IDs (this baseline):
+#   ACF-087
+#   ACF-091
+#   ACF-092
+#   ACF-093
+#   ACF-101
+#   ACF-102
+#   ACF-103
+#   ACF-106
+#   ACF-109
+#   ACF-114
+#
+# Verdict breakdown on the smoke 10:
+#   pass: 0
+#   fail_revert_ac: 0
+#   fail_error_compile: 0
+#   fail_error_runtime: 0
+#   skipped: 0
+#   other: 0
+#
+# Denominator (pass + fail_revert_ac + fail_error_runtime): 0

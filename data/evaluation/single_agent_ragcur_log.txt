@@ -1,0 +1,49 @@
+Loaded 42/42 cases from data\dataset\eval_set.json
+RAG corpus loaded from dataset data/dataset/rag_training_dataset.json: 85 docs
+[1/42] NOYA-H-04 (VaultWithdrawManager)... SKIP (empty contract_source)
+[2/42] NOYA-H-08 (BaseConnector)... pred='sendTokensToTrustedAddress' gt='sendTokensToTrustedAddress' ✓strict
+[3/42] NOYA-M-03 (VaultManager)... SKIP (empty contract_source)
+[4/42] CSW-H-01 (CoinbaseSmartWallet)... pred='executeWithoutChainIdValidation' gt='removeOwnerAtIndex' ✗miss
+[5/42] GRA-H-01 (L2GraphToken)... pred='initialize' gt='' ~loose
+[6/42] GRA-H-02 (GraphTokenUpgradeable)... pred='_initialize' gt='upgradeTo' ✗miss
+[7/42] GIT-M-02 (IdentityStaking)... pred='initialize' gt='setStakeParameters' ✗miss
+[8/42] C4-161 (NFTFloorOracle)... pred='removeFeeder' gt='removeFeeder' ✓strict
+[9/42] C4-35 (NFTFloorOracle)... pred='' gt='removeFeeder' ✗miss
+[10/42] C4-222 (VariableSupplyERC20Token)... pred='' gt='mint' ✗miss
+[11/42] C4-6 (PaprController)... pred='increaseDebt' gt='increaseDebt' ✓strict
+[12/42] C4-21 (RewardsPool)... pred='startRewardsCycle' gt='setUp' ✗miss
+[13/42] C4-55 (NFTFloorOracle)... pred='' gt='removeFeeder' ✗miss
+[14/42] C4-29 (ILBPair)... pred='burn(uint256[] memory ids, uint256[] memory amounts, address to)' gt='burn' ~loose
+[15/42] C4-17 (ClaimNodeOp)... pred='calculateAndDistributeRewards' gt='testExploit' ✗miss
+[16/42] C4-438 (LPDA)... pred='initialize' gt='buy' ✗miss
+[17/42] C4-111 (AutoPxGlp)... pred='' gt='unknown_function' ✗miss
+[18/42] C4-80 (NFTEDAStarterIncentive)... pred='' gt='auctionStartTime' ✗miss
+[19/42] C4-19 (AllowedMsgSenders)... pred='' gt='isIncluded' ✗miss
+[20/42] C4-487 (INVEscrow)... pred='' gt='onDeposit' ✗miss
+[21/42] C4-186 (NFTFloorOracle)... pred='removeFeeder' gt='removeFeeder' ✓strict
+[22/42] C4-22 (AccountListCaller)... pred='isIncluded(address)' gt='isIncluded' ~loose
+[23/42] C4-328 (ExecutionDelegate)... pred='' gt='unknown_function' ✗miss
+[24/42] C4-169 (SimplePriceOracle)... pred='setDirectPrice' gt='setUnderlyingPrice' ✗miss
+[25/42] C4-51 (Proposal-Store)... pred='AddProposal' gt='AddProposal' ✓strict
+[26/42] C4-318 (PuttyV2)... pred='' gt='fillOrder' ✗miss
+[27/42] C4-165 (NoteInterest)... pred='updateBaseRate' gt='updateBaseRate' ✓strict
+[28/42] C4-172 (Proposal-Store)... pred='queue' gt='queue' ✓strict
+[29/42] C4-63 (GovernorBravoDelegate)... pred='initialize' gt='AddProposal' ✗miss
+[30/42] C4-174 (WETH)... pred='approve(address owner, address spender)' gt='approve' ~loose
+[31/42] C4-67 (Splitter)... pred='incrementWindow' gt='incrementWindow' ✓strict
+[32/42] C4-3 (ConvexYieldWrapper)... pred='unwrap' gt='wrap' ~loose
+[33/42] C4-248 (StableVault)... pred='withdraw' gt='testExploit' ✗miss
+[34/42] C4-54 (Router)... pred='sweepToken' gt='unwrapWETH9' ✗miss
+[35/42] C4-286 (RedeemHook)... pred='' gt='unknown_function' ✗miss
+[36/42] C4-572 (BlurExchange)... pred='incrementNonce' gt='setUp' ✗miss
+[37/42] C4-229 (SimpleFeiDaiPSM)... pred='burnFeiHeld' gt='burnFeiHeld' ✓strict
+[38/42] C4-226 (Manager)... pred='deploy' gt='testMisleadingGetAddress' ✗miss
+[39/42] C4-484 (Governance)... pred='activateProposal(uint256)' gt='activateProposal' ~loose
+[40/42] C4-126 (Vault)... pred='' gt='install' ✗miss
+[41/42] C4-190 (StabilityPool)... pred='receiveCollateral' gt='receiveCollateral' ✓strict
+[42/42] C4-264 (WJLP)... pred='wrap' gt='unknown_function' ✗miss
+
+Analyst Recall: strict=24.39% (10/41), loose=36.59% (15/41) | hit@1=24.39% (10/41), hit@2=34.15% (14/41), hit@3=34.15% (14/41)
+Total wall-clock: 456.2s  LLM calls: 40
+Summary: data/evaluation/single_agent_ragcur_summary.md
+Predictions: data/evaluation/single_agent_ragcur_predictions.json

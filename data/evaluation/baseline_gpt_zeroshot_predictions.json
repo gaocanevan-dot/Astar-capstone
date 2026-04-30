@@ -1,0 +1,721 @@
+[
+  {
+    "case_id": "NOYA-H-04",
+    "contract_name": "VaultWithdrawManager",
+    "ground_truth_function": "executeWithdraw",
+    "flagged": false,
+    "flagged_functions": [],
+    "predicted_function": "",
+    "tokens_prompt": 0,
+    "tokens_completion": 0,
+    "llm_calls": 0,
+    "wall_clock_seconds": 3.5762786865234375e-06,
+    "raw_output": "",
+    "error": "empty contract_source",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "NOYA-H-08",
+    "contract_name": "BaseConnector",
+    "ground_truth_function": "sendTokensToTrustedAddress",
+    "flagged": true,
+    "flagged_functions": [
+      "sendTokensToTrustedAddress",
+      "transferPositionToAnotherConnector",
+      "addLiquidity",
+      "swapHoldings"
+    ],
+    "predicted_function": "sendTokensToTrustedAddress",
+    "tokens_prompt": 3046,
+    "tokens_completion": 48,
+    "llm_calls": 1,
+    "wall_clock_seconds": 4.638926982879639,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"sendTokensToTrustedAddress\",\n    \"transferPositionToAnotherConnector\",\n    \"addLiquidity\",\n    \"swapHoldings\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "NOYA-M-03",
+    "contract_name": "VaultManager",
+    "ground_truth_function": "executeManagerAction",
+    "flagged": false,
+    "flagged_functions": [],
+    "predicted_function": "",
+    "tokens_prompt": 0,
+    "tokens_completion": 0,
+    "llm_calls": 0,
+    "wall_clock_seconds": 3.0994415283203125e-06,
+    "raw_output": "",
+    "error": "empty contract_source",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "CSW-H-01",
+    "contract_name": "CoinbaseSmartWallet",
+    "ground_truth_function": "removeOwnerAtIndex",
+    "flagged": true,
+    "flagged_functions": [
+      "executeWithoutChainIdValidation",
+      "canSkipChainIdValidation",
+      "validateUserOp",
+      "_authorizeUpgrade"
+    ],
+    "predicted_function": "executeWithoutChainIdValidation",
+    "tokens_prompt": 3249,
+    "tokens_completion": 3449,
+    "llm_calls": 1,
+    "wall_clock_seconds": 43.911328077316284,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"executeWithoutChainIdValidation\",\n    \"canSkipChainIdValidation\",\n    \"validateUserOp\",\n    \"_authorizeUpgrade\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "GRA-H-01",
+    "contract_name": "L2GraphToken",
+    "ground_truth_function": "",
+    "flagged": false,
+    "flagged_functions": [],
+    "predicted_function": "",
+    "tokens_prompt": 915,
+    "tokens_completion": 732,
+    "llm_calls": 1,
+    "wall_clock_seconds": 11.4601731300354,
+    "raw_output": "{\n  \"is_vulnerable\": false,\n  \"vulnerable_functions\": []\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "GRA-H-02",
+    "contract_name": "GraphTokenUpgradeable",
+    "ground_truth_function": "upgradeTo",
+    "flagged": false,
+    "flagged_functions": [],
+    "predicted_function": "",
+    "tokens_prompt": 1636,
+    "tokens_completion": 732,
+    "llm_calls": 1,
+    "wall_clock_seconds": 9.631379127502441,
+    "raw_output": "{\n  \"is_vulnerable\": false,\n  \"vulnerable_functions\": []\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "GIT-M-02",
+    "contract_name": "IdentityStaking",
+    "ground_truth_function": "setStakeParameters",
+    "flagged": false,
+    "flagged_functions": [],
+    "predicted_function": "",
+    "tokens_prompt": 4926,
+    "tokens_completion": 1436,
+    "llm_calls": 1,
+    "wall_clock_seconds": 29.902312994003296,
+    "raw_output": "{\n  \"is_vulnerable\": false,\n  \"vulnerable_functions\": []\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-161",
+    "contract_name": "NFTFloorOracle",
+    "ground_truth_function": "removeFeeder",
+    "flagged": true,
+    "flagged_functions": [
+      "removeFeeder"
+    ],
+    "predicted_function": "removeFeeder",
+    "tokens_prompt": 138,
+    "tokens_completion": 164,
+    "llm_calls": 1,
+    "wall_clock_seconds": 3.6912167072296143,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"removeFeeder\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-35",
+    "contract_name": "NFTFloorOracle",
+    "ground_truth_function": "removeFeeder",
+    "flagged": false,
+    "flagged_functions": [],
+    "predicted_function": "",
+    "tokens_prompt": 122,
+    "tokens_completion": 348,
+    "llm_calls": 1,
+    "wall_clock_seconds": 5.731904029846191,
+    "raw_output": "{\n  \"is_vulnerable\": false,\n  \"vulnerable_functions\": []\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-222",
+    "contract_name": "VariableSupplyERC20Token",
+    "ground_truth_function": "mint",
+    "flagged": false,
+    "flagged_functions": [],
+    "predicted_function": "",
+    "tokens_prompt": 201,
+    "tokens_completion": 412,
+    "llm_calls": 1,
+    "wall_clock_seconds": 7.473720550537109,
+    "raw_output": "{\n  \"is_vulnerable\": false,\n  \"vulnerable_functions\": []\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-6",
+    "contract_name": "PaprController",
+    "ground_truth_function": "increaseDebt",
+    "flagged": true,
+    "flagged_functions": [
+      "increaseDebt"
+    ],
+    "predicted_function": "increaseDebt",
+    "tokens_prompt": 149,
+    "tokens_completion": 351,
+    "llm_calls": 1,
+    "wall_clock_seconds": 6.059615135192871,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"increaseDebt\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-21",
+    "contract_name": "RewardsPool",
+    "ground_truth_function": "setUp",
+    "flagged": true,
+    "flagged_functions": [
+      "startRewardsCycle"
+    ],
+    "predicted_function": "startRewardsCycle",
+    "tokens_prompt": 174,
+    "tokens_completion": 612,
+    "llm_calls": 1,
+    "wall_clock_seconds": 8.058216094970703,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"startRewardsCycle\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-55",
+    "contract_name": "NFTFloorOracle",
+    "ground_truth_function": "removeFeeder",
+    "flagged": true,
+    "flagged_functions": [
+      "removeFeeder"
+    ],
+    "predicted_function": "removeFeeder",
+    "tokens_prompt": 124,
+    "tokens_completion": 740,
+    "llm_calls": 1,
+    "wall_clock_seconds": 9.740654468536377,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"removeFeeder\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-29",
+    "contract_name": "ILBPair",
+    "ground_truth_function": "burn",
+    "flagged": true,
+    "flagged_functions": [
+      "burn"
+    ],
+    "predicted_function": "burn",
+    "tokens_prompt": 117,
+    "tokens_completion": 226,
+    "llm_calls": 1,
+    "wall_clock_seconds": 3.619367837905884,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"burn\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-17",
+    "contract_name": "ClaimNodeOp",
+    "ground_truth_function": "testExploit",
+    "flagged": true,
+    "flagged_functions": [
+      "calculateAndDistributeRewards"
+    ],
+    "predicted_function": "calculateAndDistributeRewards",
+    "tokens_prompt": 225,
+    "tokens_completion": 230,
+    "llm_calls": 1,
+    "wall_clock_seconds": 4.668283700942993,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"calculateAndDistributeRewards\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-438",
+    "contract_name": "LPDA",
+    "ground_truth_function": "buy",
+    "flagged": true,
+    "flagged_functions": [
+      "buy",
+      "refund",
+      "initialize"
+    ],
+    "predicted_function": "buy",
+    "tokens_prompt": 1266,
+    "tokens_completion": 1002,
+    "llm_calls": 1,
+    "wall_clock_seconds": 12.805974960327148,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"buy\",\n    \"refund\",\n    \"initialize\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-111",
+    "contract_name": "AutoPxGlp",
+    "ground_truth_function": "unknown_function",
+    "flagged": true,
+    "flagged_functions": [
+      "harvest",
+      "claim"
+    ],
+    "predicted_function": "harvest",
+    "tokens_prompt": 192,
+    "tokens_completion": 935,
+    "llm_calls": 1,
+    "wall_clock_seconds": 13.805616855621338,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"harvest\",\n    \"claim\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-80",
+    "contract_name": "NFTEDAStarterIncentive",
+    "ground_truth_function": "auctionStartTime",
+    "flagged": true,
+    "flagged_functions": [
+      "_setCreatorDiscount",
+      "_auctionCurrentPrice",
+      "_setAuctionStartTime"
+    ],
+    "predicted_function": "_setCreatorDiscount",
+    "tokens_prompt": 528,
+    "tokens_completion": 1649,
+    "llm_calls": 1,
+    "wall_clock_seconds": 19.89233922958374,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"_setCreatorDiscount\",\n    \"_auctionCurrentPrice\",\n    \"_setAuctionStartTime\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-19",
+    "contract_name": "AllowedMsgSenders",
+    "ground_truth_function": "isIncluded",
+    "flagged": true,
+    "flagged_functions": [
+      "isIncluded"
+    ],
+    "predicted_function": "isIncluded",
+    "tokens_prompt": 98,
+    "tokens_completion": 607,
+    "llm_calls": 1,
+    "wall_clock_seconds": 10.024661779403687,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"isIncluded\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-487",
+    "contract_name": "INVEscrow",
+    "ground_truth_function": "onDeposit",
+    "flagged": true,
+    "flagged_functions": [
+      "pay",
+      "onDeposit"
+    ],
+    "predicted_function": "pay",
+    "tokens_prompt": 265,
+    "tokens_completion": 1255,
+    "llm_calls": 1,
+    "wall_clock_seconds": 18.02175807952881,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"pay\",\n    \"onDeposit\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-186",
+    "contract_name": "NFTFloorOracle",
+    "ground_truth_function": "removeFeeder",
+    "flagged": true,
+    "flagged_functions": [
+      "removeFeeder"
+    ],
+    "predicted_function": "removeFeeder",
+    "tokens_prompt": 258,
+    "tokens_completion": 484,
+    "llm_calls": 1,
+    "wall_clock_seconds": 7.783616304397583,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"removeFeeder\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-22",
+    "contract_name": "AccountListCaller",
+    "ground_truth_function": "isIncluded",
+    "flagged": true,
+    "flagged_functions": [
+      "isIncluded",
+      "getCollateral",
+      "transferFrom",
+      "CallRedeemhook"
+    ],
+    "predicted_function": "isIncluded",
+    "tokens_prompt": 272,
+    "tokens_completion": 436,
+    "llm_calls": 1,
+    "wall_clock_seconds": 5.956777572631836,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"isIncluded\",\n    \"getCollateral\",\n    \"transferFrom\",\n    \"CallRedeemhook\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-328",
+    "contract_name": "ExecutionDelegate",
+    "ground_truth_function": "unknown_function",
+    "flagged": true,
+    "flagged_functions": [
+      "transferERC20"
+    ],
+    "predicted_function": "transferERC20",
+    "tokens_prompt": 153,
+    "tokens_completion": 928,
+    "llm_calls": 1,
+    "wall_clock_seconds": 12.475422143936157,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"transferERC20\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-169",
+    "contract_name": "SimplePriceOracle",
+    "ground_truth_function": "setUnderlyingPrice",
+    "flagged": true,
+    "flagged_functions": [
+      "setUnderlyingPrice",
+      "setDirectPrice"
+    ],
+    "predicted_function": "setUnderlyingPrice",
+    "tokens_prompt": 177,
+    "tokens_completion": 106,
+    "llm_calls": 1,
+    "wall_clock_seconds": 3.385967254638672,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"setUnderlyingPrice\",\n    \"setDirectPrice\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-51",
+    "contract_name": "Proposal-Store",
+    "ground_truth_function": "AddProposal",
+    "flagged": true,
+    "flagged_functions": [
+      "AddProposal"
+    ],
+    "predicted_function": "AddProposal",
+    "tokens_prompt": 157,
+    "tokens_completion": 163,
+    "llm_calls": 1,
+    "wall_clock_seconds": 3.5814595222473145,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"AddProposal\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-318",
+    "contract_name": "PuttyV2",
+    "ground_truth_function": "fillOrder",
+    "flagged": true,
+    "flagged_functions": [
+      "fillOrder"
+    ],
+    "predicted_function": "fillOrder",
+    "tokens_prompt": 1176,
+    "tokens_completion": 1571,
+    "llm_calls": 1,
+    "wall_clock_seconds": 20.573033094406128,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"fillOrder\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-165",
+    "contract_name": "NoteInterest",
+    "ground_truth_function": "updateBaseRate",
+    "flagged": true,
+    "flagged_functions": [
+      "updateBaseRate"
+    ],
+    "predicted_function": "updateBaseRate",
+    "tokens_prompt": 174,
+    "tokens_completion": 164,
+    "llm_calls": 1,
+    "wall_clock_seconds": 3.9924509525299072,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"updateBaseRate\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-172",
+    "contract_name": "Proposal-Store",
+    "ground_truth_function": "queue",
+    "flagged": true,
+    "flagged_functions": [
+      "queue"
+    ],
+    "predicted_function": "queue",
+    "tokens_prompt": 472,
+    "tokens_completion": 987,
+    "llm_calls": 1,
+    "wall_clock_seconds": 13.343197345733643,
+    "raw_output": "{\"is_vulnerable\": true, \"vulnerable_functions\": [\"queue\"]}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-63",
+    "contract_name": "GovernorBravoDelegate",
+    "ground_truth_function": "AddProposal",
+    "flagged": true,
+    "flagged_functions": [
+      "AddProposal"
+    ],
+    "predicted_function": "AddProposal",
+    "tokens_prompt": 224,
+    "tokens_completion": 159,
+    "llm_calls": 1,
+    "wall_clock_seconds": 3.9300272464752197,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"AddProposal\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-174",
+    "contract_name": "WETH",
+    "ground_truth_function": "approve",
+    "flagged": true,
+    "flagged_functions": [
+      "approve"
+    ],
+    "predicted_function": "approve",
+    "tokens_prompt": 111,
+    "tokens_completion": 222,
+    "llm_calls": 1,
+    "wall_clock_seconds": 5.47001576423645,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"approve\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-67",
+    "contract_name": "Splitter",
+    "ground_truth_function": "incrementWindow",
+    "flagged": true,
+    "flagged_functions": [
+      "incrementWindow"
+    ],
+    "predicted_function": "incrementWindow",
+    "tokens_prompt": 237,
+    "tokens_completion": 739,
+    "llm_calls": 1,
+    "wall_clock_seconds": 9.142251014709473,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"incrementWindow\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-3",
+    "contract_name": "ConvexYieldWrapper",
+    "ground_truth_function": "wrap",
+    "flagged": true,
+    "flagged_functions": [
+      "wrap",
+      "unwrap"
+    ],
+    "predicted_function": "wrap",
+    "tokens_prompt": 323,
+    "tokens_completion": 545,
+    "llm_calls": 1,
+    "wall_clock_seconds": 9.038339138031006,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"wrap\", \"unwrap\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-248",
+    "contract_name": "StableVault",
+    "ground_truth_function": "testExploit",
+    "flagged": true,
+    "flagged_functions": [
+      "withdraw"
+    ],
+    "predicted_function": "withdraw",
+    "tokens_prompt": 209,
+    "tokens_completion": 226,
+    "llm_calls": 1,
+    "wall_clock_seconds": 4.037041902542114,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"withdraw\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-54",
+    "contract_name": "Router",
+    "ground_truth_function": "unwrapWETH9",
+    "flagged": true,
+    "flagged_functions": [
+      "unwrapWETH9",
+      "sweepToken",
+      "refundETH"
+    ],
+    "predicted_function": "unwrapWETH9",
+    "tokens_prompt": 297,
+    "tokens_completion": 368,
+    "llm_calls": 1,
+    "wall_clock_seconds": 5.337299823760986,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"unwrapWETH9\",\n    \"sweepToken\",\n    \"refundETH\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-286",
+    "contract_name": "RedeemHook",
+    "ground_truth_function": "unknown_function",
+    "flagged": true,
+    "flagged_functions": [
+      "onRedeem"
+    ],
+    "predicted_function": "onRedeem",
+    "tokens_prompt": 103,
+    "tokens_completion": 1824,
+    "llm_calls": 1,
+    "wall_clock_seconds": 19.556368350982666,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"onRedeem\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-572",
+    "contract_name": "BlurExchange",
+    "ground_truth_function": "setUp",
+    "flagged": true,
+    "flagged_functions": [
+      "incrementNonce"
+    ],
+    "predicted_function": "incrementNonce",
+    "tokens_prompt": 809,
+    "tokens_completion": 163,
+    "llm_calls": 1,
+    "wall_clock_seconds": 4.492538928985596,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"incrementNonce\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-229",
+    "contract_name": "SimpleFeiDaiPSM",
+    "ground_truth_function": "burnFeiHeld",
+    "flagged": true,
+    "flagged_functions": [
+      "burnFeiHeld"
+    ],
+    "predicted_function": "burnFeiHeld",
+    "tokens_prompt": 128,
+    "tokens_completion": 229,
+    "llm_calls": 1,
+    "wall_clock_seconds": 3.6858785152435303,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"burnFeiHeld\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-226",
+    "contract_name": "Manager",
+    "ground_truth_function": "testMisleadingGetAddress",
+    "flagged": true,
+    "flagged_functions": [
+      "deploy"
+    ],
+    "predicted_function": "deploy",
+    "tokens_prompt": 316,
+    "tokens_completion": 354,
+    "llm_calls": 1,
+    "wall_clock_seconds": 5.332761287689209,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"deploy\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-484",
+    "contract_name": "Governance",
+    "ground_truth_function": "activateProposal",
+    "flagged": true,
+    "flagged_functions": [
+      "activateProposal"
+    ],
+    "predicted_function": "activateProposal",
+    "tokens_prompt": 295,
+    "tokens_completion": 1379,
+    "llm_calls": 1,
+    "wall_clock_seconds": 16.98601460456848,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"activateProposal\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-126",
+    "contract_name": "Vault",
+    "ground_truth_function": "install",
+    "flagged": true,
+    "flagged_functions": [
+      "install"
+    ],
+    "predicted_function": "install",
+    "tokens_prompt": 168,
+    "tokens_completion": 98,
+    "llm_calls": 1,
+    "wall_clock_seconds": 2.7754316329956055,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"install\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-190",
+    "contract_name": "StabilityPool",
+    "ground_truth_function": "receiveCollateral",
+    "flagged": true,
+    "flagged_functions": [
+      "receiveCollateral"
+    ],
+    "predicted_function": "receiveCollateral",
+    "tokens_prompt": 165,
+    "tokens_completion": 159,
+    "llm_calls": 1,
+    "wall_clock_seconds": 3.0649054050445557,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"receiveCollateral\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-264",
+    "contract_name": "WJLP",
+    "ground_truth_function": "unknown_function",
+    "flagged": true,
+    "flagged_functions": [
+      "wrap"
+    ],
+    "predicted_function": "wrap",
+    "tokens_prompt": 212,
+    "tokens_completion": 162,
+    "llm_calls": 1,
+    "wall_clock_seconds": 3.278745651245117,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"wrap\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  }
+]

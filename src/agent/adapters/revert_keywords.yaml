@@ -1,0 +1,43 @@
+# Access-control revert signatures. Used by the verifier classifier to
+# distinguish "access control worked" (fail_revert_ac) from other failures.
+# Add new patterns as a versioned PR; keep each entry short (<80 chars).
+access_control:
+  # OpenZeppelin v4.x / v5.x revert strings
+  - "Ownable: caller is not the owner"
+  - "Ownable:"
+  - "AccessControl:"
+  - "AccessControl: account"
+  # OpenZeppelin v5 custom errors
+  - "OwnableUnauthorizedAccount"
+  - "AccessControlUnauthorizedAccount"
+  # Common modifier reverts
+  - "onlyOwner"
+  - "only owner"
+  - "caller is not the owner"
+  - "caller is not admin"
+  - "caller is not authorized"
+  - "not authorized"
+  - "unauthorized"
+  - "access denied"
+  - "not admin"
+  - "NotOwner"
+  - "NotAdmin"
+  - "NotAuthorized"
+  - "Unauthorized"
+  - "Forbidden"
+  - "restricted"
+  # Pausable-adjacent
+  - "Pausable: paused"
+  - "paused"
+  # Initializable
+  - "Initializable: contract is already initialized"
+  - "already initialized"
+
+# Errors that look like reverts but are NOT access-control intercepts
+# (used to explicitly NOT classify as fail_revert_ac).
+non_access_control:
+  - "OutOfGas"
+  - "Panic"
+  - "overflow"
+  - "underflow"
+  - "division by zero"

@@ -1,0 +1,180 @@
+[
+  {
+    "case_id": "ACF-092",
+    "contract_name": "SpaceGodzilla",
+    "ground_truth_function": "swapAndLiquifyStepv1",
+    "flagged": true,
+    "flagged_functions": [
+      "transferFromm",
+      "renounceOwnership",
+      "transferOwnership"
+    ],
+    "predicted_function": "transferFromm",
+    "tokens_prompt": 4645,
+    "tokens_completion": 38,
+    "llm_calls": 1,
+    "wall_clock_seconds": 4.954149007797241,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"transferFromm\",\n    \"renounceOwnership\",\n    \"transferOwnership\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-102",
+    "contract_name": "Bad_Guys_by_RPF",
+    "ground_truth_function": "WhiteListMint",
+    "flagged": false,
+    "flagged_functions": [],
+    "predicted_function": "",
+    "tokens_prompt": 4544,
+    "tokens_completion": 604,
+    "llm_calls": 1,
+    "wall_clock_seconds": 12.382639646530151,
+    "raw_output": "{\n  \"is_vulnerable\": false,\n  \"vulnerable_functions\": []\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-091",
+    "contract_name": "ReaperVaultV2",
+    "ground_truth_function": "_withdraw",
+    "flagged": true,
+    "flagged_functions": [
+      "report",
+      "inCaseTokensGetStuck",
+      "updateWithdrawalQueue"
+    ],
+    "predicted_function": "report",
+    "tokens_prompt": 4482,
+    "tokens_completion": 1265,
+    "llm_calls": 1,
+    "wall_clock_seconds": 22.171002864837646,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"report\",\n    \"inCaseTokensGetStuck\",\n    \"updateWithdrawalQueue\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-106",
+    "contract_name": "XNFT",
+    "ground_truth_function": "pledgeAndBorrow",
+    "flagged": true,
+    "flagged_functions": [
+      "notifyRepayBorrow"
+    ],
+    "predicted_function": "notifyRepayBorrow",
+    "tokens_prompt": 4535,
+    "tokens_completion": 2270,
+    "llm_calls": 1,
+    "wall_clock_seconds": 33.02208209037781,
+    "raw_output": "{\"is_vulnerable\": true, \"vulnerable_functions\": [\"notifyRepayBorrow\"]}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-093",
+    "contract_name": "GymSinglePool",
+    "ground_truth_function": "depositFromOtherContract",
+    "flagged": true,
+    "flagged_functions": [
+      "depositFromOtherContract",
+      "_autoDeposit",
+      "withdraw"
+    ],
+    "predicted_function": "depositFromOtherContract",
+    "tokens_prompt": 4607,
+    "tokens_completion": 2670,
+    "llm_calls": 1,
+    "wall_clock_seconds": 40.13507699966431,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"depositFromOtherContract\",\n    \"_autoDeposit\",\n    \"withdraw\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-114",
+    "contract_name": "0x30410fab6d367e11839c00ad93eb357e3066ada8_1",
+    "ground_truth_function": "OnlyOwner",
+    "flagged": true,
+    "flagged_functions": [
+      "OwnerWithdraw",
+      "ForceBet",
+      "BuyContract"
+    ],
+    "predicted_function": "OwnerWithdraw",
+    "tokens_prompt": 5143,
+    "tokens_completion": 2413,
+    "llm_calls": 1,
+    "wall_clock_seconds": 36.86895155906677,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"OwnerWithdraw\",\n    \"ForceBet\",\n    \"BuyContract\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-103",
+    "contract_name": "ANCHToken",
+    "ground_truth_function": "_transfer",
+    "flagged": false,
+    "flagged_functions": [],
+    "predicted_function": "",
+    "tokens_prompt": 4586,
+    "tokens_completion": 988,
+    "llm_calls": 1,
+    "wall_clock_seconds": 17.60886573791504,
+    "raw_output": "{\n  \"is_vulnerable\": false,\n  \"vulnerable_functions\": []\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-087",
+    "contract_name": "Token",
+    "ground_truth_function": "mint",
+    "flagged": true,
+    "flagged_functions": [
+      "mint"
+    ],
+    "predicted_function": "mint",
+    "tokens_prompt": 3855,
+    "tokens_completion": 286,
+    "llm_calls": 1,
+    "wall_clock_seconds": 7.80110502243042,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"mint\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-109",
+    "contract_name": "QBridge",
+    "ground_truth_function": "deposit",
+    "flagged": true,
+    "flagged_functions": [
+      "cancelProposal",
+      "setResource",
+      "manualRelease"
+    ],
+    "predicted_function": "cancelProposal",
+    "tokens_prompt": 3661,
+    "tokens_completion": 3245,
+    "llm_calls": 1,
+    "wall_clock_seconds": 46.77635884284973,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"cancelProposal\",\n    \"setResource\",\n    \"manualRelease\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-101",
+    "contract_name": "SwapMining",
+    "ground_truth_function": "swap",
+    "flagged": true,
+    "flagged_functions": [
+      "mint",
+      "massMintPools",
+      "swap"
+    ],
+    "predicted_function": "mint",
+    "tokens_prompt": 3170,
+    "tokens_completion": 1580,
+    "llm_calls": 1,
+    "wall_clock_seconds": 25.19631600379944,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"mint\",\n    \"massMintPools\",\n    \"swap\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  }
+]

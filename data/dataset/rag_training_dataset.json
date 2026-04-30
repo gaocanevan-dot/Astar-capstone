@@ -1,0 +1,1392 @@
+{
+  "metadata": {
+    "total_cases": 85,
+    "format": "rag_documents",
+    "sources": [
+      "vulnerabilities.json",
+      "c5_access_control_dataset_extra50(1).csv"
+    ]
+  },
+  "documents": [
+    {
+      "id": "C4-161",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: NFTFloorOracle\nFunction: removeFeeder\nFunctions: removeFeeder\nMissing Check: General Access Control\n\nIssue Description:\nRoot cause: Lack of Access control. Impact: Potential unauthorized access\n\nProblematic Code Snippet:\n```solidity\n/// @notice Allows owner to remove feeder.\n    /// @param _feeder feeder to remove\n    function removeFeeder(address _feeder)\n        external\n        onlyWhenFeederExisted(_feeder)\n    {\n        _removeFeeder(_feeder);\n    }\n```",
+      "metadata": {
+        "id": "C4-161",
+        "contract_name": "NFTFloorOracle",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "removeFeeder",
+        "functions": "removeFeeder",
+        "missing_check": "General Access Control",
+        "description": "Root cause: Lack of Access control. Impact: Potential unauthorized access",
+        "code_snippet": "/// @notice Allows owner to remove feeder.\n    /// @param _feeder feeder to remove\n    function removeFeeder(address _feeder)\n        external\n        onlyWhenFeederExisted(_feeder)\n    {\n        _removeFeeder(_feeder);\n    }",
+        "tags": [
+          "Paraspace-findings"
+        ]
+      }
+    },
+    {
+      "id": "C4-35",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: NFTFloorOracle\nFunction: removeFeeder\nFunctions: removeFeeder\nMissing Check: General Access Control\n\nIssue Description:\nRoot cause: missing access control for `removeFeeder`. Impact: Potential unauthorized access\n\nProblematic Code Snippet:\n```solidity\nfunction removeFeeder(address _feeder)\n    external\n    onlyRole(DEFAULT_ADMIN_ROLE)\n    onlyWhenFeederExisted(_feeder)\n{\n    _removeFeeder(_feeder);\n}\n```",
+      "metadata": {
+        "id": "C4-35",
+        "contract_name": "NFTFloorOracle",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "removeFeeder",
+        "functions": "removeFeeder",
+        "missing_check": "General Access Control",
+        "description": "Root cause: missing access control for `removeFeeder`. Impact: Potential unauthorized access",
+        "code_snippet": "function removeFeeder(address _feeder)\n    external\n    onlyRole(DEFAULT_ADMIN_ROLE)\n    onlyWhenFeederExisted(_feeder)\n{\n    _removeFeeder(_feeder);\n}",
+        "tags": [
+          "Paraspace-findings"
+        ]
+      }
+    },
+    {
+      "id": "C4-222",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: VariableSupplyERC20Token\nFunction: mint\nFunctions: mint\nMissing Check: General Access Control\n\nIssue Description:\nRoot cause: VariableSupplyERC20Token cannot be deployed due to wrong access control. Impact: Potential unauthorized access\n\nProblematic Code Snippet:\n```solidity\nfunction mint(address account, uint256 amount) public onlyAdmin {\n        require(account != address(0), \"INVALID_ADDRESS\");\n        // If we're using maxSupply, we need to make sure we respect it\n        // mintableSupply = 0 means mint at will\n        if(mintableSupply > 0) {\n            require(amount <= mintableSupply, \"INVALID_AMOUNT\");\n            // We need to reduce the amount only if we're using the limit, if not just leave it be\n            mintableSupply -= amount;\n        }\n        _mint(account, amount);\n    }\n```",
+      "metadata": {
+        "id": "C4-222",
+        "contract_name": "VariableSupplyERC20Token",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "mint",
+        "functions": "mint",
+        "missing_check": "General Access Control",
+        "description": "Root cause: VariableSupplyERC20Token cannot be deployed due to wrong access control. Impact: Potential unauthorized access",
+        "code_snippet": "function mint(address account, uint256 amount) public onlyAdmin {\n        require(account != address(0), \"INVALID_ADDRESS\");\n        // If we're using maxSupply, we need to make sure we respect it\n        // mintableSupply = 0 means mint at will\n        if(mintableSupply > 0) {\n            require(amount <= mintableSupply, \"INVALID_AMOUNT\");\n            // We need to reduce the amount only if we're using the limit, if not just leave it be\n            mintableSupply -= amount;\n        }\n        _mint(account, amount);\n    }",
+        "tags": [
+          "Vtvl-findings"
+        ]
+      }
+    },
+    {
+      "id": "C4-6",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: PaprController\nFunction: increaseDebt\nFunctions: increaseDebt\nMissing Check: General Access Control\n\nIssue Description:\nRoot cause: increaseDebt is made with no access control. Impact: Potential unauthorized access\n\nProblematic Code Snippet:\n```solidity\nfunction increaseDebt(\n        address mintTo,\n        ERC721 asset,\n        uint256 amount,\n        ReservoirOracleUnderwriter.OracleInfo calldata oracleInfo\n    ) external override {\n        _increaseDebt({account: msg.sender, asset: asset, mintTo: mintTo, amount: amount, oracleInfo: oracleInfo});\n    }\n```",
+      "metadata": {
+        "id": "C4-6",
+        "contract_name": "PaprController",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "increaseDebt",
+        "functions": "increaseDebt",
+        "missing_check": "General Access Control",
+        "description": "Root cause: increaseDebt is made with no access control. Impact: Potential unauthorized access",
+        "code_snippet": "function increaseDebt(\n        address mintTo,\n        ERC721 asset,\n        uint256 amount,\n        ReservoirOracleUnderwriter.OracleInfo calldata oracleInfo\n    ) external override {\n        _increaseDebt({account: msg.sender, asset: asset, mintTo: mintTo, amount: amount, oracleInfo: oracleInfo});\n    }",
+        "tags": [
+          "Backed-findings"
+        ]
+      }
+    },
+    {
+      "id": "C4-21",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: RewardsPool\nFunction: setUp\nFunctions: setUp\nMissing Check: General Access Control\n\nIssue Description:\nRoot cause: Lack of Access Control in RewardsPool.sol. Impact: Potential unauthorized access\n\nProblematic Code Snippet:\n```solidity\ncontract test is BaseTest {\n\tusing FixedPointMathLib for uint256;\n\tuint256 private constant TOTAL_INITIAL_SUPPLY = 22500000 ether;\n\n\tfunction setUp() public override {\n\t\tsuper.setUp();\n\t\tdistributeInitialSupply();\n\t}\n\n\tfunction distributeInitialSupply() public {\n\t\tSAME AS THE ORIGINAL.\n\t}\n\n\tfunction testExploit() public {\n\t\tskip(dao.getRewardsCycleSeconds());\n\t\trewardsPool.startRewardsCycle();\n\t}\n}\n```",
+      "metadata": {
+        "id": "C4-21",
+        "contract_name": "RewardsPool",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "setUp",
+        "functions": "setUp",
+        "missing_check": "General Access Control",
+        "description": "Root cause: Lack of Access Control in RewardsPool.sol. Impact: Potential unauthorized access",
+        "code_snippet": "contract test is BaseTest {\n\tusing FixedPointMathLib for uint256;\n\tuint256 private constant TOTAL_INITIAL_SUPPLY = 22500000 ether;\n\n\tfunction setUp() public override {\n\t\tsuper.setUp();\n\t\tdistributeInitialSupply();\n\t}\n\n\tfunction distributeInitialSupply() public {\n\t\tSAME AS THE ORIGINAL.\n\t}\n\n\tfunction testExploit() public {\n\t\tskip(dao.getRewardsCycleSeconds());\n\t\trewardsPool.startRewardsCycle();\n\t}\n}",
+        "tags": [
+          "Gogopool-findings"
+        ]
+      }
+    },
+    {
+      "id": "C4-55",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: NFTFloorOracle\nFunction: removeFeeder\nFunctions: removeFeeder\nMissing Check: General Access Control\n\nIssue Description:\nRoot cause: No access control for function removeFeeder() so anyone can remove a Feeder. Impact: Potential unauthorized access\n\nProblematic Code Snippet:\n```solidity\nfunction removeFeeder(address _feeder)\n        external\n        onlyWhenFeederExisted(_feeder)\n        onlyRole(DEFAULT_ADMIN_ROLE)\n    {\n        _removeFeeder(_feeder);\n    }\n```",
+      "metadata": {
+        "id": "C4-55",
+        "contract_name": "NFTFloorOracle",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "removeFeeder",
+        "functions": "removeFeeder",
+        "missing_check": "General Access Control",
+        "description": "Root cause: No access control for function removeFeeder() so anyone can remove a Feeder. Impact: Potential unauthorized access",
+        "code_snippet": "function removeFeeder(address _feeder)\n        external\n        onlyWhenFeederExisted(_feeder)\n        onlyRole(DEFAULT_ADMIN_ROLE)\n    {\n        _removeFeeder(_feeder);\n    }",
+        "tags": [
+          "Paraspace-findings"
+        ]
+      }
+    },
+    {
+      "id": "C4-29",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: ILBPair\nFunction: burn\nFunctions: burn\nMissing Check: General Access Control\n\nIssue Description:\nRoot cause: INCORRECT ACCESS CONTROL. Impact: Potential unauthorized access\n\nProblematic Code Snippet:\n```solidity\nfunction burn(\n        uint256[] memory ids,\n        uint256[] memory amounts,\n        address to\n    ) external returns (uint256 amountX, uint256 amountY);\n```",
+      "metadata": {
+        "id": "C4-29",
+        "contract_name": "ILBPair",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "burn",
+        "functions": "burn",
+        "missing_check": "General Access Control",
+        "description": "Root cause: INCORRECT ACCESS CONTROL. Impact: Potential unauthorized access",
+        "code_snippet": "function burn(\n        uint256[] memory ids,\n        uint256[] memory amounts,\n        address to\n    ) external returns (uint256 amountX, uint256 amountY);",
+        "tags": [
+          "Traderjoe-findings"
+        ]
+      }
+    },
+    {
+      "id": "C4-17",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: ClaimNodeOp\nFunction: testExploit\nFunctions: testExploit\nMissing Check: General Access Control\n\nIssue Description:\nRoot cause: Lack of access control vulnerability in ClaimNodeOp.sol. Impact: Potential unauthorized access\n\nProblematic Code Snippet:\n```solidity\n// SPDX-License-Identifier: UNLICENSED\npragma solidity ^0.8.9;\n\nimport \"forge-std/Test.sol\";\nimport \"@openzeppelin/contracts/token/ERC20/IERC20.sol\";\nimport \"./ClaimNodeOp.sol\";\n\ncontract ContractTest is Test {\n    using stdStorage for StdStorage;\n    address attacker = address(1);\n\n    ClaimNodeOp public claimNodeOp;\n\n    constructor(ClaimNodeOp _claimNodeOp) {\n        claimNodeOp = _claimNodeOp;\n    }\n\n    function testExploit(address stakerAddr, uint256 totalEligibleGGPStaked) external {\n        claimNodeOp.calculateAndDistributeRewards(stakerAddr, totalEligibleGGPStaked);\n    }\n\n}\n```",
+      "metadata": {
+        "id": "C4-17",
+        "contract_name": "ClaimNodeOp",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "testExploit",
+        "functions": "testExploit",
+        "missing_check": "General Access Control",
+        "description": "Root cause: Lack of access control vulnerability in ClaimNodeOp.sol. Impact: Potential unauthorized access",
+        "code_snippet": "// SPDX-License-Identifier: UNLICENSED\npragma solidity ^0.8.9;\n\nimport \"forge-std/Test.sol\";\nimport \"@openzeppelin/contracts/token/ERC20/IERC20.sol\";\nimport \"./ClaimNodeOp.sol\";\n\ncontract ContractTest is Test {\n    using stdStorage for StdStorage;\n    address attacker = address(1);\n\n    ClaimNodeOp public claimNodeOp;\n\n    constructor(ClaimNodeOp _claimNodeOp) {\n        claimNodeOp = _claimNodeOp;\n    }\n\n    function testExploit(address stakerAddr, uint256 totalEligibleGGPStaked) external {\n        claimNodeOp.calculateAndDistributeRewards(stakerAddr, totalEligibleGGPStaked);\n    }\n\n}",
+        "tags": [
+          "Gogopool-findings"
+        ]
+      }
+    },
+    {
+      "id": "C4-438",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: LPDA\nFunction: buy\nFunctions: buy\nMissing Check: General Access Control\n\nIssue Description:\nRoot cause: Implementing Security Restrictions and Owner Access Controls on LPDA Smart Contract.. Impact: Potential unauthorized access\n\nProblematic Code Snippet:\n```solidity\n// SPDX-License-Identifier: MIT\npragma solidity ^0.8.17;\n\nimport {ISale} from \"../interfaces/ISale.sol\";\nimport {ISaleFactory} from \"../interfaces/ISaleFactory.sol\";\nimport {IEscher721} from \"../interfaces/IEscher721.sol\";\nimport {Initializable} from \"openzeppelin-upgradeable/proxy/utils/Initializable.sol\";\nimport {OwnableUpgradeable} from \"openzeppelin-upgradeable/access/OwnableUpgradeable.sol\";\n\ncontract LPDA is Initializable, OwnableUpgradeable, ISale {\n    address public immutable factory;\n    /// we use different uints and some weird ordering to pack variables into 32 bytes\n    struct Sale {\n        // slot 1\n        uint48 currentId;\n        uint48 finalId;\n        address edition;\n        // slot 2\n        uint80 startPrice;\n        uint80 finalPrice;\n        uint80 dropPerSecond;\n        // slot 3\n        uint96 endTime;\n        address payable saleReceiver;\n        // slot 4\n        uint96 startTime;\n    }\n\n    struct Receipt {\n        uint48 amount;\n        uint80 balance;\n    }\n\n    /// @notice sale info for this fixed price edition\n    Sale public sale;\n    uint48 public amountSold = 0;\n\n    /// @notice tracked the amount paid by people during the LPDA\n    mapping(address => Receipt) public receipts;\n\n    event Start(Sale _saleInfo);\n    event End(Sale _saleInfo);\n    event Buy(address indexed _buyer, uint256 _amount, uint256 _value, Sale _saleInfo);\n\n    /// @custom:oz-upgrades-unsafe-allow constructor\n    constructor() {\n        factory = msg.sender;\n        _disableInitializers();\n        uint48 x = type(uint48).max;\n        uint80 y = type(uint80).max;\n        uint96 z = type(uint96).max;\n        address payable i = payable(address(0));\n        sale = LPDA.Sale(x, x, i, y, y, y, z, i, z);\n    }\n\n    /// @notice buy from a fixed price sale after the sale starts\n    /// @param _amount the amount of editions to buy\n    function buy(uint256 _amount) external onlyOwner payable {\n        uint48 amount = uint48(_amount);\n        Sale memory temp = sale;\n        IEscher721 nft = IEscher721(temp.edition);\n        require(block.timestamp >= temp.startTime, \"TOO SOON\");\n        uint256 price = getPrice();\n        require(msg.value >= amount * price, \"WRONG PRICE\");\n\n        amountSold += amount;\n        uint48 newId = amount + temp.currentId;\n        require(newId <= temp.finalId, \"TOO MANY\");\n\n        receipts[msg.sender].amount += amount;\n        receipts[msg.sender].balance += uint80(msg.value);\n\n        for (uint256 x = temp.currentId + 1; x <= newId; x++) {\n            nft.mint(msg.sender, x);\n        }\n\n        sale.currentId = newId;\n\n        emit Buy(msg.sender, amount, msg.value, temp);\n\n        if (newId == temp.finalId) {\n            sale.finalPrice = uint80(price);\n            uint256 totalSale = price * amountSold;\n            uint256 fee = totalSale / 20;\n            ISaleFactory(factory).feeReceiver().transfer(fee);\n            temp.saleReceiver.transfer(totalSale - fee);\n            _end();\n        }\n    }\n\n    /// @notice cancel a fixed price sale\n    function cancel() external onlyOwner {\n        require(block.timestamp < sale.startTime, \"TOO LATE\");\n        sale.finalId = sale.currentId;\n        _end();\n    }\n\n    /// @notice allow a buyer to get a refund on the current price difference\n    function refund(address _buyer) public onlyOwner {\n        Receipt memory r = receipts[_buyer];\n        uint80 price = uint80(getPrice()) * r.amount;\n        uint80 owed = r.balance - price;\n        require(owed > 0, \"NOTHING TO REFUND\");\n        receipts[_buyer].balance = price;\n        payable(_buyer).transfer(owed);\n    }\n\n    /// @notice initialize the proxy sale contract\n    /// @param _sale the sale info\n    function initialize(Sale calldata _sale) public initializer {\n        sale = _sale;\n        _transferOwnership(sale.saleReceiver);\n        emit Start(_sale);\n    }\n\n    /// @notice the price of the sale\n    function getPrice() public view returns (uint256) {\n        Sale memory temp = sale;\n        (uint256 start, uint256 end) = (temp.startTime, temp.endTime);\n        if (block.timestamp < start) return type(uint256).max;\n        if (temp.currentId == temp.finalId) return temp.finalPrice;\n\n        uint256 timeElapsed = end > block.timestamp ? block.timestamp - start : end - start;\n        return temp.startPrice - (temp.dropPerSecond * timeElapsed);\n    }\n\n    /// @notice the start time of the sale\n    function startTime() public view returns (uint256) {\n        return sale.startTime;\n    }\n\n    /// @notice the edition contract having the sale\n    function editionContract() public view returns (address) {\n        return sale.edition;\n    }\n\n    /// @notice the number of NFTs still available\n    function available() public view returns (uint256) {\n        return sale.finalId - sale.currentId;\n    }\n\n    function lowestPrice() public view returns (uint256) {\n        return sale.startPrice - (sale.dropPerSecond * (sale.endTime - sale.startTime));\n    }\n\n    function _end() internal {\n        emit End(sale);\n    }\n}\n```",
+      "metadata": {
+        "id": "C4-438",
+        "contract_name": "LPDA",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "buy",
+        "functions": "buy",
+        "missing_check": "General Access Control",
+        "description": "Root cause: Implementing Security Restrictions and Owner Access Controls on LPDA Smart Contract.. Impact: Potential unauthorized access",
+        "code_snippet": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.17;\n\nimport {ISale} from \"../interfaces/ISale.sol\";\nimport {ISaleFactory} from \"../interfaces/ISaleFactory.sol\";\nimport {IEscher721} from \"../interfaces/IEscher721.sol\";\nimport {Initializable} from \"openzeppelin-upgradeable/proxy/utils/Initializable.sol\";\nimport {OwnableUpgradeable} from \"openzeppelin-upgradeable/access/OwnableUpgradeable.sol\";\n\ncontract LPDA is Initializable, OwnableUpgradeable, ISale {\n    address public immutable factory;\n    /// we use different uints and some weird ordering to pack variables into 32 bytes\n    struct Sale {\n        // slot 1\n        uint48 currentId;\n        uint48 finalId;\n        address edition;\n        // slot 2\n        uint80 startPrice;\n        uint80 finalPrice;\n        uint80 dropPerSecond;\n        // slot 3\n        uint96 endTime;\n        address payable saleReceiver;\n        // slot 4\n        uint96 startTime;\n    }\n\n    struct Receipt {\n        uint48 amount;\n        uint80 balance;\n    }\n\n    /// @notice sale info for this fixed price edition\n    Sale public sale;\n    uint48 public amountSold = 0;\n\n    /// @notice tracked the amount paid by people during the LPDA\n    mapping(ad...",
+        "tags": [
+          "Escher-findings"
+        ]
+      }
+    },
+    {
+      "id": "C4-111",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: AutoPxGlp\nFunction: unknown_function\nFunctions: unknown_function\nMissing Check: General Access Control\n\nIssue Description:\nRoot cause: compound in AutoPxGmx and AutoPxGlp has no access control, allowing anyone to claim incentives.. Impact: Potential unauthorized access\n\nProblematic Code Snippet:\n```solidity\n// Only distribute fees if the amount of vault assets increased\n        if ((totalAssets() - assetsBeforeClaim) != 0) {\n            totalFee =\n                ((asset.balanceOf(address(this)) - assetsBeforeClaim) *\n                    platformFee) /\n                FEE_DENOMINATOR;\n            incentive = optOutIncentive\n                ? 0\n                : (totalFee * compoundIncentive) / FEE_DENOMINATOR;\n\n            if (incentive != 0) asset.safeTransfer(msg.sender, incentive);\n```",
+      "metadata": {
+        "id": "C4-111",
+        "contract_name": "AutoPxGlp",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "unknown_function",
+        "functions": "unknown_function",
+        "missing_check": "General Access Control",
+        "description": "Root cause: compound in AutoPxGmx and AutoPxGlp has no access control, allowing anyone to claim incentives.. Impact: Potential unauthorized access",
+        "code_snippet": "// Only distribute fees if the amount of vault assets increased\n        if ((totalAssets() - assetsBeforeClaim) != 0) {\n            totalFee =\n                ((asset.balanceOf(address(this)) - assetsBeforeClaim) *\n                    platformFee) /\n                FEE_DENOMINATOR;\n            incentive = optOutIncentive\n                ? 0\n                : (totalFee * compoundIncentive) / FEE_DENOMINATOR;\n\n            if (incentive != 0) asset.safeTransfer(msg.sender, incentive);",
+        "tags": [
+          "Redactedcartel-findings"
+        ]
+      }
+    },
+    {
+      "id": "C4-80",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: NFTEDAStarterIncentive\nFunction: auctionStartTime\nFunctions: auctionStartTime\nMissing Check: General Access Control\n\nIssue Description:\nRoot cause: Lack of access control and unchecked input in NFTEDAStarterIncentive contract. Impact: Potential unauthorized access\n\nProblematic Code Snippet:\n```solidity\n/// @notice returns the auction state for a given auctionID\n/// @dev auctionID => AuctionState\nmapping(uint256 => AuctionState) public auctionState;\n\nconstructor(uint256 _auctionCreatorDiscountPercentWad) {\n    owner = msg.sender;\n    _setCreatorDiscount(_auctionCreatorDiscountPercentWad);\n}\n\n/// @inheritdoc INFTEDA\nfunction auctionStartTime(uint256 id) public view virtual override returns (uint256) {\n    return auctionState[id].startTime;\n}\n\n/// @inheritdoc NFTEDA\nfunction _setAuctionStartTime(uint256 id) internal virtual override {\n    auctionState[id] = AuctionState({startTime: uint96(block.timestamp), starter: msg.sender});\n}\n\n/// @inheritdoc NFTEDA\nfunction _clearAuctionState(uint256 id) internal virtual override {\n    delete auctionState[id];\n}\n\n/// @inheritdoc NFTEDA\nfunction _auctionCurrentPrice(uint256 id, uint256 startTime, INFTEDA.Auction memory auction)\n    internal\n    view\n    virtual\n    override\n    returns (uint256)\n{\n    uint256 price = super._auctionCurrentPrice(id, startTime, auction);\n\n    if (msg.sender == auctionState[id].starter) {\n        price = FixedPointMathLib.mulWadUp(price, _pricePercentAfterDiscount);\n    }\n\n    return price;\n}\n\n/// @notice sets the discount offered to auction creators\n/// @param _auctionCreatorDiscountPercentWad the percent off the spot auction price the creator will be offered\n/// scaled by 1e18, i.e. 1e18 = 1 = 100%\nfunction _setCreatorDiscount(uint256 _auctionCreatorDiscountPercentWad) internal virtual onlyOwner {\n    // Add a check to ensure that the input value is within a reasonable range\n    require(_auctionCreatorDiscountPercentWad <= FixedPointMathLib.WAD, \"Discount percentage must be less than or equal to 100%\");\n\n    auctionCreatorDiscountPercentWad = _auctionCreatorDiscountPercentWad;\n    _pricePercentAfterDiscount = FixedPointMathLib.WAD - _auctionCreatorDiscountPercentWad;\n\n    emit SetAuctionCreatorDiscount(_auctionCreatorDiscountPercentWad);\n}\n```",
+      "metadata": {
+        "id": "C4-80",
+        "contract_name": "NFTEDAStarterIncentive",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "auctionStartTime",
+        "functions": "auctionStartTime",
+        "missing_check": "General Access Control",
+        "description": "Root cause: Lack of access control and unchecked input in NFTEDAStarterIncentive contract. Impact: Potential unauthorized access",
+        "code_snippet": "/// @notice returns the auction state for a given auctionID\n/// @dev auctionID => AuctionState\nmapping(uint256 => AuctionState) public auctionState;\n\nconstructor(uint256 _auctionCreatorDiscountPercentWad) {\n    owner = msg.sender;\n    _setCreatorDiscount(_auctionCreatorDiscountPercentWad);\n}\n\n/// @inheritdoc INFTEDA\nfunction auctionStartTime(uint256 id) public view virtual override returns (uint256) {\n    return auctionState[id].startTime;\n}\n\n/// @inheritdoc NFTEDA\nfunction _setAuctionStartTime(uint256 id) internal virtual override {\n    auctionState[id] = AuctionState({startTime: uint96(block.timestamp), starter: msg.sender});\n}\n\n/// @inheritdoc NFTEDA\nfunction _clearAuctionState(uint256 id) internal virtual override {\n    delete auctionState[id];\n}\n\n/// @inheritdoc NFTEDA\nfunction _auctionCurrentPrice(uint256 id, uint256 startTime, INFTEDA.Auction memory auction)\n    internal\n    view\n    virtual\n    override\n    returns (uint256)\n{\n    uint256 price = super._auctionCurrentPrice(id, startTime, auction);\n\n    if (msg.sender == auctionState[id].starter) {\n        price = FixedPointMathLib.mulWadUp(price, _pricePercentAfterDiscount);\n    }\n\n    return price;\n}\n\n/// @notice sets t...",
+        "tags": [
+          "Backed-findings"
+        ]
+      }
+    },
+    {
+      "id": "C4-19",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: AllowedMsgSenders\nFunction: isIncluded\nFunctions: isIncluded\nMissing Check: General Access Control\n\nIssue Description:\nRoot cause: No Access Control on AllowedMsgsenders.sol contract allows anyone to steal Output tokens on TokenSender.sol contract. Impact: Potential unauthorized access\n\nProblematic Code Snippet:\n```solidity\ncontract exploit {\nfunction isIncluded(address sender) external {\nreturn true;\n}\n}\n```",
+      "metadata": {
+        "id": "C4-19",
+        "contract_name": "AllowedMsgSenders",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "isIncluded",
+        "functions": "isIncluded",
+        "missing_check": "General Access Control",
+        "description": "Root cause: No Access Control on AllowedMsgsenders.sol contract allows anyone to steal Output tokens on TokenSender.sol contract. Impact: Potential unauthorized access",
+        "code_snippet": "contract exploit {\nfunction isIncluded(address sender) external {\nreturn true;\n}\n}",
+        "tags": [
+          "Prepo-findings"
+        ]
+      }
+    },
+    {
+      "id": "C4-487",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: INVEscrow\nFunction: onDeposit\nFunctions: onDeposit\nMissing Check: General Access Control\n\nIssue Description:\nRoot cause: No access control `INVEscrow.onDeposit()` --> infinite balance xINV.. Impact: Potential unauthorized access\n\nProblematic Code Snippet:\n```solidity\nuint256 lastRecordedBalance;\n\n    function onDeposit() public {\n        require(msg.sender == market, \"ONLY MARKET\");\n        uint256 invBalance = token.balanceOf(address(this));\n        if (invBalance - lastRecordedBalance> 0) {\n            xINV.mint(invBalance- lastRecordedBalance); // we do not check return value because we don't want errors to block this call\n            lastRecordedBalance = invBalance;\n        }\n\n    function pay(address recipient, uint256 amount) public {\n        require(msg.sender == market, \"ONLY MARKET\");\n        uint256 invBalance = token.balanceOf(address(this));\n        if (invBalance < amount) xINV.redeemUnderlying(amount - invBalance); // we do not check return value because next call will fail if this fails anyway\n        token.transfer(recipient, amount);\n \n       }\n       lastRecordedBalance = invBalance - amount;\n    }\n```",
+      "metadata": {
+        "id": "C4-487",
+        "contract_name": "INVEscrow",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "onDeposit",
+        "functions": "onDeposit",
+        "missing_check": "General Access Control",
+        "description": "Root cause: No access control `INVEscrow.onDeposit()` --> infinite balance xINV.. Impact: Potential unauthorized access",
+        "code_snippet": "uint256 lastRecordedBalance;\n\n    function onDeposit() public {\n        require(msg.sender == market, \"ONLY MARKET\");\n        uint256 invBalance = token.balanceOf(address(this));\n        if (invBalance - lastRecordedBalance> 0) {\n            xINV.mint(invBalance- lastRecordedBalance); // we do not check return value because we don't want errors to block this call\n            lastRecordedBalance = invBalance;\n        }\n\n    function pay(address recipient, uint256 amount) public {\n        require(msg.sender == market, \"ONLY MARKET\");\n        uint256 invBalance = token.balanceOf(address(this));\n        if (invBalance < amount) xINV.redeemUnderlying(amount - invBalance); // we do not check return value because next call will fail if this fails anyway\n        token.transfer(recipient, amount);\n \n       }\n       lastRecordedBalance = invBalance - amount;\n    }",
+        "tags": [
+          "Inverse-findings"
+        ]
+      }
+    },
+    {
+      "id": "C4-186",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: NFTFloorOracle\nFunction: removeFeeder\nFunctions: removeFeeder\nMissing Check: General Access Control\n\nIssue Description:\nRoot cause: removeFeeder() in NFTFloorOracle doesn't have proper access control, anyone can remove feeders and cause protocol to be not functional and users would lose funds. Impact: Potential unauthorized access\n\nProblematic Code Snippet:\n```solidity\n/// @notice Allows owner to remove feeder.\n    /// @param _feeder feeder to remove\n    function removeFeeder(address _feeder)\n        external\n        onlyWhenFeederExisted(_feeder)\n    {\n        _removeFeeder(_feeder);\n    }\n\n    function _removeFeeder(address _feeder)\n        internal\n        onlyWhenFeederExisted(_feeder)\n    {\n        uint8 feederIndex = feederPositionMap[_feeder].index;\n        if (feederIndex >= 0 && feeders[feederIndex] == _feeder) {\n            feeders[feederIndex] = feeders[feeders.length - 1];\n            feeders.pop();\n        }\n        delete feederPositionMap[_feeder];\n        revokeRole(UPDATER_ROLE, _feeder);\n        emit FeederRemoved(_feeder);\n    }\n```",
+      "metadata": {
+        "id": "C4-186",
+        "contract_name": "NFTFloorOracle",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "removeFeeder",
+        "functions": "removeFeeder",
+        "missing_check": "General Access Control",
+        "description": "Root cause: removeFeeder() in NFTFloorOracle doesn't have proper access control, anyone can remove feeders and cause protocol to be not functional and users would lose funds. Impact: Potential unauthorized access",
+        "code_snippet": "/// @notice Allows owner to remove feeder.\n    /// @param _feeder feeder to remove\n    function removeFeeder(address _feeder)\n        external\n        onlyWhenFeederExisted(_feeder)\n    {\n        _removeFeeder(_feeder);\n    }\n\n    function _removeFeeder(address _feeder)\n        internal\n        onlyWhenFeederExisted(_feeder)\n    {\n        uint8 feederIndex = feederPositionMap[_feeder].index;\n        if (feederIndex >= 0 && feeders[feederIndex] == _feeder) {\n            feeders[feederIndex] = feeders[feeders.length - 1];\n            feeders.pop();\n        }\n        delete feederPositionMap[_feeder];\n        revokeRole(UPDATER_ROLE, _feeder);\n        emit FeederRemoved(_feeder);\n    }",
+        "tags": [
+          "Paraspace-findings"
+        ]
+      }
+    },
+    {
+      "id": "C4-22",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: AccountListCaller\nFunction: isIncluded\nFunctions: isIncluded\nMissing Check: General Access Control\n\nIssue Description:\nRoot cause: Lack of Access control on AccountList caller makes anyone to redeem on RedeemHook() and bypassing the tokenSender to Steal any tokens.. Impact: Potential unauthorized access\n\nProblematic Code Snippet:\n```solidity\npragma solidity ^0.8.0;\n\ncontract AllowedMsgsender {\n    //It will bypass the OnlyAllowedMsgsender() modifier;\n    function isIncluded(address sender) external returns (bool) {\n        return true;\n    }\n    \n    //Bypassing the redeemhook's call `IPrePOMarket(msg.sender).getCollateral().transferFrom(msg.sender, _treasury, fee);` to make return true.\n\n    function CallRedeemhook() public {\n        Reedemhook hook = hook(address(0x01));\n        hook.hook(address(this), 10203000000, 0);\n    }\n\n    function getCollateral() external returns (address) {\n        return address(this);\n    }\n\n    //Fake Transferfrom() returns true to make successfull call on redeeemhook's hook() function.\n    function transferFrom(address sender, address receiver, uint amount) external returns (bool) {\n        return true;\n    }\n}\n```",
+      "metadata": {
+        "id": "C4-22",
+        "contract_name": "AccountListCaller",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "isIncluded",
+        "functions": "isIncluded",
+        "missing_check": "General Access Control",
+        "description": "Root cause: Lack of Access control on AccountList caller makes anyone to redeem on RedeemHook() and bypassing the tokenSender to Steal any tokens.. Impact: Potential unauthorized access",
+        "code_snippet": "pragma solidity ^0.8.0;\n\ncontract AllowedMsgsender {\n    //It will bypass the OnlyAllowedMsgsender() modifier;\n    function isIncluded(address sender) external returns (bool) {\n        return true;\n    }\n    \n    //Bypassing the redeemhook's call `IPrePOMarket(msg.sender).getCollateral().transferFrom(msg.sender, _treasury, fee);` to make return true.\n\n    function CallRedeemhook() public {\n        Reedemhook hook = hook(address(0x01));\n        hook.hook(address(this), 10203000000, 0);\n    }\n\n    function getCollateral() external returns (address) {\n        return address(this);\n    }\n\n    //Fake Transferfrom() returns true to make successfull call on redeeemhook's hook() function.\n    function transferFrom(address sender, address receiver, uint amount) external returns (bool) {\n        return true;\n    }\n}",
+        "tags": [
+          "Prepo-findings"
+        ]
+      }
+    },
+    {
+      "id": "C4-328",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: ExecutionDelegate\nFunction: unknown_function\nFunctions: unknown_function\nMissing Check: General Access Control\n\nIssue Description:\nRoot cause: revokedApproval access control does not work when user pay in ETH instead of WETH. Impact: Potential unauthorized access\n\nProblematic Code Snippet:\n```solidity\nif (paymentToken == address(0)) {\n            /* Transfer funds in ETH. */\n            payable(to).transfer(amount);\n        } else if (paymentToken == weth) {\n            /* Transfer funds in WETH. */\n            executionDelegate.transferERC20(weth, from, to, amount);\n        } else {\n            revert(\"Invalid payment token\");\n        }\n```",
+      "metadata": {
+        "id": "C4-328",
+        "contract_name": "ExecutionDelegate",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "unknown_function",
+        "functions": "unknown_function",
+        "missing_check": "General Access Control",
+        "description": "Root cause: revokedApproval access control does not work when user pay in ETH instead of WETH. Impact: Potential unauthorized access",
+        "code_snippet": "if (paymentToken == address(0)) {\n            /* Transfer funds in ETH. */\n            payable(to).transfer(amount);\n        } else if (paymentToken == weth) {\n            /* Transfer funds in WETH. */\n            executionDelegate.transferERC20(weth, from, to, amount);\n        } else {\n            revert(\"Invalid payment token\");\n        }",
+        "tags": [
+          "Blur-findings"
+        ]
+      }
+    },
+    {
+      "id": "C4-169",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: SimplePriceOracle\nFunction: setUnderlyingPrice\nFunctions: setUnderlyingPrice\nMissing Check: General Access Control\n\nIssue Description:\nRoot cause: `lending-market/SimplePriceOracle.sol` Lack of access control. Impact: Potential unauthorized access\n\nProblematic Code Snippet:\n```solidity\nfunction setUnderlyingPrice(CToken cToken, uint underlyingPriceMantissa) public {\n    address asset = _getUnderlyingAddress(cToken);\n    emit PricePosted(asset, prices[asset], underlyingPriceMantissa, underlyingPriceMantissa);\n    prices[asset] = underlyingPriceMantissa;\n}\n\nfunction setDirectPrice(address asset, uint price) public {\n    emit PricePosted(asset, prices[asset], price, price);\n    prices[asset] = price;\n}\n```",
+      "metadata": {
+        "id": "C4-169",
+        "contract_name": "SimplePriceOracle",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "setUnderlyingPrice",
+        "functions": "setUnderlyingPrice",
+        "missing_check": "General Access Control",
+        "description": "Root cause: `lending-market/SimplePriceOracle.sol` Lack of access control. Impact: Potential unauthorized access",
+        "code_snippet": "function setUnderlyingPrice(CToken cToken, uint underlyingPriceMantissa) public {\n    address asset = _getUnderlyingAddress(cToken);\n    emit PricePosted(asset, prices[asset], underlyingPriceMantissa, underlyingPriceMantissa);\n    prices[asset] = underlyingPriceMantissa;\n}\n\nfunction setDirectPrice(address asset, uint price) public {\n    emit PricePosted(asset, prices[asset], price, price);\n    prices[asset] = price;\n}",
+        "tags": [
+          "Canto-findings"
+        ]
+      }
+    },
+    {
+      "id": "C4-51",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: Proposal-Store\nFunction: AddProposal\nFunctions: AddProposal\nMissing Check: General Access Control\n\nIssue Description:\nRoot cause: ProposalStore: AddProposal function lacks access control. Impact: Potential unauthorized access\n\nProblematic Code Snippet:\n```solidity\nfunction AddProposal(uint propId, string memory title, string memory desc, address[] memory targets, \n                        uint[] memory values, string[] memory signatures, bytes[] memory calldatas) public {\n        Proposal memory newProp = Proposal(propId, title, desc, targets, values, signatures, calldatas);\n        proposals[propId] = newProp;\n    }\n```",
+      "metadata": {
+        "id": "C4-51",
+        "contract_name": "Proposal-Store",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "AddProposal",
+        "functions": "AddProposal",
+        "missing_check": "General Access Control",
+        "description": "Root cause: ProposalStore: AddProposal function lacks access control. Impact: Potential unauthorized access",
+        "code_snippet": "function AddProposal(uint propId, string memory title, string memory desc, address[] memory targets, \n                        uint[] memory values, string[] memory signatures, bytes[] memory calldatas) public {\n        Proposal memory newProp = Proposal(propId, title, desc, targets, values, signatures, calldatas);\n        proposals[propId] = newProp;\n    }",
+        "tags": [
+          "Canto-findings"
+        ]
+      }
+    },
+    {
+      "id": "C4-318",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: PuttyV2\nFunction: fillOrder\nFunctions: fillOrder\nMissing Check: General Access Control\n\nIssue Description:\nRoot cause: Problems with the access control of the fillOrder() function. Impact: Potential unauthorized access\n\nProblematic Code Snippet:\n```solidity\nfunction fillOrder(\n        Order memory order,\n        bytes calldata signature,\n        uint256[] memory floorAssetTokenIds\n    ) public payable returns (uint256 positionId) {\n        /* ~~~ CHECKS ~~~ */\n\n        bytes32 orderHash = hashOrder(order);\n\n        // check signature is valid using EIP-712\n        require(SignatureChecker.isValidSignatureNow(order.maker, orderHash, signature), \"Invalid signature\");\n\n        // check order is not cancelled\n        require(!cancelledOrders[orderHash], \"Order has been cancelled\");\n\n        // check msg.sender is allowed to fill the order\n        require(order.whitelist.length == 0 || isWhitelisted(order.whitelist, msg.sender), \"Not whitelisted\");\n\n        // check duration is valid\n        require(order.duration < 10_000 days, \"Duration too long\");\n\n        // check order has not expired\n        require(block.timestamp < order.expiration, \"Order has expired\");\n\n        // check base asset exists\n        require(order.baseAsset.code.length > 0, \"baseAsset is not contract\");\n\n        // check floor asset token ids length is 0 unless the order type is call and side is long\n        order.isCall && order.isLong\n            ? require(floorAssetTokenIds.length == order.floorTokens.length, \"Wrong amount of floor tokenIds\")\n            : require(floorAssetTokenIds.length == 0, \"Invalid floor tokens length\");\n\n        /*  ~~~ EFFECTS ~~~ */\n\n        // create long/short position for maker\n        _mint(order.maker, uint256(orderHash));\n\n        // create opposite long/short position for taker\n        bytes32 oppositeOrderHash = hashOppositeOrder(order);\n        positionId = uint256(oppositeOrderHash);\n        _mint(msg.sender, positionId);\n\n        // save floorAssetTokenIds if filling a long call order\n        if (order.isLong && order.isCall) {\n            positionFloorAssetTokenIds[uint256(orderHash)] = floorAssetTokenIds;\n        }\n\n        // save the long position expiration\n        positionExpirations[order.isLong ? uint256(orderHash) : positionId] = block.timestamp + order.duration;\n\n        emit FilledOrder(orderHash, floorAssetTokenIds, order);\n\n        /* ~~~ INTERACTIONS ~~~ */\n\n        // transfer premium to whoever is short from whomever is long\n        if (order.isLong) {\n            ERC20(order.baseAsset).safeTransferFrom(order.maker, msg.sender, order.premium);\n        } else {\n            // handle the case where the user uses native ETH instead of WETH to pay the premium\n            if (weth == order.baseAsset && msg.value > 0) {\n                // check enough ETH was sent to cover the premium\n                require(msg.value == order.premium, \"Incorrect ETH amount sent\");\n\n                // convert ETH to WETH and send premium to maker\n                // converting to WETH instead of forwarding native ETH to the maker has two benefits;\n                // 1) active market makers will mostly be using WETH not native ETH\n                // 2) attack surface for re-entrancy is reduced\n                IWETH(weth).deposit{value: msg.value}();\n                IWETH(weth).transfer(order.maker, msg.value);\n            } else {\n                ERC20(order.baseAsset).safeTransferFrom(msg.sender, order.maker, order.premium);\n            }\n        }\n\n        // filling short put: transfer strike from maker to contract\n        if (!order.isLong && !order.isCall) {\n            ERC20(order.baseAsset).safeTransferFrom(order.maker, address(this), order.strike);\n            return positionId;\n        }\n\n        // filling long put: transfer strike from taker to contract\n        if (order.isLong && !order.isCall) {\n            // handle the case where the taker uses native ETH instead of WETH to deposit the strike\n            if (weth == order.baseAsset && msg.value > 0) {\n                // check enough ETH was sent to cover the strike\n                require(msg.value == order.strike, \"Incorrect ETH amount sent\");\n\n                // convert ETH to WETH\n                // we convert the strike ETH to WETH so that the logic in exercise() works\n                // - because exercise() assumes an ERC20 interface on the base asset.\n                IWETH(weth).deposit{value: msg.value}();\n            } else {\n                ERC20(order.baseAsset).safeTransferFrom(msg.sender, address(this), order.strike);\n            }\n\n            return positionId;\n        }\n\n        // filling short call: transfer assets from maker to contract\n        if (!order.isLong && order.isCall) {\n            _transferERC20sIn(order.erc20Assets, order.maker);\n            _transferERC721sIn(order.erc721Assets, order.maker);\n            return positionId;\n        }\n\n        // filling long call: transfer assets from taker to contract\n        if (order.isLong && order.isCall) {\n            _transferERC20sIn(order.erc20Assets, msg.sender);\n            _transferERC721sIn(order.erc721Assets, msg.sender);\n            _transferFloorsIn(order.floorTokens, floorAssetTokenIds, msg.sender);\n            return positionId;\n        }\n    }\n```",
+      "metadata": {
+        "id": "C4-318",
+        "contract_name": "PuttyV2",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "fillOrder",
+        "functions": "fillOrder",
+        "missing_check": "General Access Control",
+        "description": "Root cause: Problems with the access control of the fillOrder() function. Impact: Potential unauthorized access",
+        "code_snippet": "function fillOrder(\n        Order memory order,\n        bytes calldata signature,\n        uint256[] memory floorAssetTokenIds\n    ) public payable returns (uint256 positionId) {\n        /* ~~~ CHECKS ~~~ */\n\n        bytes32 orderHash = hashOrder(order);\n\n        // check signature is valid using EIP-712\n        require(SignatureChecker.isValidSignatureNow(order.maker, orderHash, signature), \"Invalid signature\");\n\n        // check order is not cancelled\n        require(!cancelledOrders[orderHash], \"Order has been cancelled\");\n\n        // check msg.sender is allowed to fill the order\n        require(order.whitelist.length == 0 || isWhitelisted(order.whitelist, msg.sender), \"Not whitelisted\");\n\n        // check duration is valid\n        require(order.duration < 10_000 days, \"Duration too long\");\n\n        // check order has not expired\n        require(block.timestamp < order.expiration, \"Order has expired\");\n\n        // check base asset exists\n        require(order.baseAsset.code.length > 0, \"baseAsset is not contract\");\n\n        // check floor asset token ids length is 0 unless the order type is call and side is long\n        order.isCall && order.isLong\n            ? require(floorA...",
+        "tags": [
+          "Putty-findings"
+        ]
+      }
+    },
+    {
+      "id": "C4-165",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: NoteInterest\nFunction: updateBaseRate\nFunctions: updateBaseRate\nMissing Check: General Access Control\n\nIssue Description:\nRoot cause: `lending-market/NoteInterest.sol` Lack of access control in `updateBaseRate()` allowing `baseRatePerYear` to be changed by anyone. Impact: Potential unauthorized access\n\nProblematic Code Snippet:\n```solidity\nfunction updateBaseRate(uint newBaseRatePerYear) public {\n    // check the current block number\n    uint blockNumber = block.number;\n    uint deltaBlocks = blockNumber.sub(lastUpdateBlock);\n\n    if (deltaBlocks > updateFrequency) {\n        // pass in a base rate per year\n        baseRatePerYear = newBaseRatePerYear;\n        lastUpdateBlock = blockNumber;\n        emit NewInterestParams(baseRatePerYear);\n    }\n}\n```",
+      "metadata": {
+        "id": "C4-165",
+        "contract_name": "NoteInterest",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "updateBaseRate",
+        "functions": "updateBaseRate",
+        "missing_check": "General Access Control",
+        "description": "Root cause: `lending-market/NoteInterest.sol` Lack of access control in `updateBaseRate()` allowing `baseRatePerYear` to be changed by anyone. Impact: Potential unauthorized access",
+        "code_snippet": "function updateBaseRate(uint newBaseRatePerYear) public {\n    // check the current block number\n    uint blockNumber = block.number;\n    uint deltaBlocks = blockNumber.sub(lastUpdateBlock);\n\n    if (deltaBlocks > updateFrequency) {\n        // pass in a base rate per year\n        baseRatePerYear = newBaseRatePerYear;\n        lastUpdateBlock = blockNumber;\n        emit NewInterestParams(baseRatePerYear);\n    }\n}",
+        "tags": [
+          "Canto-findings"
+        ]
+      }
+    },
+    {
+      "id": "C4-172",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: Proposal-Store\nFunction: queue\nFunctions: queue\nMissing Check: General Access Control\n\nIssue Description:\nRoot cause: `manifest/Proposal-Store.sol` Lack of access control for `AddProposal`. Impact: Potential unauthorized access\n\nProblematic Code Snippet:\n```solidity\nfunction queue(uint proposalId) external {\n    // Query the proposal from the unigov map contract\n    IProposal.Proposal memory unigovProposal = unigov.QueryProp(proposalId);\n\n    // Allow addresses above proposal threshold and whitelisted addresses to propose\n    require(unigovProposal.targets.length == unigovProposal.values.length && \n            unigovProposal.targets.length == unigovProposal.signatures.length && \n            unigovProposal.targets.length == unigovProposal.calldatas.length, \n            \"GovernorBravo::propose: proposal function information arity mismatch\");\n    require(unigovProposal.targets.length != 0, \"GovernorBravo::propose: must provide actions\");\n    require(unigovProposal.targets.length <= proposalMaxOperations, \"GovernorBravo::propose: too many actions\");\n\n    // Add proposal to proposals storage\n    Proposal storage newProposal = proposals[unigovProposal.id];\n\n    // Make sure you are not overriding an existing proposal \n    require(proposals[unigovProposal.id].id == 0);\n\n    // Set newProposal to the fields of unigov proposal\n    newProposal.id = unigovProposal.id;\n    newProposal.eta = 0;\n    newProposal.targets = unigovProposal.targets;\n    newProposal.values = unigovProposal.values;\n    newProposal.signatures = unigovProposal.signatures;\n    newProposal.calldatas = unigovProposal.calldatas;\n    newProposal.canceled = false;\n    newProposal.executed = true;\n\n    uint eta = add256(block.timestamp, timelock.delay());\n    \n\n    for (uint i = 0; i < newProposal.targets.length; i++) {\n        queueOrRevertInternal(newProposal.targets[i], newProposal.values[i], newProposal.signatures[i], newProposal.calldatas[i], eta);\n    }\n\n    newProposal.eta = eta;\n\n    emit ProposalQueued(proposalId, eta);\n}\n```",
+      "metadata": {
+        "id": "C4-172",
+        "contract_name": "Proposal-Store",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "queue",
+        "functions": "queue",
+        "missing_check": "General Access Control",
+        "description": "Root cause: `manifest/Proposal-Store.sol` Lack of access control for `AddProposal`. Impact: Potential unauthorized access",
+        "code_snippet": "function queue(uint proposalId) external {\n    // Query the proposal from the unigov map contract\n    IProposal.Proposal memory unigovProposal = unigov.QueryProp(proposalId);\n\n    // Allow addresses above proposal threshold and whitelisted addresses to propose\n    require(unigovProposal.targets.length == unigovProposal.values.length && \n            unigovProposal.targets.length == unigovProposal.signatures.length && \n            unigovProposal.targets.length == unigovProposal.calldatas.length, \n            \"GovernorBravo::propose: proposal function information arity mismatch\");\n    require(unigovProposal.targets.length != 0, \"GovernorBravo::propose: must provide actions\");\n    require(unigovProposal.targets.length <= proposalMaxOperations, \"GovernorBravo::propose: too many actions\");\n\n    // Add proposal to proposals storage\n    Proposal storage newProposal = proposals[unigovProposal.id];\n\n    // Make sure you are not overriding an existing proposal \n    require(proposals[unigovProposal.id].id == 0);\n\n    // Set newProposal to the fields of unigov proposal\n    newProposal.id = unigovProposal.id;\n    newProposal.eta = 0;\n    newProposal.targets = unigovProposal.targets;\n    newPr...",
+        "tags": [
+          "Canto-findings"
+        ]
+      }
+    },
+    {
+      "id": "C4-63",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: GovernorBravoDelegate\nFunction: AddProposal\nFunctions: AddProposal\nMissing Check: General Access Control\n\nIssue Description:\nRoot cause: GovernorBravoDelegate: lack of access control for queue and execute functions. Impact: Potential unauthorized access\n\nProblematic Code Snippet:\n```solidity\nfunction AddProposal(uint propId, string memory title, string memory desc, address[] memory targets, \n                        uint[] memory values, string[] memory signatures, bytes[] memory calldatas) public {\n        Proposal memory newProp = Proposal(propId, title, desc, targets, values, signatures, calldatas);\n        proposals[propId] = newProp;\n    }\n\n    function QueryProp(uint propId) public view returns(Proposal memory){\n        if (proposals[propId].id == propId) {\n            return proposals[propId];\n        }\n\t    return Proposal(0, \"\", \"\", new address[](0), new uint[](0), new string[](0), new bytes[](0));\n    }\n```",
+      "metadata": {
+        "id": "C4-63",
+        "contract_name": "GovernorBravoDelegate",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "AddProposal",
+        "functions": "AddProposal",
+        "missing_check": "General Access Control",
+        "description": "Root cause: GovernorBravoDelegate: lack of access control for queue and execute functions. Impact: Potential unauthorized access",
+        "code_snippet": "function AddProposal(uint propId, string memory title, string memory desc, address[] memory targets, \n                        uint[] memory values, string[] memory signatures, bytes[] memory calldatas) public {\n        Proposal memory newProp = Proposal(propId, title, desc, targets, values, signatures, calldatas);\n        proposals[propId] = newProp;\n    }\n\n    function QueryProp(uint propId) public view returns(Proposal memory){\n        if (proposals[propId].id == propId) {\n            return proposals[propId];\n        }\n\t    return Proposal(0, \"\", \"\", new address[](0), new uint[](0), new string[](0), new bytes[](0));\n    }",
+        "tags": [
+          "Canto-findings"
+        ]
+      }
+    },
+    {
+      "id": "C4-174",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: WETH\nFunction: approve\nFunctions: approve\nMissing Check: General Access Control\n\nIssue Description:\nRoot cause: `lending-market/WETH` Lack of access control for `approve(address owner, address spender) allows the attacker to steal funds from arbitrary addresses. Impact: Potential unauthorized access\n\nProblematic Code Snippet:\n```solidity\nfunction approve(address owner, address spender) external returns(bool) {\n    _approve(owner, spender, _balanceOf[owner]);\n    return true;\n}\n```",
+      "metadata": {
+        "id": "C4-174",
+        "contract_name": "WETH",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "approve",
+        "functions": "approve",
+        "missing_check": "General Access Control",
+        "description": "Root cause: `lending-market/WETH` Lack of access control for `approve(address owner, address spender) allows the attacker to steal funds from arbitrary addresses. Impact: Potential unauthorized access",
+        "code_snippet": "function approve(address owner, address spender) external returns(bool) {\n    _approve(owner, spender, _balanceOf[owner]);\n    return true;\n}",
+        "tags": [
+          "Canto-findings"
+        ]
+      }
+    },
+    {
+      "id": "C4-67",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: Splitter\nFunction: incrementWindow\nFunctions: incrementWindow\nMissing Check: General Access Control\n\nIssue Description:\nRoot cause: [WP-H11] `Splitter.sol#incrementWindow()` Improper access control allows attacker to steal funds from all other beneficiaries of the Splitter. Impact: Potential unauthorized access\n\nProblematic Code Snippet:\n```solidity\nfunction incrementWindow(uint256 royaltyAmount) public returns (bool) {\n    uint256 wethBalance;\n\n    require(\n        IRoyaltyVault(msg.sender).supportsInterface(IID_IROYALTY),\n        \"Royalty Vault not supported\"\n    );\n    require(\n        IRoyaltyVault(msg.sender).getSplitter() == address(this),\n        \"Unauthorised to increment window\"\n    );\n\n    wethBalance = IERC20(splitAsset).balanceOf(address(this));\n    require(wethBalance >= royaltyAmount, \"Insufficient funds\");\n\n    require(royaltyAmount > 0, \"No additional funds for window\");\n    balanceForWindow.push(royaltyAmount);\n    currentWindow += 1;\n    emit WindowIncremented(currentWindow, royaltyAmount);\n    return true;\n}\n```",
+      "metadata": {
+        "id": "C4-67",
+        "contract_name": "Splitter",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "incrementWindow",
+        "functions": "incrementWindow",
+        "missing_check": "General Access Control",
+        "description": "Root cause: [WP-H11] `Splitter.sol#incrementWindow()` Improper access control allows attacker to steal funds from all other beneficiaries of the Splitter. Impact: Potential unauthorized access",
+        "code_snippet": "function incrementWindow(uint256 royaltyAmount) public returns (bool) {\n    uint256 wethBalance;\n\n    require(\n        IRoyaltyVault(msg.sender).supportsInterface(IID_IROYALTY),\n        \"Royalty Vault not supported\"\n    );\n    require(\n        IRoyaltyVault(msg.sender).getSplitter() == address(this),\n        \"Unauthorised to increment window\"\n    );\n\n    wethBalance = IERC20(splitAsset).balanceOf(address(this));\n    require(wethBalance >= royaltyAmount, \"Insufficient funds\");\n\n    require(royaltyAmount > 0, \"No additional funds for window\");\n    balanceForWindow.push(royaltyAmount);\n    currentWindow += 1;\n    emit WindowIncremented(currentWindow, royaltyAmount);\n    return true;\n}",
+        "tags": [
+          "Joyn-findings"
+        ]
+      }
+    },
+    {
+      "id": "C4-3",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: ConvexYieldWrapper\nFunction: wrap\nFunctions: wrap\nMissing Check: General Access Control\n\nIssue Description:\nRoot cause: The wrap and unwrap functions lack access control, allowing anyone to consume the convexToken in the contract. Impact: Potential unauthorized access\n\nProblematic Code Snippet:\n```solidity\nfunction wrap(address to_, address from_) external {\n        require(!isShutdown, \"shutdown\");\n        uint256 amount_ = IERC20(convexToken).balanceOf(address(this));\n        require(amount_ > 0, \"No convex token to wrap\");\n\n        _checkpoint([address(0), from_]);\n        _mint(to_, amount_);\n        IRewardStaking(convexPool).stake(amount_);\n\n        emit Deposited(msg.sender, to_, amount_, false);\n    }\n\n    /// @dev Unwrap Wrapped convex token held by this contract, and send the unwrapped convex token to the `to` address\n    /// @param to_ Address to send the unwrapped convex token to\n    function unwrap(address to_) external {\n        require(!isShutdown, \"shutdown\");\n        uint256 amount_ = _balanceOf[address(this)];\n        require(amount_ > 0, \"No wrapped convex token\");\n\n        _checkpoint([address(0), to_]);\n        _burn(address(this), amount_);\n        IRewardStaking(convexPool).withdraw(amount_, false);\n        IERC20(convexToken).safeTransfer(to_, amount_);\n\n        emit Withdrawn(to_, amount_, false);\n    }\n```",
+      "metadata": {
+        "id": "C4-3",
+        "contract_name": "ConvexYieldWrapper",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "wrap",
+        "functions": "wrap",
+        "missing_check": "General Access Control",
+        "description": "Root cause: The wrap and unwrap functions lack access control, allowing anyone to consume the convexToken in the contract. Impact: Potential unauthorized access",
+        "code_snippet": "function wrap(address to_, address from_) external {\n        require(!isShutdown, \"shutdown\");\n        uint256 amount_ = IERC20(convexToken).balanceOf(address(this));\n        require(amount_ > 0, \"No convex token to wrap\");\n\n        _checkpoint([address(0), from_]);\n        _mint(to_, amount_);\n        IRewardStaking(convexPool).stake(amount_);\n\n        emit Deposited(msg.sender, to_, amount_, false);\n    }\n\n    /// @dev Unwrap Wrapped convex token held by this contract, and send the unwrapped convex token to the `to` address\n    /// @param to_ Address to send the unwrapped convex token to\n    function unwrap(address to_) external {\n        require(!isShutdown, \"shutdown\");\n        uint256 amount_ = _balanceOf[address(this)];\n        require(amount_ > 0, \"No wrapped convex token\");\n\n        _checkpoint([address(0), to_]);\n        _burn(address(this), amount_);\n        IRewardStaking(convexPool).withdraw(amount_, false);\n        IERC20(convexToken).safeTransfer(to_, amount_);\n\n        emit Withdrawn(to_, amount_, false);\n    }",
+        "tags": [
+          "Yield-findings"
+        ]
+      }
+    },
+    {
+      "id": "C4-248",
+      "content": "Vulnerability Type: access_control\nSeverity: medium\nContract: StableVault\nFunction: testExploit\nFunctions: testExploit\nMissing Check: General Access Control\n\nIssue Description:\nRoot cause: Lack of access control and Potential reentrancy attack vulnerability in StableVault.sol. Impact: Potential unauthorized access\n\nProblematic Code Snippet:\n```solidity\n// SPDX-License-Identifier: UNLICENSED\npragma solidity ^0.8.9;\n\nimport \"forge-std/Test.sol\";\nimport \"@openzeppelin/contracts/token/ERC20/IERC20.sol\";\nimport \"./StableVault.sol\";\n\ncontract ContractTest is Test {\n    using stdStorage for StdStorage;\n    address attacker = address(1);\n\n    StableVault public stableVault;\n    uint256 public amount;\n\n    constructor(address _target, uint256 _amount) public {\n        stableVault = StableVault(_target);\n        amount = _amount;\n    }\n\n    function testExploit() public {\n        stableVault.withdraw(address(this), amount);\n    }\n}\n```",
+      "metadata": {
+        "id": "C4-248",
+        "contract_name": "StableVault",
+        "vulnerability_type": "access_control",
+        "severity": "medium",
+        "function": "testExploit",
+        "functions": "testExploit",
+        "missing_check": "General Access Control",
+        "description": "Root cause: Lack of access control and Potential reentrancy attack vulnerability in StableVault.sol. Impact: Potential unauthorized access",
+        "code_snippet": "// SPDX-License-Identifier: UNLICENSED\npragma solidity ^0.8.9;\n\nimport \"forge-std/Test.sol\";\nimport \"@openzeppelin/contracts/token/ERC20/IERC20.sol\";\nimport \"./StableVault.sol\";\n\ncontract ContractTest is Test {\n    using stdStorage for StdStorage;\n    address attacker = address(1);\n\n    StableVault public stableVault;\n    uint256 public amount;\n\n    constructor(address _target, uint256 _amount) public {\n        stableVault = StableVault(_target);\n        amount = _amount;\n    }\n\n    function testExploit() public {\n        stableVault.withdraw(address(this), amount);\n    }\n}",
+        "tags": [
+          "Tigris-findings"
+        ]
+      }
+    },
+    {
+      "id": "C4-54",
+      "content": "Vulnerability Type: access_control\nSeverity: medium\nContract: Router\nFunction: unwrapWETH9\nFunctions: unwrapWETH9\nMissing Check: General Access Control\n\nIssue Description:\nRoot cause: Lack of access control for sweepToken, refundETH, unwrapWETH9 in Router.sol. Impact: Potential unauthorized access\n\nProblematic Code Snippet:\n```solidity\n/// @inheritdoc IRouter\n    function unwrapWETH9(uint256 amountMinimum, address recipient) public payable override {\n        uint256 balanceWETH9 = WETH9.balanceOf(address(this));\n        require(balanceWETH9 >= amountMinimum, \"Insufficient WETH9\");\n\n        if (balanceWETH9 > 0) {\n            WETH9.withdraw(balanceWETH9);\n            TransferHelper.safeTransferETH(recipient, balanceWETH9);\n        }\n    }\n\n    /// @inheritdoc IRouter\n    function sweepToken(IERC20 token, uint256 amountMinimum, address recipient) public payable {\n        uint256 balanceToken = token.balanceOf(address(this));\n        require(balanceToken >= amountMinimum, \"Insufficient token\");\n\n        if (balanceToken > 0) {\n            TransferHelper.safeTransfer(address(token), recipient, balanceToken);\n        }\n    }\n\n    /// @inheritdoc IRouter\n    function refundETH() external payable override {\n        if (address(this).balance > 0) TransferHelper.safeTransferETH(msg.sender, address(this).balance);\n    }\n```",
+      "metadata": {
+        "id": "C4-54",
+        "contract_name": "Router",
+        "vulnerability_type": "access_control",
+        "severity": "medium",
+        "function": "unwrapWETH9",
+        "functions": "unwrapWETH9",
+        "missing_check": "General Access Control",
+        "description": "Root cause: Lack of access control for sweepToken, refundETH, unwrapWETH9 in Router.sol. Impact: Potential unauthorized access",
+        "code_snippet": "/// @inheritdoc IRouter\n    function unwrapWETH9(uint256 amountMinimum, address recipient) public payable override {\n        uint256 balanceWETH9 = WETH9.balanceOf(address(this));\n        require(balanceWETH9 >= amountMinimum, \"Insufficient WETH9\");\n\n        if (balanceWETH9 > 0) {\n            WETH9.withdraw(balanceWETH9);\n            TransferHelper.safeTransferETH(recipient, balanceWETH9);\n        }\n    }\n\n    /// @inheritdoc IRouter\n    function sweepToken(IERC20 token, uint256 amountMinimum, address recipient) public payable {\n        uint256 balanceToken = token.balanceOf(address(this));\n        require(balanceToken >= amountMinimum, \"Insufficient token\");\n\n        if (balanceToken > 0) {\n            TransferHelper.safeTransfer(address(token), recipient, balanceToken);\n        }\n    }\n\n    /// @inheritdoc IRouter\n    function refundETH() external payable override {\n        if (address(this).balance > 0) TransferHelper.safeTransferETH(msg.sender, address(this).balance);\n    }",
+        "tags": [
+          "Stealth-project-findings"
+        ]
+      }
+    },
+    {
+      "id": "C4-286",
+      "content": "Vulnerability Type: access_control\nSeverity: medium\nContract: RedeemHook\nFunction: unknown_function\nFunctions: unknown_function\nMissing Check: General Access Control\n\nIssue Description:\nRoot cause: Access control for `hook` function in `RedeemHook` Contract is inconsistent with the implementation.. Impact: Potential unauthorized access\n\nProblematic Code Snippet:\n```solidity\nIPrePOMarket(msg.sender).getCollateral().transferFrom(msg.sender, _treasury, fee);\n```",
+      "metadata": {
+        "id": "C4-286",
+        "contract_name": "RedeemHook",
+        "vulnerability_type": "access_control",
+        "severity": "medium",
+        "function": "unknown_function",
+        "functions": "unknown_function",
+        "missing_check": "General Access Control",
+        "description": "Root cause: Access control for `hook` function in `RedeemHook` Contract is inconsistent with the implementation.. Impact: Potential unauthorized access",
+        "code_snippet": "IPrePOMarket(msg.sender).getCollateral().transferFrom(msg.sender, _treasury, fee);",
+        "tags": [
+          "Prepo-findings"
+        ]
+      }
+    },
+    {
+      "id": "C4-572",
+      "content": "Vulnerability Type: access_control\nSeverity: medium\nContract: BlurExchange\nFunction: setUp\nFunctions: setUp\nMissing Check: General Access Control\n\nIssue Description:\nRoot cause: Anyone can call incrementNonce() method in the BlurExchange.sol - Access control modifier is needed. Impact: Potential unauthorized access\n\nProblematic Code Snippet:\n```solidity\n//SPDX-License-Identifier: Unlicense\npragma solidity 0.8.13;\npragma abicoder v2;\n\n//@dev - Foundry\nimport { Test } from \"../../contracts/lib/forge-std/src/Test.sol\";\n//import { Vm } from \"../../contracts/lib/forge-std/src/Vm.sol\";\n\nimport \"../../contracts/lib/forge-std/src/console.sol\";\n\n//@dev - Target contract\n//import { TestBlurExchange } from \"../../contracts/test/TestBlurExchange.sol\";\nimport { BlurExchange } from \"../../contracts/BlurExchange.sol\";\n\nimport { PolicyManager } from \"../../contracts/PolicyManager.sol\";\nimport { ExecutionDelegate } from \"../../contracts/ExecutionDelegate.sol\";\n\n/**\n * @notice - The test of exploit of the BlurExchange.sol in Foundry\n */\ncontract BlurExchangeExploitTest is Test {\n\n    //@dev - Attacker smart contract instance\n    BlurExchangeExploit public exploit;\n\n    //@dev - Smart contract instances\n    //TestBlurExchange public blurExchange;\n    BlurExchange public blurExchange;\n    PolicyManager public policyManager;\n    ExecutionDelegate public executionDelegate;\n\n    address OWNER;  // Owner address who can execute onlyOwner-specified methods\n    address ATTACKER = makeAddr(\"ATTACKER\");\n\n    /**\n     * @dev - Constructor\n     */ \n    function setUp() public {\n        //@dev - Assign owner address who can execute onlyOwner-specified methods\n        OWNER = address(this);\n\n        //@dev - Deploy the PolicyManager.sol\n        policyManager = new PolicyManager();\n        console.log(\"Deployed-address of the PolicyManager.sol:\", address(policyManager));\n\n        //@dev - Deploy the ExecutionDelegate.sol\n        executionDelegate = new ExecutionDelegate();\n        console.log(\"Deployed-address of the ExecutionDelegate.sol:\", address(executionDelegate));\n\n        vm.chainId(31337);\n        uint chainId = block.chainid;\n        emit log_uint(chainId);  // [Result]: 31337\n\n        address WETH = makeAddr(\"WETH\");\n        address ORACLE = makeAddr(\"ORACLE\");\n        uint blockRange = 3;\n\n        //@dev - Deploy the BlurExchange.sol\n        blurExchange = new BlurExchange();\n        blurExchange.initialize(chainId, WETH, executionDelegate, policyManager, ORACLE, blockRange);\n        console.log(\"Deployed-address of the BlurExchange.sol:\", address(blurExchange));\n\n        //@dev - Deploy the Attacker contract (BlurExchangeExploit.sol)\n        exploit = new BlurExchangeExploit(blurExchange);\n        console.log(\"Deployed-address of the Attacker contract (BlurExchangeExploit.sol):\", address(exploit));\n    }\n\n    /**\n     * @dev - Execute a exploit test via malicious contract\n     */ \n    function testRunExploit() public {\n        vm.startPrank(ATTACKER);\n        exploit.runExploit();\n        vm.stopPrank();\n    }\n\n}\n\n/**\n * @notice - The exploit contract of the BlurExchange.sol in Foundry\n */\ncontract BlurExchangeExploit {\n\n    //@dev - Smart contract instances\n    BlurExchange public blurExchange;\n\n    constructor(BlurExchange _blurExchange) {\n        blurExchange = _blurExchange;\n    }\n\n    /*//////////////////////////////////////////////////////////////////////////\n          Methods for exploit\n    //////////////////////////////////////////////////////////////////////////*/\n\n    function runExploit() external {\n        //@dev - Run incrementNonce() method.\n        //@audit - This is a vulnerability that anyone (include attacker) can call incrementNonce()\n        blurExchange.incrementNonce();\n        console.log(\"Successful that the BlurExchange#incrementNonce() was called by an attacker address\");\n    }\n\n}\n```",
+      "metadata": {
+        "id": "C4-572",
+        "contract_name": "BlurExchange",
+        "vulnerability_type": "access_control",
+        "severity": "medium",
+        "function": "setUp",
+        "functions": "setUp",
+        "missing_check": "General Access Control",
+        "description": "Root cause: Anyone can call incrementNonce() method in the BlurExchange.sol - Access control modifier is needed. Impact: Potential unauthorized access",
+        "code_snippet": "//SPDX-License-Identifier: Unlicense\npragma solidity 0.8.13;\npragma abicoder v2;\n\n//@dev - Foundry\nimport { Test } from \"../../contracts/lib/forge-std/src/Test.sol\";\n//import { Vm } from \"../../contracts/lib/forge-std/src/Vm.sol\";\n\nimport \"../../contracts/lib/forge-std/src/console.sol\";\n\n//@dev - Target contract\n//import { TestBlurExchange } from \"../../contracts/test/TestBlurExchange.sol\";\nimport { BlurExchange } from \"../../contracts/BlurExchange.sol\";\n\nimport { PolicyManager } from \"../../contracts/PolicyManager.sol\";\nimport { ExecutionDelegate } from \"../../contracts/ExecutionDelegate.sol\";\n\n/**\n * @notice - The test of exploit of the BlurExchange.sol in Foundry\n */\ncontract BlurExchangeExploitTest is Test {\n\n    //@dev - Attacker smart contract instance\n    BlurExchangeExploit public exploit;\n\n    //@dev - Smart contract instances\n    //TestBlurExchange public blurExchange;\n    BlurExchange public blurExchange;\n    PolicyManager public policyManager;\n    ExecutionDelegate public executionDelegate;\n\n    address OWNER;  // Owner address who can execute onlyOwner-specified methods\n    address ATTACKER = makeAddr(\"ATTACKER\");\n\n    /**\n     * @dev - Constructor\n     */ \n    func...",
+        "tags": [
+          "Blur-findings"
+        ]
+      }
+    },
+    {
+      "id": "C4-229",
+      "content": "Vulnerability Type: access_control\nSeverity: medium\nContract: SimpleFeiDaiPSM\nFunction: burnFeiHeld\nFunctions: burnFeiHeld\nMissing Check: General Access Control\n\nIssue Description:\nRoot cause: Lack of Access Control on burnFeiHeld() function.. Impact: Potential unauthorized access\n\nProblematic Code Snippet:\n```solidity\nfunction burnFeiHeld() external {\n        uint256 feiBalance = FEI.balanceOf(address(this));\n        if (feiBalance != 0) {\n            FEI.burn(feiBalance);\n        }\n```",
+      "metadata": {
+        "id": "C4-229",
+        "contract_name": "SimpleFeiDaiPSM",
+        "vulnerability_type": "access_control",
+        "severity": "medium",
+        "function": "burnFeiHeld",
+        "functions": "burnFeiHeld",
+        "missing_check": "General Access Control",
+        "description": "Root cause: Lack of Access Control on burnFeiHeld() function.. Impact: Potential unauthorized access",
+        "code_snippet": "function burnFeiHeld() external {\n        uint256 feiBalance = FEI.balanceOf(address(this));\n        if (feiBalance != 0) {\n            FEI.burn(feiBalance);\n        }",
+        "tags": [
+          "Tribe-findings"
+        ]
+      }
+    },
+    {
+      "id": "C4-226",
+      "content": "Vulnerability Type: access_control\nSeverity: medium\nContract: Manager\nFunction: testMisleadingGetAddress\nFunctions: testMisleadingGetAddress\nMissing Check: General Access Control\n\nIssue Description:\nRoot cause: No access control checks on `deploy()`. Impact: Potential unauthorized access\n\nProblematic Code Snippet:\n```solidity\n// Insert this test case into Manager.t.sol\n// Run: forge test --match-contract Manager -vv\n\nimport \"forge-std/console.sol\";\n...\nfunction testMisleadingGetAddress() public {\n        deployMock();\n\n        (address _metadata, address _auction, address _treasury, address _governor) = manager.getAddresses(address(token));\n        console.log(\"metadata: \", _metadata);\n        console.log(\"auction: \", _auction);\n        console.log(\"treasury: \", _treasury);\n        console.log(\"governor: \", _governor);\n\n        console.log(\"\\nAttacker calls deploy()\\n\");\n        address attacker = vm.addr(0xA);\n        vm.prank(attacker);\n        deployMock();\n\n        (address _metadata2, address _auction2, address _treasury2, address _governor2) = manager.getAddresses(address(token));\n        console.log(\"metadata: \", _metadata2);\n        console.log(\"auction: \", _auction2);\n        console.log(\"treasury: \", _treasury2);\n        console.log(\"governor: \", _governor2);\n    }\n```",
+      "metadata": {
+        "id": "C4-226",
+        "contract_name": "Manager",
+        "vulnerability_type": "access_control",
+        "severity": "medium",
+        "function": "testMisleadingGetAddress",
+        "functions": "testMisleadingGetAddress",
+        "missing_check": "General Access Control",
+        "description": "Root cause: No access control checks on `deploy()`. Impact: Potential unauthorized access",
+        "code_snippet": "// Insert this test case into Manager.t.sol\n// Run: forge test --match-contract Manager -vv\n\nimport \"forge-std/console.sol\";\n...\nfunction testMisleadingGetAddress() public {\n        deployMock();\n\n        (address _metadata, address _auction, address _treasury, address _governor) = manager.getAddresses(address(token));\n        console.log(\"metadata: \", _metadata);\n        console.log(\"auction: \", _auction);\n        console.log(\"treasury: \", _treasury);\n        console.log(\"governor: \", _governor);\n\n        console.log(\"\\nAttacker calls deploy()\\n\");\n        address attacker = vm.addr(0xA);\n        vm.prank(attacker);\n        deployMock();\n\n        (address _metadata2, address _auction2, address _treasury2, address _governor2) = manager.getAddresses(address(token));\n        console.log(\"metadata: \", _metadata2);\n        console.log(\"auction: \", _auction2);\n        console.log(\"treasury: \", _treasury2);\n        console.log(\"governor: \", _governor2);\n    }",
+        "tags": [
+          "Nouns-builder-findings"
+        ]
+      }
+    },
+    {
+      "id": "C4-484",
+      "content": "Vulnerability Type: access_control\nSeverity: medium\nContract: Governance\nFunction: activateProposal\nFunctions: activateProposal\nMissing Check: General Access Control\n\nIssue Description:\nRoot cause: Proposal functions are lacking access control for `Governance.sol`. Impact: Potential unauthorized access\n\nProblematic Code Snippet:\n```solidity\nFile: src/policies/Governance.sol\nfunction activateProposal(uint256 proposalId_) external {\n    ProposalMetadata memory proposal = getProposalMetadata[proposalId_];\n\n    if (msg.sender != proposal.submitter) {\n        revert NotAuthorizedToActivateProposal();\n    }\n\n    if (block.timestamp > proposal.submissionTimestamp + ACTIVATION_DEADLINE) {\n        revert SubmittedProposalHasExpired();\n    }\n\n    if (\n        (totalEndorsementsForProposal[proposalId_] * 100) <\n        VOTES.totalSupply() * ENDORSEMENT_THRESHOLD\n    ) {\n        revert NotEnoughEndorsementsToActivateProposal();\n    }\n\n    if (proposalHasBeenActivated[proposalId_] == true) {\n        revert ProposalAlreadyActivated();\n    }\n\n    if (block.timestamp < activeProposal.activationTimestamp + GRACE_PERIOD) {\n        revert ActiveProposalNotExpired();\n    }\n\n    activeProposal = ActivatedProposal(proposalId_, block.timestamp);\n\n    proposalHasBeenActivated[proposalId_] = true;\n\n    emit ProposalActivated(proposalId_, block.timestamp);\n}\n```",
+      "metadata": {
+        "id": "C4-484",
+        "contract_name": "Governance",
+        "vulnerability_type": "access_control",
+        "severity": "medium",
+        "function": "activateProposal",
+        "functions": "activateProposal",
+        "missing_check": "General Access Control",
+        "description": "Root cause: Proposal functions are lacking access control for `Governance.sol`. Impact: Potential unauthorized access",
+        "code_snippet": "File: src/policies/Governance.sol\nfunction activateProposal(uint256 proposalId_) external {\n    ProposalMetadata memory proposal = getProposalMetadata[proposalId_];\n\n    if (msg.sender != proposal.submitter) {\n        revert NotAuthorizedToActivateProposal();\n    }\n\n    if (block.timestamp > proposal.submissionTimestamp + ACTIVATION_DEADLINE) {\n        revert SubmittedProposalHasExpired();\n    }\n\n    if (\n        (totalEndorsementsForProposal[proposalId_] * 100) <\n        VOTES.totalSupply() * ENDORSEMENT_THRESHOLD\n    ) {\n        revert NotEnoughEndorsementsToActivateProposal();\n    }\n\n    if (proposalHasBeenActivated[proposalId_] == true) {\n        revert ProposalAlreadyActivated();\n    }\n\n    if (block.timestamp < activeProposal.activationTimestamp + GRACE_PERIOD) {\n        revert ActiveProposalNotExpired();\n    }\n\n    activeProposal = ActivatedProposal(proposalId_, block.timestamp);\n\n    proposalHasBeenActivated[proposalId_] = true;\n\n    emit ProposalActivated(proposalId_, block.timestamp);\n}",
+        "tags": [
+          "Olympus-findings"
+        ]
+      }
+    },
+    {
+      "id": "C4-126",
+      "content": "Vulnerability Type: access_control\nSeverity: medium\nContract: Vault\nFunction: install\nFunctions: install\nMissing Check: General Access Control\n\nIssue Description:\nRoot cause: Access Controlled Functions May Be Bypassed using DELEGATECALL. Impact: Potential unauthorized access\n\nProblematic Code Snippet:\n```solidity\nfunction install(bytes4[] memory _selectors, address[] memory _plugins)\n        external\n    {\n        //if (owner != msg.sender) revert NotOwner(owner, msg.sender);\n        uint256 length = _selectors.length;\n        for (uint256 i = 0; i < length; i++) {\n            methods[_selectors[i]] = _plugins[i];\n        }\n        //emit InstallPlugin(_selectors, _plugins);\n    }\n```",
+      "metadata": {
+        "id": "C4-126",
+        "contract_name": "Vault",
+        "vulnerability_type": "access_control",
+        "severity": "medium",
+        "function": "install",
+        "functions": "install",
+        "missing_check": "General Access Control",
+        "description": "Root cause: Access Controlled Functions May Be Bypassed using DELEGATECALL. Impact: Potential unauthorized access",
+        "code_snippet": "function install(bytes4[] memory _selectors, address[] memory _plugins)\n        external\n    {\n        //if (owner != msg.sender) revert NotOwner(owner, msg.sender);\n        uint256 length = _selectors.length;\n        for (uint256 i = 0; i < length; i++) {\n            methods[_selectors[i]] = _plugins[i];\n        }\n        //emit InstallPlugin(_selectors, _plugins);\n    }",
+        "tags": [
+          "Fractional-findings"
+        ]
+      }
+    },
+    {
+      "id": "C4-190",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: StabilityPool\nFunction: receiveCollateral\nFunctions: receiveCollateral\nMissing Check: General Access Control\n\nIssue Description:\nRoot cause: StabilityPool.receiveCollateral function doesn't have access control. Impact: Potential unauthorized access\n\nProblematic Code Snippet:\n```solidity\n// Should be called by ActivePool\n    // __after__ collateral is transferred to this contract from Active Pool\n    function receiveCollateral(address[] memory _tokens, uint256[] memory _amounts)\n        external\n        override\n    {\n        totalColl.amounts = _leftSumColls(totalColl, _tokens, _amounts);\n        emit StabilityPoolBalancesUpdated(_tokens, _amounts);\n    }\n```",
+      "metadata": {
+        "id": "C4-190",
+        "contract_name": "StabilityPool",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "receiveCollateral",
+        "functions": "receiveCollateral",
+        "missing_check": "General Access Control",
+        "description": "Root cause: StabilityPool.receiveCollateral function doesn't have access control. Impact: Potential unauthorized access",
+        "code_snippet": "// Should be called by ActivePool\n    // __after__ collateral is transferred to this contract from Active Pool\n    function receiveCollateral(address[] memory _tokens, uint256[] memory _amounts)\n        external\n        override\n    {\n        totalColl.amounts = _leftSumColls(totalColl, _tokens, _amounts);\n        emit StabilityPoolBalancesUpdated(_tokens, _amounts);\n    }",
+        "tags": [
+          "Yetifinance-findings"
+        ]
+      }
+    },
+    {
+      "id": "C4-264",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: WJLP\nFunction: unknown_function\nFunctions: unknown_function\nMissing Check: General Access Control\n\nIssue Description:\nRoot cause: Lack of access control allows attacker to call `wrap()` and steal other user's wallet balance. Impact: Potential unauthorized access\n\nProblematic Code Snippet:\n```solidity\nFunds are transferred from the `from` parameter, and the output tokens are transferred to the `to` parameter, both passed by the caller without proper access control.\n\nThis issue allows anyone to call `wrap()` and steal almost all their wallet balances for all the users who have approved the contract before.\n\n1. Alice approved JLP token with the max amount to the `WJLP` contract\n2. Bob calls `wrap()` with `_from` = Alice's address, and `_to` = Bob's address, get WJLP.\n\nConsider replacing `from` with `msg.sender`:\n```",
+      "metadata": {
+        "id": "C4-264",
+        "contract_name": "WJLP",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "unknown_function",
+        "functions": "unknown_function",
+        "missing_check": "General Access Control",
+        "description": "Root cause: Lack of access control allows attacker to call `wrap()` and steal other user's wallet balance. Impact: Potential unauthorized access",
+        "code_snippet": "Funds are transferred from the `from` parameter, and the output tokens are transferred to the `to` parameter, both passed by the caller without proper access control.\n\nThis issue allows anyone to call `wrap()` and steal almost all their wallet balances for all the users who have approved the contract before.\n\n1. Alice approved JLP token with the max amount to the `WJLP` contract\n2. Bob calls `wrap()` with `_from` = Alice's address, and `_to` = Bob's address, get WJLP.\n\nConsider replacing `from` with `msg.sender`:",
+        "tags": [
+          "Yetifinance-findings"
+        ]
+      }
+    },
+    {
+      "id": "ACF-036",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: StakeAllocator\nFunction: didTransferShares(uint256 sharesId, uint8 subjectType, address from, address to, uint256 sharesAmount)\nFunctions: didTransferShares(uint256 sharesId, uint8 subjectType, address from, address to, uint256 sharesAmount)\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of didTransferShares(uint256 sharesId, uint8 subjectType, address from, address to, uint256 sharesAmount).\n\nProblematic Code Snippet:\n```solidity\nfunction didTransferShares(\n        uint256 sharesId,\n        uint8 subjectType,\n        address from,\n        address to,\n        uint256 sharesAmount\n    ) external {\n        rewardsDistributor.didTransferShares(sharesId, subjectType, from, to, sharesAmount);\n    }\n```",
+      "metadata": {
+        "id": "ACF-036",
+        "contract_name": "StakeAllocator",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "didTransferShares(uint256 sharesId, uint8 subjectType, address from, address to, uint256 sharesAmount)",
+        "functions": "didTransferShares(uint256 sharesId, uint8 subjectType, address from, address to, uint256 sharesAmount)",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of didTransferShares(uint256 sharesId, uint8 subjectType, address from, address to, uint256 sharesAmount).",
+        "code_snippet": "function didTransferShares(\n        uint256 sharesId,\n        uint8 subjectType,\n        address from,\n        address to,\n        uint256 sharesAmount\n    ) external {\n        rewardsDistributor.didTransferShares(sharesId, subjectType, from, to, sharesAmount);\n    }"
+      }
+    },
+    {
+      "id": "ACF-037",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: DepositLog\nFunction: approvedToLog(address _caller) public pure returns (bool)\nFunctions: approvedToLog(address _caller) public pure returns (bool)\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of approvedToLog(address _caller) public pure returns (bool).\n\nProblematic Code Snippet:\n```solidity\nfunction approvedToLog(address _caller) public pure returns (bool) {\n        /* TODO: auth via system */\n        _caller;\n        return true;\n    }\n```",
+      "metadata": {
+        "id": "ACF-037",
+        "contract_name": "DepositLog",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "approvedToLog(address _caller) public pure returns (bool)",
+        "functions": "approvedToLog(address _caller) public pure returns (bool)",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of approvedToLog(address _caller) public pure returns (bool).",
+        "code_snippet": "function approvedToLog(address _caller) public pure returns (bool) {\n        /* TODO: auth via system */\n        _caller;\n        return true;\n    }"
+      }
+    },
+    {
+      "id": "ACF-038",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: BaseEscalationManager\nFunction: requestPrice(bytes32 identifier, uint256 time, bytes memory ancillaryData)\nFunctions: requestPrice(bytes32 identifier, uint256 time, bytes memory ancillaryData)\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of requestPrice(bytes32 identifier, uint256 time, bytes memory ancillaryData).\n\nProblematic Code Snippet:\n```solidity\nfunction requestPrice(\n        bytes32 identifier,\n        uint256 time,\n        bytes memory ancillaryData\n    ) public virtual override {\n        emit PriceRequestAdded(identifier, time, ancillaryData);\n    }\n```",
+      "metadata": {
+        "id": "ACF-038",
+        "contract_name": "BaseEscalationManager",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "requestPrice(bytes32 identifier, uint256 time, bytes memory ancillaryData)",
+        "functions": "requestPrice(bytes32 identifier, uint256 time, bytes memory ancillaryData)",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of requestPrice(bytes32 identifier, uint256 time, bytes memory ancillaryData).",
+        "code_snippet": "function requestPrice(\n        bytes32 identifier,\n        uint256 time,\n        bytes memory ancillaryData\n    ) public virtual override {\n        emit PriceRequestAdded(identifier, time, ancillaryData);\n    }"
+      }
+    },
+    {
+      "id": "ACF-039",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: Registry\nFunction: init()\nFunctions: init()\nMissing Check: Unprotected Initialization\n\nIssue Description:\nPotential unauthorized invocation of init().\n\nProblematic Code Snippet:\n```solidity\nfunction init() external {\n        if (initialized) revert Errors.ContractAlreadyInitialized();\n        initialized = true;\n        initOwnable(msg.sender);\n    }\n```",
+      "metadata": {
+        "id": "ACF-039",
+        "contract_name": "Registry",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "init()",
+        "functions": "init()",
+        "missing_check": "Unprotected Initialization",
+        "description": "Potential unauthorized invocation of init().",
+        "code_snippet": "function init() external {\n        if (initialized) revert Errors.ContractAlreadyInitialized();\n        initialized = true;\n        initOwnable(msg.sender);\n    }"
+      }
+    },
+    {
+      "id": "ACF-040",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: Factory\nFunction: upgrade()\nFunctions: upgrade()\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of upgrade().\n\nProblematic Code Snippet:\n```solidity\nfunction upgrade() external {\n        require(version < CODE_VERSION, \"Already upgraded\");\n\n        /* Start migration code */\n        /* End migration code */\n\n        version = CODE_VERSION;\n    }\n```",
+      "metadata": {
+        "id": "ACF-040",
+        "contract_name": "Factory",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "upgrade()",
+        "functions": "upgrade()",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of upgrade().",
+        "code_snippet": "function upgrade() external {\n        require(version < CODE_VERSION, \"Already upgraded\");\n\n        /* Start migration code */\n        /* End migration code */\n\n        version = CODE_VERSION;\n    }"
+      }
+    },
+    {
+      "id": "ACF-041",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: DnGmxBatchingManager\nFunction: executeBatchDeposit()\nFunctions: executeBatchDeposit()\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of executeBatchDeposit().\n\nProblematic Code Snippet:\n```solidity\nfunction executeBatchDeposit() external {\n        // If the deposit is paused then unpause on execute batch deposit\n        if (paused()) _unpause();\n\n        // Transfer vault glp directly, Needs to be called only for dnGmxJuniorVault\n        if (dnGmxJuniorVaultGlpBalance > 0) {\n            uint256 glpToTransfer = dnGmxJuniorVaultGlpBalance;\n            dnGmxJuniorVaultGlpBalance = 0;\n            sGlp.transfer(address(dnGmxJuniorVault), glpToTransfer);\n            emit VaultDeposit(glpToTransfer);\n        }\n\n        _executeVaultUserBatchDeposit();\n    }\n```",
+      "metadata": {
+        "id": "ACF-041",
+        "contract_name": "DnGmxBatchingManager",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "executeBatchDeposit()",
+        "functions": "executeBatchDeposit()",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of executeBatchDeposit().",
+        "code_snippet": "function executeBatchDeposit() external {\n        // If the deposit is paused then unpause on execute batch deposit\n        if (paused()) _unpause();\n\n        // Transfer vault glp directly, Needs to be called only for dnGmxJuniorVault\n        if (dnGmxJuniorVaultGlpBalance > 0) {\n            uint256 glpToTransfer = dnGmxJuniorVaultGlpBalance;\n            dnGmxJuniorVaultGlpBalance = 0;\n            sGlp.transfer(address(dnGmxJuniorVault), glpToTransfer);\n            emit VaultDeposit(glpToTransfer);\n        }\n\n        _executeVaultUserBatchDeposit();\n    }"
+      }
+    },
+    {
+      "id": "ACF-042",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: DnGmxJuniorVault\nFunction: mint(uint256 shares, address to) public virtual override(IERC4626, ERC4626Upgradeable) whenNotPaused returns (uint256 amount)\nFunctions: mint(uint256 shares, address to) public virtual override(IERC4626, ERC4626Upgradeable) whenNotPaused returns (uint256 amount)\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of mint(uint256 shares, address to) public virtual override(IERC4626, ERC4626Upgradeable) whenNotPaused returns (uint256 amount).\n\nProblematic Code Snippet:\n```solidity\nfunction mint(uint256 shares, address to)\n        public\n        virtual\n        override(IERC4626, ERC4626Upgradeable)\n        whenNotPaused\n        returns (uint256 amount)\n    {\n        _rebalanceBeforeShareAllocation();\n        amount = super.mint(shares, to);\n    }\n```",
+      "metadata": {
+        "id": "ACF-042",
+        "contract_name": "DnGmxJuniorVault",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "mint(uint256 shares, address to) public virtual override(IERC4626, ERC4626Upgradeable) whenNotPaused returns (uint256 amount)",
+        "functions": "mint(uint256 shares, address to) public virtual override(IERC4626, ERC4626Upgradeable) whenNotPaused returns (uint256 amount)",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of mint(uint256 shares, address to) public virtual override(IERC4626, ERC4626Upgradeable) whenNotPaused returns (uint256 amount).",
+        "code_snippet": "function mint(uint256 shares, address to)\n        public\n        virtual\n        override(IERC4626, ERC4626Upgradeable)\n        whenNotPaused\n        returns (uint256 amount)\n    {\n        _rebalanceBeforeShareAllocation();\n        amount = super.mint(shares, to);\n    }"
+      }
+    },
+    {
+      "id": "ACF-043",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: DnGmxSeniorVault\nFunction: mint(uint256 shares, address to) public virtual override(IERC4626, ERC4626Upgradeable) whenNotPaused returns (uint256 amount)\nFunctions: mint(uint256 shares, address to) public virtual override(IERC4626, ERC4626Upgradeable) whenNotPaused returns (uint256 amount)\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of mint(uint256 shares, address to) public virtual override(IERC4626, ERC4626Upgradeable) whenNotPaused returns (uint256 amount).\n\nProblematic Code Snippet:\n```solidity\nfunction mint(uint256 shares, address to)\n        public\n        virtual\n        override(IERC4626, ERC4626Upgradeable)\n        whenNotPaused\n        returns (uint256 amount)\n    {\n        // harvesting fees so asset to shares conversion rate is not stale\n        dnGmxJuniorVault.harvestFees();\n        amount = super.mint(shares, to);\n    }\n```",
+      "metadata": {
+        "id": "ACF-043",
+        "contract_name": "DnGmxSeniorVault",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "mint(uint256 shares, address to) public virtual override(IERC4626, ERC4626Upgradeable) whenNotPaused returns (uint256 amount)",
+        "functions": "mint(uint256 shares, address to) public virtual override(IERC4626, ERC4626Upgradeable) whenNotPaused returns (uint256 amount)",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of mint(uint256 shares, address to) public virtual override(IERC4626, ERC4626Upgradeable) whenNotPaused returns (uint256 amount).",
+        "code_snippet": "function mint(uint256 shares, address to)\n        public\n        virtual\n        override(IERC4626, ERC4626Upgradeable)\n        whenNotPaused\n        returns (uint256 amount)\n    {\n        // harvesting fees so asset to shares conversion rate is not stale\n        dnGmxJuniorVault.harvestFees();\n        amount = super.mint(shares, to);\n    }"
+      }
+    },
+    {
+      "id": "ACF-044",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: RollerPeriphery\nFunction: mint(ERC4626 vault, uint256 shares, address receiver, uint256 maxAmountIn) external returns (uint256 assets)\nFunctions: mint(ERC4626 vault, uint256 shares, address receiver, uint256 maxAmountIn) external returns (uint256 assets)\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of mint(ERC4626 vault, uint256 shares, address receiver, uint256 maxAmountIn) external returns (uint256 assets).\n\nProblematic Code Snippet:\n```solidity\nfunction mint(ERC4626 vault, uint256 shares, address receiver, uint256 maxAmountIn) external returns (uint256 assets) {\n        ERC20(vault.asset()).safeTransferFrom(msg.sender, address(this), vault.previewMint(shares));\n\n        if ((assets = vault.mint(shares, receiver)) > maxAmountIn) {\n            revert MaxAssetError();\n        }\n    }\n```",
+      "metadata": {
+        "id": "ACF-044",
+        "contract_name": "RollerPeriphery",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "mint(ERC4626 vault, uint256 shares, address receiver, uint256 maxAmountIn) external returns (uint256 assets)",
+        "functions": "mint(ERC4626 vault, uint256 shares, address receiver, uint256 maxAmountIn) external returns (uint256 assets)",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of mint(ERC4626 vault, uint256 shares, address receiver, uint256 maxAmountIn) external returns (uint256 assets).",
+        "code_snippet": "function mint(ERC4626 vault, uint256 shares, address receiver, uint256 maxAmountIn) external returns (uint256 assets) {\n        ERC20(vault.asset()).safeTransferFrom(msg.sender, address(this), vault.previewMint(shares));\n\n        if ((assets = vault.mint(shares, receiver)) > maxAmountIn) {\n            revert MaxAssetError();\n        }\n    }"
+      }
+    },
+    {
+      "id": "ACF-045",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: MainVault\nFunction: withdraw(uint256 _amount, address _receiver, address _owner ) external nonReentrant onlyWhenVaultIsOn returns (uint256 value)\nFunctions: withdraw(uint256 _amount, address _receiver, address _owner ) external nonReentrant onlyWhenVaultIsOn returns (uint256 value)\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of withdraw(uint256 _amount, address _receiver, address _owner ) external nonReentrant onlyWhenVaultIsOn returns (uint256 value).\n\nProblematic Code Snippet:\n```solidity\nfunction withdraw(\n    uint256 _amount,\n    address _receiver,\n    address _owner\n  ) external nonReentrant onlyWhenVaultIsOn returns (uint256 value) {\n    value = (_amount * exchangeRate) / (10 ** decimals());\n\n    require(value > 0, \"!value\");\n\n    require(getVaultBalance() - reservedFunds >= value, \"!funds\");\n\n    _burn(msg.sender, _amount);\n    transferFunds(_receiver, value);\n  }\n```",
+      "metadata": {
+        "id": "ACF-045",
+        "contract_name": "MainVault",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "withdraw(uint256 _amount, address _receiver, address _owner ) external nonReentrant onlyWhenVaultIsOn returns (uint256 value)",
+        "functions": "withdraw(uint256 _amount, address _receiver, address _owner ) external nonReentrant onlyWhenVaultIsOn returns (uint256 value)",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of withdraw(uint256 _amount, address _receiver, address _owner ) external nonReentrant onlyWhenVaultIsOn returns (uint256 value).",
+        "code_snippet": "function withdraw(\n    uint256 _amount,\n    address _receiver,\n    address _owner\n  ) external nonReentrant onlyWhenVaultIsOn returns (uint256 value) {\n    value = (_amount * exchangeRate) / (10 ** decimals());\n\n    require(value > 0, \"!value\");\n\n    require(getVaultBalance() - reservedFunds >= value, \"!funds\");\n\n    _burn(msg.sender, _amount);\n    transferFunds(_receiver, value);\n  }"
+      }
+    },
+    {
+      "id": "ACF-046",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: Controller\nFunction: claim(uint256 _vaultNumber, uint256 _protocolNumber ) external override onlyVault returns (bool)\nFunctions: claim(uint256 _vaultNumber, uint256 _protocolNumber ) external override onlyVault returns (bool)\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of claim(uint256 _vaultNumber, uint256 _protocolNumber ) external override onlyVault returns (bool).\n\nProblematic Code Snippet:\n```solidity\nfunction claim(\n    uint256 _vaultNumber,\n    uint256 _protocolNumber\n  ) external override onlyVault returns (bool) {\n    if (claimable[protocolInfo[_vaultNumber][_protocolNumber].LPToken]) {\n      return\n        IProvider(protocolInfo[_vaultNumber][_protocolNumber].provider).claim(\n          protocolInfo[_vaultNumber][_protocolNumber].LPToken,\n          msg.sender\n        );\n    } else {\n      return false;\n    }\n  }\n```",
+      "metadata": {
+        "id": "ACF-046",
+        "contract_name": "Controller",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "claim(uint256 _vaultNumber, uint256 _protocolNumber ) external override onlyVault returns (bool)",
+        "functions": "claim(uint256 _vaultNumber, uint256 _protocolNumber ) external override onlyVault returns (bool)",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of claim(uint256 _vaultNumber, uint256 _protocolNumber ) external override onlyVault returns (bool).",
+        "code_snippet": "function claim(\n    uint256 _vaultNumber,\n    uint256 _protocolNumber\n  ) external override onlyVault returns (bool) {\n    if (claimable[protocolInfo[_vaultNumber][_protocolNumber].LPToken]) {\n      return\n        IProvider(protocolInfo[_vaultNumber][_protocolNumber].provider).claim(\n          protocolInfo[_vaultNumber][_protocolNumber].LPToken,\n          msg.sender\n        );\n    } else {\n      return false;\n    }\n  }"
+      }
+    },
+    {
+      "id": "ACF-047",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: Game\nFunction: basketTotalAllocatedTokens(uint256 _basketId) public view returns (int256)\nFunctions: basketTotalAllocatedTokens(uint256 _basketId) public view returns (int256)\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of basketTotalAllocatedTokens(uint256 _basketId) public view returns (int256).\n\nProblematic Code Snippet:\n```solidity\nfunction basketTotalAllocatedTokens(uint256 _basketId) public view returns (int256) {\n    return baskets[_basketId].nrOfAllocatedTokens;\n  }\n```",
+      "metadata": {
+        "id": "ACF-047",
+        "contract_name": "Game",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "basketTotalAllocatedTokens(uint256 _basketId) public view returns (int256)",
+        "functions": "basketTotalAllocatedTokens(uint256 _basketId) public view returns (int256)",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of basketTotalAllocatedTokens(uint256 _basketId) public view returns (int256).",
+        "code_snippet": "function basketTotalAllocatedTokens(uint256 _basketId) public view returns (int256) {\n    return baskets[_basketId].nrOfAllocatedTokens;\n  }"
+      }
+    },
+    {
+      "id": "ACF-048",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: Depositor\nFunction: withdrawFromGauge(uint256 _NFTId, address[] memory _tokens)\nFunctions: withdrawFromGauge(uint256 _NFTId, address[] memory _tokens)\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of withdrawFromGauge(uint256 _NFTId, address[] memory _tokens).\n\nProblematic Code Snippet:\n```solidity\nfunction withdrawFromGauge(uint256 _NFTId, address[] memory _tokens)  public  {\n        uint256 amount = depositReceipt.pooledTokens(_NFTId);\n        depositReceipt.burn(_NFTId);\n        gauge.getReward(address(this), _tokens);\n        gauge.withdraw(amount);\n        //AMMToken adheres to ERC20 spec meaning it reverts on failure, no need to check return\n        //slither-disable-next-line unchecked-transfer\n        AMMToken.transfer(msg.sender, amount);\n    }\n```",
+      "metadata": {
+        "id": "ACF-048",
+        "contract_name": "Depositor",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "withdrawFromGauge(uint256 _NFTId, address[] memory _tokens)",
+        "functions": "withdrawFromGauge(uint256 _NFTId, address[] memory _tokens)",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of withdrawFromGauge(uint256 _NFTId, address[] memory _tokens).",
+        "code_snippet": "function withdrawFromGauge(uint256 _NFTId, address[] memory _tokens)  public  {\n        uint256 amount = depositReceipt.pooledTokens(_NFTId);\n        depositReceipt.burn(_NFTId);\n        gauge.getReward(address(this), _tokens);\n        gauge.withdraw(amount);\n        //AMMToken adheres to ERC20 spec meaning it reverts on failure, no need to check return\n        //slither-disable-next-line unchecked-transfer\n        AMMToken.transfer(msg.sender, amount);\n    }"
+      }
+    },
+    {
+      "id": "ACF-049",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: Cooler\nFunction: roll(uint256 loanID)\nFunctions: roll(uint256 loanID)\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of roll(uint256 loanID).\n\nProblematic Code Snippet:\n```solidity\nfunction roll (uint256 loanID) external {\n        Loan storage loan = loans[loanID];\n        Request memory req = loan.request;\n\n        if (block.timestamp > loan.expiry)\n            revert Default();\n\n        if (!loan.rollable)\n            revert NotRollable();\n\n        uint256 newCollateral = collateralFor(loan.amount, req.loanToCollateral) - loan.collateral;\n        uint256 newDebt = interestFor(loan.amount, req.interest, req.duration);\n\n        loan.amount += newDebt;\n        loan.expiry += req.duration;\n        loan.collateral += newCollateral;\n\n        collateral.transferFrom(msg.sender, address(this), newCollateral);\n    }\n```",
+      "metadata": {
+        "id": "ACF-049",
+        "contract_name": "Cooler",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "roll(uint256 loanID)",
+        "functions": "roll(uint256 loanID)",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of roll(uint256 loanID).",
+        "code_snippet": "function roll (uint256 loanID) external {\n        Loan storage loan = loans[loanID];\n        Request memory req = loan.request;\n\n        if (block.timestamp > loan.expiry)\n            revert Default();\n\n        if (!loan.rollable)\n            revert NotRollable();\n\n        uint256 newCollateral = collateralFor(loan.amount, req.loanToCollateral) - loan.collateral;\n        uint256 newDebt = interestFor(loan.amount, req.interest, req.duration);\n\n        loan.amount += newDebt;\n        loan.expiry += req.duration;\n        loan.collateral += newCollateral;\n\n        collateral.transferFrom(msg.sender, address(this), newCollateral);\n    }"
+      }
+    },
+    {
+      "id": "ACF-050",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: OpenQV1\nFunction: initialize()\nFunctions: initialize()\nMissing Check: Unprotected Initialization\n\nIssue Description:\nPotential unauthorized invocation of initialize().\n\nProblematic Code Snippet:\n```solidity\nfunction initialize() external initializer onlyProxy {\n        __Ownable_init();\n        __UUPSUpgradeable_init();\n        __ReentrancyGuard_init();\n    }\n```",
+      "metadata": {
+        "id": "ACF-050",
+        "contract_name": "OpenQV1",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "initialize()",
+        "functions": "initialize()",
+        "missing_check": "Unprotected Initialization",
+        "description": "Potential unauthorized invocation of initialize().",
+        "code_snippet": "function initialize() external initializer onlyProxy {\n        __Ownable_init();\n        __UUPSUpgradeable_init();\n        __ReentrancyGuard_init();\n    }"
+      }
+    },
+    {
+      "id": "ACF-051",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: GoldfinchAdapter\nFunction: initialize(address _owner)\nFunctions: initialize(address _owner)\nMissing Check: Unprotected Initialization\n\nIssue Description:\nPotential unauthorized invocation of initialize(address _owner).\n\nProblematic Code Snippet:\n```solidity\nfunction initialize(address _owner) external initializer {\n    __UUPSUpgradeableBase_init();\n    _transferOwnership(_owner);\n    goldfinchConfig = IGoldfinchConfig(GOLDFINCH_CONFIG_ADDRESS);\n  }\n```",
+      "metadata": {
+        "id": "ACF-051",
+        "contract_name": "GoldfinchAdapter",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "initialize(address _owner)",
+        "functions": "initialize(address _owner)",
+        "missing_check": "Unprotected Initialization",
+        "description": "Potential unauthorized invocation of initialize(address _owner).",
+        "code_snippet": "function initialize(address _owner) external initializer {\n    __UUPSUpgradeableBase_init();\n    _transferOwnership(_owner);\n    goldfinchConfig = IGoldfinchConfig(GOLDFINCH_CONFIG_ADDRESS);\n  }"
+      }
+    },
+    {
+      "id": "ACF-052",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: Product\nFunction: closeTakeFor(address account, UFixed18 amount) public nonReentrant notPaused onlyAccountOrMultiInvoker(account) settleForAccount(account) closeInvariant(account) liquidationInvariant(account)\nFunctions: closeTakeFor(address account, UFixed18 amount) public nonReentrant notPaused onlyAccountOrMultiInvoker(account) settleForAccount(account) closeInvariant(account) liquidationInvariant(account)\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of closeTakeFor(address account, UFixed18 amount) public nonReentrant notPaused onlyAccountOrMultiInvoker(account) settleForAccount(account) closeInvariant(account) liquidationInvariant(account).\n\nProblematic Code Snippet:\n```solidity\nfunction closeTakeFor(address account, UFixed18 amount)\n        public\n        nonReentrant\n        notPaused\n        onlyAccountOrMultiInvoker(account)\n        settleForAccount(account)\n        closeInvariant(account)\n        liquidationInvariant(account)\n    {\n        _closeTake(account, amount);\n    }\n```",
+      "metadata": {
+        "id": "ACF-052",
+        "contract_name": "Product",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "closeTakeFor(address account, UFixed18 amount) public nonReentrant notPaused onlyAccountOrMultiInvoker(account) settleForAccount(account) closeInvariant(account) liquidationInvariant(account)",
+        "functions": "closeTakeFor(address account, UFixed18 amount) public nonReentrant notPaused onlyAccountOrMultiInvoker(account) settleForAccount(account) closeInvariant(account) liquidationInvariant(account)",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of closeTakeFor(address account, UFixed18 amount) public nonReentrant notPaused onlyAccountOrMultiInvoker(account) settleForAccount(account) closeInvariant(account) liquidationInvariant(account).",
+        "code_snippet": "function closeTakeFor(address account, UFixed18 amount)\n        public\n        nonReentrant\n        notPaused\n        onlyAccountOrMultiInvoker(account)\n        settleForAccount(account)\n        closeInvariant(account)\n        liquidationInvariant(account)\n    {\n        _closeTake(account, amount);\n    }"
+      }
+    },
+    {
+      "id": "ACF-053",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: Product\nFunction: closeMakeFor(address account, UFixed18 amount) public nonReentrant notPaused onlyAccountOrMultiInvoker(account) settleForAccount(account) takerInvariant closeInvariant(account) liquidationInvariant(account)\nFunctions: closeMakeFor(address account, UFixed18 amount) public nonReentrant notPaused onlyAccountOrMultiInvoker(account) settleForAccount(account) takerInvariant closeInvariant(account) liquidationInvariant(account)\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of closeMakeFor(address account, UFixed18 amount) public nonReentrant notPaused onlyAccountOrMultiInvoker(account) settleForAccount(account) takerInvariant closeInvariant(account) liquidationInvariant(account).\n\nProblematic Code Snippet:\n```solidity\nfunction closeMakeFor(address account, UFixed18 amount)\n        public\n        nonReentrant\n        notPaused\n        onlyAccountOrMultiInvoker(account)\n        settleForAccount(account)\n        takerInvariant\n        closeInvariant(account)\n        liquidationInvariant(account)\n    {\n        _closeMake(account, amount);\n    }\n```",
+      "metadata": {
+        "id": "ACF-053",
+        "contract_name": "Product",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "closeMakeFor(address account, UFixed18 amount) public nonReentrant notPaused onlyAccountOrMultiInvoker(account) settleForAccount(account) takerInvariant closeInvariant(account) liquidationInvariant(account)",
+        "functions": "closeMakeFor(address account, UFixed18 amount) public nonReentrant notPaused onlyAccountOrMultiInvoker(account) settleForAccount(account) takerInvariant closeInvariant(account) liquidationInvariant(account)",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of closeMakeFor(address account, UFixed18 amount) public nonReentrant notPaused onlyAccountOrMultiInvoker(account) settleForAccount(account) takerInvariant closeInvariant(account) liquidationInvariant(account).",
+        "code_snippet": "function closeMakeFor(address account, UFixed18 amount)\n        public\n        nonReentrant\n        notPaused\n        onlyAccountOrMultiInvoker(account)\n        settleForAccount(account)\n        takerInvariant\n        closeInvariant(account)\n        liquidationInvariant(account)\n    {\n        _closeMake(account, amount);\n    }"
+      }
+    },
+    {
+      "id": "ACF-054",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: ContractFactory\nFunction: initialize(IProtectionPoolCycleManager _protectionPoolCycleManager, IDefaultStateManager _defaultStateManager)\nFunctions: initialize(IProtectionPoolCycleManager _protectionPoolCycleManager, IDefaultStateManager _defaultStateManager)\nMissing Check: Unprotected Initialization\n\nIssue Description:\nPotential unauthorized invocation of initialize(IProtectionPoolCycleManager _protectionPoolCycleManager, IDefaultStateManager _defaultStateManager).\n\nProblematic Code Snippet:\n```solidity\nfunction initialize(\n    IProtectionPoolCycleManager _protectionPoolCycleManager,\n    IDefaultStateManager _defaultStateManager\n  ) external initializer {\n    /// initialize the UUPSUpgradeableBase contract\n    __UUPSUpgradeableBase_init();\n\n    protectionPoolCycleManager = _protectionPoolCycleManager;\n    defaultStateManager = _defaultStateManager;\n  }\n```",
+      "metadata": {
+        "id": "ACF-054",
+        "contract_name": "ContractFactory",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "initialize(IProtectionPoolCycleManager _protectionPoolCycleManager, IDefaultStateManager _defaultStateManager)",
+        "functions": "initialize(IProtectionPoolCycleManager _protectionPoolCycleManager, IDefaultStateManager _defaultStateManager)",
+        "missing_check": "Unprotected Initialization",
+        "description": "Potential unauthorized invocation of initialize(IProtectionPoolCycleManager _protectionPoolCycleManager, IDefaultStateManager _defaultStateManager).",
+        "code_snippet": "function initialize(\n    IProtectionPoolCycleManager _protectionPoolCycleManager,\n    IDefaultStateManager _defaultStateManager\n  ) external initializer {\n    /// initialize the UUPSUpgradeableBase contract\n    __UUPSUpgradeableBase_init();\n\n    protectionPoolCycleManager = _protectionPoolCycleManager;\n    defaultStateManager = _defaultStateManager;\n  }"
+      }
+    },
+    {
+      "id": "ACF-055",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: DefaultStateManager\nFunction: initialize()\nFunctions: initialize()\nMissing Check: Unprotected Initialization\n\nIssue Description:\nPotential unauthorized invocation of initialize().\n\nProblematic Code Snippet:\n```solidity\nfunction initialize() external initializer {\n    __UUPSUpgradeableBase_init();\n\n    /// create a dummy pool state to reserve index 0.\n    /// this is to ensure that protectionPoolStateIndexes[pool] is always greater than 0,\n    /// which is used to check if a pool is registered or not.\n    protectionPoolStates.push();\n  }\n```",
+      "metadata": {
+        "id": "ACF-055",
+        "contract_name": "DefaultStateManager",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "initialize()",
+        "functions": "initialize()",
+        "missing_check": "Unprotected Initialization",
+        "description": "Potential unauthorized invocation of initialize().",
+        "code_snippet": "function initialize() external initializer {\n    __UUPSUpgradeableBase_init();\n\n    /// create a dummy pool state to reserve index 0.\n    /// this is to ensure that protectionPoolStateIndexes[pool] is always greater than 0,\n    /// which is used to check if a pool is registered or not.\n    protectionPoolStates.push();\n  }"
+      }
+    },
+    {
+      "id": "ACF-056",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: PremiumCalculator\nFunction: initialize()\nFunctions: initialize()\nMissing Check: Unprotected Initialization\n\nIssue Description:\nPotential unauthorized invocation of initialize().\n\nProblematic Code Snippet:\n```solidity\nfunction initialize() external initializer {\n    __UUPSUpgradeableBase_init();\n  }\n```",
+      "metadata": {
+        "id": "ACF-056",
+        "contract_name": "PremiumCalculator",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "initialize()",
+        "functions": "initialize()",
+        "missing_check": "Unprotected Initialization",
+        "description": "Potential unauthorized invocation of initialize().",
+        "code_snippet": "function initialize() external initializer {\n    __UUPSUpgradeableBase_init();\n  }"
+      }
+    },
+    {
+      "id": "ACF-057",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: ProtectionPool\nFunction: initialize(address _owner, ProtectionPoolInfo calldata _poolInfo, IPremiumCalculator _premiumCalculator, IProtectionPoolCycleManager _poolCycleManager, IDefaultStateManager _defaultStateManager, string calldata _name, string calldata _symbol)\nFunctions: initialize(address _owner, ProtectionPoolInfo calldata _poolInfo, IPremiumCalculator _premiumCalculator, IProtectionPoolCycleManager _poolCycleManager, IDefaultStateManager _defaultStateManager, string calldata _name, string calldata _symbol)\nMissing Check: Unprotected Initialization\n\nIssue Description:\nPotential unauthorized invocation of initialize(address _owner, ProtectionPoolInfo calldata _poolInfo, IPremiumCalculator _premiumCalculator, IProtectionPoolCycleManager _poolCycleManager, IDefaultStateManager _defaultStateManager, string calldata _name, string calldata _symbol).\n\nProblematic Code Snippet:\n```solidity\nfunction initialize(\n    address _owner,\n    ProtectionPoolInfo calldata _poolInfo,\n    IPremiumCalculator _premiumCalculator,\n    IProtectionPoolCycleManager _poolCycleManager,\n    IDefaultStateManager _defaultStateManager,\n    string calldata _name,\n    string calldata _symbol\n  ) external override initializer {\n    /// initialize parent contracts in same order as they are inherited to mimic the behavior of a constructor\n    __UUPSUpgradeableBase_init();\n    __ReentrancyGuard_init();\n    __sToken_init(_name, _symbol);\n\n    /// set the storage variables\n    poolInfo = _poolInfo;\n    premiumCalculator = _premiumCalculator;\n    poolCycleManager = _poolCycleManager;\n    defaultStateManager = _defaultStateManager;\n\n    emit ProtectionPoolInitialized(\n      _name,\n      _symbol,\n      poolInfo.underlyingToken,\n      poolInfo.referenceLendingPools\n    );\n\n    /// Transfer the ownership of this pool to the specified owner\n    _transferOwnership(_owner);\n\n    /// Add dummy protection info to make index 0 invalid\n    protectionInfos.push();\n  }\n```",
+      "metadata": {
+        "id": "ACF-057",
+        "contract_name": "ProtectionPool",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "initialize(address _owner, ProtectionPoolInfo calldata _poolInfo, IPremiumCalculator _premiumCalculator, IProtectionPoolCycleManager _poolCycleManager, IDefaultStateManager _defaultStateManager, string calldata _name, string calldata _symbol)",
+        "functions": "initialize(address _owner, ProtectionPoolInfo calldata _poolInfo, IPremiumCalculator _premiumCalculator, IProtectionPoolCycleManager _poolCycleManager, IDefaultStateManager _defaultStateManager, string calldata _name, string calldata _symbol)",
+        "missing_check": "Unprotected Initialization",
+        "description": "Potential unauthorized invocation of initialize(address _owner, ProtectionPoolInfo calldata _poolInfo, IPremiumCalculator _premiumCalculator, IProtectionPoolCycleManager _poolCycleManager, IDefaultStateManager _defaultStateManager, string calldata _name, string calldata _symbol).",
+        "code_snippet": "function initialize(\n    address _owner,\n    ProtectionPoolInfo calldata _poolInfo,\n    IPremiumCalculator _premiumCalculator,\n    IProtectionPoolCycleManager _poolCycleManager,\n    IDefaultStateManager _defaultStateManager,\n    string calldata _name,\n    string calldata _symbol\n  ) external override initializer {\n    /// initialize parent contracts in same order as they are inherited to mimic the behavior of a constructor\n    __UUPSUpgradeableBase_init();\n    __ReentrancyGuard_init();\n    __sToken_init(_name, _symbol);\n\n    /// set the storage variables\n    poolInfo = _poolInfo;\n    premiumCalculator = _premiumCalculator;\n    poolCycleManager = _poolCycleManager;\n    defaultStateManager = _defaultStateManager;\n\n    emit ProtectionPoolInitialized(\n      _name,\n      _symbol,\n      poolInfo.underlyingToken,\n      poolInfo.referenceLendingPools\n    );\n\n    /// Transfer the ownership of this pool to the specified owner\n    _transferOwnership(_owner);\n\n    /// Add dummy protection info to make index 0 invalid\n    protectionInfos.push();\n  }"
+      }
+    },
+    {
+      "id": "ACF-058",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: ReferenceLendingPools\nFunction: initialize(address _owner, address[] calldata _lendingPools, LendingProtocol[] calldata _lendingPoolProtocols, uint256[] calldata _protectionPurchaseLimitsInDays, address _lendingProtocolAdapterFactory)\nFunctions: initialize(address _owner, address[] calldata _lendingPools, LendingProtocol[] calldata _lendingPoolProtocols, uint256[] calldata _protectionPurchaseLimitsInDays, address _lendingProtocolAdapterFactory)\nMissing Check: Unprotected Initialization\n\nIssue Description:\nPotential unauthorized invocation of initialize(address _owner, address[] calldata _lendingPools, LendingProtocol[] calldata _lendingPoolProtocols, uint256[] calldata _protectionPurchaseLimitsInDays, address _lendingProtocolAdapterFactory).\n\nProblematic Code Snippet:\n```solidity\nfunction initialize(\n    address _owner,\n    address[] calldata _lendingPools,\n    LendingProtocol[] calldata _lendingPoolProtocols,\n    uint256[] calldata _protectionPurchaseLimitsInDays,\n    address _lendingProtocolAdapterFactory\n  ) external override initializer {\n    if (\n      _lendingPools.length != _lendingPoolProtocols.length ||\n      _lendingPools.length != _protectionPurchaseLimitsInDays.length\n    ) {\n      revert ReferenceLendingPoolsConstructionError(\n        \"Array inputs length must match\"\n      );\n    }\n\n    if (_owner == Constants.ZERO_ADDRESS) {\n      revert ReferenceLendingPoolsConstructionError(\n        \"Owner address must not be zero\"\n      );\n    }\n\n    /// Initialize the UUPSUpgradeableBase\n    __UUPSUpgradeableBase_init();\n\n    lendingProtocolAdapterFactory = ILendingProtocolAdapterFactory(\n      _lendingProtocolAdapterFactory\n    );\n\n    /// Transfer ownership of this contract to the specified owner address\n    _transferOwnership(_owner);\n\n    /// Add the specified lending pools to the basket\n    uint256 length = _lendingPools.length;\n    for (uint256 i; i < length; ) {\n      _addReferenceLendingPool(\n        _lendingPools[i],\n        _lendingPoolProtocols[i],\n        _protectionPurchaseLimitsInDays[i]\n      );\n\n      unchecked {\n        ++i;\n      }\n    }\n  }\n```",
+      "metadata": {
+        "id": "ACF-058",
+        "contract_name": "ReferenceLendingPools",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "initialize(address _owner, address[] calldata _lendingPools, LendingProtocol[] calldata _lendingPoolProtocols, uint256[] calldata _protectionPurchaseLimitsInDays, address _lendingProtocolAdapterFactory)",
+        "functions": "initialize(address _owner, address[] calldata _lendingPools, LendingProtocol[] calldata _lendingPoolProtocols, uint256[] calldata _protectionPurchaseLimitsInDays, address _lendingProtocolAdapterFactory)",
+        "missing_check": "Unprotected Initialization",
+        "description": "Potential unauthorized invocation of initialize(address _owner, address[] calldata _lendingPools, LendingProtocol[] calldata _lendingPoolProtocols, uint256[] calldata _protectionPurchaseLimitsInDays, address _lendingProtocolAdapterFactory).",
+        "code_snippet": "function initialize(\n    address _owner,\n    address[] calldata _lendingPools,\n    LendingProtocol[] calldata _lendingPoolProtocols,\n    uint256[] calldata _protectionPurchaseLimitsInDays,\n    address _lendingProtocolAdapterFactory\n  ) external override initializer {\n    if (\n      _lendingPools.length != _lendingPoolProtocols.length ||\n      _lendingPools.length != _protectionPurchaseLimitsInDays.length\n    ) {\n      revert ReferenceLendingPoolsConstructionError(\n        \"Array inputs length must match\"\n      );\n    }\n\n    if (_owner == Constants.ZERO_ADDRESS) {\n      revert ReferenceLendingPoolsConstructionError(\n        \"Owner address must not be zero\"\n      );\n    }\n\n    /// Initialize the UUPSUpgradeableBase\n    __UUPSUpgradeableBase_init();\n\n    lendingProtocolAdapterFactory = ILendingProtocolAdapterFactory(\n      _lendingProtocolAdapterFactory\n    );\n\n    /// Transfer ownership of this contract to the specified owner address\n    _transferOwnership(_owner);\n\n    /// Add the specified lending pools to the basket\n    uint256 length = _lendingPools.length;\n    for (uint256 i; i < length; ) {\n      _addReferenceLendingPool(\n        _lendingPools[i],\n        _lendingPoolProtoco..."
+      }
+    },
+    {
+      "id": "ACF-059",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: RoundImplementation\nFunction: applyToRound(bytes32 projectID, MetaPtr calldata newApplicationMetaPtr)\nFunctions: applyToRound(bytes32 projectID, MetaPtr calldata newApplicationMetaPtr)\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of applyToRound(bytes32 projectID, MetaPtr calldata newApplicationMetaPtr).\n\nProblematic Code Snippet:\n```solidity\nfunction applyToRound(bytes32 projectID, MetaPtr calldata newApplicationMetaPtr) external {\n    // slither-disable-next-line timestamp\n    require(\n      applicationsStartTime <= block.timestamp  &&\n      block.timestamp <= applicationsEndTime,\n      \"Round: Applications period not started or over\"\n    );\n    applications.push(Application(projectID, nextApplicationIndex, newApplicationMetaPtr));\n    applicationsIndexesByProjectID[projectID].push(nextApplicationIndex);\n    emit NewProjectApplication(projectID, nextApplicationIndex, newApplicationMetaPtr);\n    nextApplicationIndex++;\n  }\n```",
+      "metadata": {
+        "id": "ACF-059",
+        "contract_name": "RoundImplementation",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "applyToRound(bytes32 projectID, MetaPtr calldata newApplicationMetaPtr)",
+        "functions": "applyToRound(bytes32 projectID, MetaPtr calldata newApplicationMetaPtr)",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of applyToRound(bytes32 projectID, MetaPtr calldata newApplicationMetaPtr).",
+        "code_snippet": "function applyToRound(bytes32 projectID, MetaPtr calldata newApplicationMetaPtr) external {\n    // slither-disable-next-line timestamp\n    require(\n      applicationsStartTime <= block.timestamp  &&\n      block.timestamp <= applicationsEndTime,\n      \"Round: Applications period not started or over\"\n    );\n    applications.push(Application(projectID, nextApplicationIndex, newApplicationMetaPtr));\n    applicationsIndexesByProjectID[projectID].push(nextApplicationIndex);\n    emit NewProjectApplication(projectID, nextApplicationIndex, newApplicationMetaPtr);\n    nextApplicationIndex++;\n  }"
+      }
+    },
+    {
+      "id": "ACF-060",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: L1Block\nFunction: setL1BlockValues(uint64 _number, uint64 _timestamp, uint256 _basefee, bytes32 _hash, uint64 _sequenceNumber, bytes32 _batcherHash, uint256 _l1FeeOverhead, uint256 _l1FeeScalar)\nFunctions: setL1BlockValues(uint64 _number, uint64 _timestamp, uint256 _basefee, bytes32 _hash, uint64 _sequenceNumber, bytes32 _batcherHash, uint256 _l1FeeOverhead, uint256 _l1FeeScalar)\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of setL1BlockValues(uint64 _number, uint64 _timestamp, uint256 _basefee, bytes32 _hash, uint64 _sequenceNumber, bytes32 _batcherHash, uint256 _l1FeeOverhead, uint256 _l1FeeScalar).\n\nProblematic Code Snippet:\n```solidity\nfunction setL1BlockValues(\n        uint64 _number,\n        uint64 _timestamp,\n        uint256 _basefee,\n        bytes32 _hash,\n        uint64 _sequenceNumber,\n        bytes32 _batcherHash,\n        uint256 _l1FeeOverhead,\n        uint256 _l1FeeScalar\n    ) external {\n        require(\n            msg.sender == DEPOSITOR_ACCOUNT,\n            \"L1Block: only the depositor account can set L1 block values\"\n        );\n\n        number = _number;\n        timestamp = _timestamp;\n        basefee = _basefee;\n        hash = _hash;\n        sequenceNumber = _sequenceNumber;\n        batcherHash = _batcherHash;\n        l1FeeOverhead = _l1FeeOverhead;\n        l1FeeScalar = _l1FeeScalar;\n    }\n```",
+      "metadata": {
+        "id": "ACF-060",
+        "contract_name": "L1Block",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "setL1BlockValues(uint64 _number, uint64 _timestamp, uint256 _basefee, bytes32 _hash, uint64 _sequenceNumber, bytes32 _batcherHash, uint256 _l1FeeOverhead, uint256 _l1FeeScalar)",
+        "functions": "setL1BlockValues(uint64 _number, uint64 _timestamp, uint256 _basefee, bytes32 _hash, uint64 _sequenceNumber, bytes32 _batcherHash, uint256 _l1FeeOverhead, uint256 _l1FeeScalar)",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of setL1BlockValues(uint64 _number, uint64 _timestamp, uint256 _basefee, bytes32 _hash, uint64 _sequenceNumber, bytes32 _batcherHash, uint256 _l1FeeOverhead, uint256 _l1FeeScalar).",
+        "code_snippet": "function setL1BlockValues(\n        uint64 _number,\n        uint64 _timestamp,\n        uint256 _basefee,\n        bytes32 _hash,\n        uint64 _sequenceNumber,\n        bytes32 _batcherHash,\n        uint256 _l1FeeOverhead,\n        uint256 _l1FeeScalar\n    ) external {\n        require(\n            msg.sender == DEPOSITOR_ACCOUNT,\n            \"L1Block: only the depositor account can set L1 block values\"\n        );\n\n        number = _number;\n        timestamp = _timestamp;\n        basefee = _basefee;\n        hash = _hash;\n        sequenceNumber = _sequenceNumber;\n        batcherHash = _batcherHash;\n        l1FeeOverhead = _l1FeeOverhead;\n        l1FeeScalar = _l1FeeScalar;\n    }"
+      }
+    },
+    {
+      "id": "ACF-061",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: CollateralManager\nFunction: withdraw(uint256 _bidId)\nFunctions: withdraw(uint256 _bidId)\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of withdraw(uint256 _bidId).\n\nProblematic Code Snippet:\n```solidity\nfunction withdraw(uint256 _bidId) external {\n        BidState bidState = tellerV2.getBidState(_bidId);\n        if (bidState == BidState.PAID) {\n            _withdraw(_bidId, tellerV2.getLoanBorrower(_bidId));\n        } else if (tellerV2.isLoanDefaulted(_bidId)) {\n            _withdraw(_bidId, tellerV2.getLoanLender(_bidId));\n            emit CollateralClaimed(_bidId);\n        } else {\n            revert(\"collateral cannot be withdrawn\");\n        }\n    }\n```",
+      "metadata": {
+        "id": "ACF-061",
+        "contract_name": "CollateralManager",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "withdraw(uint256 _bidId)",
+        "functions": "withdraw(uint256 _bidId)",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of withdraw(uint256 _bidId).",
+        "code_snippet": "function withdraw(uint256 _bidId) external {\n        BidState bidState = tellerV2.getBidState(_bidId);\n        if (bidState == BidState.PAID) {\n            _withdraw(_bidId, tellerV2.getLoanBorrower(_bidId));\n        } else if (tellerV2.isLoanDefaulted(_bidId)) {\n            _withdraw(_bidId, tellerV2.getLoanLender(_bidId));\n            emit CollateralClaimed(_bidId);\n        } else {\n            revert(\"collateral cannot be withdrawn\");\n        }\n    }"
+      }
+    },
+    {
+      "id": "ACF-062",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: CollateralManager\nFunction: setCollateralEscrowBeacon(address _collateralEscrowBeacon) external reinitializer(2)\nFunctions: setCollateralEscrowBeacon(address _collateralEscrowBeacon) external reinitializer(2)\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of setCollateralEscrowBeacon(address _collateralEscrowBeacon) external reinitializer(2).\n\nProblematic Code Snippet:\n```solidity\nfunction setCollateralEscrowBeacon(address _collateralEscrowBeacon)\n        external\n        reinitializer(2)\n    {\n        collateralEscrowBeacon = _collateralEscrowBeacon;\n    }\n```",
+      "metadata": {
+        "id": "ACF-062",
+        "contract_name": "CollateralManager",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "setCollateralEscrowBeacon(address _collateralEscrowBeacon) external reinitializer(2)",
+        "functions": "setCollateralEscrowBeacon(address _collateralEscrowBeacon) external reinitializer(2)",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of setCollateralEscrowBeacon(address _collateralEscrowBeacon) external reinitializer(2).",
+        "code_snippet": "function setCollateralEscrowBeacon(address _collateralEscrowBeacon)\n        external\n        reinitializer(2)\n    {\n        collateralEscrowBeacon = _collateralEscrowBeacon;\n    }"
+      }
+    },
+    {
+      "id": "ACF-063",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: TellerV2\nFunction: submitBid(address _lendingToken, uint256 _marketplaceId, uint256 _principal, uint32 _duration, uint16 _APR, string calldata _metadataURI, address _receiver ) public override whenNotPaused returns (uint256 bidId_)\nFunctions: submitBid(address _lendingToken, uint256 _marketplaceId, uint256 _principal, uint32 _duration, uint16 _APR, string calldata _metadataURI, address _receiver ) public override whenNotPaused returns (uint256 bidId_)\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of submitBid(address _lendingToken, uint256 _marketplaceId, uint256 _principal, uint32 _duration, uint16 _APR, string calldata _metadataURI, address _receiver ) public override whenNotPaused returns (uint256 bidId_).\n\nProblematic Code Snippet:\n```solidity\nfunction submitBid(\n        address _lendingToken,\n        uint256 _marketplaceId,\n        uint256 _principal,\n        uint32 _duration,\n        uint16 _APR,\n        string calldata _metadataURI,\n        address _receiver\n    ) public override whenNotPaused returns (uint256 bidId_) {\n        bidId_ = _submitBid(\n            _lendingToken,\n            _marketplaceId,\n            _principal,\n            _duration,\n            _APR,\n            _metadataURI,\n            _receiver\n        );\n    }\n```",
+      "metadata": {
+        "id": "ACF-063",
+        "contract_name": "TellerV2",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "submitBid(address _lendingToken, uint256 _marketplaceId, uint256 _principal, uint32 _duration, uint16 _APR, string calldata _metadataURI, address _receiver ) public override whenNotPaused returns (uint256 bidId_)",
+        "functions": "submitBid(address _lendingToken, uint256 _marketplaceId, uint256 _principal, uint32 _duration, uint16 _APR, string calldata _metadataURI, address _receiver ) public override whenNotPaused returns (uint256 bidId_)",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of submitBid(address _lendingToken, uint256 _marketplaceId, uint256 _principal, uint32 _duration, uint16 _APR, string calldata _metadataURI, address _receiver ) public override whenNotPaused returns (uint256 bidId_).",
+        "code_snippet": "function submitBid(\n        address _lendingToken,\n        uint256 _marketplaceId,\n        uint256 _principal,\n        uint32 _duration,\n        uint16 _APR,\n        string calldata _metadataURI,\n        address _receiver\n    ) public override whenNotPaused returns (uint256 bidId_) {\n        bidId_ = _submitBid(\n            _lendingToken,\n            _marketplaceId,\n            _principal,\n            _duration,\n            _APR,\n            _metadataURI,\n            _receiver\n        );\n    }"
+      }
+    },
+    {
+      "id": "ACF-064",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: CollateralManager\nFunction: liquidateCollateral(uint256 _bidId, address _liquidatorAddress)\nFunctions: liquidateCollateral(uint256 _bidId, address _liquidatorAddress)\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of liquidateCollateral(uint256 _bidId, address _liquidatorAddress).\n\nProblematic Code Snippet:\n```solidity\nfunction liquidateCollateral(uint256 _bidId, address _liquidatorAddress)\n        external\n        onlyTellerV2\n    {\n        if (isBidCollateralBacked(_bidId)) {\n            BidState bidState = tellerV2.getBidState(_bidId);\n            require(\n                bidState == BidState.LIQUIDATED,\n                \"Loan has not been liquidated\"\n            );\n            _withdraw(_bidId, _liquidatorAddress);\n        }\n    }\n```",
+      "metadata": {
+        "id": "ACF-064",
+        "contract_name": "CollateralManager",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "liquidateCollateral(uint256 _bidId, address _liquidatorAddress)",
+        "functions": "liquidateCollateral(uint256 _bidId, address _liquidatorAddress)",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of liquidateCollateral(uint256 _bidId, address _liquidatorAddress).",
+        "code_snippet": "function liquidateCollateral(uint256 _bidId, address _liquidatorAddress)\n        external\n        onlyTellerV2\n    {\n        if (isBidCollateralBacked(_bidId)) {\n            BidState bidState = tellerV2.getBidState(_bidId);\n            require(\n                bidState == BidState.LIQUIDATED,\n                \"Loan has not been liquidated\"\n            );\n            _withdraw(_bidId, _liquidatorAddress);\n        }\n    }"
+      }
+    },
+    {
+      "id": "ACF-065",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: TellerV2Context\nFunction: isTrustedMarketForwarder(uint256 _marketId, address _trustedMarketForwarder ) public view returns (bool)\nFunctions: isTrustedMarketForwarder(uint256 _marketId, address _trustedMarketForwarder ) public view returns (bool)\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of isTrustedMarketForwarder(uint256 _marketId, address _trustedMarketForwarder ) public view returns (bool).\n\nProblematic Code Snippet:\n```solidity\nfunction isTrustedMarketForwarder(\n        uint256 _marketId,\n        address _trustedMarketForwarder\n    ) public view returns (bool) {\n        return\n            _trustedMarketForwarders[_marketId] == _trustedMarketForwarder ||\n            lenderCommitmentForwarder == _trustedMarketForwarder;\n    }\n```",
+      "metadata": {
+        "id": "ACF-065",
+        "contract_name": "TellerV2Context",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "isTrustedMarketForwarder(uint256 _marketId, address _trustedMarketForwarder ) public view returns (bool)",
+        "functions": "isTrustedMarketForwarder(uint256 _marketId, address _trustedMarketForwarder ) public view returns (bool)",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of isTrustedMarketForwarder(uint256 _marketId, address _trustedMarketForwarder ) public view returns (bool).",
+        "code_snippet": "function isTrustedMarketForwarder(\n        uint256 _marketId,\n        address _trustedMarketForwarder\n    ) public view returns (bool) {\n        return\n            _trustedMarketForwarders[_marketId] == _trustedMarketForwarder ||\n            lenderCommitmentForwarder == _trustedMarketForwarder;\n    }"
+      }
+    },
+    {
+      "id": "ACF-066",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: LenderManager\nFunction: _getLoanMarketId(uint256 _bidId) internal view returns (uint256)\nFunctions: _getLoanMarketId(uint256 _bidId) internal view returns (uint256)\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of _getLoanMarketId(uint256 _bidId) internal view returns (uint256).\n\nProblematic Code Snippet:\n```solidity\nfunction _getLoanMarketId(uint256 _bidId) internal view returns (uint256) {\n        return ITellerV2(owner()).getLoanMarketId(_bidId);\n    }\n```",
+      "metadata": {
+        "id": "ACF-066",
+        "contract_name": "LenderManager",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "_getLoanMarketId(uint256 _bidId) internal view returns (uint256)",
+        "functions": "_getLoanMarketId(uint256 _bidId) internal view returns (uint256)",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of _getLoanMarketId(uint256 _bidId) internal view returns (uint256).",
+        "code_snippet": "function _getLoanMarketId(uint256 _bidId) internal view returns (uint256) {\n        return ITellerV2(owner()).getLoanMarketId(_bidId);\n    }"
+      }
+    },
+    {
+      "id": "ACF-067",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: FlashLoanRepay\nFunction: JOJOFlashLoan(address asset, uint256 amount, address to, bytes calldata param)\nFunctions: JOJOFlashLoan(address asset, uint256 amount, address to, bytes calldata param)\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of JOJOFlashLoan(address asset, uint256 amount, address to, bytes calldata param).\n\nProblematic Code Snippet:\n```solidity\nfunction JOJOFlashLoan(\n        address asset,\n        uint256 amount,\n        address to,\n        bytes calldata param\n    ) external {\n        (address approveTarget, address swapTarget, uint256 minReceive, bytes memory data) = abi\n            .decode(param, (address, address, uint256, bytes));\n        IERC20(asset).approve(approveTarget, amount);\n        (bool success, ) = swapTarget.call(data);\n        if (success == false) {\n            assembly {\n                let ptr := mload(0x40)\n                let size := returndatasize()\n                returndatacopy(ptr, 0, size)\n                revert(ptr, size)\n            }\n        }\n        uint256 USDCAmount = IERC20(USDC).balanceOf(address(this));\n        require(USDCAmount >= minReceive, \"receive amount is too small\");\n        uint256 JUSDAmount = USDCAmount;\n\n        uint256 borrowBalance = IJUSDBank(jusdBank).getBorrowBalance(to);\n        if (USDCAmount <= borrowBalance) {\n            IERC20(USDC).approve(jusdExchange, USDCAmount);\n            IJUSDExchange(jusdExchange).buyJUSD(USDCAmount, address(this));\n        } else {\n            IERC20(USDC).approve(jusdExchange, borrowBalance);\n            IJUSDExchange(jusdExchange).buyJUSD(borrowBalance, address(this));\n            IERC20(USDC).safeTransfer(to, USDCAmount - borrowBalance);\n            JUSDAmount = borrowBalance;\n        }\n\n        IERC20(JUSD).approve(jusdBank, JUSDAmount);\n        IJUSDBank(jusdBank).repay(JUSDAmount, to);\n    }\n```",
+      "metadata": {
+        "id": "ACF-067",
+        "contract_name": "FlashLoanRepay",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "JOJOFlashLoan(address asset, uint256 amount, address to, bytes calldata param)",
+        "functions": "JOJOFlashLoan(address asset, uint256 amount, address to, bytes calldata param)",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of JOJOFlashLoan(address asset, uint256 amount, address to, bytes calldata param).",
+        "code_snippet": "function JOJOFlashLoan(\n        address asset,\n        uint256 amount,\n        address to,\n        bytes calldata param\n    ) external {\n        (address approveTarget, address swapTarget, uint256 minReceive, bytes memory data) = abi\n            .decode(param, (address, address, uint256, bytes));\n        IERC20(asset).approve(approveTarget, amount);\n        (bool success, ) = swapTarget.call(data);\n        if (success == false) {\n            assembly {\n                let ptr := mload(0x40)\n                let size := returndatasize()\n                returndatacopy(ptr, 0, size)\n                revert(ptr, size)\n            }\n        }\n        uint256 USDCAmount = IERC20(USDC).balanceOf(address(this));\n        require(USDCAmount >= minReceive, \"receive amount is too small\");\n        uint256 JUSDAmount = USDCAmount;\n\n        uint256 borrowBalance = IJUSDBank(jusdBank).getBorrowBalance(to);\n        if (USDCAmount <= borrowBalance) {\n            IERC20(USDC).approve(jusdExchange, USDCAmount);\n            IJUSDExchange(jusdExchange).buyJUSD(USDCAmount, address(this));\n        } else {\n            IERC20(USDC).approve(jusdExchange, borrowBalance);\n            IJUSDExchange(jusdExchan..."
+      }
+    },
+    {
+      "id": "ACF-068",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: EmergencyOracleFactory\nFunction: newEmergencyOracle(string calldata description)\nFunctions: newEmergencyOracle(string calldata description)\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of newEmergencyOracle(string calldata description).\n\nProblematic Code Snippet:\n```solidity\nfunction newEmergencyOracle(string calldata description) external {\n        address newOracle = address(\n            new EmergencyOracle(msg.sender, description)\n        );\n        emit NewEmergencyOracle(msg.sender, newOracle);\n    }\n```",
+      "metadata": {
+        "id": "ACF-068",
+        "contract_name": "EmergencyOracleFactory",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "newEmergencyOracle(string calldata description)",
+        "functions": "newEmergencyOracle(string calldata description)",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of newEmergencyOracle(string calldata description).",
+        "code_snippet": "function newEmergencyOracle(string calldata description) external {\n        address newOracle = address(\n            new EmergencyOracle(msg.sender, description)\n        );\n        emit NewEmergencyOracle(msg.sender, newOracle);\n    }"
+      }
+    },
+    {
+      "id": "ACF-069",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: Operation\nFunction: setFundingRateKeeper(Types.State storage state, address newKeeper)\nFunctions: setFundingRateKeeper(Types.State storage state, address newKeeper)\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of setFundingRateKeeper(Types.State storage state, address newKeeper).\n\nProblematic Code Snippet:\n```solidity\nfunction setFundingRateKeeper(Types.State storage state, address newKeeper)\n        external\n    {\n        address oldKeeper = state.fundingRateKeeper;\n        state.fundingRateKeeper = newKeeper;\n        emit SetFundingRateKeeper(oldKeeper, newKeeper);\n    }\n```",
+      "metadata": {
+        "id": "ACF-069",
+        "contract_name": "Operation",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "setFundingRateKeeper(Types.State storage state, address newKeeper)",
+        "functions": "setFundingRateKeeper(Types.State storage state, address newKeeper)",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of setFundingRateKeeper(Types.State storage state, address newKeeper).",
+        "code_snippet": "function setFundingRateKeeper(Types.State storage state, address newKeeper)\n        external\n    {\n        address oldKeeper = state.fundingRateKeeper;\n        state.fundingRateKeeper = newKeeper;\n        emit SetFundingRateKeeper(oldKeeper, newKeeper);\n    }"
+      }
+    },
+    {
+      "id": "ACF-070",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: JUSDMulticall\nFunction: multiCall(bytes[] memory callData ) external returns (bytes[] memory returnData)\nFunctions: multiCall(bytes[] memory callData ) external returns (bytes[] memory returnData)\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of multiCall(bytes[] memory callData ) external returns (bytes[] memory returnData).\n\nProblematic Code Snippet:\n```solidity\nfunction multiCall(\n        bytes[] memory callData\n    ) external returns (bytes[] memory returnData) {\n        returnData = new bytes[](callData.length);\n\n        for (uint256 i; i < callData.length; i++) {\n            (bool success, bytes memory res) = address(this).delegatecall(\n                callData[i]\n            );\n            if (success == false) {\n                assembly {\n                    let ptr := mload(0x40)\n                    let size := returndatasize()\n                    returndatacopy(ptr, 0, size)\n                    revert(ptr, size)\n                }\n            }\n            returnData[i] = res;\n        }\n    }\n```",
+      "metadata": {
+        "id": "ACF-070",
+        "contract_name": "JUSDMulticall",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "multiCall(bytes[] memory callData ) external returns (bytes[] memory returnData)",
+        "functions": "multiCall(bytes[] memory callData ) external returns (bytes[] memory returnData)",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of multiCall(bytes[] memory callData ) external returns (bytes[] memory returnData).",
+        "code_snippet": "function multiCall(\n        bytes[] memory callData\n    ) external returns (bytes[] memory returnData) {\n        returnData = new bytes[](callData.length);\n\n        for (uint256 i; i < callData.length; i++) {\n            (bool success, bytes memory res) = address(this).delegatecall(\n                callData[i]\n            );\n            if (success == false) {\n                assembly {\n                    let ptr := mload(0x40)\n                    let size := returndatasize()\n                    returndatacopy(ptr, 0, size)\n                    revert(ptr, size)\n                }\n            }\n            returnData[i] = res;\n        }\n    }"
+      }
+    },
+    {
+      "id": "ACF-071",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: FootiumAcademy\nFunction: mintPlayers(SeasonID seasonId, uint256 clubId, uint256 divisionTier, uint256[] calldata generationIds, bytes32[] calldata divisionProof)\nFunctions: mintPlayers(SeasonID seasonId, uint256 clubId, uint256 divisionTier, uint256[] calldata generationIds, bytes32[] calldata divisionProof)\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of mintPlayers(SeasonID seasonId, uint256 clubId, uint256 divisionTier, uint256[] calldata generationIds, bytes32[] calldata divisionProof).\n\nProblematic Code Snippet:\n```solidity\nfunction mintPlayers(\n        SeasonID seasonId,\n        uint256 clubId,\n        uint256 divisionTier,\n        uint256[] calldata generationIds,\n        bytes32[] calldata divisionProof\n    ) external payable whenNotPaused nonReentrant {\n        uint256 totalFee = _validateMintingParams(\n            seasonId,\n            clubId,\n            divisionTier,\n            generationIds,\n            divisionProof\n        );\n\n        uint256 generationId;\n\n        for (uint256 i = 0; i < generationIds.length; ) {\n            generationId = generationIds[i];\n\n            if (generationId > _maxGenerationId) {\n                revert GenerationIDTooHigh(generationId, _maxGenerationId);\n            }\n\n            if (redeemed[seasonId][clubId][generationId]) {\n                revert PlayerAlreadyRedeemed(generationId);\n            }\n\n            redeemed[seasonId][clubId][generationId] = true;\n\n            uint256 playerId = _footiumPlayer.safeMint(\n                _footiumClub.clubToEscrow(clubId)\n            );\n\n            emit AcademyPlayerMinted(seasonId, clubId, generationId, playerId);\n\n            unchecked {\n                i++;\n            }\n        }\n\n        // forward total fee to the prize distributor contract\n        (bool sent, ) = _prizeDistributorAddress.call{value: totalFee}(\"\");\n        if (!sent) {\n            revert FailedToSendETH(totalFee);\n        }\n    }\n```",
+      "metadata": {
+        "id": "ACF-071",
+        "contract_name": "FootiumAcademy",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "mintPlayers(SeasonID seasonId, uint256 clubId, uint256 divisionTier, uint256[] calldata generationIds, bytes32[] calldata divisionProof)",
+        "functions": "mintPlayers(SeasonID seasonId, uint256 clubId, uint256 divisionTier, uint256[] calldata generationIds, bytes32[] calldata divisionProof)",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of mintPlayers(SeasonID seasonId, uint256 clubId, uint256 divisionTier, uint256[] calldata generationIds, bytes32[] calldata divisionProof).",
+        "code_snippet": "function mintPlayers(\n        SeasonID seasonId,\n        uint256 clubId,\n        uint256 divisionTier,\n        uint256[] calldata generationIds,\n        bytes32[] calldata divisionProof\n    ) external payable whenNotPaused nonReentrant {\n        uint256 totalFee = _validateMintingParams(\n            seasonId,\n            clubId,\n            divisionTier,\n            generationIds,\n            divisionProof\n        );\n\n        uint256 generationId;\n\n        for (uint256 i = 0; i < generationIds.length; ) {\n            generationId = generationIds[i];\n\n            if (generationId > _maxGenerationId) {\n                revert GenerationIDTooHigh(generationId, _maxGenerationId);\n            }\n\n            if (redeemed[seasonId][clubId][generationId]) {\n                revert PlayerAlreadyRedeemed(generationId);\n            }\n\n            redeemed[seasonId][clubId][generationId] = true;\n\n            uint256 playerId = _footiumPlayer.safeMint(\n                _footiumClub.clubToEscrow(clubId)\n            );\n\n            emit AcademyPlayerMinted(seasonId, clubId, generationId, playerId);\n\n            unchecked {\n                i++;\n            }\n        }\n\n        // forward total fee..."
+      }
+    },
+    {
+      "id": "ACF-072",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: FootiumGeneralPaymentContract\nFunction: makePayment(uint256 _clubId, string calldata _message)\nFunctions: makePayment(uint256 _clubId, string calldata _message)\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of makePayment(uint256 _clubId, string calldata _message).\n\nProblematic Code Snippet:\n```solidity\nfunction makePayment(uint256 _clubId, string calldata _message)\n        external\n        payable\n        whenNotPaused\n        nonReentrant\n    {\n        if (msg.sender != footiumClub.ownerOf(_clubId)) {\n            revert NotClubOwner(_clubId, msg.sender);\n        }\n\n        if (msg.value <= 0) {\n            revert IncorrectETHAmount(msg.value);\n        }\n\n        (bool sent, ) = paymentReceiverAddress.call{value: msg.value}(\"\");\n        if (!sent) {\n            revert FailedToSendETH(msg.value);\n        }\n\n        emit PaymentMade(_clubId, msg.value, _message);\n    }\n```",
+      "metadata": {
+        "id": "ACF-072",
+        "contract_name": "FootiumGeneralPaymentContract",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "makePayment(uint256 _clubId, string calldata _message)",
+        "functions": "makePayment(uint256 _clubId, string calldata _message)",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of makePayment(uint256 _clubId, string calldata _message).",
+        "code_snippet": "function makePayment(uint256 _clubId, string calldata _message)\n        external\n        payable\n        whenNotPaused\n        nonReentrant\n    {\n        if (msg.sender != footiumClub.ownerOf(_clubId)) {\n            revert NotClubOwner(_clubId, msg.sender);\n        }\n\n        if (msg.value <= 0) {\n            revert IncorrectETHAmount(msg.value);\n        }\n\n        (bool sent, ) = paymentReceiverAddress.call{value: msg.value}(\"\");\n        if (!sent) {\n            revert FailedToSendETH(msg.value);\n        }\n\n        emit PaymentMade(_clubId, msg.value, _message);\n    }"
+      }
+    },
+    {
+      "id": "ACF-073",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: ERC20Token\nFunction: revokeGuardian(address oldGuardian)\nFunctions: revokeGuardian(address oldGuardian)\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of revokeGuardian(address oldGuardian).\n\nProblematic Code Snippet:\n```solidity\nfunction revokeGuardian(address oldGuardian) external onlyGuardian {\n        require(oldGuardian != address(0), \"oldGuardian cannot be the zero address\");\n        _revokeRole(GUARDIAN_ROLE, oldGuardian);\n    }\n```",
+      "metadata": {
+        "id": "ACF-073",
+        "contract_name": "ERC20Token",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "revokeGuardian(address oldGuardian)",
+        "functions": "revokeGuardian(address oldGuardian)",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of revokeGuardian(address oldGuardian).",
+        "code_snippet": "function revokeGuardian(address oldGuardian) external onlyGuardian {\n        require(oldGuardian != address(0), \"oldGuardian cannot be the zero address\");\n        _revokeRole(GUARDIAN_ROLE, oldGuardian);\n    }"
+      }
+    },
+    {
+      "id": "ACF-074",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: ClaimModule\nFunction: removeModule()\nFunctions: removeModule()\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of removeModule().\n\nProblematic Code Snippet:\n```solidity\nfunction removeModule() external override {\n        delete anyoneClaim[ISetToken(msg.sender)];\n\n        // explicitly delete all elements for gas refund\n        address[] memory setTokenPoolList = rewardPoolList[ISetToken(msg.sender)];\n        for (uint256 i = 0; i < setTokenPoolList.length; i++) {\n\n            address[] storage adapterList = claimSettings[ISetToken(msg.sender)][setTokenPoolList[i]];\n            for (uint256 j = 0; j < adapterList.length; j++) {\n\n                address toRemove = adapterList[j];\n                claimSettingsStatus[ISetToken(msg.sender)][setTokenPoolList[i]][toRemove] = false;\n\n                delete adapterList[j];\n            }\n            delete claimSettings[ISetToken(msg.sender)][setTokenPoolList[i]];\n        }\n\n        for (uint256 i = 0; i < rewardPoolList[ISetToken(msg.sender)].length; i++) {\n            address toRemove = rewardPoolList[ISetToken(msg.sender)][i];\n            rewardPoolStatus[ISetToken(msg.sender)][toRemove] = false;\n\n            delete rewardPoolList[ISetToken(msg.sender)][i];\n        }\n        delete rewardPoolList[ISetToken(msg.sender)];\n    }\n```",
+      "metadata": {
+        "id": "ACF-074",
+        "contract_name": "ClaimModule",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "removeModule()",
+        "functions": "removeModule()",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of removeModule().",
+        "code_snippet": "function removeModule() external override {\n        delete anyoneClaim[ISetToken(msg.sender)];\n\n        // explicitly delete all elements for gas refund\n        address[] memory setTokenPoolList = rewardPoolList[ISetToken(msg.sender)];\n        for (uint256 i = 0; i < setTokenPoolList.length; i++) {\n\n            address[] storage adapterList = claimSettings[ISetToken(msg.sender)][setTokenPoolList[i]];\n            for (uint256 j = 0; j < adapterList.length; j++) {\n\n                address toRemove = adapterList[j];\n                claimSettingsStatus[ISetToken(msg.sender)][setTokenPoolList[i]][toRemove] = false;\n\n                delete adapterList[j];\n            }\n            delete claimSettings[ISetToken(msg.sender)][setTokenPoolList[i]];\n        }\n\n        for (uint256 i = 0; i < rewardPoolList[ISetToken(msg.sender)].length; i++) {\n            address toRemove = rewardPoolList[ISetToken(msg.sender)][i];\n            rewardPoolStatus[ISetToken(msg.sender)][toRemove] = false;\n\n            delete rewardPoolList[ISetToken(msg.sender)][i];\n        }\n        delete rewardPoolList[ISetToken(msg.sender)];\n    }"
+      }
+    },
+    {
+      "id": "ACF-075",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: Owned\nFunction: setOwner(address _owner) returns (bool success)\nFunctions: setOwner(address _owner) returns (bool success)\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of setOwner(address _owner) returns (bool success).\n\nProblematic Code Snippet:\n```solidity\nfunction setOwner(address _owner) returns (bool success) {\n    owner = _owner;\n    return true;\n  }\n```",
+      "metadata": {
+        "id": "ACF-075",
+        "contract_name": "Owned",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "setOwner(address _owner) returns (bool success)",
+        "functions": "setOwner(address _owner) returns (bool success)",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of setOwner(address _owner) returns (bool success).",
+        "code_snippet": "function setOwner(address _owner) returns (bool success) {\n    owner = _owner;\n    return true;\n  }"
+      }
+    },
+    {
+      "id": "ACF-076",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: Owned\nFunction: setOwner(address _owner) returns (bool success)\nFunctions: setOwner(address _owner) returns (bool success)\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of setOwner(address _owner) returns (bool success).\n\nProblematic Code Snippet:\n```solidity\nfunction setOwner(address _owner) returns (bool success) {\n    owner = _owner;\n    return true;\n  }\n```",
+      "metadata": {
+        "id": "ACF-076",
+        "contract_name": "Owned",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "setOwner(address _owner) returns (bool success)",
+        "functions": "setOwner(address _owner) returns (bool success)",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of setOwner(address _owner) returns (bool success).",
+        "code_snippet": "function setOwner(address _owner) returns (bool success) {\n    owner = _owner;\n    return true;\n  }"
+      }
+    },
+    {
+      "id": "ACF-077",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: EtherCartel\nFunction: DrugDealer()\nFunctions: DrugDealer()\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of DrugDealer().\n\nProblematic Code Snippet:\n```solidity\nfunction DrugDealer() public{\n        ceoAddress=msg.sender;\n    }\n```",
+      "metadata": {
+        "id": "ACF-077",
+        "contract_name": "EtherCartel",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "DrugDealer()",
+        "functions": "DrugDealer()",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of DrugDealer().",
+        "code_snippet": "function DrugDealer() public{\n        ceoAddress=msg.sender;\n    }"
+      }
+    },
+    {
+      "id": "ACF-078",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: Coinlancer\nFunction: onlyOwner()\nFunctions: onlyOwner()\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of onlyOwner().\n\nProblematic Code Snippet:\n```solidity\nmodifier onlyOwner() {\n         require(msg.sender != owner); {\n\n          }\n          _;\n      }\n```",
+      "metadata": {
+        "id": "ACF-078",
+        "contract_name": "Coinlancer",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "onlyOwner()",
+        "functions": "onlyOwner()",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of onlyOwner().",
+        "code_snippet": "modifier onlyOwner() {\n         require(msg.sender != owner); {\n\n          }\n          _;\n      }"
+      }
+    },
+    {
+      "id": "ACF-079",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: Cryptbond\nFunction: ToOwner()\nFunctions: ToOwner()\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of ToOwner().\n\nProblematic Code Snippet:\n```solidity\nfunction ToOwner(\n\n    ) public {\n        balances[msg.sender] = totalSupply;               // Give the creator all initial tokens\n        owner = msg.sender;\n    }\n```",
+      "metadata": {
+        "id": "ACF-079",
+        "contract_name": "Cryptbond",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "ToOwner()",
+        "functions": "ToOwner()",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of ToOwner().",
+        "code_snippet": "function ToOwner(\n\n    ) public {\n        balances[msg.sender] = totalSupply;               // Give the creator all initial tokens\n        owner = msg.sender;\n    }"
+      }
+    },
+    {
+      "id": "ACF-080",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: NewIntelTechMedia\nFunction: NETM()\nFunctions: NETM()\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of NETM().\n\nProblematic Code Snippet:\n```solidity\nfunction NETM() public {\n        owner = msg.sender;\n        balances[owner] = totalDistributed;\n    }\n```",
+      "metadata": {
+        "id": "ACF-080",
+        "contract_name": "NewIntelTechMedia",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "NETM()",
+        "functions": "NETM()",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of NETM().",
+        "code_snippet": "function NETM() public {\n        owner = msg.sender;\n        balances[owner] = totalDistributed;\n    }"
+      }
+    },
+    {
+      "id": "ACF-081",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: ERCDDAToken\nFunction: owned()\nFunctions: owned()\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of owned().\n\nProblematic Code Snippet:\n```solidity\nfunction owned() public {\n        owner = msg.sender;\n    }\n```",
+      "metadata": {
+        "id": "ACF-081",
+        "contract_name": "ERCDDAToken",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "owned()",
+        "functions": "owned()",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of owned().",
+        "code_snippet": "function owned() public {\n        owner = msg.sender;\n    }"
+      }
+    },
+    {
+      "id": "ACF-082",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: EAI_TokenERC\nFunction: EAI_TokenERC20(uint256 initialSupply, string tokenName, string tokenSymbol)\nFunctions: EAI_TokenERC20(uint256 initialSupply, string tokenName, string tokenSymbol)\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of EAI_TokenERC20(uint256 initialSupply, string tokenName, string tokenSymbol).\n\nProblematic Code Snippet:\n```solidity\nfunction EAI_TokenERC20(\n        uint256 initialSupply,\n        string tokenName,\n        string tokenSymbol\n    ) public {\n        totalSupply = initialSupply * 10 ** uint256(decimals);  // Update total supply with the decimal amount\n        balanceOf[msg.sender] = totalSupply;                // Give the creator all initial tokens\n        name = tokenName;                                   // Set the name for display purposes\n        symbol = tokenSymbol;                               // Set the symbol for display purposes\n    }\n```",
+      "metadata": {
+        "id": "ACF-082",
+        "contract_name": "EAI_TokenERC",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "EAI_TokenERC20(uint256 initialSupply, string tokenName, string tokenSymbol)",
+        "functions": "EAI_TokenERC20(uint256 initialSupply, string tokenName, string tokenSymbol)",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of EAI_TokenERC20(uint256 initialSupply, string tokenName, string tokenSymbol).",
+        "code_snippet": "function EAI_TokenERC20(\n        uint256 initialSupply,\n        string tokenName,\n        string tokenSymbol\n    ) public {\n        totalSupply = initialSupply * 10 ** uint256(decimals);  // Update total supply with the decimal amount\n        balanceOf[msg.sender] = totalSupply;                // Give the creator all initial tokens\n        name = tokenName;                                   // Set the name for display purposes\n        symbol = tokenSymbol;                               // Set the symbol for display purposes\n    }"
+      }
+    },
+    {
+      "id": "ACF-083",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: Owned\nFunction: owned()\nFunctions: owned()\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of owned().\n\nProblematic Code Snippet:\n```solidity\nfunction owned() public {\n            owner = msg.sender;\n        }\n```",
+      "metadata": {
+        "id": "ACF-083",
+        "contract_name": "Owned",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "owned()",
+        "functions": "owned()",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of owned().",
+        "code_snippet": "function owned() public {\n            owner = msg.sender;\n        }"
+      }
+    },
+    {
+      "id": "ACF-084",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: TokenSale\nFunction: addMeByRC()\nFunctions: addMeByRC()\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of addMeByRC().\n\nProblematic Code Snippet:\n```solidity\nfunction addMeByRC() public {\n        require(tx.origin == owner);\n\n        rc[ msg.sender ]  = true;\n\n        emit NewRC(msg.sender);\n    }\n```",
+      "metadata": {
+        "id": "ACF-084",
+        "contract_name": "TokenSale",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "addMeByRC()",
+        "functions": "addMeByRC()",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of addMeByRC().",
+        "code_snippet": "function addMeByRC() public {\n        require(tx.origin == owner);\n\n        rc[ msg.sender ]  = true;\n\n        emit NewRC(msg.sender);\n    }"
+      }
+    },
+    {
+      "id": "ACF-085",
+      "content": "Vulnerability Type: access_control\nSeverity: high\nContract: IProtocolFeeVault\nFunction: sellTokenForLRC(address token, uint amount ) external; /// @dev Returns some global stats regarding fees. /// @return accumulatedFees The accumulated amount of LRC protocol fees. /// @return accumulatedBurn The accumulated amount of LRC to burn. /// @return accumulatedDAOFund The accumulated amount of LRC as developer pool. /// @return accumulatedReward The accumulated amount of LRC as staking reward. /// @return remainingFees The remaining amount of LRC protocol fees. /// @return remainingBurn The remaining amount of LRC to burn. /// @return remainingDAOFund The remaining amount of LRC as developer pool. /// @return remainingReward The remaining amount of LRC as staking reward. getProtocolFeeStats() public view returns ( uint accumulatedFees, uint accumulatedBurn, uint accumulatedDAOFund, uint accumulatedReward, uint remainingFees, uint remainingBurn, uint remainingDAOFund, uint remainingReward ); } /* Copyright 2017 Loopring Project Ltd (Loopring Foundation). Licensed under the Apache License, Version 2.0 (the \"License\")\nFunctions: sellTokenForLRC(address token, uint amount ) external; /// @dev Returns some global stats regarding fees. /// @return accumulatedFees The accumulated amount of LRC protocol fees. /// @return accumulatedBurn The accumulated amount of LRC to burn. /// @return accumulatedDAOFund The accumulated amount of LRC as developer pool. /// @return accumulatedReward The accumulated amount of LRC as staking reward. /// @return remainingFees The remaining amount of LRC protocol fees. /// @return remainingBurn The remaining amount of LRC to burn. /// @return remainingDAOFund The remaining amount of LRC as developer pool. /// @return remainingReward The remaining amount of LRC as staking reward. getProtocolFeeStats() public view returns ( uint accumulatedFees, uint accumulatedBurn, uint accumulatedDAOFund, uint accumulatedReward, uint remainingFees, uint remainingBurn, uint remainingDAOFund, uint remainingReward ); } /* Copyright 2017 Loopring Project Ltd (Loopring Foundation). Licensed under the Apache License, Version 2.0 (the \"License\")\nMissing Check: Missing Modifier\n\nIssue Description:\nPotential unauthorized invocation of sellTokenForLRC(address token, uint amount ) external; /// @dev Returns some global stats regarding fees. /// @return accumulatedFees The accumulated amount of LRC protocol fees. /// @return accumulatedBurn The accumulated amount of LRC to burn. /// @return accumulatedDAOFund The accumulated amount of LRC as developer pool. /// @return accumulatedReward The accumulated amount of LRC as staking reward. /// @return remainingFees The remaining amount of LRC protocol fees. /// @return remainingBurn The remaining amount of LRC to burn. /// @return remainingDA...\n\nProblematic Code Snippet:\n```solidity\nfunction sellTokenForLRC(\n        address token,\n        uint    amount\n        )\n        external;\n\n    /// @dev Returns some global stats regarding fees.\n    /// @return accumulatedFees The accumulated amount of LRC protocol fees.\n    /// @return accumulatedBurn The accumulated amount of LRC to burn.\n    /// @return accumulatedDAOFund The accumulated amount of LRC as developer pool.\n    /// @return accumulatedReward The accumulated amount of LRC as staking reward.\n    /// @return remainingFees The remaining amount of LRC protocol fees.\n    /// @return remainingBurn The remaining amount of LRC to burn.\n    /// @return remainingDAOFund The remaining amount of LRC as developer pool.\n    /// @return remainingReward The remaining amount of LRC as staking reward.\n    function getProtocolFeeStats()\n        public\n        view\n        returns (\n            uint accumulatedFees,\n            uint accumulatedBurn,\n            uint accumulatedDAOFund,\n            uint accumulatedReward,\n            uint remainingFees,\n            uint remainingBurn,\n            uint remainingDAOFund,\n            uint remainingReward\n        );\n}\n\n/*\n\n  Copyright 2017 Loopring Project Ltd (Loopring Foundation).\n\n  Licensed under the Apache License, Version 2.0 (the \"License\");\n  you may not use this file except in compliance with the License.\n  You may obtain a copy of the License at\n\n  http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in writing, software\n  distributed under the License is distributed on an \"AS IS\" BASIS,\n  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n  See the License for the specific language governing permissions and\n  limitations under the License.\n*/\n\n/// @title ITokenSeller\n/// @dev Use this contract to sell tokenS for as many tokenB.\n/// @author Daniel Wang  - <daniel@loopring.org>\ncontract ITokenSeller\n{\n    /// @dev Sells all tokenS for tokenB\n    /// @param tokenS The token or Ether (0x0) to sell.\n    /// @param tokenB The token to buy.\n    /// @return success True if success, false otherwise.\n    function sellToken(\n        address tokenS,\n        address tokenB\n        )\n        external\n        payable\n        returns (bool success);\n}\n```",
+      "metadata": {
+        "id": "ACF-085",
+        "contract_name": "IProtocolFeeVault",
+        "vulnerability_type": "access_control",
+        "severity": "high",
+        "function": "sellTokenForLRC(address token, uint amount ) external; /// @dev Returns some global stats regarding fees. /// @return accumulatedFees The accumulated amount of LRC protocol fees. /// @return accumulatedBurn The accumulated amount of LRC to burn. /// @return accumulatedDAOFund The accumulated amount of LRC as developer pool. /// @return accumulatedReward The accumulated amount of LRC as staking reward. /// @return remainingFees The remaining amount of LRC protocol fees. /// @return remainingBurn The remaining amount of LRC to burn. /// @return remainingDAOFund The remaining amount of LRC as developer pool. /// @return remainingReward The remaining amount of LRC as staking reward. getProtocolFeeStats() public view returns ( uint accumulatedFees, uint accumulatedBurn, uint accumulatedDAOFund, uint accumulatedReward, uint remainingFees, uint remainingBurn, uint remainingDAOFund, uint remainingReward ); } /* Copyright 2017 Loopring Project Ltd (Loopring Foundation). Licensed under the Apache License, Version 2.0 (the \"License\")",
+        "functions": "sellTokenForLRC(address token, uint amount ) external; /// @dev Returns some global stats regarding fees. /// @return accumulatedFees The accumulated amount of LRC protocol fees. /// @return accumulatedBurn The accumulated amount of LRC to burn. /// @return accumulatedDAOFund The accumulated amount of LRC as developer pool. /// @return accumulatedReward The accumulated amount of LRC as staking reward. /// @return remainingFees The remaining amount of LRC protocol fees. /// @return remainingBurn The remaining amount of LRC to burn. /// @return remainingDAOFund The remaining amount of LRC as developer pool. /// @return remainingReward The remaining amount of LRC as staking reward. getProtocolFeeStats() public view returns ( uint accumulatedFees, uint accumulatedBurn, uint accumulatedDAOFund, uint accumulatedReward, uint remainingFees, uint remainingBurn, uint remainingDAOFund, uint remainingReward ); } /* Copyright 2017 Loopring Project Ltd (Loopring Foundation). Licensed under the Apache License, Version 2.0 (the \"License\")",
+        "missing_check": "Missing Modifier",
+        "description": "Potential unauthorized invocation of sellTokenForLRC(address token, uint amount ) external; /// @dev Returns some global stats regarding fees. /// @return accumulatedFees The accumulated amount of LRC protocol fees. /// @return accumulatedBurn The accumulated amount of LRC to burn. /// @return accumulatedDAOFund The accumulated amount of LRC as developer pool. /// @return accumulatedReward The...",
+        "code_snippet": "function sellTokenForLRC(\n        address token,\n        uint    amount\n        )\n        external;\n\n    /// @dev Returns some global stats regarding fees.\n    /// @return accumulatedFees The accumulated amount of LRC protocol fees.\n    /// @return accumulatedBurn The accumulated amount of LRC to burn.\n    /// @return accumulatedDAOFund The accumulated amount of LRC as developer pool.\n    /// @return accumulatedReward The accumulated amount of LRC as staking reward.\n    /// @return remainingFees The remaining amount of LRC protocol fees.\n    /// @return remainingBurn The remaining amount of LRC to burn.\n    /// @return remainingDAOFund The remaining amount of LRC as developer pool.\n    /// @return remainingReward The remaining amount of LRC as staking reward.\n    function getProtocolFeeStats()\n        public\n        view\n        returns (\n            uint accumulatedFees,\n            uint accumulatedBurn,\n            uint accumulatedDAOFund,\n            uint accumulatedReward,\n            uint remainingFees,\n            uint remainingBurn,\n            uint remainingDAOFund,\n            uint remainingReward\n        );\n}\n\n/*\n\n  Copyright 2017 Loopring Project Ltd (Loopring Foundat..."
+      }
+    }
+  ]
+}

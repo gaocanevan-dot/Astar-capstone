@@ -1,0 +1,105 @@
+{
+  "summary": {
+    "n": 6,
+    "diverge_count": 3,
+    "decision": "JUSTIFIED",
+    "cost_usd": 0.0825,
+    "wall_clock_s": 33979.3,
+    "total_tokens_prompt": 87580,
+    "total_tokens_completion": 30293
+  },
+  "results": [
+    {
+      "case_id": "ACF-102",
+      "contract_name": "Bad_Guys_by_RPF",
+      "ground_truth_function": "WhiteListMint",
+      "single_shot_pred": "",
+      "sc3_top1": "transferFrom",
+      "sc3_candidates": [
+        "transferFrom",
+        "approve",
+        "setApprovalForAll"
+      ],
+      "diverged": true,
+      "tokens_prompt": 14281,
+      "tokens_completion": 1236,
+      "llm_calls": 3
+    },
+    {
+      "case_id": "ACF-091",
+      "contract_name": "ReaperVaultV2",
+      "ground_truth_function": "_withdraw",
+      "single_shot_pred": "inCaseTokensGetStuck",
+      "sc3_top1": "inCaseTokensGetStuck",
+      "sc3_candidates": [
+        "inCaseTokensGetStuck",
+        "updateWithdrawalQueue",
+        "updateTvlCap"
+      ],
+      "diverged": false,
+      "tokens_prompt": 14094,
+      "tokens_completion": 4945,
+      "llm_calls": 3
+    },
+    {
+      "case_id": "ACF-106",
+      "contract_name": "XNFT",
+      "ground_truth_function": "pledgeAndBorrow",
+      "single_shot_pred": "setPendingAdmin",
+      "sc3_top1": "airDrop",
+      "sc3_candidates": [
+        "airDrop",
+        "initialize",
+        "notifyRepayBorrow"
+      ],
+      "diverged": true,
+      "tokens_prompt": 14253,
+      "tokens_completion": 6408,
+      "llm_calls": 3
+    },
+    {
+      "case_id": "ACF-093",
+      "contract_name": "GymSinglePool",
+      "ground_truth_function": "depositFromOtherContract",
+      "single_shot_pred": "depositFromOtherContract",
+      "sc3_top1": "depositFromOtherContract",
+      "sc3_candidates": [
+        "depositFromOtherContract",
+        "_autoDeposit",
+        "initialize"
+      ],
+      "diverged": false,
+      "tokens_prompt": 14469,
+      "tokens_completion": 6646,
+      "llm_calls": 3
+    },
+    {
+      "case_id": "ACF-114",
+      "contract_name": "0x30410fab6d367e11839c00ad93eb357e3066ada8_1",
+      "ground_truth_function": "OnlyOwner",
+      "single_shot_pred": "ForceBet",
+      "sc3_top1": "OwnerWithdraw",
+      "sc3_candidates": [
+        "OwnerWithdraw",
+        "ForceBet",
+        "BuyContract"
+      ],
+      "diverged": true,
+      "tokens_prompt": 16077,
+      "tokens_completion": 8486,
+      "llm_calls": 3
+    },
+    {
+      "case_id": "ACF-103",
+      "contract_name": "ANCHToken",
+      "ground_truth_function": "_transfer",
+      "single_shot_pred": "",
+      "sc3_top1": "",
+      "sc3_candidates": [],
+      "diverged": false,
+      "tokens_prompt": 14406,
+      "tokens_completion": 2572,
+      "llm_calls": 3
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "model": "gpt-5-mini",
+  "prompt_rate_per_1k": 0.00025,
+  "completion_rate_per_1k": 0.002,
+  "sample_size": 3,
+  "wall_clock_s": 259.4840302467346,
+  "sample_records": [
+    {
+      "arm": "agent-full",
+      "case_id": "ACF-092",
+      "verdict": "pass",
+      "tokens_prompt": 15138,
+      "tokens_completion": 3867,
+      "wall_clock_s": 3.81,
+      "cascade_depth": 1,
+      "reflection_calls": 0
+    },
+    {
+      "arm": "agent-full",
+      "case_id": "ACF-102",
+      "verdict": "skipped",
+      "tokens_prompt": 10150,
+      "tokens_completion": 1303,
+      "wall_clock_s": 0.0,
+      "cascade_depth": 0,
+      "reflection_calls": 0
+    },
+    {
+      "arm": "agent-full",
+      "case_id": "ACF-091",
+      "verdict": "abstain",
+      "tokens_prompt": 24061,
+      "tokens_completion": 10508,
+      "wall_clock_s": 3.75,
+      "cascade_depth": 1,
+      "reflection_calls": 0
+    }
+  ],
+  "projection": {
+    "avg_prompt_per_case": 16449.666666666668,
+    "avg_completion_per_case": 5226.0,
+    "projected_prompt_total": 657986.6666666667,
+    "projected_completion_total": 209040.0,
+    "projected_usd": 0.5826
+  },
+  "max_usd_cost": 5.0,
+  "arms": [
+    "agent-full",
+    "no-cascade",
+    "no-reflection",
+    "no-rag"
+  ],
+  "full_sweep_runs": 40
+}

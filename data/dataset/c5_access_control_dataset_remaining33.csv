@@ -1,0 +1,435 @@
+﻿incident_id,project_name,year,source,priority_type,reference,issue_category,issue_subtype,root_cause,impact,affected_contracts,contract_name,attack_surface,start_line,end_line,vulnerable_code
+ACF-086,HPAY,2022,DeFi Hack Labs,High,https://wooded-meter-1d8.notion.site/0e85e02c5ed34df3855ea9f3ca40f53b?v=22e5e2c506ef4caeb40b4f78e23517ee&p=d4489312830a40819dbfc3ec1fb4246c&pm=s,Access Control,Missing Modifier,Due to _addre is controllable. Attacker can call setToken() to set fake token created by self. 1.setToken to faketoken 2.Deposit faketoken 3.setToken to HPAY 3.withdraw.  over,Potential unauthorized invocation of setToken(address _addr) public.,,defi_hack_1,setToken(address _addr) public,1,5,"function setToken(address _addr) public {
+    //vulnerable point**
+        configuration.stakingToken = ERC20(_addr);
+        configuration.rewardsToken = ERC20(_addr);
+    }"
+ACF-087,Uerii,2022,DeFi Hack Labs,High,https://wooded-meter-1d8.notion.site/0e85e02c5ed34df3855ea9f3ca40f53b?v=22e5e2c506ef4caeb40b4f78e23517ee&p=006421dce8be4f35a7e869e276d0e6c1&pm=s,Access Control,Missing Modifier,"The privileged entry point mint() public returns (bool) lacks proper authorization validation, allowing unauthorized callers to reach sensitive logic.",Potential unauthorized invocation of mint() public returns (bool).,,Token,mint() public returns (bool),493,496,"    function mint() public returns (bool) {
+        _mint( msg.sender, 100000000000000000 );
+        return true;
+    }"
+ACF-088,Templedao,2022,DeFi Hack Labs,High,https://wooded-meter-1d8.notion.site/0e85e02c5ed34df3855ea9f3ca40f53b?v=22e5e2c506ef4caeb40b4f78e23517ee&p=268b5c5612bd4b1dadaa5acb16bc6c06&pm=s,Access Control,Missing Modifier,insufficient access control to the migrateStake function.,"Potential unauthorized invocation of migrateStake(address oldStaking, uint256 amount) external.",,StaxLPStaking,"migrateStake(address oldStaking, uint256 amount) external",241,244,"    function migrateStake(address oldStaking, uint256 amount) external {
+        StaxLPStaking(oldStaking).migrateWithdraw(msg.sender, amount);
+        _applyStake(msg.sender, amount);
+    }"
+ACF-089,MevBot private tx,2022,DeFi Hack Labs,High,https://wooded-meter-1d8.notion.site/0e85e02c5ed34df3855ea9f3ca40f53b?v=22e5e2c506ef4caeb40b4f78e23517ee&p=7454c604ef544cf1bf933b7da7979c51&pm=s,Access Control,Missing Modifier,"1) Decompile contract https://bscscan.com/address/0x64dd59d6c7f09dc05b472ce5cb961b6e10106e1d We can see a public function called pancakeCall, which means anyone can call this function.2)Check pancakeCall code logic Once pass all required check then perform 0x10a(v0, varg2, varg1); 3) Track into 0x10a(), we can see transfer funds to addree ""MEM[varg0.data+32]"". Since variable ""[http://varg0.data](https://t.co/KT6EufOI6Z)"" attacker can control over calldata in pancakeCall. So that's why an attacker can drain out the funds from the MEV contract.","Potential unauthorized invocation of pancakeCall(address varg0, uint256 varg1, uint256 varg2, bytes varg3) public Payable.",,defi_hack_4,"pancakeCall(address varg0, uint256 varg1, uint256 varg2, bytes varg3) public Payable",1,12,"function pancakeCall(address varg0, uint256 varg1, uint256 varg2, bytes varg3) public Payable {
+    require(msg.data.length - 4 >= 128);
+    require(varg0 == vargo);
+
+    require(varg3 <= 0xffffffffffffffff);
+    require(4 + varg3 + 31 < msg.data.length);
+    require(varg3.length <= @xffffffffffffffff):
+    require(4 + varg3 + varg3.length + 32 <= msg.data. length);
+    vo = new bytes [l(varg3.length);
+    CALLDATACOPY(vO.data,36 + varg3， varg3. length) ;vo[varg3.lenathl = 0:
+    0x10a(vo, varg2, varg1);
+}"
+ACF-090,ShadowFi,2022,DeFi Hack Labs,High,https://wooded-meter-1d8.notion.site/0e85e02c5ed34df3855ea9f3ca40f53b?v=22e5e2c506ef4caeb40b4f78e23517ee&p=35b99513c187402a9aaa74e0baa317a2&pm=s,Access Control,Missing Modifier,"Due to the public access of burn() method, an attacker burned 10.3M SDF in the pair and then sync'd the price. Then they swap 8.4 SDF for 1078 BNB (~$298.2K) and transfer to tornato","Potential unauthorized invocation of burn(address account, uint256 _amount) public.",,defi_hack_5,"burn(address account, uint256 _amount) public",1,5,"function burn(address account, uint256 _amount) public { //vulnerable point
+        _transferFrom(account, DEAD, _amount);
+
+        emit burnTokens(account, _amount);
+    }"
+ACF-091,Reaper Farm,2022,DeFi Hack Labs,High,https://wooded-meter-1d8.notion.site/0e85e02c5ed34df3855ea9f3ca40f53b?v=22e5e2c506ef4caeb40b4f78e23517ee&p=e32c7033b86d42749cc6ad80f27daeaa&pm=s,Access Control,Missing Modifier,"without proper access control, allowing anyone to withdraw anyone else’s funds.","Potential unauthorized invocation of _withdraw(uint256 assets, uint256 shares, address receiver, address owner) internal returns (uint256).",,ReaperVaultV2,"_withdraw(uint256 assets, uint256 shares, address receiver, address owner) internal returns (uint256)",323,369,"    function _withdraw(uint256 assets, uint256 shares, address receiver, address owner) internal returns (uint256) {
+        _burn(owner, shares);
+
+        if (assets > IERC20Metadata(asset).balanceOf(address(this))) {
+            uint256 totalLoss = 0;
+            uint256 queueLength = withdrawalQueue.length;
+            uint256 vaultBalance = 0;
+
+            for (uint256 i = 0; i < queueLength; i = _uncheckedInc(i)) {
+                vaultBalance = IERC20Metadata(asset).balanceOf(address(this));
+                if (assets <= vaultBalance) {
+                    break;
+                }
+
+                address stratAddr = withdrawalQueue[i];
+                uint256 strategyBal = strategies[stratAddr].allocated;
+                if (strategyBal == 0) {
+                    continue;
+                }
+
+                uint256 remaining = assets - vaultBalance;
+                uint256 loss = IStrategy(stratAddr).withdraw(Math.min(remaining, strategyBal));
+                uint256 actualWithdrawn = IERC20Metadata(asset).balanceOf(address(this)) - vaultBalance;
+
+                // Withdrawer incurs any losses from withdrawing as reported by strat
+                if (loss != 0) {
+                    assets -= loss;
+                    totalLoss += loss;
+                    _reportLoss(stratAddr, loss);
+                }
+
+                strategies[stratAddr].allocated -= actualWithdrawn;
+                totalAllocated -= actualWithdrawn;
+            }
+
+            vaultBalance = IERC20Metadata(asset).balanceOf(address(this));
+            if (assets > vaultBalance) {
+                assets = vaultBalance;
+            }
+
+            require(totalLoss <= ((assets + totalLoss) * withdrawMaxLoss) / PERCENT_DIVISOR, ""Cannot exceed the maximum allowed withdraw slippage"");
+        }
+
+        IERC20Metadata(asset).safeTransfer(receiver, assets);
+        emit Withdraw(msg.sender, receiver, owner, assets, shares);
+        return assets;
+    }"
+ACF-092,SpaceGodzilla,2022,DeFi Hack Labs,High,https://wooded-meter-1d8.notion.site/0e85e02c5ed34df3855ea9f3ca40f53b?v=22e5e2c506ef4caeb40b4f78e23517ee&p=1c6f8927668d481daa6b25fb1bc1317d&pm=s,Access Control,Missing Modifier,"The privileged entry point swapAndLiquifyStepv1() public lacks proper authorization validation, allowing unauthorized callers to reach sensitive logic.",Potential unauthorized invocation of swapAndLiquifyStepv1() public.,,SpaceGodzilla,swapAndLiquifyStepv1() public,1233,1237,"    function swapAndLiquifyStepv1() public {
+        uint256 ethBalance = ETH.balanceOf(address(this));
+        uint256 tokenBalance = balanceOf(address(this));
+        addLiquidityUsdt(tokenBalance, ethBalance);
+    }"
+ACF-093,GYMNetwork,2022,DeFi Hack Labs,High,https://wooded-meter-1d8.notion.site/0e85e02c5ed34df3855ea9f3ca40f53b?v=22e5e2c506ef4caeb40b4f78e23517ee&p=579d6806099e4304aa761ade1d1c7eac&pm=s,Access Control,Missing Modifier,"The privileged entry point depositFromOtherContract( uint256 _depositAmount, uint8 _periodId, bool isUnlocked, address _from ) external lacks proper authorization validation, allowing unauthorized callers to reach sensitive logic.","Potential unauthorized invocation of depositFromOtherContract( uint256 _depositAmount, uint8 _periodId, bool isUnlocked, address _from ) external.",,GymSinglePool,"depositFromOtherContract( uint256 _depositAmount, uint8 _periodId, bool isUnlocked, address _from ) external",286,294,"    function depositFromOtherContract(
+        uint256 _depositAmount,
+        uint8 _periodId,
+        bool isUnlocked,
+        address _from
+    ) external  {
+        require(isPoolActive,'Contract is not running yet');
+        _autoDeposit(_depositAmount,_periodId,isUnlocked,_from);
+    }"
+ACF-094,DAO Maker,2021,DeFi Hack Labs,High,https://wooded-meter-1d8.notion.site/0e85e02c5ed34df3855ea9f3ca40f53b?v=22e5e2c506ef4caeb40b4f78e23517ee&p=f8caada455094e60a894f773bae35090&pm=s,Access Control,Missing Modifier,"The privileged entry point emergencyExit(address varg0) public payable lacks proper authorization validation, allowing unauthorized callers to reach sensitive logic.",Potential unauthorized invocation of emergencyExit(address varg0) public payable.,,defi_hack_11,emergencyExit(address varg0) public payable,1,56,"function emergencyExit(address varg0) public payable {  //vulnerable point
+    require(msg.data.length - 4 >= 32);
+    require(msg.sender == _owner, 'Ownable: caller is not the owner');
+    require((address(_hasInitialized >> 8)).code.size);
+    v0, v1 = address(_hasInitialized >> 8).balanceOf(address(this)).gas(msg.gas);
+    require(v0); // checks call status, propagates error data on error
+    require(RETURNDATASIZE() >= 32);
+    MEM[MEM[64]] = 68;
+    if (this.balance >= 0) {
+        if ((address(_hasInitialized >> 8)).code.size) {
+            v2 = v3 = MEM[64];
+            v4 = v5 = MEM[MEM[64]];
+            v6 = v7 = 32 + MEM[64];
+            while (v4 >= 32) {
+                MEM[v2] = MEM[v6];
+                v4 = v4 + ~31;
+                v2 += 32;
+                v6 += 32;
+            }
+            MEM[v2] = MEM[v6] & ~(256 ** (32 - v4) - 1) | MEM[v2] & 256 ** (32 - v4) - 1;
+            v8, v9, v10, v11 = address(_hasInitialized >> 8).transfer(varg0, v1).gas(msg.gas);
+            if (RETURNDATASIZE() == 0) {
+                v12 = v13 = 96;
+            } else {
+                v12 = v14 = new bytes[](RETURNDATASIZE());
+                RETURNDATACOPY(v14.data, 0, RETURNDATASIZE());
+            }
+            if (!v8) {
+                require(!MEM[v12], v11, MEM[v12]);
+                v15 = new array[](v16.length);
+                v17 = v18 = 0;
+                while (v17 < v16.length) {
+                    MEM[v17 + v15.data] = MEM[v17 + v16.data];
+                    v17 += 32;
+                }
+                v19 = v20 = v16.length + v15.data;
+                if (0) {
+                    MEM[v20 - 0] = ~0x0 & MEM[v20 - 0];
+                }
+                revert(v15, v21, 'SafeERC20: low-level call failed');
+            } else {
+                if (MEM[v12]) {
+                    require(MEM[v12] >= 32);
+                    require(MEM[32 + v12], 'SafeERC20: ERC20 operation did not succeed');
+                }
+                exit;
+            }
+        } else {
+            MEM[MEM[64] + 4] = 32;
+            revert('Address: call to non-contract');
+        }
+    } else {
+        MEM[4 + MEM[64]] = 32;
+        revert('Address: insufficient balance for call');
+    }
+}"
+ACF-095,CVE-2021-3006,2021,CVE,High,https://nvd.nist.gov/vuln/detail/CVE-2021-3006,Access Control,Missing Modifier,"The breed function in the smart contract implementation for Farm in Seal Finance (Seal), an Ethereum token, lacks access control and thus allows price manipulation, as exploited in the wild in December 2020 and January 2021.",Potential unauthorized invocation of breed() external.,,Seal,breed() external,1,15,"function breed() external {
+    require(now /1 days > today);
+    today += 1;
+    uint256 sealPairAmount = sealbalance0f(address(cSeal));
+    uint256 tokenPairAmount = token.balanceof(address(cSeal));
+    uint256 newSeal = sealPairAmount.mul(spawnRate).div(1e18);
+    uint256 amount = UniswapV2Library,getAmountOut(newSeal, seaPairAmount, tokenPairAmount);
+    seal.mint(address(cSeal), newSeal);
+    if(address(seal) < address(token))
+        cSeal.swap(0, amount, address(this),"""");
+    else
+    cSeal.swap(amount, 0, address(this), """");
+    token.transfer(address(cSeal), amount);seal.mint(address(cSeal), newSeal);
+    cSeal.mint(address(this));
+}"
+ACF-096,CVE-2021-34273,2021,CVE,High,https://nvd.nist.gov/vuln/detail/CVE-2021-34273,Access Control,Missing Modifier,"A security flaw in the 'owned' function of a smart contract implementation for BTC2X (B2X), a tradeable Ethereum ERC20 token, allows attackers to hijack victim accounts and arbitrarily increase the digital supply of assets.",Potential unauthorized invocation of owned() public.,,Owned,owned() public,35,37,"    function owned() public {
+        owner = msg.sender;
+    }"
+ACF-097,CVE-2021-39167,2021,CVE,High,https://nvd.nist.gov/vuln/detail/CVE-2021-39167,Access Control,General Access Control,"OpenZepplin is a library for smart contract development. In affected versions a vulnerability in TimelockController allowed an actor with the executor role to escalate privileges. Further details about the vulnerability will be disclosed at a later date. As a workaround revoke the executor role from accounts \xmarkt strictly under the team's control. We recommend revoking all executors that are \xmarkt also proposers. When applying this mitigation, ensure there is at least one proposer and executor remaining.",Potential unauthorized invocation of _afterCall(bytes32 id) private.,,TimelockController,_afterCall(bytes32 id) private,313,316,"    function _afterCall(bytes32 id) private {
+        require(isOperationReady(id), ""TimelockController: operation is not ready"");
+        _timestamps[id] = _DONE_TIMESTAMP;
+    }"
+ACF-098,CVE-2021-39168,2021,CVE,High,https://nvd.nist.gov/vuln/detail/CVE-2021-39168,Access Control,General Access Control,"OpenZepplin is a library for smart contract development. In affected versions a vulnerability in TimelockController allowed an actor with the executor role to escalate privileges. Further details about the vulnerability will be disclosed at a later date. As a workaround revoke the executor role from accounts \xmarkt strictly under the team's control. We recommend revoking all executors that are \xmarkt also proposers. When applying this mitigation, ensure there is at least one proposer and executor remaining.",Potential unauthorized invocation of _afterCall(bytes32 id) private.,,TimelockController,_afterCall(bytes32 id) private,313,316,"    function _afterCall(bytes32 id) private {
+        require(isOperationReady(id), ""TimelockController: operation is not ready"");
+        _timestamps[id] = _DONE_TIMESTAMP;
+    }"
+ACF-099,IOracleFactory,2023,TTWeb,High,https://github.com/sherlock-audit/2023-04-splits-judging/blob/main//false/017.md,Access Control,Missing Modifier,"The createOracle function in the IOracleFactory.sol contract creates a new OracleImpl instance. However, there are no access control mechanisms to restrict who can call this function, which may allow unauthorized users to create oracles with potentially malicious parameters.",Potential unauthorized invocation of createOracle(bytes calldata data_) external returns (OracleImpl oracle).,,IOracleFactory,createOracle(bytes calldata data_) external returns (OracleImpl oracle),8,8,    function createOracle(bytes calldata data_) external returns (OracleImpl oracle);
+ACF-100,BondFixedExpiryTeller,2022,DeFi Hack Labs,High,https://wooded-meter-1d8.notion.site/0e85e02c5ed34df3855ea9f3ca40f53b?v=22e5e2c506ef4caeb40b4f78e23517ee&p=6c30f71c9c4b456b8d2746f17536393e&pm=s,Access Control,Missing Modifier,"Due to token_ is controllable and does not validate properly on BondFixedExpiryTeller, attacker can create a custom contract to drain out the fund on BondFixedExpiryTeller.","Potential unauthorized invocation of redeem(ERC20BondToken token_, uint256 amount_) external override nonReentrant.",,BondFixedExpiryTeller,"redeem(ERC20BondToken token_, uint256 amount_) external override nonReentrant",137,142,"    function redeem(ERC20BondToken token_, uint256 amount_) external override nonReentrant {
+        if (uint48(block.timestamp) < token_.expiry())
+            revert Teller_TokenNotMatured(token_.expiry());
+        token_.burn(msg.sender, amount_);
+        token_.underlying().transfer(msg.sender, amount_);
+    }"
+ACF-101,SwapMining,2021,DeFi Hack Labs,High,https://wooded-meter-1d8.notion.site/0e85e02c5ed34df3855ea9f3ca40f53b?v=22e5e2c506ef4caeb40b4f78e23517ee&p=19f0371ea6d842049ce2cd8de9a7be01&pm=s,Access Control,Missing Modifier,Attacker created fake factory contract to get real reward tokens.,"Potential unauthorized invocation of swap(address account, address input, address output, uint256 amount) public onlyRouter returns (bool).",,SwapMining,"swap(address account, address input, address output, uint256 amount) public onlyRouter returns (bool)",236,269,"    function swap(address account, address input, address output, uint256 amount) public onlyRouter returns (bool) {
+        require(account != address(0), ""SwapMining: taker swap account is the zero address"");
+        require(input != address(0), ""SwapMining: taker swap input is the zero address"");
+        require(output != address(0), ""SwapMining: taker swap output is the zero address"");
+
+        if (poolLength() <= 0) {
+            return false;
+        }
+
+        if (!isWhitelist(input) || !isWhitelist(output)) {
+            return false;
+        }
+
+        address pair = BabyLibrary.pairFor(address(factory), input, output);
+        PoolInfo storage pool = poolInfo[pairOfPid[pair]];
+        // If it does not exist or the allocPoint is 0 then return
+        if (pool.pair != pair || pool.allocPoint <= 0) {
+            return false;
+        }
+
+        uint256 quantity = getQuantity(output, amount, targetToken);
+        if (quantity <= 0) {
+            return false;
+        }
+
+        mint(pairOfPid[pair]);
+
+        pool.quantity = pool.quantity.add(quantity);
+        pool.totalQuantity = pool.totalQuantity.add(quantity);
+        UserInfo storage user = userInfo[pairOfPid[pair]][account];
+        user.quantity = user.quantity.add(quantity);
+        user.blockNumber = block.number;
+        return true;
+    }"
+ACF-102,Bad_Guys_by_RPF,2022,DeFi Hack Labs,High,https://wooded-meter-1d8.notion.site/0e85e02c5ed34df3855ea9f3ca40f53b?v=22e5e2c506ef4caeb40b4f78e23517ee&p=1d853c09cbba4b9f8607917941ef6766&pm=s,Access Control,Missing Modifier,"Missing check for ""chosenAmount"" in the WhiteListMint function which allowed the attacker to pass the number of NFTs he/she wanted to mint.","Potential unauthorized invocation of WhiteListMint(bytes32[] calldata _merkleProof, uint256 chosenAmount) public.",,Bad_Guys_by_RPF,"WhiteListMint(bytes32[] calldata _merkleProof, uint256 chosenAmount) public",1190,1209,"    function WhiteListMint(bytes32[] calldata _merkleProof, uint256 chosenAmount)
+        public
+    {
+        require(_numberMinted(msg.sender)<1, ""Already Claimed"");
+        require(isPaused == false, ""turn on minting"");
+        require(
+            chosenAmount > 0,
+            ""Number Of Tokens Can Not Be Less Than Or Equal To 0""
+        );
+        require(
+            totalSupply() + chosenAmount <= maxsupply - reserve,
+            ""all tokens have been minted""
+        );
+        bytes32 leaf = keccak256(abi.encodePacked(msg.sender));
+        require(
+            MerkleProof.verify(_merkleProof, rootHash, leaf),
+            ""Invalid Proof""
+        );
+        _safeMint(msg.sender, chosenAmount);
+    }"
+ACF-103,ANCHToken,2022,DeFi Hack Labs,High,https://wooded-meter-1d8.notion.site/0e85e02c5ed34df3855ea9f3ca40f53b?v=22e5e2c506ef4caeb40b4f78e23517ee&p=05e23ba475d74dc4911f67553219d482&pm=s,Access Control,Missing Modifier,"if it supports skim(), the token transfer does not check if recipient and sender are the same, any reward, factor and balance change in _transfer() function, then you are vulnerable for the attack.","Potential unauthorized invocation of _transfer( address sender, address recipient, uint256 tAmount ) private.",,ANCHToken,"_transfer( address sender, address recipient, uint256 tAmount ) private",764,789,"    function _transfer(
+        address sender,
+        address recipient,
+        uint256 tAmount
+    ) private {
+        require(sender != address(0), ""ERC20: transfer from the zero address"");
+        require(recipient != address(0), ""ERC20: transfer to the zero address"");
+        require(tAmount > 0, ""Transfer amount must be greater than zero"");
+
+
+		if(sender == uniswapV2Pair) {
+            _tokenBuyTransferReward(sender, recipient, tAmount);
+        } else if(recipient == uniswapV2Pair) {
+            _tokenSellTransferReward(sender, recipient, tAmount);
+        } else{
+
+            uint256 currentRate = _getRate();
+            uint256 rAmount = tAmount.mul(currentRate);
+            _rOwned[sender] = _rOwned[sender].sub(rAmount);
+            _rOwned[recipient] = _rOwned[recipient].add(rAmount);
+
+            emit Transfer(sender, recipient, tAmount);
+        }
+
+
+    }"
+ACF-104,Replica,2022,DeFi Hack Labs,High,https://wooded-meter-1d8.notion.site/0e85e02c5ed34df3855ea9f3ca40f53b?v=22e5e2c506ef4caeb40b4f78e23517ee&p=ad14e2665a33499e88b5ff5c2c0b3232&pm=s,Access Control,Unprotected Initialization,"business Logic Flaw, Incorrect acceptable merkle-root checks. Nomad team initialized the trusted root to be 0x00.","Potential unauthorized invocation of initialize( uint32 _remoteDomain, address _updater, bytes32 _committedRoot, uint256 _optimisticSeconds ) public initializer.",,Replica,"initialize( uint32 _remoteDomain, address _updater, bytes32 _committedRoot, uint256 _optimisticSeconds ) public initializer",103,117,"    function initialize(
+        uint32 _remoteDomain,
+        address _updater,
+        bytes32 _committedRoot,
+        uint256 _optimisticSeconds
+    ) public initializer {
+        __NomadBase_initialize(_updater);
+        // set storage variables
+        entered = 1;
+        remoteDomain = _remoteDomain;
+        committedRoot = _committedRoot;
+        // pre-approve the committed root.
+        confirmAt[_committedRoot] = 1;
+        _setOptimisticTimeout(_optimisticSeconds);
+    }"
+ACF-105,Quixotic,2022,DeFi Hack Labs,High,https://wooded-meter-1d8.notion.site/0e85e02c5ed34df3855ea9f3ca40f53b?v=22e5e2c506ef4caeb40b4f78e23517ee&p=67a1acabd9fc411ca0ed2bc082313ea1&pm=s,Access Control,Missing Modifier,"The privileged entry point fillSellOrder( address payable seller, address contractAddress, uint256 tokenId, uint256 startTime, uint256 expiration, uint256 price, uint256 quantity, uint256 createdAtBlockNumber, address paymentERC20, bytes memory signature, address payable buyer ) external payable whenNotPaused nonReentrant lacks proper authorization validation, allowing unauthorized callers to reach sensitive logic.","Potential unauthorized invocation of fillSellOrder( address payable seller, address contractAddress, uint256 tokenId, uint256 startTime, uint256 expiration, uint256 price, uint256 quantity, uint256 createdAtBlockNumber, address paymentERC20, bytes memory signature, address payable buyer ) external payable whenNotPaused nonReentrant.",,Quixotic,"fillSellOrder( address payable seller, address contractAddress, uint256 tokenId, uint256 startTime, uint256 expiration, uint256 price, uint256 quantity, uint256 createdAtBlockNumber, address paymentERC20, bytes memory signature, address payable buyer ) external payable whenNotPaused nonReentrant",7,56,"    function fillSellOrder(
+        address payable seller,
+        address contractAddress,
+        uint256 tokenId,
+        uint256 startTime,
+        uint256 expiration,
+        uint256 price,
+        uint256 quantity,
+        uint256 createdAtBlockNumber,
+        address paymentERC20,
+        bytes memory signature,
+        address payable buyer
+    ) external payable whenNotPaused nonReentrant {
+        // If the payment ERC20 is the zero address, we check that enough native ETH has been sent
+        // with the transaction. Otherwise, we use the supplied ERC20 payment token.
+        if (paymentERC20 == address(0)) {
+            require(msg.value >= price, ""Transaction doesn't have the required ETH amount."");
+        } else {
+            _checkValidERC20Payment(buyer, price, paymentERC20);
+        }
+
+        SellOrder memory sellOrder = SellOrder(
+            seller,
+            contractAddress,
+            tokenId,
+            startTime,
+            expiration,
+            price,
+            quantity,
+            createdAtBlockNumber,
+            paymentERC20
+        );
+
+        /* Make sure the order is not cancelled */
+        require(
+            cancellationRegistry.getSellOrderCancellationBlockNumber(seller, contractAddress, tokenId) < createdAtBlockNumber,
+            ""This order has been cancelled.""
+        );
+
+        /* Check signature */
+        require(_validateSellerSignature(sellOrder, signature), ""Signature is not valid for SellOrder.""); //vulnerable point
+
+        // Check has started
+        require((block.timestamp > startTime), ""SellOrder start time is in the future."");
+
+        // Check not expired
+        require((block.timestamp < expiration), ""This sell order has expired."");
+
+        _fillSellOrder(sellOrder, buyer);
+    }"
+ACF-106,XCarnival,2022,DeFi Hack Labs,High,https://wooded-meter-1d8.notion.site/0e85e02c5ed34df3855ea9f3ca40f53b?v=22e5e2c506ef4caeb40b4f78e23517ee&p=7c440144148f47a99e468c216f5e22df&pm=s,Access Control,Missing Modifier,"call XToken contract's borrow(), there is no judgment that the NFT has been withdrawn. Parameter xToken can control, attakcer can withdraw pledged NFT.","Potential unauthorized invocation of pledgeAndBorrow(address _collection, uint256 _tokenId, uint256 _nftType, address xToken, uint256 borrowAmount) external nonReentrant.",,XNFT,"pledgeAndBorrow(address _collection, uint256 _tokenId, uint256 _nftType, address xToken, uint256 borrowAmount) external nonReentrant",108,111,"    function pledgeAndBorrow(address _collection, uint256 _tokenId, uint256 _nftType, address xToken, uint256 borrowAmount) external nonReentrant {
+        uint256 orderId = pledgeInternal(_collection, _tokenId, _nftType);
+        IXToken(xToken).borrow(orderId, payable(msg.sender), borrowAmount);
+    }"
+ACF-107,Compound,2022,DeFi Hack Labs,High,https://wooded-meter-1d8.notion.site/0e85e02c5ed34df3855ea9f3ca40f53b?v=22e5e2c506ef4caeb40b4f78e23517ee&p=0fad042e6c1d45439eb78d0560de3cd3&pm=s,Access Control,Missing Modifier,"if contract can make calls into arbitrary addresses, this can be abused. Attacker use legacy TUSD smart contract to trick compound.",Potential unauthorized invocation of sweepToken(EIP20NonStandardInterface token) external.,,CErc20,sweepToken(EIP20NonStandardInterface token) external,120,124,"    function sweepToken(EIP20NonStandardInterface token) external {
+    	require(address(token) != underlying, ""CErc20::sweepToken: can not sweep underlying token"");
+    	uint256 balance = token.balanceOf(address(this));
+    	token.transfer(admin, balance);
+    }"
+ACF-108,TreasureDAO,2022,DeFi Hack Labs,High,https://wooded-meter-1d8.notion.site/0e85e02c5ed34df3855ea9f3ca40f53b?v=22e5e2c506ef4caeb40b4f78e23517ee&p=9c37b46d577e45e08f3db4f6527f0239&pm=s,Access Control,Missing Modifier,"Since _quantity can be zero, so attacker can buy NFT for free","Potential unauthorized invocation of buyItem( address _nftAddress, uint256 _tokenId, address _owner, uint256 _quantity ) external nonReentrant isListed(_nftAddress, _tokenId, _owner) validListing(_nftAddress, _tokenId, _owner).",,TreasureDAO,"buyItem( address _nftAddress, uint256 _tokenId, address _owner, uint256 _quantity ) external nonReentrant isListed(_nftAddress, _tokenId, _owner) validListing(_nftAddress, _tokenId, _owner)",1,41,"function buyItem(
+        address _nftAddress,
+        uint256 _tokenId,
+        address _owner,
+        uint256 _quantity
+    )
+        external
+        nonReentrant
+        isListed(_nftAddress, _tokenId, _owner)
+        validListing(_nftAddress, _tokenId, _owner)
+    {
+        require(_msgSender() != _owner, ""Cannot buy your own item"");
+
+        Listing memory listedItem = listings[_nftAddress][_tokenId][_owner];
+        require(listedItem.quantity >= _quantity, ""not enough quantity"");  //vulnerable point, insufficient validation.
+
+        // Transfer NFT to buyer
+        if (IERC165(_nftAddress).supportsInterface(INTERFACE_ID_ERC721)) {
+            IERC721(_nftAddress).safeTransferFrom(_owner, _msgSender(), _tokenId);
+        } else {
+            IERC1155(_nftAddress).safeTransferFrom(_owner, _msgSender(), _tokenId, _quantity, bytes(""""));
+        }
+
+        if (listedItem.quantity == _quantity) {
+            delete (listings[_nftAddress][_tokenId][_owner]);
+        } else {
+            listings[_nftAddress][_tokenId][_owner].quantity -= _quantity;
+        }
+
+        emit ItemSold(
+            _owner,
+            _msgSender(),
+            _nftAddress,
+            _tokenId,
+            _quantity,
+            listedItem.pricePerItem
+        );
+
+        TreasureNFTOracle(oracle).reportSale(_nftAddress, _tokenId, paymentToken, listedItem.pricePerItem);
+        _buyItem(listedItem.pricePerItem, _quantity, _owner);
+    }"
+ACF-109,QBridge,2022,DeFi Hack Labs,High,https://wooded-meter-1d8.notion.site/0e85e02c5ed34df3855ea9f3ca40f53b?v=22e5e2c506ef4caeb40b4f78e23517ee&p=a56fb91f2e2b4b869463562322060479&pm=s,Access Control,Missing Modifier,**safeTransferFrom() in SafeToken.sol** does not revert when the token EOA.  tokenAddress can be address(0) to pass all check to mint xETH.,"Potential unauthorized invocation of deposit(uint8 destinationDomainID, bytes32 resourceID, bytes calldata data) external payable notPaused.",,QBridge,"deposit(uint8 destinationDomainID, bytes32 resourceID, bytes calldata data) external payable notPaused",200,210,"    function deposit(uint8 destinationDomainID, bytes32 resourceID, bytes calldata data) external payable notPaused {
+        require(msg.value == fee, ""QBridge: invalid fee"");
+
+        address handler = resourceIDToHandlerAddress[resourceID];
+        require(handler != address(0), ""QBridge: invalid resourceID"");
+
+        uint64 depositNonce = ++_depositCounts[destinationDomainID];
+
+        IQBridgeHandler(handler).deposit(resourceID, msg.sender, data);
+        emit Deposit(destinationDomainID, resourceID, depositNonce, msg.sender, data);
+    }"
+ACF-110,QBridgeHandler,2022,DeFi Hack Labs,High,https://wooded-meter-1d8.notion.site/0e85e02c5ed34df3855ea9f3ca40f53b?v=22e5e2c506ef4caeb40b4f78e23517ee&p=a56fb91f2e2b4b869463562322060479&pm=s,Access Control,Missing Modifier,**safeTransferFrom() in SafeToken.sol** does not revert when the token EOA.  tokenAddress can be address(0) to pass all check to mint xETH.,"Potential unauthorized invocation of deposit(bytes32 resourceID, address depositer, bytes calldata data) external override onlyBridge.",,QBridgeHandler,"deposit(bytes32 resourceID, address depositer, bytes calldata data) external override onlyBridge",122,137,"    function deposit(bytes32 resourceID, address depositer, bytes calldata data) external override onlyBridge {
+        uint option;
+        uint amount;
+        (option, amount) = abi.decode(data, (uint, uint));
+
+        address tokenAddress = resourceIDToTokenContractAddress[resourceID];
+        require(contractWhitelist[tokenAddress], ""provided tokenAddress is not whitelisted"");
+
+        if (burnList[tokenAddress]) {
+            require(amount >= withdrawalFees[resourceID], ""less than withdrawal fee"");
+            QBridgeToken(tokenAddress).burnFrom(depositer, amount);
+        } else {
+            require(amount >= minAmounts[resourceID][option], ""less than minimum amount"");
+            tokenAddress.safeTransferFrom(depositer, address(this), amount);
+        }
+    }"
+ACF-111,tx1,2021,TTWeb,High,,Access Control,Missing Modifier,"Authorization associated with onlyOwner() relies on tx.origin instead of msg.sender, which can allow authorization checks to be bypassed via an intermediary contract.",Potential authorization bypass through onlyOwner().,,Ownable,onlyOwner(),158,161,"    modifier onlyOwner() {
+        require(_owner == tx.origin, ""Ownable: caller is not the owner""); /* <TX_VUL>, [4. msg.sender->tx.origin] require(_owner == _msgSender(), ""Ownable: caller is not the owner""); */
+        _;
+    }"
+ACF-112,tx2,2022,TTWeb,High,,Access Control,Missing Modifier,"Authorization associated with onlyOwner() relies on tx.origin instead of msg.sender, which can allow authorization checks to be bypassed via an intermediary contract.",Potential authorization bypass through onlyOwner().,,TattooMoneyPublicSaleIV,onlyOwner(),238,241,"    modifier onlyOwner() {
+        require(tx.origin == owner, ""Only for contract Owner""); /* <TX_VUL>, [4. msg.sender->tx.origin] require(msg.sender == owner, ""Only for contract Owner""); */
+        _;
+    }"
+ACF-113,tx3,2021,TTWeb,High,,Access Control,Missing Modifier,"Authorization associated with onlyOwner() relies on tx.origin instead of msg.sender, which can allow authorization checks to be bypassed via an intermediary contract.",Potential authorization bypass through onlyOwner().,,Ownable,onlyOwner(),26,29,"    modifier onlyOwner() {
+        require(owner() == tx.origin, ""Ownable: caller is not the owner""); /* <TX_VUL>, [4. msg.sender->tx.origin] require(owner() == _msgSender(), ""Ownable: caller is not the owner""); */
+        _;
+    }"
+ACF-114,tx4,2022,TTWeb,High,,Access Control,Missing Modifier,"Authorization associated with OnlyOwner() relies on tx.origin instead of msg.sender, which can allow authorization checks to be bypassed via an intermediary contract.",Potential authorization bypass through OnlyOwner().,,BetHorde,OnlyOwner(),533,536,"  modifier OnlyOwner() {
+    require(tx.origin == state.owner, ""Owner""); /* <TX_VUL>, [4. msg.sender->tx.origin] require(msg.sender == state.owner, ""Owner""); */
+    _;
+  }"
+ACF-115,tx5,2022,TTWeb,High,,Access Control,Missing Modifier,"Authorization associated with onlyOwner() relies on tx.origin instead of msg.sender, which can allow authorization checks to be bypassed via an intermediary contract.",Potential authorization bypass through onlyOwner().,,Fund3Week,onlyOwner(),139,142,"    modifier onlyOwner() {
+        require(owner == tx.origin, ""!owner""); /* <TX_VUL> [4. msg.sender->tx.origin] require(owner == msg.sender, ""!owner""); */
+        _;
+    }"
+ACF-116,tx6,2021,TTWeb,High,,Access Control,Missing Modifier,"Authorization associated with onlyOwner() relies on tx.origin instead of msg.sender, which can allow authorization checks to be bypassed via an intermediary contract.",Potential authorization bypass through onlyOwner().,,BridgeOperatable,onlyOwner(),27,30,"    modifier onlyOwner() {
+        require(tx.origin == owner, 'onlyOwner: insufficient privilege'); /* <TX_VUL>, [4. msg.sender->tx.origin] require(msg.sender == owner, 'onlyOwner: insufficient privilege'); */
+        _;
+    }"
+ACF-117,tx7,2017,TTWeb,High,,Access Control,Missing Modifier,"Authorization associated with onlyOwner() relies on tx.origin instead of msg.sender, which can allow authorization checks to be bypassed via an intermediary contract.",Potential authorization bypass through onlyOwner().,,owned,onlyOwner(),7,10,"modifier onlyOwner() {
+        require(tx.origin == owner); /* <TX_VUL>, [4. msg.sender->tx.origin] require(msg.sender == owner); */
+        _;
+    }"
+ACF-118,tx8,2022,TTWeb,High,,Access Control,Missing Modifier,"Authorization associated with onlyOwner() relies on tx.origin instead of msg.sender, which can allow authorization checks to be bypassed via an intermediary contract.",Potential authorization bypass through onlyOwner().,,Ownable,onlyOwner(),127,130,"    modifier onlyOwner() {
+        require(owner() == tx.origin, ""Ownable: caller is not the owner""); /* <TX_VUL>, [4. msg.sender->tx.origin] require(owner() == _msgSender(), ""Ownable: caller is not the owner""); */
+        _;
+    }"

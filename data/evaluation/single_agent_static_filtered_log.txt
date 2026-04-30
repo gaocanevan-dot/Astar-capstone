@@ -1,0 +1,49 @@
+Loaded 42/42 cases from data\dataset\eval_set.json
+Static analysis: ENABLED (FILTERED (suspicious-only))
+[1/42] NOYA-H-04 (VaultWithdrawManager)... SKIP (empty contract_source)
+[2/42] NOYA-H-08 (BaseConnector)... pred='sendTokensToTrustedAddress' gt='sendTokensToTrustedAddress' ✓strict
+[3/42] NOYA-M-03 (VaultManager)... SKIP (empty contract_source)
+[4/42] CSW-H-01 (CoinbaseSmartWallet)... pred='initialize' gt='removeOwnerAtIndex' ✗miss
+[5/42] GRA-H-01 (L2GraphToken)... pred='setGateway' gt='' ~loose
+[6/42] GRA-H-02 (GraphTokenUpgradeable)... pred='permit' gt='upgradeTo' ✗miss
+[7/42] GIT-M-02 (IdentityStaking)... pred='initialize' gt='setStakeParameters' ✗miss
+[8/42] C4-161 (NFTFloorOracle)... pred='removeFeeder' gt='removeFeeder' ✓strict
+[9/42] C4-35 (NFTFloorOracle)... pred='' gt='removeFeeder' ✗miss
+[10/42] C4-222 (VariableSupplyERC20Token)... pred='' gt='mint' ✗miss
+[11/42] C4-6 (PaprController)... pred='increaseDebt' gt='increaseDebt' ✓strict
+[12/42] C4-21 (RewardsPool)... pred='distributeInitialSupply' gt='setUp' ✗miss
+[13/42] C4-55 (NFTFloorOracle)... pred='' gt='removeFeeder' ✗miss
+[14/42] C4-29 (ILBPair)... pred='burn' gt='burn' ✓strict
+[15/42] C4-17 (ClaimNodeOp)... pred='testExploit' gt='testExploit' ✓strict
+[16/42] C4-438 (LPDA)... pred='initialize' gt='buy' ✗miss
+[17/42] C4-111 (AutoPxGlp)... pred='' gt='unknown_function' ✗miss
+[18/42] C4-80 (NFTEDAStarterIncentive)... pred='' gt='auctionStartTime' ✗miss
+[19/42] C4-19 (AllowedMsgSenders)... pred='isIncluded' gt='isIncluded' ✓strict
+[20/42] C4-487 (INVEscrow)... pred='pay' gt='onDeposit' ✗miss
+[21/42] C4-186 (NFTFloorOracle)... pred='removeFeeder' gt='removeFeeder' ✓strict
+[22/42] C4-22 (AccountListCaller)... pred='CallRedeemhook' gt='isIncluded' ✗miss
+[23/42] C4-328 (ExecutionDelegate)... pred='' gt='unknown_function' ✗miss
+[24/42] C4-169 (SimplePriceOracle)... pred='setDirectPrice' gt='setUnderlyingPrice' ✗miss
+[25/42] C4-51 (Proposal-Store)... pred='AddProposal' gt='AddProposal' ✓strict
+[26/42] C4-318 (PuttyV2)... pred='fillOrder' gt='fillOrder' ✓strict
+[27/42] C4-165 (NoteInterest)... pred='updateBaseRate' gt='updateBaseRate' ✓strict
+[28/42] C4-172 (Proposal-Store)... pred='queue' gt='queue' ✓strict
+[29/42] C4-63 (GovernorBravoDelegate)... pred='AddProposal' gt='AddProposal' ✓strict
+[30/42] C4-174 (WETH)... pred='approve' gt='approve' ✓strict
+[31/42] C4-67 (Splitter)... pred='incrementWindow' gt='incrementWindow' ✓strict
+[32/42] C4-3 (ConvexYieldWrapper)... pred='wrap' gt='wrap' ✓strict
+[33/42] C4-248 (StableVault)... pred='withdraw' gt='testExploit' ✗miss
+[34/42] C4-54 (Router)... pred='sweepToken' gt='unwrapWETH9' ✗miss
+[35/42] C4-286 (RedeemHook)... pred='' gt='unknown_function' ✗miss
+[36/42] C4-572 (BlurExchange)... pred='incrementNonce' gt='setUp' ✗miss
+[37/42] C4-229 (SimpleFeiDaiPSM)... pred='burnFeiHeld' gt='burnFeiHeld' ✓strict
+[38/42] C4-226 (Manager)... pred='testMisleadingGetAddress' gt='testMisleadingGetAddress' ✓strict
+[39/42] C4-484 (Governance)... pred='activateProposal' gt='activateProposal' ✓strict
+[40/42] C4-126 (Vault)... pred='install' gt='install' ✓strict
+[41/42] C4-190 (StabilityPool)... pred='receiveCollateral' gt='receiveCollateral' ✓strict
+[42/42] C4-264 (WJLP)... pred='wrap' gt='unknown_function' ✗miss
+
+Analyst Recall: strict=48.78% (20/41), loose=48.78% (20/41) | hit@1=48.78% (20/41), hit@2=58.54% (24/41), hit@3=60.98% (25/41)
+Total wall-clock: 555.6s  LLM calls: 40
+Summary: data/evaluation/single_agent_static_filtered_summary.md
+Predictions: data/evaluation/single_agent_static_filtered_predictions.json
