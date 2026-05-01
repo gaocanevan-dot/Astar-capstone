@@ -105,8 +105,12 @@ data/dataset/.dataset_hashes.lock
 # OMC runtime state (session-scoped). Plans + research stay tracked under
 # .omc/plans/ via explicit `git add` of those subdirs.
 .omc/state/
+.omc/sessions/
+.omc/specs/
 .omc/notepad.md
 .omc/project-memory.json
+.omc/prd.json
+.omc/progress.txt
 .omc/logs/
 
 # Local forge-std install cache (created by adapters/foundry.py at runtime)

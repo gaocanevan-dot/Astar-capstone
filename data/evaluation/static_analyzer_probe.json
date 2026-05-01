@@ -1,0 +1,108 @@
+{
+  "n_cases": 10,
+  "slither_count": 1,
+  "regex_count": 9,
+  "error_count": 0,
+  "results": [
+    {
+      "case_id": "ACF-092",
+      "contract_name": "SpaceGodzilla",
+      "loc": 1290,
+      "tool_used": "regex",
+      "n_functions": 52,
+      "n_slither_findings": 0,
+      "wall_clock_s": 4.07,
+      "error": ""
+    },
+    {
+      "case_id": "ACF-102",
+      "contract_name": "Bad_Guys_by_RPF",
+      "loc": 1246,
+      "tool_used": "regex",
+      "n_functions": 63,
+      "n_slither_findings": 0,
+      "wall_clock_s": 2.59,
+      "error": ""
+    },
+    {
+      "case_id": "ACF-091",
+      "contract_name": "ReaperVaultV2",
+      "loc": 766,
+      "tool_used": "regex",
+      "n_functions": 37,
+      "n_slither_findings": 0,
+      "wall_clock_s": 2.39,
+      "error": ""
+    },
+    {
+      "case_id": "ACF-106",
+      "contract_name": "XNFT",
+      "loc": 617,
+      "tool_used": "regex",
+      "n_functions": 47,
+      "n_slither_findings": 0,
+      "wall_clock_s": 2.6,
+      "error": ""
+    },
+    {
+      "case_id": "ACF-093",
+      "contract_name": "GymSinglePool",
+      "loc": 734,
+      "tool_used": "regex",
+      "n_functions": 39,
+      "n_slither_findings": 0,
+      "wall_clock_s": 2.58,
+      "error": ""
+    },
+    {
+      "case_id": "ACF-114",
+      "contract_name": "0x30410fab6d367e11839c00ad93eb357e3066ada8_1",
+      "loc": 554,
+      "tool_used": "regex",
+      "n_functions": 21,
+      "n_slither_findings": 0,
+      "wall_clock_s": 3.67,
+      "error": ""
+    },
+    {
+      "case_id": "ACF-103",
+      "contract_name": "ANCHToken",
+      "loc": 881,
+      "tool_used": "slither",
+      "n_functions": 32,
+      "n_slither_findings": 1,
+      "wall_clock_s": 3.13,
+      "error": ""
+    },
+    {
+      "case_id": "ACF-087",
+      "contract_name": "Token",
+      "loc": 501,
+      "tool_used": "regex",
+      "n_functions": 21,
+      "n_slither_findings": 0,
+      "wall_clock_s": 2.95,
+      "error": ""
+    },
+    {
+      "case_id": "ACF-109",
+      "contract_name": "QBridge",
+      "loc": 359,
+      "tool_used": "regex",
+      "n_functions": 22,
+      "n_slither_findings": 0,
+      "wall_clock_s": 2.55,
+      "error": ""
+    },
+    {
+      "case_id": "ACF-101",
+      "contract_name": "SwapMining",
+      "loc": 356,
+      "tool_used": "regex",
+      "n_functions": 26,
+      "n_slither_findings": 0,
+      "wall_clock_s": 2.48,
+      "error": ""
+    }
+  ]
+}
