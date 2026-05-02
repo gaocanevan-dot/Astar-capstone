@@ -181,6 +181,36 @@ TOOL_SCHEMAS: list[dict[str, Any]] = [
             },
         },
     },
+    # Day-5b — cascade tool. Available in 5b-tool and 5b-mandate arms only;
+    # registry filtering by mode happens in loop.py via `available_tools`.
+    {
+        "type": "function",
+        "function": {
+            "name": "try_next_candidate",
+            "description": (
+                "Retry on a different candidate function when the current "
+                "target's PoC has failed. Performs internal "
+                "propose_target → write_poc → run_forge cycle for the named "
+                "candidate. Use AT MOST ONCE per case. Pick the candidate "
+                "from your earlier static_analyze suspicious list, NOT the "
+                "function you already tried."
+            ),
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "candidate_function": {
+                        "type": "string",
+                        "description": "A different function name from the static_analyze suspicious list.",
+                    },
+                    "reason": {
+                        "type": "string",
+                        "description": "Brief reason this candidate is worth trying (1 sentence).",
+                    },
+                },
+                "required": ["candidate_function", "reason"],
+            },
+        },
+    },
 ]
 
 
@@ -266,6 +296,8 @@ def tool_run_forge(args: dict, case: dict, mem, state: AgentState) -> str:
 
     state.annotations["forge_calls_this_case"] = forge_count + 1
     state.last_forge_verdict = verdict.get("execution_result", "")
+    if not state.first_forge_verdict:
+        state.first_forge_verdict = state.last_forge_verdict
     eh = list(state.annotations.get("error_history", []))
     if state.last_forge_verdict.startswith("fail_error"):
         eh.append(verdict.get("error_summary", ""))
@@ -396,6 +428,68 @@ def tool_recall_self_lesson(args: dict, case: dict, mem, state: AgentState) -> s
     return json.dumps({"ok": True, "n": len(results), "results": results})[:6000]
 
 
+def tool_try_next_candidate(args: dict, case: dict, mem, state: AgentState) -> str:
+    """Day-5b — orchestrated retry on a different candidate function.
+
+    Combines propose_target → write_poc → run_forge into a single tool call.
+    Caps cascade_invocations at 1 per case (mechanical AC9). Returns the
+    aggregated verdict + cascade depth.
+    """
+    candidate = (args.get("candidate_function") or "").strip()
+    reason = (args.get("reason") or "").strip()
+    if not candidate:
+        return json.dumps({"ok": False, "error": "candidate_function required"})
+
+    # Cap: 1 cascade per case
+    if state.cascade_invocations >= 1:
+        return json.dumps({
+            "ok": False,
+            "error": "try_next_candidate already used this case (per-case cap=1). Call submit_finding or give_up.",
+        })
+
+    # Cannot re-try the same target the agent already proposed
+    prior_target = (state.annotations.get("target_function") or "").strip()
+    if candidate == prior_target:
+        return json.dumps({
+            "ok": False,
+            "error": f"candidate_function {candidate!r} is the same as the prior target. Pick a DIFFERENT function from static_analyze.",
+        })
+
+    state.cascade_invocations += 1
+
+    # Sub-call 1: propose_target with new candidate
+    state.annotations["target_function"] = candidate
+    state.annotations["hypothesis"] = (
+        f"[try_next_candidate cascade] {reason}"[:500]
+    )
+
+    # Sub-call 2: write_poc on new candidate
+    write_result_str = tool_write_poc(
+        {"target_function": candidate, "exploit_logic": reason},
+        case, mem, state,
+    )
+    write_result = json.loads(write_result_str)
+    if not write_result.get("ok"):
+        return json.dumps({
+            "ok": False,
+            "stage": "write_poc",
+            "error": write_result.get("error", "write_poc failed"),
+            "cascade_depth": state.cascade_invocations,
+        })
+
+    # Sub-call 3: run_forge on the new PoC
+    forge_result_str = tool_run_forge({}, case, mem, state)
+    forge_result = json.loads(forge_result_str)
+    return json.dumps({
+        "ok": True,
+        "stage": "complete",
+        "cascade_depth": state.cascade_invocations,
+        "candidate": candidate,
+        "verdict": forge_result.get("verdict"),
+        "error_summary": forge_result.get("error_summary", "")[:300],
+    })
+
+
 def tool_save_lesson(args: dict, case: dict, mem, state: AgentState) -> str:
     trigger = (args.get("trigger") or "").strip()
     takeaway = (args.get("takeaway") or "").strip()
@@ -428,9 +522,29 @@ TOOL_DISPATCH: dict[str, Callable[..., str]] = {
     "recall_similar_cases": tool_recall_similar_cases,
     "recall_self_lesson": tool_recall_self_lesson,
     "save_lesson": tool_save_lesson,
+    "try_next_candidate": tool_try_next_candidate,
 }
 
 TERMINAL_TOOLS: set[str] = {"submit_finding", "give_up"}
+
+# Day-5b — tools restricted by --mode flag in run_react_agent.py
+# 5-baseline: no try_next_candidate
+# 5b-tool / 5b-mandate: try_next_candidate exposed
+TOOLS_DISABLED_IN_BASELINE: set[str] = {"try_next_candidate"}
+
+
+def filter_tools_for_mode(mode: str) -> list[dict]:
+    """Return TOOL_SCHEMAS filtered for a given mode.
+
+    mode == "5-baseline": exclude try_next_candidate
+    mode == "5b-tool" / "5b-mandate" / None: all tools available
+    """
+    if mode == "5-baseline":
+        return [
+            t for t in TOOL_SCHEMAS
+            if t.get("function", {}).get("name") not in TOOLS_DISABLED_IN_BASELINE
+        ]
+    return list(TOOL_SCHEMAS)
 
 
 def dispatch_tool(

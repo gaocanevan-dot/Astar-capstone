@@ -66,8 +66,36 @@ Every `thought` should be 1-2 sentences. Do not narrate at length.
 """
 
 
-def build_system_prompt(max_iter: int = 20) -> str:
-    return SYSTEM_PROMPT.format(max_iter=max_iter)
+CASCADE_MANDATE_BLOCK = """
+
+═══════════════════════════════════════════════════════════════════
+DAY-5B CASCADE MANDATE (this run only — overrides default give_up flow)
+═══════════════════════════════════════════════════════════════════
+
+Before calling `give_up` on a case where `run_forge` returned ANY
+`fail_*` verdict, you MUST call `try_next_candidate` exactly once with
+a DIFFERENT function name from your static_analyze suspicious list.
+
+Workflow when first run_forge fails:
+  - `fail_revert_ac`     → call try_next_candidate(candidate_function=<different>,
+                            reason="AC blocked first target, try alternate")
+  - `fail_error_compile` → optionally retry write_poc once first; if still fails,
+                            call try_next_candidate
+  - `fail_error_runtime` → call try_next_candidate immediately
+
+Only AFTER try_next_candidate returns can you call give_up. The system
+will intercept and force one cascade attempt anyway if you skip this
+mandate, but you should call it explicitly to keep the trace honest.
+
+Per-case cap: 1 try_next_candidate invocation. Don't loop further.
+"""
+
+
+def build_system_prompt(max_iter: int = 20, cascade_mandate: bool = False) -> str:
+    base = SYSTEM_PROMPT.format(max_iter=max_iter)
+    if cascade_mandate:
+        return base + CASCADE_MANDATE_BLOCK
+    return base
 
 
 def format_case_brief(case: dict) -> str:

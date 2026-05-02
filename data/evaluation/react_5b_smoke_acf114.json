@@ -1,0 +1,56 @@
+{
+  "summary": {
+    "n_cases_run": 1,
+    "running_usd": 0.0446,
+    "aborted": null,
+    "ac1_self_terminate": "1/1",
+    "ac1_pass": false,
+    "ac2_avg_distinct_tools": 7.0,
+    "ac2_pass": true,
+    "ac5b_cases_with_lesson_recall": "0/1",
+    "ac5b_pass": false,
+    "ac7_within_budget": true,
+    "pass_count": 1,
+    "recall_at_1": "0/1",
+    "memory_after": {
+      "n_patterns": 85,
+      "n_episodes": 11,
+      "n_lessons": 12
+    }
+  },
+  "records": [
+    {
+      "case_id": "ACF-114",
+      "contract_name": "0x30410fab6d367e11839c00ad93eb357e3066ada8_1",
+      "ground_truth_function": "OnlyOwner",
+      "predicted_function": "HouseWithdraw",
+      "recall_hit": false,
+      "terminal_reason": "submit_finding",
+      "self_terminated": true,
+      "finding_confirmed": true,
+      "forge_verdict": "pass",
+      "n_iterations": 10,
+      "distinct_tool_count": 7,
+      "tools_called": [
+        "static_analyze",
+        "get_function_body",
+        "get_function_body",
+        "propose_target",
+        "write_poc",
+        "run_forge",
+        "try_next_candidate",
+        "write_poc",
+        "run_forge",
+        "submit_finding"
+      ],
+      "recall_self_lesson_nonempty": 0,
+      "cascade_invocations": 1,
+      "cascade_was_system_forced": false,
+      "mode": "5b-mandate",
+      "case_usd": 0.0446,
+      "running_usd": 0.0446,
+      "tokens_prompt": 57984,
+      "tokens_completion": 15038
+    }
+  ]
+}

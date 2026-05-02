@@ -32,6 +32,14 @@ class AgentState:
     # AC5b evidence — count of `recall_self_lesson` calls that returned ≥1 result
     recall_self_lesson_nonempty: int = 0
 
+    # Day-5b AC9 mechanical — count of `try_next_candidate` invocations.
+    # Counted whether the call comes from the agent (tool) or the system
+    # (intercept after give_up under 5b-mandate). The mechanical AC9 verifier
+    # divides this against `forge_calls_this_case` × first-fail to detect
+    # whether cascade fired when it should have.
+    cascade_invocations: int = 0
+    cascade_was_system_forced: bool = False  # True iff system-intercept path
+
     # Terminal verdict from the agent itself (submit_finding / give_up payloads)
     submitted_target: str = ""
     submitted_evidence: str = ""
@@ -41,6 +49,10 @@ class AgentState:
     # If the agent ever ran forge during this case, the most recent verdict
     # (mirrors PipelineResult.execution_result for downstream comparison)
     last_forge_verdict: str = ""
+    # Day-5b — first forge verdict (NEVER overwritten after first forge call).
+    # Used by AC9 verifier to detect "cascade was needed" without inspecting
+    # the full trace JSON.
+    first_forge_verdict: str = ""
 
     def distinct_tool_count(self) -> int:
         return len(set(self.tools_called))

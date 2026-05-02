@@ -85,7 +85,22 @@ def main() -> int:
         help="Comma-separated list of case_ids to run (overrides --limit). "
              "Useful for targeted re-runs.",
     )
+    ap.add_argument(
+        "--mode",
+        choices=["5-baseline", "5b-tool", "5b-mandate"],
+        default=None,
+        help=(
+            "Day-5b 3-arm experiment mode. "
+            "5-baseline: no cascade tool (Day-5 replay). "
+            "5b-tool: try_next_candidate exposed, no MUST mandate. "
+            "5b-mandate: cascade tool + prompt MUST + system intercept fallback."
+        ),
+    )
     args = ap.parse_args()
+
+    # Auto-namespace output when mode is set so 3 arms don't clobber each other
+    if args.mode and args.out_name == "react_sweep_run1":
+        args.out_name = f"react_5b_{args.mode}"
 
     smoke = json.loads(Path(args.smoke_set).read_text(encoding="utf-8"))
     cases = smoke.get("cases", [])
@@ -152,6 +167,7 @@ def main() -> int:
                 memory_backend=mem,
                 max_iter=args.max_iter,
                 max_usd_per_case=args.max_usd_per_case,
+                mode=args.mode,
             )
         except Exception as exc:
             print(f"    CRASH: {type(exc).__name__}: {exc}")
@@ -183,13 +199,19 @@ def main() -> int:
             "predicted_function": result.target_function,
             "recall_hit": recall_hit,
             "terminal_reason": result.terminal_reason,
-            "self_terminated": result.terminal_reason in ("submit_finding", "give_up"),
+            "self_terminated": result.terminal_reason
+                in ("submit_finding", "give_up", "system_cascade_pass", "system_cascade_then_give_up"),
             "finding_confirmed": result.finding_confirmed,
             "forge_verdict": result.last_forge_verdict,
             "n_iterations": result.n_iterations,
             "distinct_tool_count": result.distinct_tool_count,
             "tools_called": list(result.state.tools_called),
             "recall_self_lesson_nonempty": result.recall_self_lesson_nonempty,
+            # Day-5b mechanical AC9 fields
+            "cascade_invocations": result.state.cascade_invocations,
+            "cascade_was_system_forced": result.state.cascade_was_system_forced,
+            "first_forge_verdict": result.state.first_forge_verdict,
+            "mode": args.mode or "default",
             "case_usd": result.total_usd,
             "running_usd": round(running_usd, 4),
             "tokens_prompt": int(result.annotations.get("tokens_prompt", 0)),

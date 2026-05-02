@@ -23,8 +23,17 @@ from agent.react.tools import (
     TERMINAL_TOOLS,
     TOOL_SCHEMAS,
     dispatch_tool,
+    filter_tools_for_mode,
+    tool_try_next_candidate,
 )
 from agent.react.trace import Trace, TraceStep
+
+
+# Day-5b — sweep mode constants
+MODE_DAY5_BASELINE = "5-baseline"     # no cascade tool, no intercept (Day-5 replay)
+MODE_5B_TOOL = "5b-tool"              # cascade tool exposed, no MUST, no intercept
+MODE_5B_MANDATE = "5b-mandate"        # cascade tool + prompt MUST + system intercept fallback
+VALID_MODES = {MODE_DAY5_BASELINE, MODE_5B_TOOL, MODE_5B_MANDATE}
 
 
 # Day-5 R8 defaults (mirrors Critic-pruned acceptance bar)
@@ -62,6 +71,53 @@ class AgentResult:
     annotations: dict[str, Any] = field(default_factory=dict)
 
 
+def _system_intercept_cascade(case: dict, memory_backend, state: AgentState) -> str:
+    """Day-5b 5b-mandate fail-safe: when agent calls give_up after a forge-fail
+    without using try_next_candidate, the SYSTEM picks the next candidate from
+    static_analyzer's suspicious_summary and runs one cascade attempt.
+
+    Honest framing: this is Option A (mechanical cascade), gated by mode.
+    NOT 'agent learned to cascade'. Returns observation string for trace.
+    """
+    try:
+        from agent.adapters.static_analyzer import analyze as static_analyze
+
+        facts = static_analyze(case.get("contract_source", ""), case.get("contract_name", ""))
+        prior_target = (state.annotations.get("target_function") or "").strip().lower()
+        # Pick next suspicious that's NOT the prior target
+        next_candidate = ""
+        for fn in facts.functions[:30]:
+            if (
+                fn.visibility in ("external", "public")
+                and fn.state_changing
+                and fn.name.lower() != prior_target
+                and not fn.name.startswith("_")
+            ):
+                next_candidate = fn.name
+                break
+        if not next_candidate:
+            return json.dumps({
+                "ok": False,
+                "system_intercept": True,
+                "reason": "no alternate suspicious candidate available",
+            })
+    except Exception as exc:
+        return json.dumps({
+            "ok": False,
+            "system_intercept": True,
+            "error": f"{type(exc).__name__}: {exc}",
+        })
+
+    # Force a cascade attempt with the system-picked candidate
+    return tool_try_next_candidate(
+        {
+            "candidate_function": next_candidate,
+            "reason": "system intercept (5b-mandate fallback after agent give_up)",
+        },
+        case, memory_backend, state,
+    )
+
+
 def _compute_usd_delta(
     annotations: dict[str, Any],
     prev_prompt: int,
@@ -87,6 +143,7 @@ def run_react_agent(
     prompt_rate: float = DEFAULT_PROMPT_RATE,
     completion_rate: float = DEFAULT_COMPLETION_RATE,
     chat_with_tools_fn=None,  # injection point for tests
+    mode: Optional[str] = None,  # Day-5b: 5-baseline / 5b-tool / 5b-mandate
 ) -> AgentResult:
     """Run the ReAct loop on a single case.
 
@@ -96,6 +153,11 @@ def run_react_agent(
     """
     chat_fn = chat_with_tools_fn or chat_with_tools
 
+    # Day-5b: validate mode + select tool registry + select prompt variant
+    if mode is not None and mode not in VALID_MODES:
+        raise ValueError(f"mode must be one of {VALID_MODES} (got {mode!r})")
+    available_tools = filter_tools_for_mode(mode) if mode else list(TOOL_SCHEMAS)
+
     state = AgentState(
         case_id=case.get("id", "?"),
         contract_name=case.get("contract_name", "?"),
@@ -103,7 +165,10 @@ def run_react_agent(
     trace = Trace.new(case_id=state.case_id, contract_name=state.contract_name)
 
     history: list[dict[str, Any]] = [
-        {"role": "system", "content": build_system_prompt(max_iter=max_iter)},
+        {"role": "system", "content": build_system_prompt(
+            max_iter=max_iter,
+            cascade_mandate=(mode == MODE_5B_MANDATE),
+        )},
         {"role": "user", "content": format_case_brief(case)},
     ]
 
@@ -162,7 +227,7 @@ def run_react_agent(
 
         # --- LLM round trip ---
         try:
-            resp = chat_fn(history, TOOL_SCHEMAS, state.annotations)
+            resp = chat_fn(history, available_tools, state.annotations)
         except Exception as exc:
             terminal_reason = f"llm_error:{type(exc).__name__}"
             trace.add_step(TraceStep(
@@ -246,6 +311,42 @@ def run_react_agent(
             })
 
             if tool_name in TERMINAL_TOOLS:
+                # Day-5b 5b-mandate fail-safe: if agent calls give_up after
+                # at least one forge-fail AND has not yet used cascade,
+                # system silently fires one cascade attempt with the next
+                # candidate from static analysis. This is honest Option-A
+                # orchestration, marked as such in trace + AC1 redefined.
+                if (
+                    mode == MODE_5B_MANDATE
+                    and tool_name == "give_up"
+                    and state.cascade_invocations == 0
+                    and state.last_forge_verdict.startswith("fail")
+                ):
+                    forced_obs = _system_intercept_cascade(case, memory_backend, state)
+                    state.cascade_was_system_forced = True
+                    # Append a synthetic trace step recording the system action
+                    trace.add_step(TraceStep(
+                        step=iter_idx,
+                        iso_ts=datetime.now(timezone.utc).isoformat(),
+                        thought="[SYSTEM INTERCEPT — 5b-mandate fallback]",
+                        tool_name="try_next_candidate",
+                        tool_args={"system_forced": True},
+                        tool_call_id="system_intercept",
+                        tool_result=forced_obs,
+                    ))
+                    state.tools_called.append("try_next_candidate")
+                    # Re-evaluate: if intercept produced a pass, override
+                    # terminal to submit_finding-equivalent
+                    if state.last_forge_verdict == "pass":
+                        terminal_reason = "system_cascade_pass"
+                        state.submitted_target = state.annotations.get("target_function", "")
+                        state.submitted_evidence = "system-mediated cascade exploited next candidate"
+                        state.finding_confirmed = True if hasattr(state, "finding_confirmed") else None  # noqa
+                    else:
+                        terminal_reason = "system_cascade_then_give_up"
+                    terminated_in_batch = True
+                    break
+
                 terminal_reason = tool_name
                 terminated_in_batch = True
                 break  # don't process further tool_calls in this batch
@@ -300,8 +401,11 @@ def run_react_agent(
             pass
 
     finding_confirmed = (
-        terminal_reason == "submit_finding"
-        and state.last_forge_verdict == "pass"
+        (
+            terminal_reason == "submit_finding"
+            and state.last_forge_verdict == "pass"
+        )
+        or terminal_reason == "system_cascade_pass"
     )
 
     return AgentResult(
