@@ -24,15 +24,25 @@ from __future__ import annotations
 
 import csv
 import json
+import shutil
 import subprocess
 import sys
+import tempfile
 import time
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 HOLDOUT_CSV = REPO / "data" / "dataset" / "c5_access_control_dataset_remaining33.csv"
+SOURCE_MAP_CSV = REPO / "data" / "dataset" / "source_map_remaining33.csv"
+ARCHIVE_PREFIX = REPO / "data" / "dataset" / "Repair-Access-Control-C-main" / "Repair-Access-Control-C-main"
 RULE_FILE = REPO / ".omc" / "plans" / "day-6-blind-screen-rule.md"
 OUT_MD = REPO / "data" / "evaluation" / "day6_buildability.md"
+
+# Reuse foundry adapter primitives to keep pragma + cache logic consistent
+sys.path.insert(0, str(REPO / "src"))
+from agent.adapters.foundry import (  # noqa: E402
+    _ensure_forge_std_cache, _resolve_pragma, resolve_forge,
+)
 
 # 23 clean unused ACF IDs (ACF-086..ACF-118 minus the 10 used in Day-5b)
 USED_IN_DAY5B = {"ACF-087", "ACF-091", "ACF-092", "ACF-093", "ACF-101",
@@ -56,26 +66,102 @@ def load_holdout_ids() -> list[str]:
     return ids
 
 
-def try_build_one(case_id: str) -> bool:
-    """Attempt forge build for one case. Returns True iff exit=0.
+_SOURCE_MAP_CACHE: dict[str, str] | None = None
 
-    Implementation note: this function intentionally does NOT log which
-    case it attempted, beyond returning a bool. Per blind-screen rule,
-    aggregation is count-only.
 
-    The build harness is the same one used by Day-5b react agent runs.
-    Adapt this stub to whatever the project's `forge build` invocation
-    is (foundry workspace path, contract file, etc.). For now this is
-    a placeholder that the operator wires up to the real harness.
+def _load_source_map() -> dict[str, str]:
+    """ACF-id -> archive-relative contract path (e.g. data/contracts/cve/B2X.sol)."""
+    global _SOURCE_MAP_CACHE
+    if _SOURCE_MAP_CACHE is None:
+        _SOURCE_MAP_CACHE = {}
+        with SOURCE_MAP_CSV.open("r", encoding="utf-8-sig") as fp:
+            for row in csv.DictReader(fp):
+                _SOURCE_MAP_CACHE[row["incident_id"]] = row["matched_solidity_file"]
+    return _SOURCE_MAP_CACHE
+
+
+def _resolve_contract_path(case_id: str) -> Path | None:
+    """Map ACF id -> absolute path under archive prefix. None if unmappable."""
+    rel = _load_source_map().get(case_id)
+    if not rel:
+        return None
+    full = ARCHIVE_PREFIX / rel
+    return full if full.exists() else None
+
+
+def try_build_one(case_id: str, forge: str, build_timeout_s: int = 60) -> bool:
+    """Attempt `forge build` on one case's contract source. Returns True iff exit=0.
+
+    Per blind-screen rule, this function does NOT log which case attempted
+    or what error it produced — caller aggregates count only.
+
+    Strategy:
+      1. Resolve source path via source_map_remaining33.csv + archive prefix.
+      2. Apply pragma policy (`_resolve_pragma`) so 0.7.x sources still compile
+         under solc 0.8 by being treated as `pre_08_force_replica` (skip build,
+         since they cannot bridge — return False).
+      3. Write contract to temp foundry workspace + minimal foundry.toml.
+      4. Copy forge-std cache into workspace lib/ (some contracts import it).
+      5. Run `forge build` with auto_detect_solc enabled.
     """
-    # PLACEHOLDER: replace with actual forge build invocation.
-    # Real implementation should:
-    #   1. Locate contract source file via source_map_remaining33.csv
-    #   2. Run `forge build --root <project_root> 2>&1`
-    #   3. Return True iff exit code 0
-    # For the kickoff-prep phase we simply return True for all cases as
-    # a structural check; operator MUST replace this before Step 0a real run.
-    return True
+    src_path = _resolve_contract_path(case_id)
+    if src_path is None:
+        return False  # source missing -> not buildable
+
+    try:
+        contract_source = src_path.read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        return False
+
+    pragma_directive, pragma_hint = _resolve_pragma(contract_source)
+    if pragma_hint == "pre_08_force_replica":
+        # Pre-0.8 contracts can't be compiled standalone with our solc setup
+        # Treat as not-buildable for Day-6 RAG purposes (PoC harness can't
+        # use them either, so they're not viable holdout cases anyway).
+        return False
+
+    cached_lib, cache_status = _ensure_forge_std_cache(forge)
+    if cache_status == "install_failed":
+        return False  # treat as not buildable; aggregate count is what matters
+
+    with tempfile.TemporaryDirectory(prefix="day6_blind_") as tmpdir:
+        proj = Path(tmpdir)
+        (proj / "src").mkdir()
+        (proj / "lib").mkdir()
+        # Use generic name to avoid case-id leak via filesystem inspection
+        # (defensive: even if the build artifact dir survives, no per-id signal).
+        source_to_write = (
+            pragma_directive + "\n" + contract_source
+            if pragma_hint == "no_pragma_force_0820"
+            else contract_source
+        )
+        (proj / "src" / "Candidate.sol").write_text(source_to_write, encoding="utf-8")
+        (proj / "foundry.toml").write_text(
+            "[profile.default]\n"
+            'src = "src"\n'
+            'out = "out"\n'
+            'libs = ["lib"]\n'
+            "auto_detect_solc = true\n",
+            encoding="utf-8",
+        )
+        try:
+            shutil.copytree(cached_lib, proj / "lib" / "forge-std")
+        except OSError:
+            return False
+
+        try:
+            result = subprocess.run(
+                [forge, "build"],
+                cwd=str(proj),
+                capture_output=True,
+                text=True,
+                encoding="utf-8",
+                errors="replace",
+                timeout=build_timeout_s,
+            )
+        except (subprocess.TimeoutExpired, OSError):
+            return False
+        return result.returncode == 0
 
 
 def main() -> int:
@@ -89,14 +175,29 @@ def main() -> int:
         print(f"ERROR: expected 23 holdout IDs, got {len(ids)}", file=sys.stderr)
         return 1
 
+    forge = resolve_forge()
+    if forge is None:
+        print("ERROR: forge executable not found on PATH / FOUNDRY_PATH", file=sys.stderr)
+        return 1
+    if not ARCHIVE_PREFIX.exists():
+        print(f"ERROR: contract archive not found at {ARCHIVE_PREFIX}", file=sys.stderr)
+        return 1
+
     print(f"Blind-screening {len(ids)} candidate cases for forge buildability...")
+    print(f"(Forge: {forge})")
     print("(Per blind rule: only the aggregate count will be logged.)")
+    print()
 
     started_at = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
     buildable = 0
-    for cid in ids:
-        if try_build_one(cid):
+    for i, cid in enumerate(ids, 1):
+        # Per blind rule: print only progress dot, never the case id alongside result.
+        ok = try_build_one(cid, forge)
+        sys.stdout.write("." if ok else "x")
+        sys.stdout.flush()
+        if ok:
             buildable += 1
+    print()  # newline after progress
 
     finished_at = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
 

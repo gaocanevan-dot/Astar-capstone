@@ -6,15 +6,19 @@ Per blind-screen rule: count-only artifact. Per-ID results NOT logged.
 
 ```json
 {
-  "screened_at_start": "2026-05-02T15:41:41Z",
-  "screened_at_finish": "2026-05-02T15:41:41Z",
+  "screened_at_start": "2026-05-02T16:03:45Z",
+  "screened_at_finish": "2026-05-02T16:04:25Z",
   "candidates_total": 23,
-  "buildable_count": 23
+  "buildable_count": 5
 }
 ```
 
-## n routing decision
+## Preliminary n routing (PENDING AC10d at Step 0b)
 
-buildable=23 >= 21 → **n=18 routing**
+The final routing decision is made at Step 1 (freeze holdout)
+after Step 0b reports AC10d Jaccard-survivor count. Effective
+candidate count = min(buildable_count, ac10d_survivor_count).
 
-Decision: `n18`
+buildable=5 < 18 → **PATH B ESCALATION** (Step 0c spot-check)
+
+Preliminary decision: `pathB`

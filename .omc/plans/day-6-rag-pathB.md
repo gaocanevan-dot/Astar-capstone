@@ -7,31 +7,49 @@ claim IF Step 0a (blind buildability) returns <18 buildable OR Step 0b
 
 **Activation gate**: Step 0a `buildable_count` < 18 OR Step 0b survivors < 15.
 
+**ACTIVATION CONFIRMED 2026-05-02**: Step 0a real run returned
+`buildable_count = 5` of 23 candidates → Path B triggered. Step 0b
+verified library-quality gates pass (AC10a 100% / AC10b 19% / AC10c 0
+illegal / AC10d 16 survivors), so the failure is NOT library
+contamination — it is candidate-source viability. Most ACF cases
+reference imports/dependencies that don't bundle into the standalone
+Foundry workspace this script attempts to compile in.
+
 ---
 
-## Headline (PRE-WRITTEN)
+## Headline (post-Step-0a actual numbers)
 
-> "Day-6 Path A (clean ACF holdout) was not viable: contamination
-> hub-detection (AC10d) and/or forge-buildability shortfall reduced the
+> "Day-6 Path A (clean ACF holdout) was not viable: forge-buildability
+> shortfall (5/23 buildable in standalone Foundry workspace) reduced the
 > candidate pool below the n_floor=15 required for any defensible
-> statistical claim. Path B activated: Step 0c spot-check on
-> {PATHB_SOURCE} confirmed/refused viability ({PATHB_RESULT}). The
+> statistical claim. Library-quality gates (AC10a/b/c/d) all PASSED on
+> the 23-case pool — root cause is NOT contamination, it is
+> **candidate-source viability**: most ACF contracts depend on
+> imports/dependencies that don't bundle into the isolated standalone
+> compilation harness Step 0a uses. Path B (alternative corpus)
+> activation pending operator decision on Step 0c spot-check.
 > Day-6 RAG mechanism (AntiPatternInjector at propose_target) is NOT
 > evaluated in this round; design + skeleton are committed for re-use
 > on the next viable corpus."
 
 ## Why Path A failed
 
-Step 0a buildable_count: {BUILDABLE_COUNT} (need ≥18)
-Step 0b AC10d survivors: {SURVIVORS} (need ≥{N_FLOOR})
+Step 0a buildable_count: **5** (need ≥18 for n=15 routing, ≥21 for n=18)
+Step 0b AC10d survivors: 16 (would have passed, but moot given Step 0a)
 
-Reason for shortfall (one of):
-- Forge build failures on {N_BUILD_FAIL} of 23 candidate cases
-  (toolchain mismatch, missing dependencies, contract source corruption)
-- AC10d Jaccard contamination dropped {N_AC10D_DROPS} cases
-  (anti_patterns library too tightly coupled to ACF source — same
-  attack patterns recur across sequentially-numbered DeFi-Hack cases)
-- Both
+Detailed breakdown:
+- **Forge build failures on 18 of 23 candidate cases.** Per the blind-screen
+  rule, per-ID failure reasons are NOT logged. Likely causes (informed
+  guess from contract layout): missing imports (OpenZeppelin / project
+  internal interfaces), pre-0.8 pragma incompatibilities (`_resolve_pragma`
+  routes those to `replica_only` and the script returns False), and
+  reference to types defined in sibling source files.
+- **AC10d Jaccard would have dropped 7 cases** (ACF-096 perfect duplicate +
+  6 cases sharing 0.40-0.67 token overlap with ACF-078 onlyowner cluster),
+  leaving 16 survivors. This passed the n_floor=15 gate, but the much
+  smaller buildability pool dominates the routing decision.
+- Either bottleneck alone would have been recoverable; both compounded
+  produces a hard Path B trigger.
 
 **Critical finding to commit**: the 23-case clean pool is too small AND
 too close to the library's training distribution for valid n=18+ RAG
@@ -100,15 +118,43 @@ test against in Day-7:
 3. **NOT validity for any specific Path B corpus** — Step 0c spot-check
    provides only a 3-case viability signal, not a buildability guarantee.
 
-## Acceptance criteria tally (Path B branch)
+## Acceptance criteria tally (Path B branch, actual)
 
 | AC | Threshold | Result | Pass? |
 |---|---|---|---|
-| AC10a coverage | ≥60% | {AC10A:.0%} on Path A holdout | {V10A} |
-| AC10b leakage | <30% | {AC10B:.0%} on Path A holdout | {V10B} |
+| AC10a coverage | ≥60% | 100% on Path A holdout | YES |
+| AC10b leakage (post-AC10d survivors) | <30% | 19% (3/16) | YES |
 | AC10c ID overlap | 0 | 0 | YES |
-| AC10d Jaccard survivors | ≥15 | {SURVIVORS} (< floor) | NO (this is why we're here) |
+| AC10d Jaccard survivors | ≥15 | 16 | YES |
+| **Step 0a buildability** | **≥18** | **5** | **NO** ← Path B trigger |
 | AC11–AC20 | various | NOT EVALUATED | n/a |
+
+**Note**: AC10d alone would have passed (16 survivors ≥ 15 floor). The
+Path B trigger is buildability, not contamination. This is informative
+for Day-7 corpus selection: a viable corpus needs both clean library
+audit AND standalone-buildable contracts.
+
+## Operator decision point (NEW — surfaced post-Step-0a)
+
+The blind-screen rule forbids per-ID inspection of which 5 cases built.
+Two options for next iteration:
+
+1. **Honor blind rule, pivot to Path B fully**: never inspect which 5,
+   spend Step 0c spot-check on SmartBugs-curated, run Day-7 there.
+   Most defensible epistemically. Discards the 5 buildable as
+   not-investigatable.
+
+2. **Drop blind rule for Path B prep, salvage the 5**: re-run Step 0a
+   in non-blind mode, identify the 5, use them as a qualitative pilot
+   (n=5, no statistical claim). This violates the pre-committed blind
+   rule but is methodologically defensible IF we explicitly tag the
+   re-run as "blind-rule-suspended for Path B salvage" and add the
+   suspension to the audit trail.
+
+Recommendation: **Option 1**. n=5 isn't enough for any RAG signal even
+qualitatively; the 5 cases sit ambiguously between "useful pilot" and
+"cherry-picked anecdote" in any writeup. Spending the budget on
+SmartBugs spot-check has a cleaner downstream story.
 
 ## Stop rule
 
