@@ -1,6 +1,6 @@
 # Capstone Narrative — Agent vs Zero-Shot Baseline
 
-Bilingual draft. Honest framing. All numbers traceable to artifacts in `data/evaluation/` and `.omc/plans/day4-routing-reversal-disclosure.md`.
+Bilingual draft. Honest framing. All numbers traceable to artifacts in `data/evaluation/` and `docs/methodology/day4-routing-reversal-disclosure.md`.
 
 ---
 
@@ -14,7 +14,7 @@ The lift has clear mechanistic attribution. ACF-114 (`SpaceGodzilla`) fails at t
 
 Honest limitations: Recall@1 (predicted = labeled function) remains 2/10 under both systems — Code4rena contracts often have multiple AC-deficient functions, so passes happen on non-labeled exploitable functions. We treat the agent's contribution as **end-to-end exploit construction**, not labeled-function identification.
 
-Post-hoc cascade routing adjustments are disclosed in `.omc/plans/day4-routing-reversal-disclosure.md`.
+Post-hoc cascade routing adjustments are disclosed in `docs/methodology/day4-routing-reversal-disclosure.md`.
 
 ---
 
@@ -28,7 +28,7 @@ Post-hoc cascade routing adjustments are disclosed in `.omc/plans/day4-routing-r
 
 诚实声明：在两个系统下 Recall@1（预测函数 = label 函数）都是 2/10——Code4rena 合约普遍存在多个 AC 缺陷函数，因此 PoC 在非 label 函数上 pass 是常态。我们将 agent 的核心贡献定位为**端到端漏洞利用构造**，而非 label 函数识别。
 
-Cascade 路由的 post-hoc 调整在 `.omc/plans/day4-routing-reversal-disclosure.md` 中全程公开。
+Cascade 路由的 post-hoc 调整在 `docs/methodology/day4-routing-reversal-disclosure.md` 中全程公开。
 
 ---
 

@@ -16,6 +16,6 @@ Lift criterion: at least one of (5b-tool, 5b-mandate) has `pass ≥ 5` AND `self
 | 5b-tool | 10 | 6 | 10 | 0 | 6.0 | 0 | 0 | $0.1515 |
 | 5b-mandate | 10 | 5 | 10 | 0 | 6.6 | 5 | 0 | $0.2255 |
 
-## Chosen narrative: `.omc/plans/day-5b-honest-framing.md`
+## Chosen narrative: `docs/methodology/day-5b-honest-framing.md`
 
 **This is the LAST post-hoc round on n=10.** No further architecture changes on this smoke set without a fresh held-out corpus.

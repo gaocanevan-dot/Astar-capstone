@@ -10,7 +10,7 @@ check. Hard PASS / ABORT decision.
   AC10d Jaccard    every holdout case max-Jaccard < threshold (R1-derived)
 
 Threshold for AC10d is read from
-.omc/plans/day-6-blind-screen-rule.md (R2). If absent, exits 1.
+docs/methodology/day-6-blind-screen-rule.md (R2). If absent, exits 1.
 
 If AC10d drops the holdout below n=15 floor → ABORT and escalate to
 Path B (Critic minor finding closure).
@@ -29,7 +29,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 HOLDOUT_CSV = REPO / "data" / "dataset" / "c5_access_control_dataset_remaining33.csv"
 ANTIPATTERNS = REPO / "data" / "agent_memory" / "anti_patterns.jsonl"
-RULE_FILE = REPO / ".omc" / "plans" / "day-6-blind-screen-rule.md"
+RULE_FILE = REPO / "docs" / "methodology" / "day-6-blind-screen-rule.md"
 OUT_MD = REPO / "data" / "evaluation" / "day6_audit.md"
 
 USED_IN_DAY5B = {"ACF-087", "ACF-091", "ACF-092", "ACF-093", "ACF-101",

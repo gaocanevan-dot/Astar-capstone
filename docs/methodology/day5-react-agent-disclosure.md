@@ -3,7 +3,7 @@
 **Status**: Q3 demo MET. R7 fallback NOT triggered. ReAct agent ships as
 primary architecture; Day-4 pipeline retained as comparison baseline.
 
-**Plan ancestor**: `.omc/plans/day4-routing-reversal-disclosure.md`
+**Plan ancestor**: `docs/methodology/day4-routing-reversal-disclosure.md`
 **Disclosure principle**: same as Day-4 — every change documented with
 empirical trigger, mechanism evidence, and honest framing.
 

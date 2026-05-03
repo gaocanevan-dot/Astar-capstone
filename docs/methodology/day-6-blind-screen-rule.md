@@ -123,10 +123,10 @@ on mechanical AC results:
 
 | Branch | Activation rule | File |
 |---|---|---|
-| Effective | delta ≥ +3 AND p<0.10 | `.omc/plans/day-6-rag-effective.md` |
-| Inconclusive | 1 ≤ delta < 3 OR (delta≥3 AND p≥0.10) | `.omc/plans/day-6-rag-inconclusive.md` |
-| Ineffective | delta ≤ 0 | `.omc/plans/day-6-rag-ineffective.md` |
-| Path B | Step 0a buildable<18 OR Step 0b survivors<15 | `.omc/plans/day-6-rag-pathB.md` |
+| Effective | delta ≥ +3 AND p<0.10 | `docs/methodology/day-6-rag-effective.md` |
+| Inconclusive | 1 ≤ delta < 3 OR (delta≥3 AND p≥0.10) | `docs/methodology/day-6-rag-inconclusive.md` |
+| Ineffective | delta ≤ 0 | `docs/methodology/day-6-rag-ineffective.md` |
+| Path B | Step 0a buildable<18 OR Step 0b survivors<15 | `docs/methodology/day-6-rag-pathB.md` |
 
 **Inconclusive rerun cap**: max 2 consecutive inconclusive on same
 intervention; 3rd attempt MUST ship ineffective.
@@ -163,7 +163,7 @@ results must be tagged as `characterization`, never as
 ## Hash gate (operator runs this BEFORE Step 0a)
 
 ```bash
-git log --pretty=format:'%H %ci %s' -- .omc/plans/day-6-blind-screen-rule.md
+git log --pretty=format:'%H %ci %s' -- docs/methodology/day-6-blind-screen-rule.md
 ```
 
 Output must show this file committed BEFORE the Step 0a runtime. The

@@ -83,7 +83,7 @@ test against in Day-7:
 - `scripts/day6_blind_screen.py` — buildability harness (corpus-agnostic)
 - `scripts/day6_audit.py` — AC10a/b/c/d auditor (parameterized over source)
 - `scripts/calibrate_jaccard.py` — Jaccard threshold calibrator (reusable)
-- `.omc/plans/day-6-blind-screen-rule.md` — operating rule (reusable)
+- `docs/methodology/day-6-blind-screen-rule.md` — operating rule (reusable)
 
 ## Day-6 paper-worthy findings (Path B version)
 

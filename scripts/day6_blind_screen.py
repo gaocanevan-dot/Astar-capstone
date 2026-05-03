@@ -15,7 +15,7 @@ Output:
   data/evaluation/day6_buildability.md  (count-only artifact)
   Exit code: 0 if buildable >= 18, 2 if <18 (path B trigger), 1 on harness error.
 
-Pre-condition: `.omc/plans/day-6-blind-screen-rule.md` MUST be committed
+Pre-condition: `docs/methodology/day-6-blind-screen-rule.md` MUST be committed
 to git BEFORE this script runs (R2 hash gate). The script asserts the
 rule file exists; it does NOT verify the git state because hooks vary
 across operator setups — operator is responsible for the commit.
@@ -35,7 +35,7 @@ REPO = Path(__file__).resolve().parent.parent
 HOLDOUT_CSV = REPO / "data" / "dataset" / "c5_access_control_dataset_remaining33.csv"
 SOURCE_MAP_CSV = REPO / "data" / "dataset" / "source_map_remaining33.csv"
 ARCHIVE_PREFIX = REPO / "data" / "dataset" / "Repair-Access-Control-C-main" / "Repair-Access-Control-C-main"
-RULE_FILE = REPO / ".omc" / "plans" / "day-6-blind-screen-rule.md"
+RULE_FILE = REPO / "docs" / "methodology" / "day-6-blind-screen-rule.md"
 OUT_MD = REPO / "data" / "evaluation" / "day6_buildability.md"
 
 # Reuse foundry adapter primitives to keep pragma + cache logic consistent

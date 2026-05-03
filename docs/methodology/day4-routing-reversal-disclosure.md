@@ -1,7 +1,7 @@
 # Day-4 Routing Reversal & Post-hoc Adjustments — Disclosure
 
 **Status**: Locked-in changes after Day-3 baseline tied at 4/10 pass.
-**Plan ancestor**: `.omc/plans/ralplan-iter4-agent-flow-recall.md`
+**Plan ancestor**: `docs/methodology/ralplan-iter4-agent-flow-recall.md`
 **Disclosure principle**: every change documented with empirical trigger, mechanism evidence, and honest framing. This file is referenced verbatim in capstone narrative limitations section.
 
 ---
@@ -162,7 +162,7 @@ The +2 pass increase (4 → 6) breaks down per-case:
 | `data/evaluation/smoke_gpt-zeroshot-e2e.json` (Day-3) | zero-shot baseline data |
 | `data/evaluation/smoke_agent-full.json` (Day-4) | final agent-full sweep results |
 | `data/evaluation/smoke_summary.md` (Day-4) | aggregate summary |
-| `.omc/plans/day4-routing-reversal-disclosure.md` (this file) | full disclosure |
+| `docs/methodology/day4-routing-reversal-disclosure.md` (this file) | full disclosure |
 
 ---
 

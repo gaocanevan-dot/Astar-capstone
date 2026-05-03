@@ -188,7 +188,7 @@ def run_pipeline(
         # (PoC keeps reverting on this candidate — try a different function).
         # Compile failures still retry up to max_retries (PoC writer needs the
         # error feedback to fix). This is a deliberate, post-hoc-yet-disclosed
-        # adjustment (see .omc/plans/day4-routing-reversal-disclosure.md).
+        # adjustment (see docs/methodology/day4-routing-reversal-disclosure.md).
         runtime_fail_count = 0
         runtime_advance = False
 

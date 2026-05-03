@@ -20,7 +20,7 @@ Day-4 ISSUE 2 CHANGE:
   `_post_tool`) are still populated for downstream consumer stability — both
   point at the single result.
 
-Documented in `.omc/plans/day4-routing-reversal-disclosure.md` as a
+Documented in `docs/methodology/day4-routing-reversal-disclosure.md` as a
 disclosed post-Day-3 simplification motivated by zero-shot tied baseline.
 """
 

@@ -2,8 +2,8 @@
 """Day-5b mechanical acceptance gate (Critic R4 + Architect R4 spirit).
 
 Reads the 3 per-arm sweep aggregates and emits a binary verdict:
-- exit 0 → ship `.omc/plans/day-5b-honest-framing.md` as the headline narrative
-- exit non-zero → ship `.omc/plans/day-D-pivot.md` as pivot narrative
+- exit 0 → ship `docs/methodology/day-5b-honest-framing.md` as the headline narrative
+- exit non-zero → ship `docs/methodology/day-D-pivot.md` as pivot narrative
 
 Acceptance bar (pre-committed in narratives):
 - At least ONE of {5b-tool, 5b-mandate} reaches `pass_count >= 5/10`
@@ -116,8 +116,8 @@ def main() -> int:
 
     overall_pass = cost_pass and bar2_pass
     chosen_narrative = (
-        ".omc/plans/day-5b-honest-framing.md" if overall_pass
-        else ".omc/plans/day-D-pivot.md"
+        "docs/methodology/day-5b-honest-framing.md" if overall_pass
+        else "docs/methodology/day-D-pivot.md"
     )
 
     # ---- Render verdict ----

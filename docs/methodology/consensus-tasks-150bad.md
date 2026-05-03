@@ -1,6 +1,6 @@
 # Consensus Task Doc: 150-Bad-Case Framework
 
-**Plan:** `.omc/plans/consensus-plan-150bad.md`
+**Plan:** `docs/methodology/consensus-plan-150bad.md`
 **Schema:** see plan §3.2 (task_id / phase / title / depends_on / files_touched / exit_test / estimate_h / owner_hint / status / notes)
 **Status legend:** `todo` · `in_progress` · `blocked` · `done`
 **Path convention:** all `files_touched` paths are relative to repo root (`E:/Studying Material/Capstone/agent`).

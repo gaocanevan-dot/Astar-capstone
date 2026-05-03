@@ -228,7 +228,7 @@ def main() -> int:
         f"- Per-case traces: `{traces_dir.relative_to(REPO_ROOT)}/`",
         f"- Day-4 baseline: `{Path(args.day4_baseline).relative_to(REPO_ROOT)}`",
         f"- Zero-shot baseline: `{Path(args.zero_shot_baseline).relative_to(REPO_ROOT)}`",
-        "- Disclosure: `.omc/plans/day4-routing-reversal-disclosure.md` (Day-4 lineage)",
+        "- Disclosure: `docs/methodology/day4-routing-reversal-disclosure.md` (Day-4 lineage)",
         "",
     ])
 

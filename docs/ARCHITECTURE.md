@@ -2,7 +2,7 @@
 
 This document describes the **single-agent** variant of the access-control
 vulnerability framework. This is an early feasibility check — a deliberate
-reduction of the full LangGraph design in `.omc/plans/consensus-plan-150bad.md`.
+reduction of the full LangGraph design in `docs/methodology/consensus-plan-150bad.md`.
 
 ## Why single-agent?
 

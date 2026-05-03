@@ -151,7 +151,7 @@ class TestCascadeAbstainOnRetryExhausted:
     transient-PoC caution), 2nd occurrence ADVANCES (cascade unblocked).
 
     Pre-Day-4 expectation (preserved here in comments for transparency,
-    documented in `.omc/plans/day4-routing-reversal-disclosure.md`):
+    documented in `docs/methodology/day4-routing-reversal-disclosure.md`):
         3x `fail_error_runtime` → abstain at depth 1, no cascade advance.
     Day-4 expectation:
         runtime#1 retry → runtime#2 advance to top-2.

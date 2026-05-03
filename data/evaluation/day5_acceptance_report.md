@@ -51,4 +51,4 @@ with Day-3/4 progression preserved as ablation history.
 - Per-case traces: `data\evaluation\react_traces/`
 - Day-4 baseline: `data\evaluation\smoke_agent-full.json`
 - Zero-shot baseline: `data\evaluation\smoke_gpt-zeroshot-e2e.json`
-- Disclosure: `.omc/plans/day4-routing-reversal-disclosure.md` (Day-4 lineage)
+- Disclosure: `docs/methodology/day4-routing-reversal-disclosure.md` (Day-4 lineage)

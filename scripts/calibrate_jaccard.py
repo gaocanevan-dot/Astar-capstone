@@ -15,7 +15,7 @@ Threshold selection (Architect-prescribed, in order of preference):
   3. Hard floor 0.30 (final fallback if distribution is uniformly high)
 
 The recommended threshold is then transcribed into
-.omc/plans/day-6-blind-screen-rule.md (R2) and used by scripts/day6_audit.py
+docs/methodology/day-6-blind-screen-rule.md (R2) and used by scripts/day6_audit.py
 as AC10d's mechanical gate.
 
 Usage:

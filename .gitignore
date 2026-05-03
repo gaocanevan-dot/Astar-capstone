@@ -102,16 +102,10 @@ data/dataset/.dataset_hashes.lock
 # Local CLI / IDE state
 .claude/
 
-# OMC runtime state (session-scoped). Plans + research stay tracked under
-# .omc/plans/ via explicit `git add` of those subdirs.
-.omc/state/
-.omc/sessions/
-.omc/specs/
-.omc/notepad.md
-.omc/project-memory.json
-.omc/prd.json
-.omc/progress.txt
-.omc/logs/
+# OMC / Claude Code tooling state — entire .omc/ tree is local-only.
+# Methodology artifacts that used to live here have been migrated to
+# docs/methodology/ for permanent tracking. See commit history for moves.
+.omc/
 
 # Local forge-std install cache (created by adapters/foundry.py at runtime)
 .cache/forge-std/

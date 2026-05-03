@@ -2,7 +2,7 @@
 
 **Status:** APPROVED (Planner v2 + Architect second-pass SOUND + Critic APPROVE with 2-line addendum folded in)
 **Spec:** `.omc/specs/deep-interview-150-bad-case-detection.md`
-**Companion task doc:** `.omc/plans/consensus-tasks-150bad.md`
+**Companion task doc:** `docs/methodology/consensus-tasks-150bad.md`
 **Mode:** RALPLAN-DR Short (non-interactive)
 **Iterations:** Planner v1 → Architect v1 → Critic v1 (ITERATE) → Planner v2 → Architect v2 (SOUND) → Critic v2 (APPROVE) = 1 re-review round
 
@@ -71,7 +71,7 @@ Architect 提出的三选路径,已并入 A(frozen `AuditCore` + mutable sidecar
 
 架构决策 + 实施阶段 + acceptance criteria + ADR + changelog。
 
-### 3.2 Task 文档(`.omc/plans/consensus-tasks-150bad.md`)
+### 3.2 Task 文档(`docs/methodology/consensus-tasks-150bad.md`)
 
 **Schema(每一行任务必填):**
 
