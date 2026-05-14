@@ -1,0 +1,3131 @@
+[
+  {
+    "case_id": "ACF-001",
+    "contract_name": "TBTCSystem",
+    "ground_truth_function": "requestNewKeep",
+    "flagged": false,
+    "flagged_functions": [],
+    "predicted_function": "",
+    "tokens_prompt": 2843,
+    "tokens_completion": 1244,
+    "llm_calls": 1,
+    "wall_clock_seconds": 23.234238862991333,
+    "raw_output": "{\n  \"is_vulnerable\": false,\n  \"vulnerable_functions\": []\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-002",
+    "contract_name": "USSD",
+    "ground_truth_function": "burnRebalancer",
+    "flagged": true,
+    "flagged_functions": [
+      "mintRebalancer",
+      "burnRebalancer",
+      "approveToRouter"
+    ],
+    "predicted_function": "mintRebalancer",
+    "tokens_prompt": 1690,
+    "tokens_completion": 1065,
+    "llm_calls": 1,
+    "wall_clock_seconds": 16.88771080970764,
+    "raw_output": "{\"is_vulnerable\": true, \"vulnerable_functions\": [\"mintRebalancer\", \"burnRebalancer\", \"approveToRouter\"]}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-003",
+    "contract_name": "RoundFactory",
+    "ground_truth_function": "create",
+    "flagged": true,
+    "flagged_functions": [
+      "create",
+      "initialize",
+      "updateRoundImplementation"
+    ],
+    "predicted_function": "create",
+    "tokens_prompt": 852,
+    "tokens_completion": 1132,
+    "llm_calls": 1,
+    "wall_clock_seconds": 18.630017042160034,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"create\",\n    \"initialize\",\n    \"updateRoundImplementation\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-004",
+    "contract_name": "BaseStrategyVault",
+    "ground_truth_function": "__INIT_VAULT",
+    "flagged": false,
+    "flagged_functions": [],
+    "predicted_function": "",
+    "tokens_prompt": 1918,
+    "tokens_completion": 988,
+    "llm_calls": 1,
+    "wall_clock_seconds": 15.985424280166626,
+    "raw_output": "{\n  \"is_vulnerable\": false,\n  \"vulnerable_functions\": []\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-005",
+    "contract_name": "Cooler",
+    "ground_truth_function": "request",
+    "flagged": true,
+    "flagged_functions": [
+      "roll",
+      "request",
+      "transfer"
+    ],
+    "predicted_function": "roll",
+    "tokens_prompt": 2083,
+    "tokens_completion": 4260,
+    "llm_calls": 1,
+    "wall_clock_seconds": 115.88817095756531,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"roll\", \"request\", \"transfer\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-006",
+    "contract_name": "USSD",
+    "ground_truth_function": "mintRebalancer",
+    "flagged": true,
+    "flagged_functions": [
+      "mintRebalancer",
+      "burnRebalancer",
+      "approveToRouter"
+    ],
+    "predicted_function": "mintRebalancer",
+    "tokens_prompt": 1690,
+    "tokens_completion": 1458,
+    "llm_calls": 1,
+    "wall_clock_seconds": 20.176253080368042,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"mintRebalancer\",\n    \"burnRebalancer\",\n    \"approveToRouter\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-007",
+    "contract_name": "ProtectionPoolCycleManager",
+    "ground_truth_function": "initialize",
+    "flagged": true,
+    "flagged_functions": [
+      "initialize"
+    ],
+    "predicted_function": "initialize",
+    "tokens_prompt": 1593,
+    "tokens_completion": 478,
+    "llm_calls": 1,
+    "wall_clock_seconds": 7.6810407638549805,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"initialize\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-008",
+    "contract_name": "Log",
+    "ground_truth_function": "Log",
+    "flagged": true,
+    "flagged_functions": [
+      "Log"
+    ],
+    "predicted_function": "Log",
+    "tokens_prompt": 165,
+    "tokens_completion": 350,
+    "llm_calls": 1,
+    "wall_clock_seconds": 5.844496250152588,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"Log\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-009",
+    "contract_name": "CollateralManager",
+    "ground_truth_function": "commitCollateral",
+    "flagged": true,
+    "flagged_functions": [
+      "setCollateralEscrowBeacon",
+      "initialize",
+      "withdraw"
+    ],
+    "predicted_function": "setCollateralEscrowBeacon",
+    "tokens_prompt": 4358,
+    "tokens_completion": 2414,
+    "llm_calls": 1,
+    "wall_clock_seconds": 36.422614097595215,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"setCollateralEscrowBeacon\",\n    \"initialize\",\n    \"withdraw\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-010",
+    "contract_name": "AccountManager",
+    "ground_truth_function": "init",
+    "flagged": true,
+    "flagged_functions": [
+      "init",
+      "initDep",
+      "openAccount"
+    ],
+    "predicted_function": "init",
+    "tokens_prompt": 2979,
+    "tokens_completion": 1766,
+    "llm_calls": 1,
+    "wall_clock_seconds": 27.04468297958374,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"init\", \"initDep\", \"openAccount\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-011",
+    "contract_name": "LienToken",
+    "ground_truth_function": "_deleteLienPosition",
+    "flagged": false,
+    "flagged_functions": [],
+    "predicted_function": "",
+    "tokens_prompt": 5153,
+    "tokens_completion": 2332,
+    "llm_calls": 1,
+    "wall_clock_seconds": 43.66199207305908,
+    "raw_output": "{\n  \"is_vulnerable\": false,\n  \"vulnerable_functions\": []\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-012",
+    "contract_name": "CrabNetting",
+    "ground_truth_function": "checkOrder",
+    "flagged": true,
+    "flagged_functions": [
+      "checkOrder",
+      "_checkOrder",
+      "setNonceTrue"
+    ],
+    "predicted_function": "checkOrder",
+    "tokens_prompt": 4872,
+    "tokens_completion": 2792,
+    "llm_calls": 1,
+    "wall_clock_seconds": 46.664305210113525,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"checkOrder\", \"_checkOrder\", \"setNonceTrue\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-013",
+    "contract_name": "PassThroughWalletImpl",
+    "ground_truth_function": "initializer",
+    "flagged": true,
+    "flagged_functions": [
+      "passThroughTokens",
+      "setPassThrough",
+      "initializer"
+    ],
+    "predicted_function": "passThroughTokens",
+    "tokens_prompt": 909,
+    "tokens_completion": 1710,
+    "llm_calls": 1,
+    "wall_clock_seconds": 22.314729928970337,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"passThroughTokens\",\n    \"setPassThrough\",\n    \"initializer\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-014",
+    "contract_name": "DVM",
+    "ground_truth_function": "init",
+    "flagged": true,
+    "flagged_functions": [
+      "initOwner",
+      "setFeeProxy",
+      "claimOwnership"
+    ],
+    "predicted_function": "initOwner",
+    "tokens_prompt": 5224,
+    "tokens_completion": 942,
+    "llm_calls": 1,
+    "wall_clock_seconds": 12.496575832366943,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"initOwner\",\n    \"setFeeProxy\",\n    \"claimOwnership\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-015",
+    "contract_name": "EFLeverVault",
+    "ground_truth_function": "receiveFlashLoan",
+    "flagged": true,
+    "flagged_functions": [
+      "receiveFlashLoan",
+      "withdraw",
+      "deposit"
+    ],
+    "predicted_function": "receiveFlashLoan",
+    "tokens_prompt": 5382,
+    "tokens_completion": 2342,
+    "llm_calls": 1,
+    "wall_clock_seconds": 102.4196879863739,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"receiveFlashLoan\", \"withdraw\", \"deposit\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-016",
+    "contract_name": "WalletLibrary",
+    "ground_truth_function": "initWallet",
+    "flagged": true,
+    "flagged_functions": [
+      "changeOwner",
+      "addOwner",
+      "kill"
+    ],
+    "predicted_function": "changeOwner",
+    "tokens_prompt": 4278,
+    "tokens_completion": 4140,
+    "llm_calls": 1,
+    "wall_clock_seconds": 57.03110098838806,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"changeOwner\",\n    \"addOwner\",\n    \"kill\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-017",
+    "contract_name": "SimplePriceOracle",
+    "ground_truth_function": "setOracleData",
+    "flagged": true,
+    "flagged_functions": [
+      "setOracleData"
+    ],
+    "predicted_function": "setOracleData",
+    "tokens_prompt": 376,
+    "tokens_completion": 416,
+    "llm_calls": 1,
+    "wall_clock_seconds": 8.688695907592773,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"setOracleData\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-018",
+    "contract_name": "ERC721BaseToken",
+    "ground_truth_function": "_burn",
+    "flagged": true,
+    "flagged_functions": [
+      "_burn"
+    ],
+    "predicted_function": "_burn",
+    "tokens_prompt": 3437,
+    "tokens_completion": 2275,
+    "llm_calls": 1,
+    "wall_clock_seconds": 36.46134281158447,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"_burn\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-019",
+    "contract_name": "TokenHandler",
+    "ground_truth_function": "safeTransferFrom",
+    "flagged": true,
+    "flagged_functions": [
+      "safeTransfer",
+      "safeTransferFrom",
+      "safeApprove"
+    ],
+    "predicted_function": "safeTransfer",
+    "tokens_prompt": 4530,
+    "tokens_completion": 750,
+    "llm_calls": 1,
+    "wall_clock_seconds": 77.91670107841492,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"safeTransfer\",\n    \"safeTransferFrom\",\n    \"safeApprove\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-020",
+    "contract_name": "LPC",
+    "ground_truth_function": "_transfer",
+    "flagged": false,
+    "flagged_functions": [],
+    "predicted_function": "",
+    "tokens_prompt": 4777,
+    "tokens_completion": 348,
+    "llm_calls": 1,
+    "wall_clock_seconds": 7.477319240570068,
+    "raw_output": "{\n  \"is_vulnerable\": false,\n  \"vulnerable_functions\": []\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-021",
+    "contract_name": "NFT",
+    "ground_truth_function": "init",
+    "flagged": true,
+    "flagged_functions": [
+      "init",
+      "mint",
+      "burn"
+    ],
+    "predicted_function": "init",
+    "tokens_prompt": 1105,
+    "tokens_completion": 1060,
+    "llm_calls": 1,
+    "wall_clock_seconds": 76.48596000671387,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"init\", \"mint\", \"burn\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-022",
+    "contract_name": "MapleLoan",
+    "ground_truth_function": "makePayment",
+    "flagged": true,
+    "flagged_functions": [
+      "fundLoan",
+      "upgrade",
+      "skim"
+    ],
+    "predicted_function": "fundLoan",
+    "tokens_prompt": 3131,
+    "tokens_completion": 1835,
+    "llm_calls": 1,
+    "wall_clock_seconds": 31.56010103225708,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"fundLoan\",\n    \"upgrade\",\n    \"skim\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-023",
+    "contract_name": "LenderPool",
+    "ground_truth_function": "withdrawInterest",
+    "flagged": true,
+    "flagged_functions": [
+      "withdrawInterest",
+      "_withdrawInterest"
+    ],
+    "predicted_function": "withdrawInterest",
+    "tokens_prompt": 320,
+    "tokens_completion": 1512,
+    "llm_calls": 1,
+    "wall_clock_seconds": 25.315988063812256,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"withdrawInterest\",\n    \"_withdrawInterest\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-024",
+    "contract_name": "VaderPoolV2",
+    "ground_truth_function": "mintFungible",
+    "flagged": false,
+    "flagged_functions": [],
+    "predicted_function": "",
+    "tokens_prompt": 2998,
+    "tokens_completion": 1692,
+    "llm_calls": 1,
+    "wall_clock_seconds": 29.14039921760559,
+    "raw_output": "{\n  \"is_vulnerable\": false,\n  \"vulnerable_functions\": []\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-025",
+    "contract_name": "Dao",
+    "ground_truth_function": "claimAllForMember",
+    "flagged": false,
+    "flagged_functions": [],
+    "predicted_function": "",
+    "tokens_prompt": 4679,
+    "tokens_completion": 2460,
+    "llm_calls": 1,
+    "wall_clock_seconds": 41.18117094039917,
+    "raw_output": "{\n  \"is_vulnerable\": false,\n  \"vulnerable_functions\": []\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-026",
+    "contract_name": "MStableYieldSource",
+    "ground_truth_function": "approveMax",
+    "flagged": true,
+    "flagged_functions": [
+      "redeemToken",
+      "supplyTokenTo",
+      "approveMax"
+    ],
+    "predicted_function": "redeemToken",
+    "tokens_prompt": 1225,
+    "tokens_completion": 2346,
+    "llm_calls": 1,
+    "wall_clock_seconds": 40.12823820114136,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"redeemToken\", \"supplyTokenTo\", \"approveMax\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-027",
+    "contract_name": "FlashGovernanceArbiter",
+    "ground_truth_function": "assertGovernanceApproved",
+    "flagged": true,
+    "flagged_functions": [
+      "setEnforcement",
+      "burnFlashGovernanceAsset",
+      "configureSecurityParameters"
+    ],
+    "predicted_function": "setEnforcement",
+    "tokens_prompt": 2039,
+    "tokens_completion": 2482,
+    "llm_calls": 1,
+    "wall_clock_seconds": 100.44979000091553,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"setEnforcement\",\n    \"burnFlashGovernanceAsset\",\n    \"configureSecurityParameters\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-028",
+    "contract_name": "Owned",
+    "ground_truth_function": "owned",
+    "flagged": true,
+    "flagged_functions": [
+      "owned",
+      "distributeToken",
+      "transferOwnership"
+    ],
+    "predicted_function": "owned",
+    "tokens_prompt": 836,
+    "tokens_completion": 1389,
+    "llm_calls": 1,
+    "wall_clock_seconds": 19.038205862045288,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"owned\",\n    \"distributeToken\",\n    \"transferOwnership\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-029",
+    "contract_name": "BAFCToken",
+    "ground_truth_function": "UBSexToken",
+    "flagged": true,
+    "flagged_functions": [
+      "UBSexToken",
+      "freezeAccount",
+      "switchLiquidity"
+    ],
+    "predicted_function": "UBSexToken",
+    "tokens_prompt": 329,
+    "tokens_completion": 814,
+    "llm_calls": 1,
+    "wall_clock_seconds": 11.370563268661499,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"UBSexToken\",\n    \"freezeAccount\",\n    \"switchLiquidity\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-030",
+    "contract_name": "XBORNID",
+    "ground_truth_function": "XBornID",
+    "flagged": true,
+    "flagged_functions": [
+      "XBornID",
+      "getTokens",
+      "withdraw"
+    ],
+    "predicted_function": "XBornID",
+    "tokens_prompt": 1795,
+    "tokens_completion": 1645,
+    "llm_calls": 1,
+    "wall_clock_seconds": 22.831313848495483,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"XBornID\",\n    \"getTokens\",\n    \"withdraw\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-031",
+    "contract_name": "BOMBBA",
+    "ground_truth_function": "quaker",
+    "flagged": true,
+    "flagged_functions": [
+      "quaker",
+      "mint",
+      "pullBack"
+    ],
+    "predicted_function": "quaker",
+    "tokens_prompt": 2313,
+    "tokens_completion": 876,
+    "llm_calls": 1,
+    "wall_clock_seconds": 18.386306047439575,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"quaker\",\n    \"mint\",\n    \"pullBack\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-032",
+    "contract_name": "Ragnarok",
+    "ground_truth_function": "transferOwnership",
+    "flagged": true,
+    "flagged_functions": [
+      "transferOwnership"
+    ],
+    "predicted_function": "transferOwnership",
+    "tokens_prompt": 167,
+    "tokens_completion": 159,
+    "llm_calls": 1,
+    "wall_clock_seconds": 3.4597561359405518,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"transferOwnership\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-033",
+    "contract_name": "Melotoken",
+    "ground_truth_function": "mint",
+    "flagged": true,
+    "flagged_functions": [
+      "mint"
+    ],
+    "predicted_function": "mint",
+    "tokens_prompt": 168,
+    "tokens_completion": 158,
+    "llm_calls": 1,
+    "wall_clock_seconds": 4.568584203720093,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"mint\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-034",
+    "contract_name": "DEItoken",
+    "ground_truth_function": "burnFrom",
+    "flagged": true,
+    "flagged_functions": [
+      "burnFrom"
+    ],
+    "predicted_function": "burnFrom",
+    "tokens_prompt": 169,
+    "tokens_completion": 607,
+    "llm_calls": 1,
+    "wall_clock_seconds": 11.998762369155884,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"burnFrom\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-035",
+    "contract_name": "Initialized",
+    "ground_truth_function": "initialize",
+    "flagged": true,
+    "flagged_functions": [
+      "initialize"
+    ],
+    "predicted_function": "initialize",
+    "tokens_prompt": 211,
+    "tokens_completion": 158,
+    "llm_calls": 1,
+    "wall_clock_seconds": 6.944990158081055,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"initialize\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-036",
+    "contract_name": "StakeAllocator",
+    "ground_truth_function": "didTransferShares",
+    "flagged": true,
+    "flagged_functions": [
+      "didTransferShares",
+      "initialize",
+      "allocateDelegatorStake"
+    ],
+    "predicted_function": "didTransferShares",
+    "tokens_prompt": 3978,
+    "tokens_completion": 2351,
+    "llm_calls": 1,
+    "wall_clock_seconds": 95.36734890937805,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"didTransferShares\",\n    \"initialize\",\n    \"allocateDelegatorStake\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-037",
+    "contract_name": "DepositLog",
+    "ground_truth_function": "approvedToLog",
+    "flagged": true,
+    "flagged_functions": [
+      "logGotRedemptionSignature",
+      "logRegisteredPubkey",
+      "logRedemptionRequested"
+    ],
+    "predicted_function": "logGotRedemptionSignature",
+    "tokens_prompt": 2362,
+    "tokens_completion": 500,
+    "llm_calls": 1,
+    "wall_clock_seconds": 10.91891598701477,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"logGotRedemptionSignature\",\n    \"logRegisteredPubkey\",\n    \"logRedemptionRequested\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-038",
+    "contract_name": "BaseEscalationManager",
+    "ground_truth_function": "requestPrice",
+    "flagged": true,
+    "flagged_functions": [
+      "isDisputeAllowed",
+      "assertionDisputedCallback",
+      "assertionResolvedCallback"
+    ],
+    "predicted_function": "isDisputeAllowed",
+    "tokens_prompt": 791,
+    "tokens_completion": 884,
+    "llm_calls": 1,
+    "wall_clock_seconds": 15.150628089904785,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"isDisputeAllowed\",\n    \"assertionDisputedCallback\",\n    \"assertionResolvedCallback\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-039",
+    "contract_name": "Registry",
+    "ground_truth_function": "init",
+    "flagged": true,
+    "flagged_functions": [
+      "init",
+      "setAddress",
+      "addAccount"
+    ],
+    "predicted_function": "init",
+    "tokens_prompt": 1720,
+    "tokens_completion": 1132,
+    "llm_calls": 1,
+    "wall_clock_seconds": 22.531312942504883,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"init\",\n    \"setAddress\",\n    \"addAccount\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-040",
+    "contract_name": "Factory",
+    "ground_truth_function": "upgrade",
+    "flagged": true,
+    "flagged_functions": [
+      "deploy",
+      "call",
+      "upgrade"
+    ],
+    "predicted_function": "deploy",
+    "tokens_prompt": 3819,
+    "tokens_completion": 3050,
+    "llm_calls": 1,
+    "wall_clock_seconds": 38.70031213760376,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"deploy\",\n    \"call\",\n    \"upgrade\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-041",
+    "contract_name": "DnGmxBatchingManager",
+    "ground_truth_function": "executeBatchDeposit",
+    "flagged": true,
+    "flagged_functions": [
+      "executeBatchDeposit"
+    ],
+    "predicted_function": "executeBatchDeposit",
+    "tokens_prompt": 3901,
+    "tokens_completion": 2916,
+    "llm_calls": 1,
+    "wall_clock_seconds": 39.028422355651855,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"executeBatchDeposit\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-042",
+    "contract_name": "DnGmxJuniorVault",
+    "ground_truth_function": "mint",
+    "flagged": true,
+    "flagged_functions": [
+      "withdrawFees",
+      "harvestFees",
+      "initialize"
+    ],
+    "predicted_function": "withdrawFees",
+    "tokens_prompt": 4652,
+    "tokens_completion": 1261,
+    "llm_calls": 1,
+    "wall_clock_seconds": 17.90437912940979,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"withdrawFees\",\n    \"harvestFees\",\n    \"initialize\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-043",
+    "contract_name": "DnGmxSeniorVault",
+    "ground_truth_function": "mint",
+    "flagged": true,
+    "flagged_functions": [
+      "initialize",
+      "updateBorrowCap",
+      "setDnGmxJuniorVault"
+    ],
+    "predicted_function": "initialize",
+    "tokens_prompt": 4175,
+    "tokens_completion": 2161,
+    "llm_calls": 1,
+    "wall_clock_seconds": 30.4092800617218,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"initialize\",\n    \"updateBorrowCap\",\n    \"setDnGmxJuniorVault\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-044",
+    "contract_name": "RollerPeriphery",
+    "ground_truth_function": "mint",
+    "flagged": true,
+    "flagged_functions": [
+      "approve",
+      "mint",
+      "deposit"
+    ],
+    "predicted_function": "approve",
+    "tokens_prompt": 1239,
+    "tokens_completion": 3172,
+    "llm_calls": 1,
+    "wall_clock_seconds": 46.084460735321045,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"approve\", \"mint\", \"deposit\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-045",
+    "contract_name": "MainVault",
+    "ground_truth_function": "withdraw",
+    "flagged": true,
+    "flagged_functions": [
+      "rebalanceXChain",
+      "pushTotalUnderlyingToController",
+      "sendRewardsToGame"
+    ],
+    "predicted_function": "rebalanceXChain",
+    "tokens_prompt": 4014,
+    "tokens_completion": 1460,
+    "llm_calls": 1,
+    "wall_clock_seconds": 29.762213230133057,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"rebalanceXChain\",\n    \"pushTotalUnderlyingToController\",\n    \"sendRewardsToGame\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-046",
+    "contract_name": "Controller",
+    "ground_truth_function": "claim",
+    "flagged": true,
+    "flagged_functions": [
+      "claim",
+      "setProtocolBlacklist",
+      "getProtocolInfo"
+    ],
+    "predicted_function": "claim",
+    "tokens_prompt": 2024,
+    "tokens_completion": 1710,
+    "llm_calls": 1,
+    "wall_clock_seconds": 27.99119520187378,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"claim\",\n    \"setProtocolBlacklist\",\n    \"getProtocolInfo\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-047",
+    "contract_name": "Game",
+    "ground_truth_function": "basketTotalAllocatedTokens",
+    "flagged": true,
+    "flagged_functions": [
+      "pushAllocationsToController",
+      "pushAllocationsToVaults",
+      "mintNewBasket"
+    ],
+    "predicted_function": "pushAllocationsToController",
+    "tokens_prompt": 5022,
+    "tokens_completion": 1909,
+    "llm_calls": 1,
+    "wall_clock_seconds": 25.187360048294067,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"pushAllocationsToController\",\n    \"pushAllocationsToVaults\",\n    \"mintNewBasket\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-048",
+    "contract_name": "Depositor",
+    "ground_truth_function": "withdrawFromGauge",
+    "flagged": true,
+    "flagged_functions": [
+      "withdrawFromGauge",
+      "multiWithdrawFromGauge",
+      "partialWithdrawFromGauge"
+    ],
+    "predicted_function": "withdrawFromGauge",
+    "tokens_prompt": 1711,
+    "tokens_completion": 1189,
+    "llm_calls": 1,
+    "wall_clock_seconds": 22.214513063430786,
+    "raw_output": "{\"is_vulnerable\":true,\"vulnerable_functions\":[\"withdrawFromGauge\",\"multiWithdrawFromGauge\",\"partialWithdrawFromGauge\"]}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-049",
+    "contract_name": "Cooler",
+    "ground_truth_function": "roll",
+    "flagged": true,
+    "flagged_functions": [
+      "request",
+      "roll",
+      "clear"
+    ],
+    "predicted_function": "request",
+    "tokens_prompt": 2083,
+    "tokens_completion": 1636,
+    "llm_calls": 1,
+    "wall_clock_seconds": 88.7757740020752,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"request\", \"roll\", \"clear\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-050",
+    "contract_name": "OpenQV1",
+    "ground_truth_function": "initialize",
+    "flagged": true,
+    "flagged_functions": [
+      "setTierWinner",
+      "closeOngoing",
+      "associateExternalIdToAddress"
+    ],
+    "predicted_function": "setTierWinner",
+    "tokens_prompt": 4004,
+    "tokens_completion": 2482,
+    "llm_calls": 1,
+    "wall_clock_seconds": 41.611340045928955,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"setTierWinner\",\n    \"closeOngoing\",\n    \"associateExternalIdToAddress\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-051",
+    "contract_name": "GoldfinchAdapter",
+    "ground_truth_function": "initialize",
+    "flagged": true,
+    "flagged_functions": [
+      "initialize",
+      "upgradeTo",
+      "upgradeToAndCall"
+    ],
+    "predicted_function": "initialize",
+    "tokens_prompt": 2698,
+    "tokens_completion": 878,
+    "llm_calls": 1,
+    "wall_clock_seconds": 15.353652954101562,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"initialize\",\n    \"upgradeTo\",\n    \"upgradeToAndCall\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-052",
+    "contract_name": "Product",
+    "ground_truth_function": "closeTakeFor",
+    "flagged": true,
+    "flagged_functions": [
+      "initialize",
+      "settleAccount",
+      "settle"
+    ],
+    "predicted_function": "initialize",
+    "tokens_prompt": 4334,
+    "tokens_completion": 1709,
+    "llm_calls": 1,
+    "wall_clock_seconds": 28.91180181503296,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"initialize\",\n    \"settleAccount\",\n    \"settle\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-053",
+    "contract_name": "Product",
+    "ground_truth_function": "closeMakeFor",
+    "flagged": true,
+    "flagged_functions": [
+      "initialize",
+      "openTakeFor",
+      "openMakeFor"
+    ],
+    "predicted_function": "initialize",
+    "tokens_prompt": 4334,
+    "tokens_completion": 1390,
+    "llm_calls": 1,
+    "wall_clock_seconds": 25.964287042617798,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"initialize\",\n    \"openTakeFor\",\n    \"openMakeFor\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-054",
+    "contract_name": "ContractFactory",
+    "ground_truth_function": "initialize",
+    "flagged": true,
+    "flagged_functions": [
+      "initialize",
+      "createLendingProtocolAdapter",
+      "createProtectionPool"
+    ],
+    "predicted_function": "initialize",
+    "tokens_prompt": 2542,
+    "tokens_completion": 1328,
+    "llm_calls": 1,
+    "wall_clock_seconds": 23.12357997894287,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"initialize\",\n    \"createLendingProtocolAdapter\",\n    \"createProtectionPool\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-055",
+    "contract_name": "DefaultStateManager",
+    "ground_truth_function": "initialize",
+    "flagged": true,
+    "flagged_functions": [
+      "assessStateBatch",
+      "assessStates",
+      "calculateAndClaimUnlockedCapital"
+    ],
+    "predicted_function": "assessStateBatch",
+    "tokens_prompt": 4500,
+    "tokens_completion": 1395,
+    "llm_calls": 1,
+    "wall_clock_seconds": 31.228342056274414,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"assessStateBatch\",\n    \"assessStates\",\n    \"calculateAndClaimUnlockedCapital\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-056",
+    "contract_name": "PremiumCalculator",
+    "ground_truth_function": "initialize",
+    "flagged": true,
+    "flagged_functions": [
+      "initialize"
+    ],
+    "predicted_function": "initialize",
+    "tokens_prompt": 1591,
+    "tokens_completion": 866,
+    "llm_calls": 1,
+    "wall_clock_seconds": 14.633346796035767,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"initialize\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-057",
+    "contract_name": "ProtectionPool",
+    "ground_truth_function": "initialize",
+    "flagged": true,
+    "flagged_functions": [
+      "accruePremiumAndExpireProtections",
+      "claimUnlockedCapital",
+      "withdraw"
+    ],
+    "predicted_function": "accruePremiumAndExpireProtections",
+    "tokens_prompt": 4496,
+    "tokens_completion": 1907,
+    "llm_calls": 1,
+    "wall_clock_seconds": 32.589946031570435,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"accruePremiumAndExpireProtections\",\n    \"claimUnlockedCapital\",\n    \"withdraw\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-058",
+    "contract_name": "ReferenceLendingPools",
+    "ground_truth_function": "initialize",
+    "flagged": true,
+    "flagged_functions": [
+      "initialize"
+    ],
+    "predicted_function": "initialize",
+    "tokens_prompt": 2497,
+    "tokens_completion": 1502,
+    "llm_calls": 1,
+    "wall_clock_seconds": 26.71490502357483,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"initialize\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-059",
+    "contract_name": "RoundImplementation",
+    "ground_truth_function": "applyToRound",
+    "flagged": true,
+    "flagged_functions": [
+      "initialize",
+      "setReadyForPayout",
+      "withdraw"
+    ],
+    "predicted_function": "initialize",
+    "tokens_prompt": 4350,
+    "tokens_completion": 1774,
+    "llm_calls": 1,
+    "wall_clock_seconds": 24.464361906051636,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"initialize\",\n    \"setReadyForPayout\",\n    \"withdraw\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-060",
+    "contract_name": "L1Block",
+    "ground_truth_function": "setL1BlockValues",
+    "flagged": false,
+    "flagged_functions": [],
+    "predicted_function": "",
+    "tokens_prompt": 883,
+    "tokens_completion": 540,
+    "llm_calls": 1,
+    "wall_clock_seconds": 8.800626993179321,
+    "raw_output": "{\n  \"is_vulnerable\": false,\n  \"vulnerable_functions\": []\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-061",
+    "contract_name": "CollateralManager",
+    "ground_truth_function": "withdraw",
+    "flagged": true,
+    "flagged_functions": [
+      "setCollateralEscrowBeacon",
+      "initialize",
+      "liquidateCollateral"
+    ],
+    "predicted_function": "setCollateralEscrowBeacon",
+    "tokens_prompt": 4358,
+    "tokens_completion": 1777,
+    "llm_calls": 1,
+    "wall_clock_seconds": 29.53184413909912,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"setCollateralEscrowBeacon\",\n    \"initialize\",\n    \"liquidateCollateral\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-062",
+    "contract_name": "CollateralManager",
+    "ground_truth_function": "setCollateralEscrowBeacon",
+    "flagged": true,
+    "flagged_functions": [
+      "setCollateralEscrowBeacon",
+      "commitCollateral",
+      "withdraw"
+    ],
+    "predicted_function": "setCollateralEscrowBeacon",
+    "tokens_prompt": 4358,
+    "tokens_completion": 2223,
+    "llm_calls": 1,
+    "wall_clock_seconds": 37.74776101112366,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"setCollateralEscrowBeacon\",\n    \"commitCollateral\",\n    \"withdraw\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-063",
+    "contract_name": "TellerV2",
+    "ground_truth_function": "submitBid",
+    "flagged": true,
+    "flagged_functions": [
+      "initialize",
+      "lenderAcceptBid",
+      "claimLoanNFT"
+    ],
+    "predicted_function": "initialize",
+    "tokens_prompt": 4565,
+    "tokens_completion": 2479,
+    "llm_calls": 1,
+    "wall_clock_seconds": 35.13117218017578,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"initialize\",\n    \"lenderAcceptBid\",\n    \"claimLoanNFT\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-064",
+    "contract_name": "CollateralManager",
+    "ground_truth_function": "liquidateCollateral",
+    "flagged": true,
+    "flagged_functions": [
+      "initialize",
+      "setCollateralEscrowBeacon",
+      "commitCollateral"
+    ],
+    "predicted_function": "initialize",
+    "tokens_prompt": 4358,
+    "tokens_completion": 1775,
+    "llm_calls": 1,
+    "wall_clock_seconds": 30.099982023239136,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"initialize\",\n    \"setCollateralEscrowBeacon\",\n    \"commitCollateral\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-065",
+    "contract_name": "TellerV2Context",
+    "ground_truth_function": "isTrustedMarketForwarder",
+    "flagged": true,
+    "flagged_functions": [
+      "approveMarketForwarder",
+      "setTrustedMarketForwarder",
+      "_msgSenderForMarket"
+    ],
+    "predicted_function": "approveMarketForwarder",
+    "tokens_prompt": 1199,
+    "tokens_completion": 2804,
+    "llm_calls": 1,
+    "wall_clock_seconds": 51.07644200325012,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"approveMarketForwarder\",\n    \"setTrustedMarketForwarder\",\n    \"_msgSenderForMarket\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-066",
+    "contract_name": "LenderManager",
+    "ground_truth_function": "_getLoanMarketId",
+    "flagged": true,
+    "flagged_functions": [
+      "initialize",
+      "registerLoan",
+      "_getLoanMarketId"
+    ],
+    "predicted_function": "initialize",
+    "tokens_prompt": 706,
+    "tokens_completion": 1262,
+    "llm_calls": 1,
+    "wall_clock_seconds": 24.79737615585327,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"initialize\",\n    \"registerLoan\",\n    \"_getLoanMarketId\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-067",
+    "contract_name": "FlashLoanRepay",
+    "ground_truth_function": "JOJOFlashLoan",
+    "flagged": true,
+    "flagged_functions": [
+      "JOJOFlashLoan"
+    ],
+    "predicted_function": "JOJOFlashLoan",
+    "tokens_prompt": 709,
+    "tokens_completion": 737,
+    "llm_calls": 1,
+    "wall_clock_seconds": 12.475839138031006,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"JOJOFlashLoan\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-068",
+    "contract_name": "EmergencyOracleFactory",
+    "ground_truth_function": "newEmergencyOracle",
+    "flagged": true,
+    "flagged_functions": [
+      "newEmergencyOracle",
+      "setAssetPrice",
+      "turnOffOracle"
+    ],
+    "predicted_function": "newEmergencyOracle",
+    "tokens_prompt": 459,
+    "tokens_completion": 1456,
+    "llm_calls": 1,
+    "wall_clock_seconds": 23.236536026000977,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"newEmergencyOracle\",\n    \"setAssetPrice\",\n    \"turnOffOracle\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-069",
+    "contract_name": "Operation",
+    "ground_truth_function": "setFundingRateKeeper",
+    "flagged": true,
+    "flagged_functions": [
+      "setPerpRiskParams",
+      "updateFundingRate",
+      "setOperator"
+    ],
+    "predicted_function": "setPerpRiskParams",
+    "tokens_prompt": 1095,
+    "tokens_completion": 689,
+    "llm_calls": 1,
+    "wall_clock_seconds": 13.213614702224731,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"setPerpRiskParams\",\n    \"updateFundingRate\",\n    \"setOperator\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-070",
+    "contract_name": "JUSDMulticall",
+    "ground_truth_function": "multiCall",
+    "flagged": true,
+    "flagged_functions": [
+      "multiCall",
+      "getSetOperator",
+      "getWithdrawData"
+    ],
+    "predicted_function": "multiCall",
+    "tokens_prompt": 699,
+    "tokens_completion": 2217,
+    "llm_calls": 1,
+    "wall_clock_seconds": 37.27670669555664,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"multiCall\", \"getSetOperator\", \"getWithdrawData\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-071",
+    "contract_name": "FootiumAcademy",
+    "ground_truth_function": "mintPlayers",
+    "flagged": true,
+    "flagged_functions": [
+      "initialize",
+      "mintPlayers",
+      "setClubDivsMerkleRoot"
+    ],
+    "predicted_function": "initialize",
+    "tokens_prompt": 2096,
+    "tokens_completion": 2162,
+    "llm_calls": 1,
+    "wall_clock_seconds": 38.696205139160156,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"initialize\",\n    \"mintPlayers\",\n    \"setClubDivsMerkleRoot\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-072",
+    "contract_name": "FootiumGeneralPaymentContract",
+    "ground_truth_function": "makePayment",
+    "flagged": true,
+    "flagged_functions": [
+      "initialize",
+      "setPaymentReceiverAddress",
+      "makePayment"
+    ],
+    "predicted_function": "initialize",
+    "tokens_prompt": 813,
+    "tokens_completion": 942,
+    "llm_calls": 1,
+    "wall_clock_seconds": 17.302165985107422,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"initialize\",\n    \"setPaymentReceiverAddress\",\n    \"makePayment\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-073",
+    "contract_name": "ERC20Token",
+    "ground_truth_function": "revokeGuardian",
+    "flagged": true,
+    "flagged_functions": [
+      "setGovernor",
+      "setGuardian",
+      "setMinter"
+    ],
+    "predicted_function": "setGovernor",
+    "tokens_prompt": 2373,
+    "tokens_completion": 2606,
+    "llm_calls": 1,
+    "wall_clock_seconds": 43.530741930007935,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"setGovernor\",\n    \"setGuardian\",\n    \"setMinter\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-074",
+    "contract_name": "ClaimModule",
+    "ground_truth_function": "removeModule",
+    "flagged": true,
+    "flagged_functions": [
+      "claim",
+      "batchClaim",
+      "removeModule"
+    ],
+    "predicted_function": "claim",
+    "tokens_prompt": 4359,
+    "tokens_completion": 1196,
+    "llm_calls": 1,
+    "wall_clock_seconds": 16.36239504814148,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"claim\",\n    \"batchClaim\",\n    \"removeModule\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-075",
+    "contract_name": "Owned",
+    "ground_truth_function": "setOwner",
+    "flagged": true,
+    "flagged_functions": [
+      "setOwner",
+      "uploadBalances",
+      "setExportFee"
+    ],
+    "predicted_function": "setOwner",
+    "tokens_prompt": 2162,
+    "tokens_completion": 1774,
+    "llm_calls": 1,
+    "wall_clock_seconds": 35.024872064590454,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"setOwner\",\n    \"uploadBalances\",\n    \"setExportFee\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-076",
+    "contract_name": "Owned",
+    "ground_truth_function": "setOwner",
+    "flagged": true,
+    "flagged_functions": [
+      "setOwner",
+      "uploadBalances",
+      "unlockToken"
+    ],
+    "predicted_function": "setOwner",
+    "tokens_prompt": 1296,
+    "tokens_completion": 2285,
+    "llm_calls": 1,
+    "wall_clock_seconds": 32.15601897239685,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"setOwner\",\n    \"uploadBalances\",\n    \"unlockToken\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-077",
+    "contract_name": "EtherCartel",
+    "ground_truth_function": "DrugDealer",
+    "flagged": true,
+    "flagged_functions": [
+      "DrugDealer",
+      "seedMarket",
+      "buyDrugs"
+    ],
+    "predicted_function": "DrugDealer",
+    "tokens_prompt": 1495,
+    "tokens_completion": 1448,
+    "llm_calls": 1,
+    "wall_clock_seconds": 20.992931842803955,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"DrugDealer\", \"seedMarket\", \"buyDrugs\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-078",
+    "contract_name": "Coinlancer",
+    "ground_truth_function": "onlyOwner",
+    "flagged": true,
+    "flagged_functions": [
+      "onlyOwner",
+      "approve",
+      "transferFrom"
+    ],
+    "predicted_function": "onlyOwner",
+    "tokens_prompt": 1175,
+    "tokens_completion": 1004,
+    "llm_calls": 1,
+    "wall_clock_seconds": 16.485681772232056,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"onlyOwner\",\n    \"approve\",\n    \"transferFrom\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-079",
+    "contract_name": "Cryptbond",
+    "ground_truth_function": "ToOwner",
+    "flagged": true,
+    "flagged_functions": [
+      "ToOwner",
+      "Mining24",
+      "withdraw"
+    ],
+    "predicted_function": "ToOwner",
+    "tokens_prompt": 2219,
+    "tokens_completion": 748,
+    "llm_calls": 1,
+    "wall_clock_seconds": 29.702187061309814,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"ToOwner\",\n    \"Mining24\",\n    \"withdraw\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-080",
+    "contract_name": "NewIntelTechMedia",
+    "ground_truth_function": "NETM",
+    "flagged": true,
+    "flagged_functions": [
+      "NETM",
+      "withdraw",
+      "withdrawForeignTokens"
+    ],
+    "predicted_function": "NETM",
+    "tokens_prompt": 1746,
+    "tokens_completion": 877,
+    "llm_calls": 1,
+    "wall_clock_seconds": 12.782670021057129,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"NETM\",\n    \"withdraw\",\n    \"withdrawForeignTokens\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-081",
+    "contract_name": "ERCDDAToken",
+    "ground_truth_function": "owned",
+    "flagged": true,
+    "flagged_functions": [
+      "owned",
+      "mintToken",
+      "freezeAccount"
+    ],
+    "predicted_function": "owned",
+    "tokens_prompt": 617,
+    "tokens_completion": 358,
+    "llm_calls": 1,
+    "wall_clock_seconds": 7.268238067626953,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"owned\", \"mintToken\", \"freezeAccount\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-082",
+    "contract_name": "EAI_TokenERC",
+    "ground_truth_function": "EAI_TokenERC20",
+    "flagged": true,
+    "flagged_functions": [
+      "EAI_TokenERC20"
+    ],
+    "predicted_function": "EAI_TokenERC20",
+    "tokens_prompt": 1217,
+    "tokens_completion": 739,
+    "llm_calls": 1,
+    "wall_clock_seconds": 12.489745140075684,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"EAI_TokenERC20\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-083",
+    "contract_name": "Owned",
+    "ground_truth_function": "owned",
+    "flagged": true,
+    "flagged_functions": [
+      "owned",
+      "mintTokens",
+      "blacklistAccount"
+    ],
+    "predicted_function": "owned",
+    "tokens_prompt": 1949,
+    "tokens_completion": 1197,
+    "llm_calls": 1,
+    "wall_clock_seconds": 18.437559127807617,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"owned\",\n    \"mintTokens\",\n    \"blacklistAccount\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-084",
+    "contract_name": "TokenSale",
+    "ground_truth_function": "addMeByRC",
+    "flagged": true,
+    "flagged_functions": [
+      "addMeByRC",
+      "claim",
+      "buyFromRC"
+    ],
+    "predicted_function": "addMeByRC",
+    "tokens_prompt": 4062,
+    "tokens_completion": 1193,
+    "llm_calls": 1,
+    "wall_clock_seconds": 20.368112087249756,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"addMeByRC\", \"claim\", \"buyFromRC\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-085",
+    "contract_name": "IProtocolFeeVault",
+    "ground_truth_function": "sellTokenForLRC",
+    "flagged": true,
+    "flagged_functions": [
+      "updateSettings",
+      "claimStakingReward",
+      "fundDAO"
+    ],
+    "predicted_function": "updateSettings",
+    "tokens_prompt": 4548,
+    "tokens_completion": 495,
+    "llm_calls": 1,
+    "wall_clock_seconds": 15.365003108978271,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"updateSettings\",\n    \"claimStakingReward\",\n    \"fundDAO\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-086",
+    "contract_name": "defi_hack_1",
+    "ground_truth_function": "setToken",
+    "flagged": true,
+    "flagged_functions": [
+      "setToken"
+    ],
+    "predicted_function": "setToken",
+    "tokens_prompt": 162,
+    "tokens_completion": 223,
+    "llm_calls": 1,
+    "wall_clock_seconds": 5.445101976394653,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"setToken\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-087",
+    "contract_name": "Token",
+    "ground_truth_function": "mint",
+    "flagged": true,
+    "flagged_functions": [
+      "mint"
+    ],
+    "predicted_function": "mint",
+    "tokens_prompt": 3855,
+    "tokens_completion": 286,
+    "llm_calls": 1,
+    "wall_clock_seconds": 5.609361886978149,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"mint\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-088",
+    "contract_name": "StaxLPStaking",
+    "ground_truth_function": "migrateStake",
+    "flagged": true,
+    "flagged_functions": [
+      "migrateWithdraw",
+      "setMigrator",
+      "notifyRewardAmount"
+    ],
+    "predicted_function": "migrateWithdraw",
+    "tokens_prompt": 2445,
+    "tokens_completion": 2736,
+    "llm_calls": 1,
+    "wall_clock_seconds": 40.434942960739136,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"migrateWithdraw\",\n    \"setMigrator\",\n    \"notifyRewardAmount\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-089",
+    "contract_name": "defi_hack_4",
+    "ground_truth_function": "pancakeCall",
+    "flagged": true,
+    "flagged_functions": [
+      "pancakeCall",
+      "0x10a"
+    ],
+    "predicted_function": "pancakeCall",
+    "tokens_prompt": 580,
+    "tokens_completion": 620,
+    "llm_calls": 1,
+    "wall_clock_seconds": 9.119021892547607,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"pancakeCall\",\n    \"0x10a\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-090",
+    "contract_name": "defi_hack_5",
+    "ground_truth_function": "burn",
+    "flagged": true,
+    "flagged_functions": [
+      "burn"
+    ],
+    "predicted_function": "burn",
+    "tokens_prompt": 162,
+    "tokens_completion": 222,
+    "llm_calls": 1,
+    "wall_clock_seconds": 3.995216131210327,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"burn\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-091",
+    "contract_name": "ReaperVaultV2",
+    "ground_truth_function": "_withdraw",
+    "flagged": true,
+    "flagged_functions": [
+      "inCaseTokensGetStuck",
+      "updateWithdrawalQueue",
+      "setTvlCap"
+    ],
+    "predicted_function": "inCaseTokensGetStuck",
+    "tokens_prompt": 4482,
+    "tokens_completion": 1204,
+    "llm_calls": 1,
+    "wall_clock_seconds": 18.018467903137207,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"inCaseTokensGetStuck\",\n    \"updateWithdrawalQueue\",\n    \"setTvlCap\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-092",
+    "contract_name": "SpaceGodzilla",
+    "ground_truth_function": "swapAndLiquifyStepv1",
+    "flagged": false,
+    "flagged_functions": [],
+    "predicted_function": "",
+    "tokens_prompt": 4644,
+    "tokens_completion": 604,
+    "llm_calls": 1,
+    "wall_clock_seconds": 10.751142024993896,
+    "raw_output": "{\n  \"is_vulnerable\": false,\n  \"vulnerable_functions\": []\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-093",
+    "contract_name": "GymSinglePool",
+    "ground_truth_function": "depositFromOtherContract",
+    "flagged": true,
+    "flagged_functions": [
+      "depositFromOtherContract",
+      "deposit",
+      "withdraw"
+    ],
+    "predicted_function": "depositFromOtherContract",
+    "tokens_prompt": 4607,
+    "tokens_completion": 2733,
+    "llm_calls": 1,
+    "wall_clock_seconds": 34.81967377662659,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"depositFromOtherContract\",\n    \"deposit\",\n    \"withdraw\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-094",
+    "contract_name": "defi_hack_11",
+    "ground_truth_function": "emergencyExit",
+    "flagged": false,
+    "flagged_functions": [],
+    "predicted_function": "",
+    "tokens_prompt": 761,
+    "tokens_completion": 988,
+    "llm_calls": 1,
+    "wall_clock_seconds": 16.074726104736328,
+    "raw_output": "{\n  \"is_vulnerable\": false,\n  \"vulnerable_functions\": []\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-095",
+    "contract_name": "Seal",
+    "ground_truth_function": "breed",
+    "flagged": true,
+    "flagged_functions": [
+      "breed"
+    ],
+    "predicted_function": "breed",
+    "tokens_prompt": 289,
+    "tokens_completion": 478,
+    "llm_calls": 1,
+    "wall_clock_seconds": 10.338881015777588,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"breed\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-096",
+    "contract_name": "Owned",
+    "ground_truth_function": "owned",
+    "flagged": true,
+    "flagged_functions": [
+      "owned",
+      "transferOwnership",
+      "distributeToken"
+    ],
+    "predicted_function": "owned",
+    "tokens_prompt": 836,
+    "tokens_completion": 1133,
+    "llm_calls": 1,
+    "wall_clock_seconds": 20.06786799430847,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"owned\",\n    \"transferOwnership\",\n    \"distributeToken\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-097",
+    "contract_name": "TimelockController",
+    "ground_truth_function": "_afterCall",
+    "flagged": true,
+    "flagged_functions": [
+      "execute",
+      "executeBatch",
+      "updateDelay"
+    ],
+    "predicted_function": "execute",
+    "tokens_prompt": 2700,
+    "tokens_completion": 1766,
+    "llm_calls": 1,
+    "wall_clock_seconds": 29.900892972946167,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"execute\", \"executeBatch\", \"updateDelay\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-098",
+    "contract_name": "TimelockController",
+    "ground_truth_function": "_afterCall",
+    "flagged": true,
+    "flagged_functions": [
+      "execute",
+      "executeBatch",
+      "updateDelay"
+    ],
+    "predicted_function": "execute",
+    "tokens_prompt": 2700,
+    "tokens_completion": 2278,
+    "llm_calls": 1,
+    "wall_clock_seconds": 37.98432397842407,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"execute\", \"executeBatch\", \"updateDelay\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-099",
+    "contract_name": "IOracleFactory",
+    "ground_truth_function": "createOracle",
+    "flagged": false,
+    "flagged_functions": [],
+    "predicted_function": "",
+    "tokens_prompt": 182,
+    "tokens_completion": 92,
+    "llm_calls": 1,
+    "wall_clock_seconds": 2.766754150390625,
+    "raw_output": "{\n  \"is_vulnerable\": false,\n  \"vulnerable_functions\": []\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-100",
+    "contract_name": "BondFixedExpiryTeller",
+    "ground_truth_function": "redeem",
+    "flagged": true,
+    "flagged_functions": [
+      "redeem",
+      "deploy",
+      "_handlePayout"
+    ],
+    "predicted_function": "redeem",
+    "tokens_prompt": 1776,
+    "tokens_completion": 2093,
+    "llm_calls": 1,
+    "wall_clock_seconds": 36.86992311477661,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"redeem\",\n    \"deploy\",\n    \"_handlePayout\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-101",
+    "contract_name": "SwapMining",
+    "ground_truth_function": "swap",
+    "flagged": true,
+    "flagged_functions": [
+      "mint",
+      "massMintPools",
+      "swap"
+    ],
+    "predicted_function": "mint",
+    "tokens_prompt": 3170,
+    "tokens_completion": 1702,
+    "llm_calls": 1,
+    "wall_clock_seconds": 25.71524405479431,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"mint\", \"massMintPools\", \"swap\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-102",
+    "contract_name": "Bad_Guys_by_RPF",
+    "ground_truth_function": "WhiteListMint",
+    "flagged": false,
+    "flagged_functions": [],
+    "predicted_function": "",
+    "tokens_prompt": 4544,
+    "tokens_completion": 476,
+    "llm_calls": 1,
+    "wall_clock_seconds": 7.3497700691223145,
+    "raw_output": "{\n  \"is_vulnerable\": false,\n  \"vulnerable_functions\": []\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-103",
+    "contract_name": "ANCHToken",
+    "ground_truth_function": "_transfer",
+    "flagged": false,
+    "flagged_functions": [],
+    "predicted_function": "",
+    "tokens_prompt": 4586,
+    "tokens_completion": 604,
+    "llm_calls": 1,
+    "wall_clock_seconds": 11.564162969589233,
+    "raw_output": "{\n  \"is_vulnerable\": false,\n  \"vulnerable_functions\": []\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-104",
+    "contract_name": "Replica",
+    "ground_truth_function": "initialize",
+    "flagged": true,
+    "flagged_functions": [
+      "initialize",
+      "prove",
+      "setConfirmation"
+    ],
+    "predicted_function": "initialize",
+    "tokens_prompt": 2905,
+    "tokens_completion": 3051,
+    "llm_calls": 1,
+    "wall_clock_seconds": 46.285887002944946,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"initialize\",\n    \"prove\",\n    \"setConfirmation\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-105",
+    "contract_name": "Quixotic",
+    "ground_truth_function": "fillSellOrder",
+    "flagged": true,
+    "flagged_functions": [
+      "fillSellOrder",
+      "_validateSellerSignature",
+      "_fillSellOrder"
+    ],
+    "predicted_function": "fillSellOrder",
+    "tokens_prompt": 526,
+    "tokens_completion": 618,
+    "llm_calls": 1,
+    "wall_clock_seconds": 13.321192979812622,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"fillSellOrder\", \"_validateSellerSignature\", \"_fillSellOrder\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-106",
+    "contract_name": "XNFT",
+    "ground_truth_function": "pledgeAndBorrow",
+    "flagged": true,
+    "flagged_functions": [
+      "pledgeInternal",
+      "notifyRepayBorrow",
+      "notifyOrderLiquidated"
+    ],
+    "predicted_function": "pledgeInternal",
+    "tokens_prompt": 4535,
+    "tokens_completion": 2162,
+    "llm_calls": 1,
+    "wall_clock_seconds": 39.41880702972412,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"pledgeInternal\",\n    \"notifyRepayBorrow\",\n    \"notifyOrderLiquidated\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-107",
+    "contract_name": "CErc20",
+    "ground_truth_function": "sweepToken",
+    "flagged": true,
+    "flagged_functions": [
+      "sweepToken",
+      "initialize",
+      "_addReserves"
+    ],
+    "predicted_function": "sweepToken",
+    "tokens_prompt": 2277,
+    "tokens_completion": 1070,
+    "llm_calls": 1,
+    "wall_clock_seconds": 20.868012189865112,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"sweepToken\",\n    \"initialize\",\n    \"_addReserves\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-108",
+    "contract_name": "TreasureDAO",
+    "ground_truth_function": "buyItem",
+    "flagged": true,
+    "flagged_functions": [
+      "buyItem",
+      "_buyItem"
+    ],
+    "predicted_function": "buyItem",
+    "tokens_prompt": 582,
+    "tokens_completion": 1256,
+    "llm_calls": 1,
+    "wall_clock_seconds": 22.014708995819092,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"buyItem\",\n    \"_buyItem\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-109",
+    "contract_name": "QBridge",
+    "ground_truth_function": "deposit",
+    "flagged": true,
+    "flagged_functions": [
+      "setRelayerThreshold",
+      "setResource",
+      "cancelProposal"
+    ],
+    "predicted_function": "setRelayerThreshold",
+    "tokens_prompt": 3661,
+    "tokens_completion": 2281,
+    "llm_calls": 1,
+    "wall_clock_seconds": 38.39882779121399,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"setRelayerThreshold\", \"setResource\", \"cancelProposal\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-110",
+    "contract_name": "QBridgeHandler",
+    "ground_truth_function": "deposit",
+    "flagged": true,
+    "flagged_functions": [
+      "setResource",
+      "setBurnable",
+      "initialize"
+    ],
+    "predicted_function": "setResource",
+    "tokens_prompt": 1883,
+    "tokens_completion": 1133,
+    "llm_calls": 1,
+    "wall_clock_seconds": 17.8353271484375,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"setResource\",\n    \"setBurnable\",\n    \"initialize\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-111",
+    "contract_name": "Ownable",
+    "ground_truth_function": "onlyOwner",
+    "flagged": true,
+    "flagged_functions": [
+      "transferOwnership",
+      "withdraw",
+      "recoverERC20"
+    ],
+    "predicted_function": "transferOwnership",
+    "tokens_prompt": 1884,
+    "tokens_completion": 1325,
+    "llm_calls": 1,
+    "wall_clock_seconds": 20.4748752117157,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"transferOwnership\",\n    \"withdraw\",\n    \"recoverERC20\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-112",
+    "contract_name": "TattooMoneyPublicSaleIV",
+    "ground_truth_function": "onlyOwner",
+    "flagged": true,
+    "flagged_functions": [
+      "takeAll",
+      "changeOwner",
+      "recoverErc20"
+    ],
+    "predicted_function": "takeAll",
+    "tokens_prompt": 2782,
+    "tokens_completion": 1135,
+    "llm_calls": 1,
+    "wall_clock_seconds": 17.718157052993774,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"takeAll\",\n    \"changeOwner\",\n    \"recoverErc20\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-113",
+    "contract_name": "Ownable",
+    "ground_truth_function": "onlyOwner",
+    "flagged": true,
+    "flagged_functions": [
+      "claimMain",
+      "claimToken",
+      "sendToken"
+    ],
+    "predicted_function": "claimMain",
+    "tokens_prompt": 788,
+    "tokens_completion": 493,
+    "llm_calls": 1,
+    "wall_clock_seconds": 11.761792182922363,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"claimMain\",\n    \"claimToken\",\n    \"sendToken\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-114",
+    "contract_name": "BetHorde",
+    "ground_truth_function": "OnlyOwner",
+    "flagged": true,
+    "flagged_functions": [
+      "OwnerWithdraw",
+      "BuyContract",
+      "Dismantle"
+    ],
+    "predicted_function": "OwnerWithdraw",
+    "tokens_prompt": 5121,
+    "tokens_completion": 2415,
+    "llm_calls": 1,
+    "wall_clock_seconds": 41.17185401916504,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"OwnerWithdraw\",\n    \"BuyContract\",\n    \"Dismantle\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-115",
+    "contract_name": "Fund3Week",
+    "ground_truth_function": "onlyOwner",
+    "flagged": true,
+    "flagged_functions": [
+      "externalCallEth",
+      "transferFunds",
+      "setNextContract"
+    ],
+    "predicted_function": "externalCallEth",
+    "tokens_prompt": 2054,
+    "tokens_completion": 1327,
+    "llm_calls": 1,
+    "wall_clock_seconds": 19.34872817993164,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"externalCallEth\",\n    \"transferFunds\",\n    \"setNextContract\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-116",
+    "contract_name": "BridgeOperatable",
+    "ground_truth_function": "onlyOwner",
+    "flagged": true,
+    "flagged_functions": [
+      "transferOperator1",
+      "setTreasury",
+      "withdraw"
+    ],
+    "predicted_function": "transferOperator1",
+    "tokens_prompt": 1570,
+    "tokens_completion": 1134,
+    "llm_calls": 1,
+    "wall_clock_seconds": 24.36656093597412,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"transferOperator1\",\n    \"setTreasury\",\n    \"withdraw\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-117",
+    "contract_name": "owned",
+    "ground_truth_function": "onlyOwner",
+    "flagged": true,
+    "flagged_functions": [
+      "mintToken",
+      "transferOwnership",
+      "freezeAccount"
+    ],
+    "predicted_function": "mintToken",
+    "tokens_prompt": 2308,
+    "tokens_completion": 685,
+    "llm_calls": 1,
+    "wall_clock_seconds": 14.827733993530273,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"mintToken\",\n    \"transferOwnership\",\n    \"freezeAccount\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "ACF-118",
+    "contract_name": "Ownable",
+    "ground_truth_function": "onlyOwner",
+    "flagged": true,
+    "flagged_functions": [
+      "transferOwnership",
+      "withdraw",
+      "reclaimToken"
+    ],
+    "predicted_function": "transferOwnership",
+    "tokens_prompt": 1650,
+    "tokens_completion": 941,
+    "llm_calls": 1,
+    "wall_clock_seconds": 17.406923055648804,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"transferOwnership\",\n    \"withdraw\",\n    \"reclaimToken\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-111",
+    "contract_name": "AutoPxGlp.sol",
+    "ground_truth_function": "compound",
+    "flagged": false,
+    "flagged_functions": [],
+    "predicted_function": "",
+    "tokens_prompt": 4378,
+    "tokens_completion": 924,
+    "llm_calls": 1,
+    "wall_clock_seconds": 22.83356285095215,
+    "raw_output": "{\n  \"is_vulnerable\": false,\n  \"vulnerable_functions\": []\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-111_2",
+    "contract_name": "AutoPxGlp.sol",
+    "ground_truth_function": "compound",
+    "flagged": false,
+    "flagged_functions": [],
+    "predicted_function": "",
+    "tokens_prompt": 4378,
+    "tokens_completion": 1116,
+    "llm_calls": 1,
+    "wall_clock_seconds": 15.676281213760376,
+    "raw_output": "{\n  \"is_vulnerable\": false,\n  \"vulnerable_functions\": []\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-126",
+    "contract_name": "Vault.sol",
+    "ground_truth_function": "install",
+    "flagged": true,
+    "flagged_functions": [
+      "fallback",
+      "init",
+      "execute"
+    ],
+    "predicted_function": "fallback",
+    "tokens_prompt": 1379,
+    "tokens_completion": 2340,
+    "llm_calls": 1,
+    "wall_clock_seconds": 34.81998801231384,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"fallback\", \"init\", \"execute\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-126_2",
+    "contract_name": "Vault.sol",
+    "ground_truth_function": "install",
+    "flagged": true,
+    "flagged_functions": [
+      "init",
+      "fallback",
+      "_execute"
+    ],
+    "predicted_function": "init",
+    "tokens_prompt": 1379,
+    "tokens_completion": 3306,
+    "llm_calls": 1,
+    "wall_clock_seconds": 48.415831089019775,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"init\",\n    \"fallback\",\n    \"_execute\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-161",
+    "contract_name": "NFTFloorOracle.sol",
+    "ground_truth_function": "removeFeeder",
+    "flagged": true,
+    "flagged_functions": [
+      "removeFeeder",
+      "initialize",
+      "setPrice"
+    ],
+    "predicted_function": "removeFeeder",
+    "tokens_prompt": 3616,
+    "tokens_completion": 2477,
+    "llm_calls": 1,
+    "wall_clock_seconds": 101.99867010116577,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"removeFeeder\",\n    \"initialize\",\n    \"setPrice\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-161_2",
+    "contract_name": "NFTFloorOracle.sol",
+    "ground_truth_function": "removeFeeder",
+    "flagged": true,
+    "flagged_functions": [
+      "removeFeeder",
+      "initialize",
+      "setPrice"
+    ],
+    "predicted_function": "removeFeeder",
+    "tokens_prompt": 3616,
+    "tokens_completion": 2157,
+    "llm_calls": 1,
+    "wall_clock_seconds": 35.22816324234009,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"removeFeeder\",\n    \"initialize\",\n    \"setPrice\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-17",
+    "contract_name": "ClaimNodeOp.sol",
+    "ground_truth_function": "calculateAndDistributeRewards",
+    "flagged": true,
+    "flagged_functions": [
+      "calculateAndDistributeRewards",
+      "setRewardsCycleTotal",
+      "claimAndRestake"
+    ],
+    "predicted_function": "calculateAndDistributeRewards",
+    "tokens_prompt": 1247,
+    "tokens_completion": 1204,
+    "llm_calls": 1,
+    "wall_clock_seconds": 27.43787717819214,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"calculateAndDistributeRewards\",\n    \"setRewardsCycleTotal\",\n    \"claimAndRestake\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-17_2",
+    "contract_name": "ClaimNodeOp.sol",
+    "ground_truth_function": "testExploit",
+    "flagged": true,
+    "flagged_functions": [
+      "setRewardsCycleTotal",
+      "calculateAndDistributeRewards",
+      "claimAndRestake"
+    ],
+    "predicted_function": "setRewardsCycleTotal",
+    "tokens_prompt": 1247,
+    "tokens_completion": 1012,
+    "llm_calls": 1,
+    "wall_clock_seconds": 16.191416025161743,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"setRewardsCycleTotal\",\n    \"calculateAndDistributeRewards\",\n    \"claimAndRestake\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-172",
+    "contract_name": "Proposal-Store.sol",
+    "ground_truth_function": "AddProposal",
+    "flagged": true,
+    "flagged_functions": [
+      "AddProposal",
+      "QueryProp",
+      "constructor"
+    ],
+    "predicted_function": "AddProposal",
+    "tokens_prompt": 556,
+    "tokens_completion": 934,
+    "llm_calls": 1,
+    "wall_clock_seconds": 15.858300924301147,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"AddProposal\", \"QueryProp\", \"constructor\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-172_2",
+    "contract_name": "Proposal-Store.sol",
+    "ground_truth_function": "queue",
+    "flagged": true,
+    "flagged_functions": [
+      "AddProposal"
+    ],
+    "predicted_function": "AddProposal",
+    "tokens_prompt": 556,
+    "tokens_completion": 799,
+    "llm_calls": 1,
+    "wall_clock_seconds": 12.697017908096313,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"AddProposal\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-186",
+    "contract_name": "NFTFloorOracle.sol",
+    "ground_truth_function": "removeFeeder",
+    "flagged": true,
+    "flagged_functions": [
+      "initialize",
+      "removeFeeder",
+      "_addFeeder"
+    ],
+    "predicted_function": "initialize",
+    "tokens_prompt": 3616,
+    "tokens_completion": 2862,
+    "llm_calls": 1,
+    "wall_clock_seconds": 43.23193001747131,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"initialize\",\n    \"removeFeeder\",\n    \"_addFeeder\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-186_2",
+    "contract_name": "NFTFloorOracle.sol",
+    "ground_truth_function": "removeFeeder",
+    "flagged": true,
+    "flagged_functions": [
+      "removeFeeder",
+      "initialize",
+      "setPrice"
+    ],
+    "predicted_function": "removeFeeder",
+    "tokens_prompt": 3616,
+    "tokens_completion": 2029,
+    "llm_calls": 1,
+    "wall_clock_seconds": 34.57599115371704,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"removeFeeder\",\n    \"initialize\",\n    \"setPrice\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-190",
+    "contract_name": "StabilityPool.sol",
+    "ground_truth_function": "_requireCallerIsTML",
+    "flagged": false,
+    "flagged_functions": [],
+    "predicted_function": "",
+    "tokens_prompt": 4793,
+    "tokens_completion": 1244,
+    "llm_calls": 1,
+    "wall_clock_seconds": 22.942699670791626,
+    "raw_output": "{\n  \"is_vulnerable\": false,\n  \"vulnerable_functions\": []\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-190_2",
+    "contract_name": "StabilityPool.sol",
+    "ground_truth_function": "receiveCollateral",
+    "flagged": false,
+    "flagged_functions": [],
+    "predicted_function": "",
+    "tokens_prompt": 4793,
+    "tokens_completion": 604,
+    "llm_calls": 1,
+    "wall_clock_seconds": 10.545192241668701,
+    "raw_output": "{\n  \"is_vulnerable\": false,\n  \"vulnerable_functions\": []\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-21",
+    "contract_name": "RewardsPool.sol",
+    "ground_truth_function": "startRewardsCycle",
+    "flagged": true,
+    "flagged_functions": [
+      "startRewardsCycle"
+    ],
+    "predicted_function": "startRewardsCycle",
+    "tokens_prompt": 2405,
+    "tokens_completion": 1056,
+    "llm_calls": 1,
+    "wall_clock_seconds": 17.602560997009277,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"startRewardsCycle\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-21_2",
+    "contract_name": "RewardsPool.sol",
+    "ground_truth_function": "setUp",
+    "flagged": true,
+    "flagged_functions": [
+      "startRewardsCycle",
+      "distributeMultisigAllotment",
+      "inflate"
+    ],
+    "predicted_function": "startRewardsCycle",
+    "tokens_prompt": 2405,
+    "tokens_completion": 1587,
+    "llm_calls": 1,
+    "wall_clock_seconds": 26.93637704849243,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"startRewardsCycle\",\n    \"distributeMultisigAllotment\",\n    \"inflate\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-222_2",
+    "contract_name": "VariableSupplyERC20Token.sol",
+    "ground_truth_function": "Unknown",
+    "flagged": false,
+    "flagged_functions": [],
+    "predicted_function": "",
+    "tokens_prompt": 663,
+    "tokens_completion": 540,
+    "llm_calls": 1,
+    "wall_clock_seconds": 12.690651893615723,
+    "raw_output": "{\n  \"is_vulnerable\": false,\n  \"vulnerable_functions\": []\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-222_4",
+    "contract_name": "VariableSupplyERC20Token.sol",
+    "ground_truth_function": "mint",
+    "flagged": true,
+    "flagged_functions": [
+      "mint"
+    ],
+    "predicted_function": "mint",
+    "tokens_prompt": 663,
+    "tokens_completion": 1246,
+    "llm_calls": 1,
+    "wall_clock_seconds": 21.71126103401184,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"mint\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-226",
+    "contract_name": "Manager.sol",
+    "ground_truth_function": "deploy",
+    "flagged": true,
+    "flagged_functions": [
+      "initialize",
+      "registerUpgrade",
+      "removeUpgrade"
+    ],
+    "predicted_function": "initialize",
+    "tokens_prompt": 1940,
+    "tokens_completion": 2156,
+    "llm_calls": 1,
+    "wall_clock_seconds": 38.807997941970825,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"initialize\",\n    \"registerUpgrade\",\n    \"removeUpgrade\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-226_2",
+    "contract_name": "Manager.sol",
+    "ground_truth_function": "testMisleadingGetAddress",
+    "flagged": true,
+    "flagged_functions": [
+      "initialize",
+      "deploy",
+      "registerUpgrade"
+    ],
+    "predicted_function": "initialize",
+    "tokens_prompt": 1940,
+    "tokens_completion": 1515,
+    "llm_calls": 1,
+    "wall_clock_seconds": 28.053248167037964,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"initialize\",\n    \"deploy\",\n    \"registerUpgrade\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-229",
+    "contract_name": "SimpleFeiDaiPSM.sol",
+    "ground_truth_function": "burnFeiHeld",
+    "flagged": false,
+    "flagged_functions": [],
+    "predicted_function": "",
+    "tokens_prompt": 1256,
+    "tokens_completion": 1180,
+    "llm_calls": 1,
+    "wall_clock_seconds": 21.919236183166504,
+    "raw_output": "{\n  \"is_vulnerable\": false,\n  \"vulnerable_functions\": []\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-229_2",
+    "contract_name": "SimpleFeiDaiPSM.sol",
+    "ground_truth_function": "burnFeiHeld",
+    "flagged": true,
+    "flagged_functions": [
+      "mint",
+      "redeem",
+      "burnFeiHeld"
+    ],
+    "predicted_function": "mint",
+    "tokens_prompt": 1256,
+    "tokens_completion": 1384,
+    "llm_calls": 1,
+    "wall_clock_seconds": 25.414540767669678,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"mint\", \"redeem\", \"burnFeiHeld\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-248",
+    "contract_name": "StableVault.sol",
+    "ground_truth_function": "withdraw",
+    "flagged": true,
+    "flagged_functions": [
+      "withdraw",
+      "deposit",
+      "depositWithPermit"
+    ],
+    "predicted_function": "withdraw",
+    "tokens_prompt": 850,
+    "tokens_completion": 2860,
+    "llm_calls": 1,
+    "wall_clock_seconds": 47.00675678253174,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"withdraw\",\n    \"deposit\",\n    \"depositWithPermit\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-248_2",
+    "contract_name": "StableVault.sol",
+    "ground_truth_function": "testExploit",
+    "flagged": true,
+    "flagged_functions": [
+      "listToken",
+      "delistToken",
+      "withdraw"
+    ],
+    "predicted_function": "listToken",
+    "tokens_prompt": 850,
+    "tokens_completion": 1901,
+    "llm_calls": 1,
+    "wall_clock_seconds": 23.513244152069092,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"listToken\",\n    \"delistToken\",\n    \"withdraw\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-264",
+    "contract_name": "WJLP.sol",
+    "ground_truth_function": "wrap",
+    "flagged": true,
+    "flagged_functions": [
+      "setAddresses",
+      "updateReward",
+      "unwrapFor"
+    ],
+    "predicted_function": "setAddresses",
+    "tokens_prompt": 2649,
+    "tokens_completion": 2605,
+    "llm_calls": 1,
+    "wall_clock_seconds": 47.10386300086975,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"setAddresses\",\n    \"updateReward\",\n    \"unwrapFor\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-264_2",
+    "contract_name": "WJLP.sol",
+    "ground_truth_function": "wrap",
+    "flagged": true,
+    "flagged_functions": [
+      "setAddresses",
+      "updateReward",
+      "unwrapFor"
+    ],
+    "predicted_function": "setAddresses",
+    "tokens_prompt": 2649,
+    "tokens_completion": 1773,
+    "llm_calls": 1,
+    "wall_clock_seconds": 27.94617486000061,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"setAddresses\",\n    \"updateReward\",\n    \"unwrapFor\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-29",
+    "contract_name": "ILBPair.sol",
+    "ground_truth_function": "burn",
+    "flagged": true,
+    "flagged_functions": [
+      "initialize",
+      "collectProtocolFees",
+      "setFeesParameters"
+    ],
+    "predicted_function": "initialize",
+    "tokens_prompt": 1921,
+    "tokens_completion": 424,
+    "llm_calls": 1,
+    "wall_clock_seconds": 7.679919004440308,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"initialize\", \"collectProtocolFees\", \"setFeesParameters\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-29_2",
+    "contract_name": "ILBPair.sol",
+    "ground_truth_function": "burn",
+    "flagged": true,
+    "flagged_functions": [
+      "initialize",
+      "setFeesParameters",
+      "collectProtocolFees"
+    ],
+    "predicted_function": "initialize",
+    "tokens_prompt": 1921,
+    "tokens_completion": 686,
+    "llm_calls": 1,
+    "wall_clock_seconds": 14.736922025680542,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"initialize\",\n    \"setFeesParameters\",\n    \"collectProtocolFees\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-3",
+    "contract_name": "ConvexYieldWrapper.sol",
+    "ground_truth_function": "unwrap",
+    "flagged": true,
+    "flagged_functions": [
+      "wrap",
+      "unwrap",
+      "addVault"
+    ],
+    "predicted_function": "wrap",
+    "tokens_prompt": 1772,
+    "tokens_completion": 2091,
+    "llm_calls": 1,
+    "wall_clock_seconds": 31.9499351978302,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"wrap\",\n    \"unwrap\",\n    \"addVault\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-3_2",
+    "contract_name": "ConvexYieldWrapper.sol",
+    "ground_truth_function": "wrap",
+    "flagged": true,
+    "flagged_functions": [
+      "removeVault",
+      "wrap",
+      "unwrap"
+    ],
+    "predicted_function": "removeVault",
+    "tokens_prompt": 1772,
+    "tokens_completion": 1253,
+    "llm_calls": 1,
+    "wall_clock_seconds": 21.707262992858887,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"removeVault\", \"wrap\", \"unwrap\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-318",
+    "contract_name": "PuttyV2.sol",
+    "ground_truth_function": "fillOrder",
+    "flagged": false,
+    "flagged_functions": [],
+    "predicted_function": "",
+    "tokens_prompt": 4747,
+    "tokens_completion": 2076,
+    "llm_calls": 1,
+    "wall_clock_seconds": 37.39465594291687,
+    "raw_output": "{\n  \"is_vulnerable\": false,\n  \"vulnerable_functions\": []\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-318_2",
+    "contract_name": "PuttyV2.sol",
+    "ground_truth_function": "fillOrder",
+    "flagged": false,
+    "flagged_functions": [],
+    "predicted_function": "",
+    "tokens_prompt": 4747,
+    "tokens_completion": 1756,
+    "llm_calls": 1,
+    "wall_clock_seconds": 32.12310814857483,
+    "raw_output": "{\n  \"is_vulnerable\": false,\n  \"vulnerable_functions\": []\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-328",
+    "contract_name": "ExecutionDelegate.sol",
+    "ground_truth_function": "transferERC20",
+    "flagged": true,
+    "flagged_functions": [
+      "transferERC20",
+      "transferERC721Unsafe",
+      "transferERC1155"
+    ],
+    "predicted_function": "transferERC20",
+    "tokens_prompt": 1018,
+    "tokens_completion": 1650,
+    "llm_calls": 1,
+    "wall_clock_seconds": 26.830004930496216,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"transferERC20\",\n    \"transferERC721Unsafe\",\n    \"transferERC1155\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-328_2",
+    "contract_name": "ExecutionDelegate.sol",
+    "ground_truth_function": "transferERC20",
+    "flagged": false,
+    "flagged_functions": [],
+    "predicted_function": "",
+    "tokens_prompt": 1018,
+    "tokens_completion": 1628,
+    "llm_calls": 1,
+    "wall_clock_seconds": 25.702944040298462,
+    "raw_output": "{\n  \"is_vulnerable\": false,\n  \"vulnerable_functions\": []\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-35",
+    "contract_name": "NFTFloorOracle.sol",
+    "ground_truth_function": "removeFeeder",
+    "flagged": true,
+    "flagged_functions": [
+      "removeFeeder",
+      "initialize",
+      "setPrice"
+    ],
+    "predicted_function": "removeFeeder",
+    "tokens_prompt": 3616,
+    "tokens_completion": 2221,
+    "llm_calls": 1,
+    "wall_clock_seconds": 29.190741300582886,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"removeFeeder\",\n    \"initialize\",\n    \"setPrice\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-35_2",
+    "contract_name": "NFTFloorOracle.sol",
+    "ground_truth_function": "removeFeeder",
+    "flagged": true,
+    "flagged_functions": [
+      "removeFeeder",
+      "initialize",
+      "setPrice"
+    ],
+    "predicted_function": "removeFeeder",
+    "tokens_prompt": 3616,
+    "tokens_completion": 1709,
+    "llm_calls": 1,
+    "wall_clock_seconds": 23.642383098602295,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"removeFeeder\",\n    \"initialize\",\n    \"setPrice\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-438",
+    "contract_name": "LPDA.sol",
+    "ground_truth_function": "buy",
+    "flagged": true,
+    "flagged_functions": [
+      "initialize",
+      "cancel",
+      "buy"
+    ],
+    "predicted_function": "initialize",
+    "tokens_prompt": 1299,
+    "tokens_completion": 2282,
+    "llm_calls": 1,
+    "wall_clock_seconds": 40.24843192100525,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"initialize\",\n    \"cancel\",\n    \"buy\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-438_2",
+    "contract_name": "LPDA.sol",
+    "ground_truth_function": "buy",
+    "flagged": true,
+    "flagged_functions": [
+      "initialize",
+      "cancel",
+      "buy"
+    ],
+    "predicted_function": "initialize",
+    "tokens_prompt": 1299,
+    "tokens_completion": 2020,
+    "llm_calls": 1,
+    "wall_clock_seconds": 29.69051218032837,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"initialize\", \"cancel\", \"buy\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-484",
+    "contract_name": "Governance.sol",
+    "ground_truth_function": "activateProposal",
+    "flagged": true,
+    "flagged_functions": [
+      "configureDependencies",
+      "executeProposal",
+      "reclaimVotes"
+    ],
+    "predicted_function": "configureDependencies",
+    "tokens_prompt": 2595,
+    "tokens_completion": 3118,
+    "llm_calls": 1,
+    "wall_clock_seconds": 53.436816930770874,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"configureDependencies\",\n    \"executeProposal\",\n    \"reclaimVotes\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-484_2",
+    "contract_name": "Governance.sol",
+    "ground_truth_function": "activateProposal",
+    "flagged": true,
+    "flagged_functions": [
+      "configureDependencies",
+      "reclaimVotes",
+      "executeProposal"
+    ],
+    "predicted_function": "configureDependencies",
+    "tokens_prompt": 2595,
+    "tokens_completion": 2990,
+    "llm_calls": 1,
+    "wall_clock_seconds": 45.38108587265015,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"configureDependencies\",\n    \"reclaimVotes\",\n    \"executeProposal\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-487",
+    "contract_name": "INVEscrow.sol",
+    "ground_truth_function": "onDeposit",
+    "flagged": true,
+    "flagged_functions": [
+      "initialize",
+      "pay",
+      "delegate"
+    ],
+    "predicted_function": "initialize",
+    "tokens_prompt": 955,
+    "tokens_completion": 1124,
+    "llm_calls": 1,
+    "wall_clock_seconds": 21.70507287979126,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"initialize\", \"pay\", \"delegate\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-487_2",
+    "contract_name": "INVEscrow.sol",
+    "ground_truth_function": "onDeposit",
+    "flagged": true,
+    "flagged_functions": [
+      "initialize",
+      "pay",
+      "delegate"
+    ],
+    "predicted_function": "initialize",
+    "tokens_prompt": 955,
+    "tokens_completion": 1060,
+    "llm_calls": 1,
+    "wall_clock_seconds": 14.3401780128479,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"initialize\", \"pay\", \"delegate\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-51",
+    "contract_name": "Proposal-Store.sol",
+    "ground_truth_function": "AddProposal",
+    "flagged": true,
+    "flagged_functions": [
+      "AddProposal"
+    ],
+    "predicted_function": "AddProposal",
+    "tokens_prompt": 556,
+    "tokens_completion": 543,
+    "llm_calls": 1,
+    "wall_clock_seconds": 11.96751594543457,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"AddProposal\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-51_2",
+    "contract_name": "Proposal-Store.sol",
+    "ground_truth_function": "AddProposal",
+    "flagged": true,
+    "flagged_functions": [
+      "AddProposal"
+    ],
+    "predicted_function": "AddProposal",
+    "tokens_prompt": 556,
+    "tokens_completion": 735,
+    "llm_calls": 1,
+    "wall_clock_seconds": 10.439845085144043,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\"AddProposal\"]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-55",
+    "contract_name": "NFTFloorOracle.sol",
+    "ground_truth_function": "removeFeeder",
+    "flagged": true,
+    "flagged_functions": [
+      "removeFeeder",
+      "initialize",
+      "setPrice"
+    ],
+    "predicted_function": "removeFeeder",
+    "tokens_prompt": 3616,
+    "tokens_completion": 1837,
+    "llm_calls": 1,
+    "wall_clock_seconds": 89.50438284873962,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"removeFeeder\",\n    \"initialize\",\n    \"setPrice\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-55_2",
+    "contract_name": "NFTFloorOracle.sol",
+    "ground_truth_function": "removeFeeder",
+    "flagged": true,
+    "flagged_functions": [
+      "removeFeeder",
+      "initialize",
+      "setPrice"
+    ],
+    "predicted_function": "removeFeeder",
+    "tokens_prompt": 3616,
+    "tokens_completion": 1901,
+    "llm_calls": 1,
+    "wall_clock_seconds": 37.81724309921265,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"removeFeeder\",\n    \"initialize\",\n    \"setPrice\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-572",
+    "contract_name": "BlurExchange.sol",
+    "ground_truth_function": "incrementNonce",
+    "flagged": true,
+    "flagged_functions": [
+      "initialize",
+      "setExecutionDelegate",
+      "setOracle"
+    ],
+    "predicted_function": "initialize",
+    "tokens_prompt": 3881,
+    "tokens_completion": 1581,
+    "llm_calls": 1,
+    "wall_clock_seconds": 35.09850287437439,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"initialize\",\n    \"setExecutionDelegate\",\n    \"setOracle\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-572_2",
+    "contract_name": "BlurExchange.sol",
+    "ground_truth_function": "setUp",
+    "flagged": true,
+    "flagged_functions": [
+      "setExecutionDelegate",
+      "setOracle",
+      "setPolicyManager"
+    ],
+    "predicted_function": "setExecutionDelegate",
+    "tokens_prompt": 3881,
+    "tokens_completion": 1327,
+    "llm_calls": 1,
+    "wall_clock_seconds": 28.54916501045227,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"setExecutionDelegate\",\n    \"setOracle\",\n    \"setPolicyManager\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-6",
+    "contract_name": "PaprController.sol",
+    "ground_truth_function": "increaseDebt",
+    "flagged": true,
+    "flagged_functions": [
+      "uniswapV3SwapCallback",
+      "onERC721Received",
+      "increaseDebt"
+    ],
+    "predicted_function": "uniswapV3SwapCallback",
+    "tokens_prompt": 4553,
+    "tokens_completion": 3635,
+    "llm_calls": 1,
+    "wall_clock_seconds": 50.17483687400818,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"uniswapV3SwapCallback\",\n    \"onERC721Received\",\n    \"increaseDebt\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-6_2",
+    "contract_name": "PaprController.sol",
+    "ground_truth_function": "increaseDebt",
+    "flagged": true,
+    "flagged_functions": [
+      "increaseDebt",
+      "onERC721Received",
+      "uniswapV3SwapCallback"
+    ],
+    "predicted_function": "increaseDebt",
+    "tokens_prompt": 4553,
+    "tokens_completion": 2035,
+    "llm_calls": 1,
+    "wall_clock_seconds": 28.06010913848877,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"increaseDebt\",\n    \"onERC721Received\",\n    \"uniswapV3SwapCallback\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-67",
+    "contract_name": "Splitter.sol",
+    "ground_truth_function": "incrementWindow",
+    "flagged": true,
+    "flagged_functions": [
+      "incrementWindow",
+      "claim",
+      "claimForAllWindows"
+    ],
+    "predicted_function": "incrementWindow",
+    "tokens_prompt": 2261,
+    "tokens_completion": 2478,
+    "llm_calls": 1,
+    "wall_clock_seconds": 36.04078006744385,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"incrementWindow\",\n    \"claim\",\n    \"claimForAllWindows\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-67_2",
+    "contract_name": "Splitter.sol",
+    "ground_truth_function": "incrementWindow",
+    "flagged": true,
+    "flagged_functions": [
+      "incrementWindow",
+      "transferSplitAsset",
+      "claim"
+    ],
+    "predicted_function": "incrementWindow",
+    "tokens_prompt": 2261,
+    "tokens_completion": 3053,
+    "llm_calls": 1,
+    "wall_clock_seconds": 38.605664014816284,
+    "raw_output": "{\n  \"is_vulnerable\": true,\n  \"vulnerable_functions\": [\n    \"incrementWindow\",\n    \"transferSplitAsset\",\n    \"claim\"\n  ]\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-80",
+    "contract_name": "NFTEDAStarterIncentive.sol",
+    "ground_truth_function": "_setCreatorDiscount",
+    "flagged": false,
+    "flagged_functions": [],
+    "predicted_function": "",
+    "tokens_prompt": 765,
+    "tokens_completion": 1052,
+    "llm_calls": 1,
+    "wall_clock_seconds": 14.022720098495483,
+    "raw_output": "{\n  \"is_vulnerable\": false,\n  \"vulnerable_functions\": []\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  },
+  {
+    "case_id": "C4-80_2",
+    "contract_name": "NFTEDAStarterIncentive.sol",
+    "ground_truth_function": "auctionStartTime",
+    "flagged": false,
+    "flagged_functions": [],
+    "predicted_function": "",
+    "tokens_prompt": 765,
+    "tokens_completion": 604,
+    "llm_calls": 1,
+    "wall_clock_seconds": 7.98096489906311,
+    "raw_output": "{\n  \"is_vulnerable\": false,\n  \"vulnerable_functions\": []\n}",
+    "error": "",
+    "method": "gpt_zeroshot"
+  }
+]

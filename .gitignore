@@ -93,7 +93,7 @@ Thumbs.db
 # pulled lazily by scripts/build_smoke_set_v2.py. Both the unzipped folder
 # and the original zip are excluded.
 data/dataset/Repair-Access-Control-C-main/
-data/dataset/Repair-Access-Control-C-main.zip
+data/dataset/Repair-Access-Control-C-main*.zip
 
 # Embedding binary caches (regenerable from rag_training_dataset.json)
 data/dataset/.rag_training_dataset.embcache.npz
@@ -109,3 +109,12 @@ data/dataset/.dataset_hashes.lock
 
 # Local forge-std install cache (created by adapters/foundry.py at runtime)
 .cache/forge-std/
+
+# Vendored Solidity libs (~51 MB third-party — OZ v3/v4/v5, Solady, Solmate,
+# forge-std). Already covered by the generic `lib/` rule above, but made
+# explicit here for clarity. Reinstall via
+# `scripts/source_fetcher/install_libs.sh`.
+lib/vendored/
+
+# eval_set.json local timestamp backups produced by update_eval_set.py
+data/dataset/eval_set.json.bak.*

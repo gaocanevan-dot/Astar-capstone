@@ -1,0 +1,42 @@
+{
+  "A1": {
+    "n_total": 172,
+    "n_evaluable": 171,
+    "strict_r1": 43.27485380116959,
+    "loose_r1": 45.614035087719294,
+    "hit_at_3": 59.06432748538012,
+    "poc_pass": 83.13953488372093,
+    "phantom_pass": 41.86046511627907,
+    "avg_cost_per_case": 0.01024252761627907
+  },
+  "A2": {
+    "n_total": 172,
+    "n_evaluable": 171,
+    "strict_r1": 42.69005847953216,
+    "loose_r1": 44.44444444444444,
+    "hit_at_3": 42.69005847953216,
+    "poc_pass": 77.90697674418605,
+    "phantom_pass": 40.69767441860465,
+    "avg_cost_per_case": 0.009275838662790699
+  },
+  "A3": {
+    "n_total": 172,
+    "n_evaluable": 171,
+    "strict_r1": 42.10526315789473,
+    "loose_r1": 43.859649122807014,
+    "hit_at_3": 53.80116959064327,
+    "poc_pass": 86.62790697674419,
+    "phantom_pass": 44.76744186046512,
+    "avg_cost_per_case": 0.003661093023255814
+  },
+  "A4": {
+    "n_total": 172,
+    "n_evaluable": 171,
+    "strict_r1": 0.0,
+    "loose_r1": 0.0,
+    "hit_at_3": 0.0,
+    "poc_pass": 0.0,
+    "phantom_pass": 0.0,
+    "avg_cost_per_case": 0.0
+  }
+}

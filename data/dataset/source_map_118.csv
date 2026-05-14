@@ -1,0 +1,119 @@
+﻿incident_id,project_name,attack_surface,matched_solidity_file,matched_start_line_est,matched_end_line_est
+ACF-001,TBTCSystem,"requestNewKeep(uint256 _m, uint256 _n, uint256 _bond)",data/contracts/ttweb/TBTCSystem.sol,265,273
+ACF-002,USSD2,burnRebalancer(uint256 amount),data/contracts/ttweb/USSD.sol,208,210
+ACF-003,RoundFactory,"create(bytes calldata encodedParameters,   address ownedBy)",data/contracts/ttweb/RoundFactory.sol,92,110
+ACF-004,BaseStrategyVault,"__INIT_VAULT(string memory name_,     uint16 borrowCurrencyId_)",data/contracts/ttweb/BaseStrategyVault.sol,91,102
+ACF-005,CoolerRequest,"request(uint256 amount,     uint256 interest,     uint256 loanToCollateral,     uint256 duration)",data/contracts/ttweb/Cooler.sol,74,86
+ACF-006,USSD1,mintRebalancer(uint256 amount),data/contracts/ttweb/USSD.sol,204,206
+ACF-007,ProtectionPoolCycleManager,initialize(),data/contracts/ttweb/PremiumCalculator.sol,29,31
+ACF-008,Log,"Log(address _contract,   address _caller,   string memory _logName,   bytes memory _data)",data/contracts/ttweb/Log.sol,1,8
+ACF-009,CollateralManager1,"commitCollateral(uint256 _bidId,     Collateral[] calldata _collateralInfo)",data/contracts/ttweb/CollateralManager.sol,117,130
+ACF-010,AccountManager,init(IRegistry _registry),data/contracts/ttweb/AccountManager.sol,68,73
+ACF-011,LienToken,"_deleteLienPosition(uint256 collateralId, uint256 position)",data/contracts/ttweb/LienToken.sol,651,664
+ACF-012,CrabNetting,checkOrder(Order memory _order),data/contracts/ttweb/CrabNetting.sol,447,449
+ACF-013,PassThroughWalletImpl,initializer(InitParams calldata params_),data/contracts/ttweb/PassThroughWalletImpl.sol,78,85
+ACF-014,DODO,"init(address maintainer,     address baseTokenAddress,     address quoteTokenAddress,     uint256 lpFeeRate,     address mtFeeRateModel,     uint256 i,     uint256 k,     bool isOpenTWAP)",data/contracts/defi_hack_ac/DVM.sol,1419,1469
+ACF-015,EFLeverVault,"receiveFlashLoan(IERC20[] memory tokens,     uint256[] memory amounts,     uint256[] memory feeAmounts,     bytes memory userData)",data/contracts/defi_hack_iv/EFLeverVault.sol,310,327
+ACF-016,Parity,"initWallet(address[] _owners, uint _required, uint _daylimit)",data/contracts/defi_hack_ac/WalletLibrary.sol,223,226
+ACF-017,Rikkei Finance,"setOracleData(address rToken, oracleChainlink _oracle)",data/contracts/SimplePriceOracle/contracts/SimplePriceOracle.sol,29,31
+ACF-018,Sandbox LAND,"_burn(address from, address owner, uint256 id)",data/contracts/Land/src/Land/erc721/ERC721BaseToken.sol,355,360
+ACF-019,Bancor Protocol,"safeTransferFrom(IERC20Token _token, address _from, address _to, uint256 _value)",data/contracts/defi_hack_ac/BancorNetwork.sol,551,553
+ACF-020,LPC,"_transfer(address sender,     address recipient,     uint256 amount)",data/contracts/defi_hack_iv/LPC.sol,1148,1244
+ACF-021,88mph,"init(address newOwner,     string calldata tokenName,     string calldata tokenSymbol)",data/contracts/NFT/contracts/NFT.sol,39,57
+ACF-022,MapleLoan,makePayment(uint256 amount_),data/contracts/code4rena/MapleLoan.sol,86,93
+ACF-023,LenderPool,"withdrawInterest(uint256 _id, address _lender)",data/contracts/code4rena/LenderPool.sol,1,3
+ACF-024,VaderPoolV2,"mintFungible(IERC20 foreignAsset,     uint256 nativeDeposit,     uint256 foreignDeposit,     address from,     address to)",data/contracts/code4rena/VaderPoolV2.sol,284,335
+ACF-025,Dao,claimAllForMember(address member),data/contracts/code4rena/Dao.sol,276,285
+ACF-026,MStableYieldSource,approveMax(),data/contracts/code4rena/MStableYieldSource.sol,61,65
+ACF-027,FlashGovernanceArbiter,"assertGovernanceApproved(address sender,   address target,   bool emergency)",data/contracts/code4rena/FlashGovernanceArbiter.sol,60,81
+ACF-028,CVE-2021-34272,owned(),data/contracts/cve/B2X.sol,35,37
+ACF-029,CVE-2018-19830,UBSexToken(),data/contracts/cve/BAFCToken.sol,13,14
+ACF-030,CVE-2019-15078,XBornID(),data/contracts/cve/XBORNID.sol,118,121
+ACF-031,CVE-2018-19834,quaker(address wallet),data/contracts/cve/BOMBBA.sol,122,127
+ACF-032,Ragnarok,transferOwnership(address newOwner),data/contracts/medium/Ragnarok.sol,1,5
+ACF-033,Melotoken,"mint(address account,   uint256 amount,   string memory txId)",data/contracts/medium/Melotoken.sol,1,10
+ACF-034,DEItoken,"burnFrom(address account, uint256 amount)",data/contracts/medium/DEItoken.sol,1,5
+ACF-035,Initialized,"initialize(address _LINK,   address _owner,   uint256 _capacity,   uint256 _startingSharesPerLink)",data/contracts/ttweb/Initialized.sol,1,12
+ACF-036,StakeAllocator,"didTransferShares(uint256 sharesId, uint8 subjectType, address from, address to, uint256 sharesAmount)",data/contracts/ttweb/StakeAllocator/components/staking/allocation/StakeAllocator.sol,345,353
+ACF-037,DepositLog,approvedToLog(address _caller) public pure returns (bool),data/contracts/ttweb/DepositLog.sol,107,111
+ACF-038,BaseEscalationManager,"requestPrice(bytes32 identifier, uint256 time, bytes memory ancillaryData)",data/contracts/ttweb/BaseEscalationManager.sol,61,67
+ACF-039,Registry,init(),data/contracts/ttweb/Registry.sol,61,65
+ACF-040,Factory,upgrade(),data/contracts/ttweb/Factory.sol,114,121
+ACF-041,DnGmxBatchingManager,executeBatchDeposit(),data/contracts/ttweb/DnGmxBatchingManager.sol,240,253
+ACF-042,DnGmxJuniorVault,"mint(uint256 shares, address to) public virtual override(IERC4626, ERC4626Upgradeable) whenNotPaused returns (uint256 amount)",data/contracts/ttweb/DnGmxJuniorVault.sol,403,412
+ACF-043,DnGmxSeniorVault,"mint(uint256 shares, address to) public virtual override(IERC4626, ERC4626Upgradeable) whenNotPaused returns (uint256 amount)",data/contracts/ttweb/DnGmxSeniorVault.sol,228,238
+ACF-044,RollerPeriphery,"mint(ERC4626 vault, uint256 shares, address receiver, uint256 maxAmountIn) external returns (uint256 assets)",data/contracts/ttweb/RollerPeriphery.sol,59,65
+ACF-045,MainVault,"withdraw(uint256 _amount, address _receiver, address _owner ) external nonReentrant onlyWhenVaultIsOn returns (uint256 value)",data/contracts/ttweb/MainVault.sol,131,144
+ACF-046,Controller,"claim(uint256 _vaultNumber, uint256 _protocolNumber ) external override onlyVault returns (bool)",data/contracts/ttweb/Controller.sol,57,70
+ACF-047,Game,basketTotalAllocatedTokens(uint256 _basketId) public view returns (int256),data/contracts/ttweb/Game.sol,191,193
+ACF-048,Depositor,"withdrawFromGauge(uint256 _NFTId, address[] memory _tokens)",data/contracts/ttweb/Depositor.sol,119,127
+ACF-049,Cooler,roll(uint256 loanID),data/contracts/ttweb/Cooler.sol,129,147
+ACF-050,OpenQV1,initialize(),data/contracts/ttweb/OpenQV1.sol,14,18
+ACF-051,GoldfinchAdapter,initialize(address _owner),data/contracts/ttweb/GoldfinchAdapter.sol,55,59
+ACF-052,Product,"closeTakeFor(address account, UFixed18 amount) public nonReentrant notPaused onlyAccountOrMultiInvoker(account) settleForAccount(account) closeInvariant(account) liquidationInvariant(account)",data/contracts/ttweb/Product.sol,246,256
+ACF-053,Product2,"closeMakeFor(address account, UFixed18 amount) public nonReentrant notPaused onlyAccountOrMultiInvoker(account) settleForAccount(account) takerInvariant closeInvariant(account) liquidationInvariant(account)",data/contracts/ttweb/Product.sol,328,339
+ACF-054,ContractFactory,"initialize(IProtectionPoolCycleManager _protectionPoolCycleManager, IDefaultStateManager _defaultStateManager)",data/contracts/ttweb/ContractFactory.sol,87,96
+ACF-055,DefaultStateManager,initialize(),data/contracts/ttweb/DefaultStateManager.sol,58,65
+ACF-056,PremiumCalculator,initialize(),data/contracts/ttweb/PremiumCalculator.sol,29,31
+ACF-057,ProtectionPool,"initialize(address _owner, ProtectionPoolInfo calldata _poolInfo, IPremiumCalculator _premiumCalculator, IProtectionPoolCycleManager _poolCycleManager, IDefaultStateManager _defaultStateManager, string calldata _name, string calldata _symbol)",data/contracts/ttweb/ProtectionPool.sol,125,157
+ACF-058,ReferenceLendingPools,"initialize(address _owner, address[] calldata _lendingPools, LendingProtocol[] calldata _lendingPoolProtocols, uint256[] calldata _protectionPurchaseLimitsInDays, address _lendingProtocolAdapterFactory)",data/contracts/ttweb/ReferenceLendingPools.sol,53,98
+ACF-059,RoundImplementation,"applyToRound(bytes32 projectID, MetaPtr calldata newApplicationMetaPtr)",data/contracts/ttweb/RoundImplementation.sol,371,382
+ACF-060,L1Block,"setL1BlockValues(uint64 _number, uint64 _timestamp, uint256 _basefee, bytes32 _hash, uint64 _sequenceNumber, bytes32 _batcherHash, uint256 _l1FeeOverhead, uint256 _l1FeeScalar)",data/contracts/ttweb/L1Block.sol,79,102
+ACF-061,CollateralManager2,withdraw(uint256 _bidId),data/contracts/ttweb/CollateralManager.sol,250,260
+ACF-062,CollateralManager3,setCollateralEscrowBeacon(address _collateralEscrowBeacon) external reinitializer(2),data/contracts/ttweb/CollateralManager.sol,91,96
+ACF-063,TellerV2,"submitBid(address _lendingToken, uint256 _marketplaceId, uint256 _principal, uint32 _duration, uint16 _APR, string calldata _metadataURI, address _receiver ) public override whenNotPaused returns (uint256 bidId_)",data/contracts/ttweb/TellerV2.sol,272,290
+ACF-064,CollateralManager4,"liquidateCollateral(uint256 _bidId, address _liquidatorAddress)",data/contracts/ttweb/CollateralManager.sol,268,280
+ACF-065,TellerV2Context,"isTrustedMarketForwarder(uint256 _marketId, address _trustedMarketForwarder ) public view returns (bool)",data/contracts/ttweb/TellerV2Context.sol,38,45
+ACF-066,LenderManager,_getLoanMarketId(uint256 _bidId) internal view returns (uint256),data/contracts/ttweb/LenderManager.sol,52,54
+ACF-067,FlashLoanRepay,"JOJOFlashLoan(address asset, uint256 amount, address to, bytes calldata param)",data/contracts/ttweb/FlashLoanRepay.sol,35,70
+ACF-068,EmergencyOracleFactory,newEmergencyOracle(string calldata description),data/contracts/ttweb/EmergencyOracle.sol,54,59
+ACF-069,Operation,"setFundingRateKeeper(Types.State storage state, address newKeeper)",data/contracts/ttweb/Operation.sol,95,101
+ACF-070,JUSDMulticall,multiCall(bytes[] memory callData ) external returns (bytes[] memory returnData),data/contracts/ttweb/JUSDMulticall.sol,13,32
+ACF-071,FootiumAcademy,"mintPlayers(SeasonID seasonId, uint256 clubId, uint256 divisionTier, uint256[] calldata generationIds, bytes32[] calldata divisionProof)",data/contracts/ttweb/FootiumAcademy.sol,166,212
+ACF-072,FootiumGeneralPaymentContract,"makePayment(uint256 _clubId, string calldata _message)",data/contracts/ttweb/FootiumGeneralPaymentContract.sol,84,104
+ACF-073,ERC20Token,revokeGuardian(address oldGuardian),data/contracts/ttweb/ERC20Token.sol,123,126
+ACF-074,ClaimModule,removeModule(),data/contracts/ttweb/ClaimModule.sol,264,289
+ACF-075,CVE-2018-10666,setOwner(address _owner) returns (bool success),data/contracts/cve/IDXM.sol,37,40
+ACF-076,CVE-2018-10705,setOwner(address _owner) returns (bool success),data/contracts/cve/AURA.sol,31,34
+ACF-077,CVE-2018-11329,DrugDealer(),data/contracts/cve/EtherCartel.sol,22,24
+ACF-078,CVE-2018-17111,onlyOwner(),data/contracts/cve/Coinlancer.sol,56,61
+ACF-079,CVE-2018-19831,ToOwner(),data/contracts/cve/Cryptbond.sol,99,104
+ACF-080,CVE-2018-19832,NETM(),data/contracts/cve/NewIntelTechMedia.sol,107,110
+ACF-081,CVE-2018-19833,owned(),data/contracts/cve/ERCDDAToken.sol,19,21
+ACF-082,CVE-2019-15079,"EAI_TokenERC20(uint256 initialSupply, string tokenName, string tokenSymbol)",data/contracts/cve/EAI_TokenERC.sol,33,42
+ACF-083,CVE-2019-15080,owned(),data/contracts/cve/MorphToken.sol,16,18
+ACF-084,CVE-2020-17753,addMeByRC(),data/contracts/cve/RC.sol,451,457
+ACF-085,CVE-2020-35962,"sellTokenForLRC(address token, uint amount ) external; /// @dev Returns some global stats regarding fees. /// @return accumulatedFees The accumulated amount of LRC protocol fees. /// @return accumulatedBurn The accumulated amount of LRC to burn. /// @return accumulatedDAOFund The accumulated amount of LRC as developer pool. /// @return accumulatedReward The accumulated amount of LRC as staking reward. /// @return remainingFees The remaining amount of LRC protocol fees. /// @return remainingBurn The remaining amount of LRC to burn. /// @return remainingDAOFund The remaining amount of LRC as developer pool. /// @return remainingReward The remaining amount of LRC as staking reward. getProtocolFeeStats() public view returns ( uint accumulatedFees, uint accumulatedBurn, uint accumulatedDAOFund, uint accumulatedReward, uint remainingFees, uint remainingBurn, uint remainingDAOFund, uint remainingReward ); } /* Copyright 2017 Loopring Project Ltd (Loopring Foundation). Licensed under the Apache License, Version 2.0 (the ""License"")",data/contracts/cve/ProtocolFeeVault.sol,733,797
+ACF-086,HPAY,setToken(address _addr) public,data/contracts/defi_hack_ac/defi_hack_1.sol,1,5
+ACF-087,Uerii,mint() public returns (bool),data/contracts/defi_hack_ac/Token.sol,493,496
+ACF-088,Templedao,"migrateStake(address oldStaking, uint256 amount) external",data/contracts/defi_hack_ac/StaxLPStaking.sol,241,244
+ACF-089,MevBot private tx,"pancakeCall(address varg0, uint256 varg1, uint256 varg2, bytes varg3) public Payable",data/contracts/defi_hack_ac/defi_hack_4.sol,1,12
+ACF-090,ShadowFi,"burn(address account, uint256 _amount) public",data/contracts/defi_hack_ac/defi_hack_5.sol,1,5
+ACF-091,Reaper Farm,"_withdraw(uint256 assets, uint256 shares, address receiver, address owner) internal returns (uint256)",data/contracts/defi_hack_ac/ReaperVaultV2.sol,323,369
+ACF-092,SpaceGodzilla,swapAndLiquifyStepv1() public,data/contracts/defi_hack_ac/SpaceGodzilla.sol,1233,1237
+ACF-093,GYMNetwork,"depositFromOtherContract( uint256 _depositAmount, uint8 _periodId, bool isUnlocked, address _from ) external",data/contracts/defi_hack_ac/GymSinglePool.sol,286,294
+ACF-094,DAO Maker,emergencyExit(address varg0) public payable,data/contracts/defi_hack_ac/defi_hack_11.sol,1,56
+ACF-095,CVE-2021-3006,breed() external,data/contracts/cve/Seal.sol,1,15
+ACF-096,CVE-2021-34273,owned() public,data/contracts/cve/B2X.sol,35,37
+ACF-097,CVE-2021-39167,_afterCall(bytes32 id) private,data/contracts/cve/CVE-2021-39167/governance/TimelockController.sol,313,316
+ACF-098,CVE-2021-39168,_afterCall(bytes32 id) private,data/contracts/cve/CVE-2021-39167/governance/TimelockController.sol,313,316
+ACF-099,IOracleFactory,createOracle(bytes calldata data_) external returns (OracleImpl oracle),data/contracts/ttweb/IOracleFactory.sol,8,8
+ACF-100,BondFixedExpiryTeller,"redeem(ERC20BondToken token_, uint256 amount_) external override nonReentrant",data/contracts/defi_hack_iv/BondFixedExpiryTeller.sol,137,142
+ACF-101,SwapMining,"swap(address account, address input, address output, uint256 amount) public onlyRouter returns (bool)",data/contracts/defi_hack_iv/SwapMining.sol,236,269
+ACF-102,Bad_Guys_by_RPF,"WhiteListMint(bytes32[] calldata _merkleProof, uint256 chosenAmount) public",data/contracts/defi_hack_iv/Bad_Guys_by_RPF.sol,1190,1209
+ACF-103,ANCHToken,"_transfer( address sender, address recipient, uint256 tAmount ) private",data/contracts/defi_hack_iv/ANCHToken.sol,764,789
+ACF-104,Replica,"initialize( uint32 _remoteDomain, address _updater, bytes32 _committedRoot, uint256 _optimisticSeconds ) public initializer",data/contracts/defi_hack_iv/Replica.sol,103,117
+ACF-105,Quixotic,"fillSellOrder( address payable seller, address contractAddress, uint256 tokenId, uint256 startTime, uint256 expiration, uint256 price, uint256 quantity, uint256 createdAtBlockNumber, address paymentERC20, bytes memory signature, address payable buyer ) external payable whenNotPaused nonReentrant",data/contracts/defi_hack_iv/Quixotic.sol,7,56
+ACF-106,XCarnival,"pledgeAndBorrow(address _collection, uint256 _tokenId, uint256 _nftType, address xToken, uint256 borrowAmount) external nonReentrant",data/contracts/defi_hack_iv/XNFT.sol,108,111
+ACF-107,Compound,sweepToken(EIP20NonStandardInterface token) external,data/contracts/defi_hack_iv/CErc20Delegate.sol,120,124
+ACF-108,TreasureDAO,"buyItem( address _nftAddress, uint256 _tokenId, address _owner, uint256 _quantity ) external nonReentrant isListed(_nftAddress, _tokenId, _owner) validListing(_nftAddress, _tokenId, _owner)",data/contracts/defi_hack_iv/TreasureDAO.sol,1,41
+ACF-109,QBridge,"deposit(uint8 destinationDomainID, bytes32 resourceID, bytes calldata data) external payable notPaused",data/contracts/defi_hack_iv/QBridge.sol,200,210
+ACF-110,QBridgeHandler,"deposit(bytes32 resourceID, address depositer, bytes calldata data) external override onlyBridge",data/contracts/defi_hack_iv/QBridgeHandler.sol,122,137
+ACF-111,tx1,onlyOwner(),data/contracts/txorigin/0x0edf34a446966eda43bc71ca4627ed5847914025_1.sol,158,161
+ACF-112,tx2,onlyOwner(),data/contracts/txorigin/0x4c0f67a4b3ef0c4fc52aec217457c4da37353e85_1.sol,238,241
+ACF-113,tx3,onlyOwner(),data/contracts/txorigin/0x8550Dc7eB3C5055170AFdD3cDB360eB12a25fE45_1.sol,26,29
+ACF-114,tx4,OnlyOwner(),data/contracts/txorigin/0x30410fab6d367e11839c00ad93eb357e3066ada8_1.sol,533,536
+ACF-115,tx5,onlyOwner(),data/contracts/txorigin/0x04037029b4f7fac106b7a3b88985d095e11fd091_1.sol,139,142
+ACF-116,tx6,onlyOwner(),data/contracts/txorigin/0x82840058ab0b44d0a1d208b24fa60ce8b88c1e91_1.sol,27,30
+ACF-117,tx7,onlyOwner(),data/contracts/txorigin/0xC4f7BF3Afba59211a95511291F766019172FF36e_1.sol,7,10
+ACF-118,tx8,onlyOwner(),data/contracts/txorigin/0xc606721c67741D9C140Ed11b93Fc4ea857C8A69f_1.sol,127,130
